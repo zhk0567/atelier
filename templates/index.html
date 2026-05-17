@@ -1,0 +1,99 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ site_name }} Wiki{% endblock %}
+
+{% block content %}
+<div class="wiki-notice wiki-ambox">{{ availability }}{% if ui.badge_available %} · {{ ui.badge_available }}{% endif %}</div>
+
+<h1>{{ site_name }} Wiki</h1>
+<p class="lead">{{ tagline }}</p>
+<p>{{ bio }}</p>
+
+<table class="infobox">
+  <caption class="infobox-title">{{ ui.label_profile }}</caption>
+  <tbody>
+    <tr><th scope="row">{{ ui.hello }}</th><td><strong>{{ site_name }}</strong></td></tr>
+    <tr><th scope="row">{{ ui.fact_focus }}</th><td>{{ focus }}</td></tr>
+    <tr><th scope="row">{{ ui.fact_status }}</th><td>{{ availability }}</td></tr>
+    {% if education_line %}
+    <tr><th scope="row">{{ ui.fact_education }}</th><td>{{ education_line }}</td></tr>
+    {% endif %}
+    {% if reading_line %}
+    <tr><th scope="row">{{ ui.fact_reading }}</th><td>{{ reading_line }}</td></tr>
+    {% endif %}
+    <tr><th scope="row">{{ ui.fact_email }}</th><td><a href="mailto:{{ email }}">{{ email }}</a></td></tr>
+    <tr><th scope="row">GitHub</th><td><a href="{{ github }}" target="_blank" rel="noopener noreferrer">{{ github }}</a></td></tr>
+  </tbody>
+</table>
+
+<div class="clearfix"></div>
+
+<h2 id="stats">{{ ui.label_stats }}</h2>
+<table class="wikitable">
+  <caption>站点数据概览</caption>
+  <thead>
+    <tr>
+      <th>指标</th>
+      <th>数值</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in stats %}
+    <tr>
+      <th scope="row">{{ s.label }}</th>
+      <td><strong>{{ s.value }}</strong> {{ s.unit }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 id="featured">{{ ui.label_featured_projects }}</h2>
+<p>{{ hero_subtitle }}</p>
+<ul class="wiki-portal-list">
+  {% for project in projects %}
+  <li>
+    <span class="wiki-portal-thumb" style="background-image: url('{{ wiki_assets.crafting_table }}');" aria-hidden="true"></span>
+    <h3><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
+    <p class="meta">{{ project.category }} {{ ui.sep_dot }} {{ project.year }}{% if project.project_type %} {{ ui.sep_dot }} {{ project.project_type }}{% endif %}</p>
+    <p>{{ project.summary }}</p>
+    {% if project.tags %}
+    <p class="wiki-tags">
+      {% for tag in project.tags[:4] %}
+      <span class="wiki-tag">{{ tag }}</span>
+      {% endfor %}
+    </p>
+    {% endif %}
+  </li>
+  {% else %}
+  <li><p>暂无置顶项目。</p></li>
+  {% endfor %}
+</ul>
+<p><a href="/projects">{{ ui.link_all_projects }}</a>（共 {{ total_project_count }} 个）</p>
+
+<h2 id="portal">{{ ui.label_data_portal }}</h2>
+<p>以下内容来自 <code>zhita_settings.xlsx</code>，按工作表分类浏览。</p>
+<table class="wikitable">
+  <thead>
+    <tr>
+      <th></th>
+      <th>分类</th>
+      <th>工作表</th>
+      <th>条数</th>
+      <th>链接</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for hub in data_hubs %}
+    <tr>
+      <td class="wiki-icon-cell">
+        <span class="wiki-icon-box" style="background-image: url('{{ hub_icons[hub.id] }}');" aria-hidden="true"></span>
+      </td>
+      <th scope="row">{{ hub.label }}</th>
+      <td>{{ hub.sheet }}</td>
+      <td>{{ hub.count }}</td>
+      <td><a href="{{ hub.url }}">浏览</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

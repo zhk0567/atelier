@@ -1,0 +1,176 @@
+<wiki_structure>
+  <title>English Speaking Trainer Wiki</title>
+  <description>一个基于TED Talks和Psych2Go文章的Android英语口语训练应用，提供文章阅读、语音模仿、单词查询和悬浮球查词功能。</description>
+  <sections>
+    <section id="section-1">
+      <title>项目概览</title>
+      <pages>
+        <page_ref>page-1</page_ref>
+        <page_ref>page-2</page_ref>
+      </pages>
+    </section>
+    <section id="section-2">
+      <title>技术架构</title>
+      <pages>
+        <page_ref>page-3</page_ref><page_ref>page-4</page_ref>
+        <page_ref>page-5</page_ref>
+      </pages>
+      <subsections>
+        <section_ref>section-3</section_ref>
+      </subsections>
+    </section>
+    <section id="section-3">
+      <title>核心功能</title>
+      <pages>
+        <page_ref>page-6</page_ref><page_ref>page-7</page_ref>
+        <page_ref>page-8</page_ref>
+        <page_ref>page-9</page_ref>
+      </pages></section>
+    <section id="section-4">
+      <title>开发与维护</title>
+      <pages>
+        <page_ref>page-10</page_ref>
+        <page_ref>page-11</page_ref>
+        <page_ref>page-12</page_ref>
+      </pages>
+    </section>
+  </sections><pages>
+    <page id="page-1">
+      <title>项目简介</title>
+      <description>介绍English Speaking Trainer应用的功能定位、目标用户和主要特性。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-2</related>
+      </related_pages>
+      <parent_section>section-1</parent_section>
+    </page><page id="page-2">
+      <title>项目结构</title>
+      <description>说明Android项目的目录结构和代码组织方式。</description><importance>high</importance><relevant_files>
+        <file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-3</related>
+      </related_pages>
+      <parent_section>section-1</parent_section>
+    </page>
+    <page id="page-3">
+      <title>架构概览</title><description>描述应用的整体架构设计，包括数据层、界面层和工具类的职责划分。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-4</related>
+        <related>page-5</related>
+      </related_pages>
+      <parent_section>section-2</parent_section>
+    </page>
+    <page id="page-4">
+      <title>数据流说明</title>
+      <description>解释文章数据、音频资源和单词查询在应用中的流转过程。</description><importance>medium</importance><relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>audio_transcriber.py</file_path><file_path>video_transcriber.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-3</related>
+        <related>page-6</related>
+      </related_pages>
+      <parent_section>section-2</parent_section>
+    </page>
+    <page id="page-5">
+      <title>组件关系图</title>
+      <description>展示Activity、Adapter、Model和自定义View之间的依赖和交互关系。</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>README.md</file_path></relevant_files>
+      <related_pages>
+        <related>page-3</related>
+        <related>page-7</related>
+      </related_pages>
+      <parent_section>section-2</parent_section>
+    </page>
+    <page id="page-6">
+      <title>文章阅读功能</title>
+      <description>详细说明文章列表、文章详情、段落同步和来源筛选的实现方式。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>generate_psych2go_articles.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-7</related>
+        <related>page-8</related>
+      </related_pages>
+      <parent_section>section-3</parent_section></page>
+    <page id="page-7">
+      <title>语音模仿与播放控制</title><description>描述音频播放、倍速调节、进度条控制和时间戳同步的技术实现。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>audio_transcriber.py</file_path>
+        <file_path>video_transcriber.py</file_path>
+      </relevant_files>
+      <related_pages><related>page-6</related><related>page-9</related></related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-8"><title>单词查询系统</title>
+      <description>解释文章内点击查词、悬浮球查词和智能搜索（前缀/模糊匹配）的功能实现。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>transcriber_README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-6</related>
+        <related>page-9</related>
+      </related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-9">
+      <title>悬浮球组件</title>
+      <description>详细说明FloatingBallView的实现、生命周期管理和全局查词功能。</description><importance>medium</importance><relevant_files>
+        <file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-8</related>
+      </related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-10">
+      <title>开发环境与依赖</title>
+      <description>列出构建项目所需的Android Studio版本、JDK、SDK和主要第三方库。</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>requirements_transcriber.txt</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-11</related>
+      </related_pages><parent_section>section-4</parent_section>
+    </page>
+    <page id="page-11">
+      <title>快速开始指南</title>
+      <description>提供克隆项目、导入Android Studio、Gradle同步和运行调试的步骤。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-10</related>
+      </related_pages><parent_section>section-4</parent_section>
+    </page>
+    <page id="page-12">
+      <title>版本历史与更新计划</title><description>说明已发布版本的功能更新和未来开发路线图（短期、中期、长期计划）。</description>
+      <importance>medium</importance>
+      <relevant_files><file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related>
+      </related_pages>
+      <parent_section>section-4</parent_section>
+    </page>
+  </pages>
+</wiki_structure>

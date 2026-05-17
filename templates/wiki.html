@@ -1,0 +1,21 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ page }} · Wiki · {{ site_name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  {% if project %}
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="{{ project_url }}">{{ project.title }}</a>
+  {% endif %}
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ page }}</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="wiki-md">
+  {{ content_html | safe }}
+</div>
+{% endblock %}

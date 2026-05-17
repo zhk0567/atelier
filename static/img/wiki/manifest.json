@@ -1,0 +1,84 @@
+{
+  "license": "CC BY-SA 3.0 — Minecraft Wiki contributors",
+  "attribution_url": "https://minecraft.wiki/",
+  "assets": [
+    {
+      "file": "grass_block.png",
+      "urls": [
+        "https://minecraft.wiki/images/Grass_Block_JE7_BE6.png?width=32",
+        "https://minecraft.wiki/images/Grass_Block_JE5_BE3.png?width=32"
+      ]
+    },
+    {
+      "file": "dirt.png",
+      "urls": [
+        "https://minecraft.wiki/images/Dirt_JE2_BE2.png?width=32"
+      ]
+    },
+    {
+      "file": "stone.png",
+      "urls": [
+        "https://minecraft.wiki/images/Stone_JE7_BE6.png?width=32",
+        "https://minecraft.wiki/images/Stone_JE5_BE4.png?width=32"
+      ]
+    },
+    {
+      "file": "cobblestone.png",
+      "urls": [
+        "https://minecraft.wiki/images/Cobblestone_JE5_BE3.png?width=32"
+      ]
+    },
+    {
+      "file": "oak_planks.png",
+      "urls": [
+        "https://minecraft.wiki/images/Oak_Planks_JE6_BE3.png?width=32",
+        "https://minecraft.wiki/images/Oak_Planks_JE4_BE2.png?width=32"
+      ]
+    },
+    {
+      "file": "crafting_table.png",
+      "urls": [
+        "https://minecraft.wiki/images/Crafting_Table_JE4_BE3.png?width=32"
+      ]
+    },
+    {
+      "file": "bookshelf.png",
+      "urls": [
+        "https://minecraft.wiki/images/Bookshelf_JE2_BE2.png?width=32"
+      ]
+    },
+    {
+      "file": "item_book.png",
+      "urls": [
+        "https://minecraft.wiki/images/Book_JE2_BE2.png?width=32",
+        "https://minecraft.wiki/images/Writable_Book_JE2_BE2.png?width=32"
+      ]
+    },
+    {
+      "file": "item_compass.png",
+      "urls": [
+        "https://minecraft.wiki/images/Compass_JE3_BE3.gif?width=32",
+        "https://minecraft.wiki/images/Compass_JE2_BE2.gif?width=32"
+      ]
+    },
+    {
+      "file": "item_map.png",
+      "urls": [
+        "https://minecraft.wiki/images/Map_JE2_BE2.png?width=32",
+        "https://minecraft.wiki/images/Filled_Map_JE2_BE2.png?width=32"
+      ]
+    },
+    {
+      "file": "sprite_grass.png",
+      "copy_from": "grass_block.png"
+    },
+    {
+      "file": "sprite_dirt.png",
+      "copy_from": "dirt.png"
+    },
+    {
+      "file": "sprite_stone.png",
+      "copy_from": "stone.png"
+    }
+  ]
+}

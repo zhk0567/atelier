@@ -1,0 +1,527 @@
+/think
+Okay, I need to analyze the provided repository structure and README to create a wiki structure for the "guyunxinchuan" branch. The user wants the wiki in Mandarin Chinese, and I must output only the XML structure without any extra text.
+
+First, I'll examine the repository details from the query. The repository is Intelligent-Learning-Terminal, and we're focusing on the guyunxinchuan branch. The file tree shows three main parts: data (with story files), miniprogram (WeChat Mini Program), and web (web application). There's also mention of an Android app in the README, but looking at the file tree provided, I don't see any Android-related files listed. The file tree only shows data, miniprogram, and web directories. The README mentions Android under "app/" but it's not in the provided file tree. Since the instructions say to base answers ONLY on existing code or documents from the provided file tree, I should ignore the Android part because it's not listed in the file tree. The file tree starts with README.md, data, miniprogram, web, tools, etc. No "app" directory is present in the given file tree. So for this analysis, I'll focus on the miniprogram and web parts since those are clearly present.
+
+Now, reading the README: It describes the repo as having three parts: Android native app, Web demo site (Vite + React), and WeChat Mini Program. But since the file tree doesn't include Android files, I'll concentrate on the Web and Mini Program sections as they are fully represented in the file tree.
+
+The file tree shows:
+- data/ directory with story files (古琴.txt, 四平调.txt, etc.)
+- miniprogram/ with many subdirectories: components, config, data, pages, pkg, project.config.json, sitemap.json, start.py, stores, tools, typings, utils
+- web/ with README.md, index.html, package.json, postcss.config.js, src/ (with assets, components, data, hooks, lib, layout, pages, store, theme, vite-env.d.ts, tailwind.config.ts, vite.config.ts), start.py
+- tools/ with various sync scripts
+
+The README also mentions that each part is independent: Web in web/, Mini Program in miniprogram/, and Android in app/ (but app/ not in file tree).
+
+For the wiki structure, I need to create 8-12 pages covering key aspects. Since Android isn't in the file tree, I'll skip it and focus on Web and Mini Program, plus general project structure.
+
+Key aspects to cover:
+1. Project Overview: Based on README, explaining the three parts (but note Android missing in file tree, so maybe mention it's referenced but not shown? But instructions say strictly base on existing code, so perhaps only cover what's in file tree. However, README is part of the repo, so I can use it to describe the intended structure, even if Android files aren't listed. The file tree provided might be incomplete, but I have to go by what's given. The README says "app/" exists, but it's not in the file tree. Since the file tree is provided as part of the query, and it doesn't list app/, I should not include Android in the wiki because there are no files to reference. But the README is in the file tree (README.md at root), so I can use that for description.
+
+Looking at the file tree: It starts with README.md, then data, miniprogram, web, tools. No app. So for the wiki, I'll cover:
+- Project structure (from README and file tree)
+- Web application details
+- Mini Program details
+- Data handling (since data/ directory has story files)
+- Tools (sync scripts)
+- Specific components or modules
+
+Now, for the XML structure:
+-<title>: Overall title for the wiki
+-<description>: Brief description
+-<sections>: Can have sections and subsections
+-<pages>: Individual pages with id, title, description, importance, relevant_files, related_pages, parent_section
+
+I need to create 8-12 pages.
+
+Let me brainstorm page ideas:
+
+1. Project Overview: Describe the three-part architecture (Android, Web, Mini Program) based on README, even if Android files aren't in tree, since README is present.
+2. Web Application Architecture: Details about the Vite + React setup in web/
+3. Mini Program Architecture: Details about the WeChat Mini Program with TypeScript
+4. Data Management: How story data is handled (data/ directory and how it's used in web/miniprogram)
+5. Component Library: Reusable components in both web and miniprogram
+6. State Management: Stores (e.g., cartStore, playerStore) in both platforms
+7. Navigation and Routing: How pages are structured and linked
+8. Build and Deployment: How to run each part (using start.py scripts)
+9. Theme System: How theming is implemented (themeStore, theme.ts, etc.)
+10. Tools and Scripts: Purpose of the sync scripts in tools/
+11. Story Content: Details about the story files in data/
+12. Development Setup: Environment requirements from README
+
+But I need to limit to 8-12. Let's aim for 10.
+
+Now, for each page, I need to specify relevant_files from the file tree.
+
+Important: The file paths must be exactly as in the provided file tree. Note that paths use backslashes in the tree (e.g., data\故事\古琴.txt), but in XML, I should use forward slashes or keep as is? The file tree shows backslashes, but in reality, paths might be OS-dependent. However, for the wiki, I should use the paths as given, but since it's a XML attribute, I'll use the strings exactly as provided, but note that in the file tree, it's shown with backslashes. However, in markdown or XML, it's fine to use forward slashes for paths usually, but to be precise, I'll use the paths as listed in the file tree, which use backslashes. But in the file tree snippet, it's written with backslashes like "data\故事\古琴.txt", so I'll keep that.
+
+But in the relevant_files, I need to put the path as a string. Since it's XML, I can use the path as given.
+
+Now, let's define the pages.
+
+First, overall title and description.
+
+Title: 古韵薪传项目维基 (or something similar)
+
+Description: 本维基文档化了古韵薪传多端项目，覆盖Web应用、微信小程序及项目结构、开发指南等核心内容。
+
+Now, sections and pages.
+
+I think it's better to have a flat structure or minimal sections. The XML allows sections with subsections, but to keep it simple, I can have one section with all pages, or a few sections.
+
+Since the user said "include pages that would benefit from visual diagrams", I should note which pages might need diagrams, but in the XML, I don't have a field for that; it's just in the description or I can mention in page description that it would benefit from a diagram.
+
+But the XML structure doesn't have a specific field for diagrams; it's just in the page description I can note that.
+
+Now, let's list the pages I propose:
+
+1. Project Overview
+2. Web Application Architecture
+3. Mini Program Architecture
+4. Data Flow and Story Management
+5. Component Library Overview
+6. State Management System
+7. Navigation and Routing
+8. Build and Deployment Process
+9. Theme System
+10. Development Tools and Scripts
+
+That's 10 pages.
+
+Now, assign IDs.
+
+I'll use section structure: maybe one main section.
+
+To follow the XML format, I need<sections> with <section> elements, and<pages> with<page> elements.
+
+Each page must have a parent_section.
+
+I can have one section that contains all pages.
+
+Let me define:
+
+<section id="section-overview">
+  <title>项目概览</title>
+  ... pages ...
+</section>
+
+But the XML has<sections> containing multiple <section>, and each <section> can have<pages> and<subsections>.
+
+To simplify, I'll have one section with no subsections, and all pages under that section.
+
+So:
+
+<sections>
+  <section id="sec-1">
+    <title>项目核心模块</title>
+    <pages>
+      <page_ref>page-overview</page_ref>
+      <page_ref>page-web</page_ref>
+      ... etc ...
+    </pages>
+  </section>
+</sections>
+
+Then in <pages>, each page has parent_section="sec-1"
+
+Now, for each page, fill in title, description, importance, relevant_files, related_pages.
+
+Importance: high, medium, low. I'll set most as high or medium.
+
+Relevant_files: list of file paths from the tree.
+
+Related_pages: other page IDs.
+
+Let's define the pages:
+
+Page 1: Project Overview
+- ID: page-overview
+- Title: 项目概述与架构
+- Description: 介绍古韵薪传项目的三端架构（Android、Web、微信小程序），基于README.md的说明，解释各端的独立性和共同目标。
+- Importance: high
+- Relevant_files: README.md (since it's the root README)
+- Related_pages: page-web, page-miniprogram (but I'll use the IDs I define)
+- Parent_section: sec-1
+
+Page 2: Web Application Architecture
+- ID: page-web-arch
+- Title: Web应用架构详解
+- Description: 分析Web端基于Vite和React的技术栈，包括目录结构、状态管理、主题系统等。适合架构图展示。
+- Importance: high
+- Relevant_files: web/README.md, web/package.json, web/vite.config.ts, web/src/main.tsx, web/src/App.tsx, web/src/store/ (cartStore.ts, etc.), web/src/theme/
+- Related_pages: page-overview, page-component-lib, page-state-mgmt
+- Parent_section: sec-1
+
+Page 3: Mini Program Architecture
+- ID: page-mp-arch
+- Title: 微信小程序架构详解
+- Description: 解释微信小程序原生开发与TypeScript的结合，包括app.json、自定义tabbar、页面结构等。适合组件关系图。
+- Importance: high
+- Relevant_files: miniprogram/README.md, miniprogram/app.json, miniprogram/project.config.json, miniprogram/sitemap.json, miniprogram/custom-tab-bar/, miniprogram/pages/, miniprogram/pkg/
+- Related_pages: page-overview, page-component-lib, page-state-mgmt
+- Parent_section: sec-1
+
+Page 4: Data Flow and Story Management
+- ID: page-data-flow
+- Title: 数据流与故事内容管理
+- Description: 说明故事数据（data/目录下的.txt文件）如何被加载、处理并在Web和小程序中使用。涉及data/目录和相关的data文件（如story.ts）。
+- Importance: high
+- Relevant_files: data/故事/古琴.txt, data/故事/四平调.txt, ... (all story files), miniprogram/data/story.ts, web/src/data/story.ts
+- Related_pages: page-web-arch, page-mp-arch
+- Parent_section: sec-1
+
+Page 5: Component Library Overview
+- ID: page-component-lib
+- title: 可复用组件库
+- description: 描述Web和小程序中共享的UI组件概念（如Cover、Icon、Section等），尽管实现分离，但设计保持一致。适合组件树图。
+- importance: medium
+- relevant_files: miniprogram/components/ (all component dirs), web/src/components/ (all component files)
+- related_pages: page-web-arch, page-mp-arch
+- parent_section: sec-1
+
+Page 6: State Management System
+- ID: page-state-mgmt
+- title: 状态管理机制
+- description: 分析Web端使用的zustand或类似store（cartStore.ts, playerStore等）和小程序中的store实现，说明状态如何跨页面共享。
+- importance: high
+- relevant_files: web/src/store/ (cartStore.ts, playerStore.ts, sessionStore.ts, themeStore.ts), miniprogram/stores/ (cartStore.ts, playerStore.ts, sessionStore.ts, themeStore.ts)
+- related_pages: page-web-arch, page-mp-arch, page-data-flow
+- parent_section: sec-1
+
+Page 7: Navigation and Routing
+- ID: page-navigation
+- title: 导航与路由系统
+- description: 解释Web端的路由（可能基于React Router或类似）和小程序的页面跳转（通过wx.navigateTo等），包括底部导航栏的实现。
+- importance: medium
+- relevant_files: web/src/layout/BottomNav.tsx, web/src/pages/ (all page files), miniprogram/tabBar? (from app.json), miniprogram/pages/ (all page json/ts)
+- related_pages: page-web-arch, page-mp-arch
+- parent_section: sec-1
+
+Page 8: Build and Deployment Process
+- ID: page-build-deploy
+- title: 构建与部署流程
+- description: 详细说明如何使用start.py脚本启动Web和小程序开发服务器，以及构建步骤。基于web/start.py和miniprogram/start.py。
+- importance: high
+- relevant_files: web/start.py, miniprogram/start.py, web/package.json, miniprogram/project.config.json
+- related_pages: page-overview
+- parent_section: sec-1
+
+Page 9: Theme System
+- ID: page-theme-system
+- title: 主题系统实现
+- description: 描述项目如何实现主题切换（如浅色/深色或国风主题），通过themeStore和主题令牌（tokens.ts）实现。
+- importance: medium
+- relevant_files: web/src/theme/ThemeProvider.tsx, web/src/theme/tokens.ts, miniprogram/stores/themeStore.ts, miniprogram/utils/theme.ts
+- related_pages: page-web-arch, page-mp-arch, page-state-mgmt
+- parent_section: sec-1
+
+Page 10: Development Tools and Scripts
+- ID: page-dev-tools
+- title: 开发工具与数据同步脚本
+- description: 解释tools/目录下的各种同步脚本（如sync_stories_data.py等）的用途，用于更新故事数据、封面等资源。
+- importance: medium
+- relevant_files: tools/sync_stories_data.py, tools/sync_story_covers.py, tools/sync_shop_carousel.py, etc. (all sync scripts in tools/)
+- related_pages: page-data-flow, page-overview
+- parent_section: sec-1
+
+Now, I have 10 pages.
+
+I need to make sure the relevant_files are actual paths from the file tree.
+
+Let me verify some:
+
+- For page-overview: README.md exists at root.
+
+- For page-web-arch: web/README.md (but in file tree, web/ has README.md? Looking at file tree: "web\README.md" is listed, yes. web/package.json, web/vite.config.ts, web/src/main.tsx, web/src/App.tsx, web/src/store/ (the store files are listed under web/src/store/), web/src/theme/ (ThemeProvider.tsx and tokens.ts are listed).
+
+In file tree:
+web\src\store\cartStore.ts
+web\src\store\playerStore.ts
+etc.
+web\src\theme\ThemeProvider.tsx
+web\src\theme\tokens.ts
+
+- For page-mp-arch: miniprogram\README.md (listed), miniprogram\app.json, miniprogram\project.config.json, miniprogram\sitemap.json, miniprogram\custom-tab-bar\index.json and index.ts, miniprogram\pages\ (all pages), miniprogram\pkg\ (all packages)
+
+- For page-data-flow: data\故事\古琴.txt etc. are listed under data\故事\ . Also miniprogram\data\story.ts and web\src\data\story.ts are listed.
+
+- For page-component-lib: miniprogram\components\ (all subdirs like cover, icon, etc.), web\src\components\ (all .tsx files)
+
+- For page-state-mgmt: web\src\store\cartStore.ts etc., miniprogram\stores\cartStore.ts etc.
+
+- For page-navigation: web\src\layout\BottomNav.tsx, web\src\pages\ (all), miniprogram\app.json (defines tabBar), miniprogram\pages\ (all)
+
+- For page-build-deploy: web\start.py, miniprogram\start.py, web\package.json, miniprogram\project.config.json
+
+- For page-theme-system: web\src\theme\ThemeProvider.tsx, web\src\theme\tokens.ts, miniprogram\stores\themeStore.ts, miniprogram\utils\theme.ts
+
+- For page-dev-tools: all tools\sync_*.py files are listed.
+
+Now, for related_pages, I need to use the page IDs I defined.
+
+Also, in the XML,<relevant_files> should contain <file_path> elements.
+
+Similarly, <related_pages> contains <related> elements.
+
+Now, let's assign the section ID. I'll use one section.
+
+Set section id="sec-main"
+
+In<sections>, have one <section> with id="sec-main"
+
+Then pages have parent_section="sec-main"
+
+Now, write the XML.
+
+First, the root <wiki_structure>
+
+Then <title>: 古韵薪传项目维基<description>: 本维基文档化了古韵薪传多端项目，覆盖Web应用、微信小程序及项目结构、开发指南等核心内容，旨在帮助开发者快速理解和贡献代码。
+
+Then<sections>: with one section.
+
+Then <pages>: with all pages.
+
+Now, importance: I'll set as per my earlier note.
+
+Let me list all pages with IDs:
+
+1. page-overview
+2. page-web-arch
+3. page-mp-arch
+4. page-data-flow
+5. page-component-lib
+6. page-state-mgmt
+7. page-navigation
+8. page-build-deploy
+9. page-theme-system
+10. page-dev-tools
+
+In the XML, for each page,<importance> should be one of high/medium/low.
+
+Now, write the XML.
+
+Remember: no extra text, just the XML.
+
+Start with<wiki_structure>
+
+End with</wiki_structure>
+
+Now, construct it.<wiki_structure>
+  <title>古韵薪传项目维基</title>
+  <description>本维基文档化了古韵薪传多端项目，覆盖Web应用、微信小程序及项目结构、开发指南等核心内容，旨在帮助开发者快速理解和贡献代码。</description>
+  <sections>
+    <section id="sec-main">
+      <title>项目核心模块</title>
+      <pages>
+        <page_ref>page-overview</page_ref>
+        <page_ref>page-web-arch</page_ref>
+        <page_ref>page-mp-arch</page_ref>
+        <page_ref>page-data-flow</page_ref>
+        <page_ref>page-component-lib</page_ref>
+        <page_ref>page-state-mgmt</page_ref>
+        <page_ref>page-navigation</page_ref>
+        <page_ref>page-build-deploy</page_ref>
+        <page_ref>page-theme-system</page_ref>
+        <page_ref>page-dev-tools</page_ref>
+      </pages>
+    </section>
+  </sections>
+  <pages>
+    <page id="page-overview">
+      <title>项目概述与架构</title>
+      <description>介绍古韵薪传项目的三端架构（Android、Web、微信小程序），基于README.md的说明，解释各端的独立性和共同目标。适合架构概览图展示。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-web-arch</related>
+        <related>page-mp-arch</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-web-arch">
+      <title>Web应用架构详解</title>
+      <description>分析Web端基于Vite和React的技术栈，包括目录结构、状态管理、主题系统等。适合架构图展示。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>web/README.md</file_path>
+        <file_path>web/package.json</file_path>
+        <file_path>web/vite.config.ts</file_path>
+        <file_path>web/src/main.tsx</file_path>
+        <file_path>web/src/App.tsx</file_path>
+        <file_path>web/src/store/cartStore.ts</file_path>
+        <file_path>web/src/store/playerStore.ts</file_path>
+        <file_path>web/src/store/sessionStore.ts</file_path>
+        <file_path>web/src/store/themeStore.ts</file_path>
+        <file_path>web/src/theme/ThemeProvider.tsx</file_path>
+        <file_path>web/src/theme/tokens.ts</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-overview</related>
+        <related>page-component-lib</related>
+        <related>page-state-mgmt</related>
+        <related>page-theme-system</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-mp-arch">
+      <title>微信小程序架构详解</title>
+      <description>解释微信小程序原生开发与TypeScript的结合，包括app.json、自定义tabbar、页面结构等。适合组件关系图。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>miniprogram/README.md</file_path>
+        <file_path>miniprogram/app.json</file_path>
+        <file_path>miniprogram/project.config.json</file_path>
+        <file_path>miniprogram/sitemap.json</file_path>
+        <file_path>miniprogram/custom-tab-bar/index.json</file_path>
+        <file_path>miniprogram/custom-tab-bar/index.ts</file_path>
+        <file_path>miniprogram/pages/splash/index.json</file_path>
+        <file_path>miniprogram/pages/splash/index.ts</file_path>
+        <file_path>miniprogram/pages/story/index.json</file_path>
+        <file_path>miniprogram/pages/story/index.ts</file_path>
+        <file_path>miniprogram/pkg/story-list/index.json</file_path>
+        <file_path>miniprogram/pkg/story-list/index.ts</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-overview</related>
+        <related>page-component-lib</related>
+        <related>page-state-mgmt</related>
+        <related>page-theme-system</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-data-flow">
+      <title>数据流与故事内容管理</title>
+      <description>说明故事数据（data/目录下的.txt文件）如何被加载、处理并在Web和小程序中使用。涉及data/目录和相关的data文件（如story.ts）。适合数据流图展示。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>data\故事\古琴.txt</file_path>
+        <file_path>data\故事\四平调.txt</file_path>
+        <file_path>data\故事\河南坠子.txt</file_path>
+        <file_path>data\故事\河洛大鼓.txt</file_path>
+        <file_path>data\故事\濮阳大弦戏.txt</file_path>
+        <file_path>data\故事\箜篌艺术.txt</file_path>
+        <file_path>miniprogram\data\story.ts</file_path>
+        <file_path>web\src\data\story.ts</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-web-arch</related>
+        <related>page-mp-arch</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-component-lib">
+      <title>可复用组件库</title>
+      <description>描述Web和小程序中共享的UI组件概念（如Cover、Icon、Section等），尽管实现分离，但设计保持一致。适合组件树图展示。</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>miniprogram\components\cover\index.json</file_path>
+        <file_path>miniprogram\components\cover\index.ts</file_path>
+        <file_path>miniprogram\components\icon\index.json</file_path>
+        <file_path>miniprogram\components\icon\index.ts</file_path>
+        <file_path>miniprogram\components\section\index.json</file_path>
+        <file_path>miniprogram\components\section\index.ts</file_path>
+        <file_path>web\src\components\Cover.tsx</file_path>
+        <file_path>web\src\components\Icon.tsx</file_path>
+        <file_path>web\src\components\Section.tsx</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-web-arch</related>
+        <related>page-mp-arch</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-state-mgmt">
+      <title>状态管理机制</title>
+      <description>分析Web端使用的zustand或类似store（cartStore.ts, playerStore等）和小程序中的store实现，说明状态如何跨页面共享。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>web\src\store\cartStore.ts</file_path>
+        <file_path>web\src\store\playerStore.ts</file_path>
+        <file_path>web\src\store\sessionStore.ts</file_path>
+        <file_path>web\src\store\themeStore.ts</file_path>
+        <file_path>miniprogram\stores\cartStore.ts</file_path>
+        <file_path>miniprogram\stores\playerStore.ts</file_path>
+        <file_path>miniprogram\stores\sessionStore.ts</file_path>
+        <file_path>miniprogram\stores\themeStore.ts</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-web-arch</related>
+        <related>page-mp-arch</related>
+        <related>page-data-flow</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-navigation">
+      <title>导航与路由系统</title>
+      <description>解释Web端的路由（可能基于React Router或类似）和小程序的页面跳转（通过wx.navigateTo等），包括底部导航栏的实现。</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>web\src\layout\BottomNav.tsx</file_path>
+        <file_path>web\src\pages\Home.tsx</file_path>
+        <file_path>web\src\pages\About.tsx</file_path>
+        <file_path>miniprogram\app.json</file_path>
+        <file_path>miniprogram\pages\tabBar\index.json</file_path>
+        <file_path>miniprogram\pages\tabBar\index.ts</file_path>
+        <file_path>miniprogram\pages\splash\index.json</file_path>
+        <file_path>miniprogram\pages\splash\index.ts</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-web-arch</related>
+        <related>page-mp-arch</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-build-deploy">
+      <title>构建与部署流程</title>
+      <description>详细说明如何使用start.py脚本启动Web和小程序开发服务器，以及构建步骤。基于web/start.py和miniprogram/start.py。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>web\start.py</file_path>
+        <file_path>miniprogram\start.py</file_path>
+        <file_path>web\package.json</file_path>
+        <file_path>miniprogram\project.config.json</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-overview</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-theme-system">
+      <title>主题系统实现</title>
+      <description>描述项目如何实现主题切换（如浅色/深色或国风主题），通过themeStore和主题令牌（tokens.ts）实现。</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>web\src\theme\ThemeProvider.tsx</file_path>
+        <file_path>web\src\theme\tokens.ts</file_path>
+        <file_path>miniprogram\stores\themeStore.ts</file_path>
+        <file_path>miniprogram\utils\theme.ts</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-web-arch</related>
+        <related>page-mp-arch</related>
+        <related>page-state-mgmt</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+    <page id="page-dev-tools">
+      <title>开发工具与数据同步脚本</title>
+      <description>解释tools/目录下的各种同步脚本（如sync_stories_data.py等）的用途，用于更新故事数据、封面等资源。</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>tools\sync_stories_data.py</file_path>
+        <file_path>tools\sync_story_covers.py</file_path>
+        <file_path>tools\sync_shop_carousel.py</file_path>
+        <file_path>tools\sync_wenchuang_shop.py</file_path>
+        <file_path>tools\sync_basic_lesson_covers.py</file_path>
+        <file_path>tools\sync_basic_lesson_videos.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-overview</related>
+        <related>page-data-flow</related>
+      </related_pages>
+      <parent_section>sec-main</parent_section>
+    </page>
+  </pages>
+</wiki_structure>

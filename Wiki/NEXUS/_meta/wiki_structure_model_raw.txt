@@ -1,0 +1,226 @@
+<wiki_structure>
+  <title>NEXUS Unified 智能语音交互平台 Wiki</title>
+  <description>企业级智能语音交互平台，集成实时语音识别、AI对话和语音合成功能，支持连续对话、历史记录管理、故事阅读系统等功能。</description>
+  <sections>
+    <section id="section-1">
+      <title>项目概览</title>
+      <pages>
+        <page_ref>page-1</page_ref>
+        <page_ref>page-2</page_ref>
+      </pages>
+    </section>
+    <section id="section-2">
+      <title>系统架构</title>
+      <pages>
+        <page_ref>page-3</page_ref>
+        <page_ref>page-4</page_ref>
+      </pages>
+      <subsections>
+        <section_ref>section-3</section_ref>
+      </subsections>
+    </section>
+    <section id="section-3">
+      <title>核心功能模块</title>
+      <pages>
+        <page_ref>page-5</page_ref>
+        <page_ref>page-6</page_ref>
+        <page_ref>page-7</page_ref>
+        <page_ref>page-8</page_ref>
+      </pages>
+    </section>
+    <section id="section-4">
+      <title>部署与运维</title>
+      <pages>
+        <page_ref>page-9</page_ref>
+        <page_ref>page-10</page_ref>
+        <page_ref>page-11</page_ref>
+      </pages>
+    </section>
+  </sections>
+  <pages>
+    <page id="page-1">
+      <title>项目简介</title>
+      <description>项目整体介绍，包括核心功能、技术栈和快速开始指南</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>任务情况说明.txt</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-2</related>
+        <related>page-3</related>
+      </related_pages>
+      <parent_section>section-1</parent_section>
+    </page>
+    <page id="page-2">
+      <title>项目结构</title>
+      <description>详细的项目文件结构说明，包括后端模块、前端应用和配置文件</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>admin_panel.html</file_path>
+        <file_path>app.py</file_path>
+        <file_path>backend/__init__.py</file_path>
+        <file_path>backend/asr_service.py</file_path>
+        <file_path>backend/config.py</file_path>
+        <file_path>backend/logger_config.py</file_path>
+        <file_path>backend/routes/__init__.py</file_path>
+        <file_path>backend/routes/admin_story_routes.py</file_path>
+        <file_path>backend/routes/asr_routes.py</file_path>
+        <file_path>backend/routes/auth_routes.py</file_path>
+        <file_path>backend/routes/error_routes.py</file_path>
+        <file_path>backend/routes/health_routes.py</file_path>
+        <file_path>backend/routes/realtime_routes.py</file_path>
+        <file_path>clear_tables.py</file_path>
+        <file_path>requirements.txt</file_path>
+        <file_path>任务清单.md</file_path>
+        <file_path>部署清单.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related>
+        <related>page-3</related>
+      </related_pages>
+      <parent_section>section-1</parent_section>
+    </page>
+    <page id="page-3">
+      <title>系统架构概览</title>
+      <description>系统整体架构设计，包括前后端分离架构、微服务模块和数据流</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>app.py</file_path>
+        <file_path>backend/__init__.py</file_path>
+        <file_path>backend/config.py</file_path>
+        <file_path>backend/routes/__init__.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related>
+        <related>page-4</related>
+        <related>page-5</related>
+      </related_pages>
+      <parent_section>section-2</parent_section>
+    </page>
+    <page id="page-4">
+      <title>数据流与交互</title>
+      <description>详细说明数据在系统中的流动过程，包括语音识别、AI对话和语音合成的数据流</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>backend/asr_service.py</file_path>
+        <file_path>backend/routes/asr_routes.py</file_path>
+        <file_path>backend/routes/realtime_routes.py</file_path>
+        <file_path>backend/routes/auth_routes.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-3</related>
+        <related>page-5</related>
+        <related>page-6</related>
+      </related_pages>
+      <parent_section>section-2</parent_section>
+    </page>
+    <page id="page-5">
+      <title>语音识别服务</title>
+      <description>ASR服务的实现细节，包括Dolphin ASR模型集成、音频处理和实时转写功能</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>backend/asr_service.py</file_path>
+        <file_path>backend/routes/asr_routes.py</file_path>
+        <file_path>backend/routes/realtime_routes.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-4</related>
+        <related>page-6</related>
+      </related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-6">
+      <title>AI对话服务</title>
+      <description>AI对话服务的实现，包括DeepSeek API集成、流式对话和上下文管理</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>backend/routes/realtime_routes.py</file_path>
+        <file_path>backend/routes/auth_routes.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-4</related>
+        <related>page-5</related>
+        <related>page-7</related>
+      </related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-7">
+      <title>语音合成服务</title>
+      <description>TTS服务的实现，包括多音色中文语音合成和Edge-TTS集成</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>backend/routes/realtime_routes.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-4</related>
+        <related>page-6</related>
+      </related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-8">
+      <title>故事阅读系统</title>
+      <description>30天循环故事系统的实现，包括日期算法、双模式阅读和进度跟踪</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>backend/routes/admin_story_routes.py</file_path>
+        <file_path>admin_panel.html</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-9</related>
+      </related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-9">
+      <title>数据库设计</title>
+      <description>数据库表结构设计，包括用户表、阅读进度表和故事交互表</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>backend/config.py</file_path>
+        <file_path>clear_tables.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-8</related>
+        <related>page-10</related>
+      </related_pages>
+      <parent_section>section-4</parent_section>
+    </page>
+    <page id="page-10">
+      <title>部署指南</title>
+      <description>详细的部署步骤，包括环境要求、数据库配置、后端启动和Android应用编译</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>部署清单.md</file_path>
+        <file_path>requirements.txt</file_path>
+        <file_path>app.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related>
+        <related>page-9</related>
+        <related>page-11</related>
+      </related_pages>
+      <parent_section>section-4</parent_section>
+    </page>
+    <page id="page-11">
+      <title>API接口文档</title>
+      <description>所有RESTful API接口的详细说明，包括健康检查、故事获取、阅读进度更新等</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>backend/routes/health_routes.py</file_path>
+        <file_path>backend/routes/admin_story_routes.py</file_path>
+        <file_path>backend/routes/asr_routes.py</file_path>
+        <file_path>backend/routes/auth_routes.py</file_path>
+        <file_path>backend/routes/realtime_routes.py</file_path>
+        <file_path>backend/routes/error_routes.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-4</related>
+        <related>page-5</related>
+        <related>page-6</related>
+        <related>page-7</related>
+        <related>page-8</related>
+      </related_pages>
+      <parent_section>section-4</parent_section>
+    </page>
+  </pages>
+</wiki_structure>

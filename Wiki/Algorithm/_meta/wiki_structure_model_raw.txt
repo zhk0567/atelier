@@ -1,0 +1,181 @@
+<wiki_structure>
+  <title>Algorithm 仓库 Wiki</title>
+  <description>一个双语言（Python/C++）的算法与数据结构学习仓库，包含完整的实现、面试题解和学习路线，适用于面试准备和长期复习。</description>
+  <sections>
+    <section id="section-1"><title>项目概览</title>
+      <pages>
+        <page_ref>page-1</page_ref>
+        <page_ref>page-2</page_ref></pages></section><section id="section-2">
+      <title>数据结构</title>
+      <pages>
+        <page_ref>page-3</page_ref>
+        <page_ref>page-4</page_ref>
+        <page_ref>page-5</page_ref>
+      </pages>
+      <subsections><section_ref>section-3</section_ref>
+      </subsections></section><section id="section-3">
+      <title>算法实现</title><pages>
+        <page_ref>page-6</page_ref>
+        <page_ref>page-7</page_ref>
+        <page_ref>page-8</page_ref>
+      </pages>
+    </section>
+    <section id="section-4">
+      <title>刷题与面试</title>
+      <pages>
+        <page_ref>page-9</page_ref>
+        <page_ref>page-10</page_ref>
+        <page_ref>page-11</page_ref>
+      </pages>
+    </section>
+    <section id="section-5">
+      <title>开发与维护</title><pages><page_ref>page-12</page_ref>
+      </pages>
+    </section>
+  </sections>
+  <pages>
+    <page id="page-1">
+      <title>项目结构与约定</title>
+      <description>说明仓库的目录组织方式、命名规范、双语言同构结构以及如何遵循贡献指南。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>README.md</file_path></relevant_files>
+      <related_pages>
+        <related>page-2</related>
+        <related>page-12</related>
+      </related_pages>
+      <parent_section>section-1</parent_section></page><page id="page-2">
+      <title>学习路线与进度追踪</title>
+      <description>提供基础到进阶的学习顺序建议，并说明当前各模块的完成状态和待办事项。适合新用户快速入门。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages><related>page-1</related>
+        <related>page-9</related></related_pages>
+      <parent_section>section-1</parent_section>
+    </page>
+    <page id="page-3">
+      <title>线性数据结构</title>
+      <description>详细说明数组、链表、栈、队列、哈希表等线性结构的实现原理、时间复杂度和使用场景，适合配合图解学习。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>cpp/data_structures/linked_list/linked_list.cpp</file_path>
+        <file_path>cpp/data_structures/stack/stack.cpp</file_path><file_path>cpp/data_structures/queue/queue.cpp</file_path><file_path>cpp/data_structures/hash_table/hash_table.cpp</file_path>
+      </relevant_files><related_pages>
+        <related>page-4</related>
+        <related>page-6</related>
+      </related_pages>
+      <parent_section>section-2</parent_section></page><page id="page-4">
+      <title>树形数据结构</title><description>讲解二叉树、BST、AVL、红黑树、堆、Trie、线段树和树状数组的性质、操作实现和应用场景，建议配合结构图进行学习。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>cpp/data_structures/tree/binary_tree/binary_tree.cpp</file_path>
+        <file_path>cpp/data_structures/tree/bst/bst.cpp</file_path>
+        <file_path>cpp/data_structures/tree/avl/avl.cpp</file_path>
+        <file_path>cpp/data_structures/tree/red_black_tree/red_black_tree.cpp</file_path><file_path>cpp/data_structures/tree/heap/heap.cpp</file_path><file_path>cpp/data_structures/tree/trie/trie.cpp</file_path><file_path>cpp/data_structures/tree/segment_tree/segment_tree.cpp</file_path><file_path>cpp/data_structures/tree/fenwick_tree/fenwick_tree.cpp</file_path>
+      </relevant_files><related_pages>
+        <related>page-3</related>
+        <related>page-6</related>
+      </related_pages>
+      <parent_section>section-2</parent_section></page><page id="page-5">
+      <title>图与高级数据结构</title>
+      <description>覆盖图的邻接表/邻接矩阵表示、并查集、跳表、布隆过滤器和LRU缓存的实现，适合通过图示展示存储结构和操作流程。</description>
+      <importance>medium</importance><relevant_files>
+        <file_path>cpp/data_structures/graph/adjacency_list/graph_list.cpp</file_path>
+        <file_path>cpp/data_structures/graph/adjacency_matrix/graph_matrix.cpp</file_path>
+        <file_path>cpp/data_structures/graph/disjoint_set/union_find.cpp</file_path>
+        <file_path>cpp/data_structures/advanced/skip_list/skip_list.cpp</file_path>
+        <file_path>cpp/data_structures/advanced/bloom_filter/bloom_filter.cpp</file_path>
+        <file_path>cpp/data_structures/advanced/lru_cache/lru_cache.cpp</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-4</related><related>page-7</related>
+      </related_pages>
+      <parent_section>section-2</parent_section>
+    </page>
+    <page id="page-6">
+      <li>排序、查找与基础算法</li>
+      <description>介绍排序（快速、归堆等）、查找（二分）、递归、分治和位运算的经典实现，适合通过过程图理解算法执行流程。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>cpp/algorithms/sorting/sorting.cpp</file_path><file_path>cpp/algorithms/searching/searching.cpp</file_path><file_path>cpp/algorithms/recursion/recursion.cpp</file_path><file_path>cpp/algorithms/divide_and_conquer/divide_and_conquer.cpp</file_path>
+        <file_path>cpp/algorithms/bit_manipulation/bit_manipulation.cpp</file_path></relevant_files>
+      <related_pages><related>page-3</related>
+        <related>page-7</related></related_pages>
+      <parent_section>section-3</parent_section></page><page id="page-7">
+      <title>高级算法专题</title>
+      <description>深入讲解动态规划（线性、区间、树形、背包等）、贪心、双指针、滑动窗口、前缀和和莫队算法的思想与实现，建议用状态转移图辅助理解。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>cpp/algorithms/dynamic_programming/linear/linear_dp.cpp</file_path>
+        <file_path>cpp/algorithms/dynamic_programming/interval/interval_dp.cpp</file_path>
+        <file_path>cpp/algorithms/dynamic_programming/tree/tree_dp.cpp</file_path><file_path>cpp/algorithms/dynamic_programming/knapsack/knapsack_dp.cpp</file_path>
+        <file_path>cpp/algorithms/dynamic_programming/bitmask/bitmask_dp.cpp</file_path><file_path>cpp/algorithms/dynamic_programming/digit/digit_dp.cpp</file_path>
+        <file_path>cpp/algorithms/greedy/greedy.cpp</file_path>
+        <file_path>cpp/algorithms/two_pointers/two_pointers.cpp</file_path><file_path>cpp/algorithms/sliding_window/sliding_window.cpp</file_path><file_path>cpp/algorithms/prefix_sum/prefix_sum.cpp</file_path>
+        <file_path>cpp/algorithms/advanced/mo_algorithm/mo_algorithm.cpp</file_path>
+      </related_pages>
+        <related>page-4</related>
+        <related>page-8</related>
+      </related_pages><parent_section>section-3</parent_section></page><page id="page-8">
+      <title>图算法与字符串处理</title>
+      <description>覆盖图的遍历、最短路径、最小生成树、拓扑排序、LCA、强连通分量、二分图匹配和网络流，以及字符串匹配（KMP、Z算法、AC自动机、Manacher）等高频 topic。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>cpp/algorithms/graph/traversal/graph_traversal.cpp</file_path>
+        <file_path>cpp/algorithms/graph/shortest_path/dijkstra.cpp</file_path>
+        <file_path>cpp/algorithms/graph/shortest_path/floyd_warshall.cpp</file_path>
+        <file_path>cpp/algorithms/graph/mst/kruskal.cpp</file_path>
+        <file_path>cpp/algorithms/graph/mst/prim.cpp</file_path>
+        <file_path>cpp/algorithms/graph/topological_sort/kahn.cpp</file_path><file_path>cpp/algorithms/graph/lca/lca.cpp</file_path>
+        <file_path>cpp/algorithms/graph/scc/tarjan.cpp</file_path>
+        <file_path>cpp/algorithms/graph/bipartite_matching/bipartite_matching.cpp</file_path>
+        <file_path>cpp/algorithms/graph/network_flow/edmonds_karp.cpp</file_path>
+        <file_path>cpp/algorithms/string/string_algorithms.cpp</file_path><file_path>cpp/algorithms/string/kmp.cpp</file_path>
+        <file_path>cpp/algorithms/string/z_algorithm.cpp</file_path>
+        <file_path>cpp/algorithms/string/ac_automaton.cpp</file_path>
+        <file_path>cpp/algorithms/string/manacher.cpp</file_path>
+      </relevant_files><related_pages>
+        <related>page-5</related>
+        <related>page-6</related>
+      </related_pages><parent_section>section-3</parent_section></page><page id="page-9">
+      <title>LeetCode 题解与刷题指南</title>
+      <description>说明如何使用本仓库进行 LeetCode 刷题，包括题目组织方式、解题模板、难度分类以及 Hot 100 题单的使用方法。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>cpp/problems/notes.md</file_path>
+        <file_path>cpp/problems/hot100/notes.md</file_path>
+        <file_path>cpp/problems/leetcode/0001_two_sum/solution.cpp</file_path></relevant_files>
+      <related_pages>
+        <related>page-2</related>
+        <related>page-10</related>
+      </related_pages>
+      <parent_section>section-4</parent_section></page><page id="page-10">
+      <title>面试高频题与并发实现</title>
+      <description>详解仓库中并发与系统设计相关的面试高频题实现，如 LRU/LFU 缓存、各种锁（自旋锁、互斥锁、读写锁）、线程池、信号量和无锁队列等。</description>
+      <importance>high</importance><relevant_files>
+        <file_path>cpp/interview/classic/lru_cache/lru_cache.cpp</file_path><file_path>cpp/interview/classic/lfu_cache/lfu_cache.cpp</file_path>
+        <file_path>cpp/interview/classic/thread_pool/thread_pool.cpp</file_path>
+        <file_path>cpp/interview/classic/semaphore/semaphore.cpp</file_path>
+        <file_path>cpp/interview/classic/rwlock/rwlock.cpp</file_path><file_path>cpp/interview/classic/rwlock_writer_pref/rwlock_writer_pref.cpp</file_path>
+        <file_path>cpp/interview/classic/tas_spinlock/tas_spinlock.cpp</file_path>
+        <file_path>cpp/interview/classic/ticket_lock/ticket_lock.cpp</file_path><file_path>cpp/interview/classic/mpmc_queue/mpmc_queue.cpp</file_path><file_path>cpp/interview/classic/thread_safe_queue/thread_safe_queue.cpp</file_path>
+      </relevant_files>
+      <related_pages><related>page-9</related>
+        <related>page-5</related>
+      </related_pages><parent_section>section-4</parent_section></page><page id="page-11"><title>数学与工具函数</title>
+      <description>介绍仓库中涉及的数学知识点，包括数论、组合数学、快速幂、矩阵运算、扩展欧几里得、概率等，以及工具头文件的使用方法。</description>
+      <importance>medium</importance><relevant_files>
+        <file_path>cpp/include/alg_std.hpp</file_path>
+        <file_path>cpp/algorithms/math/number_theory/number_theory.cpp</file_path>
+        <file_path>cpp/algorithms/math/combinatorics/combinatorics.cpp</file_path>
+        <file_path>cpp/algorithms/math/fast_power/fast_power.cpp</file_path>
+        <file_path>cpp/algorithms/math/matrix/matrix.cpp</file_path>
+        <file_path>cpp/algorithms/math/extended_gcd/extended_gcd.cpp</file_path>
+        <file_path>cpp/algorithms/math/probability/probability.cpp</file_path>
+      </relevant_files>
+      <related_pages><related>page-6</related>
+        <related>page-12</related>
+      </related_pages><parent_section>section-4</parent_section></page><page id="page-12"><title>开发指南与工具链</title>
+      <description>说明 C++ 编译要求、使用的统一头文件、跨平台兼容性处理、以及如何贡献新内容或修改现有实现。</description>
+      <importance>medium</importance><relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>cpp/include/alg_std.hpp</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related><related>page-11</related></related_pages>
+      <parent_section>section-5</parent_section></page></pages>
+</wiki_structure>

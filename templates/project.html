@@ -1,0 +1,50 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ project.title }} · {{ site_name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="/projects">{{ ui.label_all_projects_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ project.title }}</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>{{ project.title }}</h1>
+<p class="lead">{{ project.summary }}</p>
+<p class="wiki-tags">
+  <span class="wiki-tag">{{ project.category }}</span>
+  <span class="wiki-tag">{{ project.year }}</span>
+  {% for tag in project.tags %}
+  <span class="wiki-tag">{{ tag }}</span>
+  {% endfor %}
+</p>
+<p>
+  <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+  ·
+  <a href="{{ wiki_index_url }}">Wiki 总览</a>
+</p>
+
+{% set features = project.feature_lines or project.highlights %}
+{% if features %}
+<h2>主要功能</h2>
+<ul class="wiki-list">
+  {% for item in features %}
+  <li>{{ item }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if wiki_pages %}
+<h2>Wiki 文档</h2>
+<p>点击标题在站内阅读 Wiki 文档。</p>
+<ul class="wiki-links">
+  {% for page in wiki_pages %}
+  <li><a href="{{ page.view_url }}">{{ page.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

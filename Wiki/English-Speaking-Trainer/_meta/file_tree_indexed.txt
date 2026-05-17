@@ -1,0 +1,25 @@
+README.md
+TED-Talks-Android-Project\README.md
+audio_transcriber.py
+generate_psych2go_articles.py
+requirements_transcriber.txt
+transcriber_README.md
+video\5个迹象表明，你正在PUA别人！_fulltext.txt
+video\5个迹象表明，你正在PUA别人！_timestamps.txt
+video\你是一个高度敏感的人吗_fulltext.txt
+video\你是一个高度敏感的人吗_timestamps.txt
+video\你是懒还是抑郁？_fulltext.txt
+video\你是懒还是抑郁？_timestamps.txt
+video\你的睡眠时间揭示了你是怎样的一个人_fulltext.txt
+video\你的睡眠时间揭示了你是怎样的一个人_timestamps.txt
+video\内向 VS 外向——真正的区别_fulltext.txt
+video\内向 VS 外向——真正的区别_timestamps.txt
+video\成为更受欢迎的人：从这10个小习惯开始_fulltext.txt
+video\成为更受欢迎的人：从这10个小习惯开始_timestamps.txt
+video\智商高也会有烦恼，高智商人遭遇的6个困难！_fulltext.txt
+video\智商高也会有烦恼，高智商人遭遇的6个困难！_timestamps.txt
+video\沉迷 Porn 如何损害你的大脑_fulltext.txt
+video\沉迷 Porn 如何损害你的大脑_timestamps.txt
+video\社交媒体是如何被设计来让你痛苦的_fulltext.txt
+video\社交媒体是如何被设计来让你痛苦的_timestamps.txt
+video_transcriber.py

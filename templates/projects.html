@@ -1,0 +1,37 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ ui.label_all_projects_page }} · {{ site_name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ ui.label_all_projects_page }} ({{ project_count }})</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>{{ ui.label_all_projects_page }}</h1>
+<p class="lead">{{ ui.projects_page_lead }}</p>
+
+<ul class="wiki-portal-list">
+  {% for project in projects %}
+  <li>
+    <span class="wiki-portal-thumb" style="background-image: url('{{ wiki_assets.crafting_table }}');" aria-hidden="true"></span>
+    {% if project.id in pinned_ids %}
+    <p><span class="wiki-tag">{{ ui.badge_pinned }}</span></p>
+    {% endif %}
+    <h3><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
+    <p class="meta">{{ project.category }} {{ ui.sep_dot }} {{ project.year }}</p>
+    <p>{{ project.summary }}</p>
+    {% if project.tags %}
+    <p class="wiki-tags">
+      {% for tag in project.tags[:3] %}
+      <span class="wiki-tag">{{ tag }}</span>
+      {% endfor %}
+    </p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

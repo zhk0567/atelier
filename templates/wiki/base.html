@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="x-atelier-site" content="{{ site_name }}" />
+  {% block meta %}{% endblock %}
+  <title>{% block title %}{{ site_title }}{% endblock %}</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=4" />
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="wiki-site">
+  {% if wallpapers %}
+  <div class="wiki-wallpaper" id="wiki-wallpaper" aria-hidden="true">
+    <video class="wiki-wallpaper__media wiki-wallpaper__video" id="wiki-wallpaper-video" muted loop playsinline preload="metadata"></video>
+    <img class="wiki-wallpaper__media wiki-wallpaper__image" id="wiki-wallpaper-image" alt="" hidden />
+  </div>
+  <script id="wiki-wallpapers-data" type="application/json">{{ wallpapers | tojson }}</script>
+  {% endif %}
+  <header class="wiki-header">
+    <div class="wiki-header__start">
+      <button type="button" class="wiki-nav-toggle" aria-label="{{ ui.label_nav }}" aria-expanded="false">☰</button>
+      <a href="/" class="wiki-logo">
+        <span class="wiki-logo__mark" aria-hidden="true"></span>
+        <span class="wiki-logo__text">{{ site_name }} Wiki</span>
+      </a>
+    </div>
+    <div class="wiki-search">
+      <input type="search" class="wiki-search__input" id="wiki-search" placeholder="{{ ui.search_placeholder }}" autocomplete="off" />
+    </div>
+    <div class="wiki-header__tools">
+      {% if wallpapers %}
+      <label class="wiki-wallpaper-picker">
+        <span class="wiki-wallpaper-picker__label">{{ ui.label_wallpaper }}</span>
+        <select id="wallpaper-select" class="wiki-wallpaper-picker__select" aria-label="{{ ui.label_wallpaper }}">
+          <option value="random">{{ ui.wallpaper_random }}</option>
+          {% for w in wallpapers %}
+          <option value="{{ w.id }}">{{ w.label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      {% endif %}
+      <a href="{{ github }}" class="wiki-tool-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <button type="button" class="wiki-tool-btn theme-toggle" aria-label="{{ ui.toggle_theme }}">☀</button>
+    </div>
+  </header>
+
+  <div class="wiki-body">
+    <aside class="wiki-sidebar" id="wiki-sidebar">
+      <div class="wiki-sidebar__inner">
+        <p class="wiki-sidebar__heading">{{ ui.label_nav }}</p>
+        <nav class="wiki-nav" aria-label="{{ ui.label_nav }}">
+          {% for group in wiki_nav %}
+          <div class="wiki-nav__group">
+            <p class="wiki-nav__group-title">{{ group.label }}</p>
+            <ul>
+              {% for link in group.children %}
+              <li>
+                <a href="{{ link.url }}"{% if link.external %} target="_blank" rel="noopener noreferrer"{% endif %} data-nav-label="{{ link.label }}">{{ link.label }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endfor %}
+          <div class="wiki-nav__group">
+            <p class="wiki-nav__group-title">外部链接</p>
+            <ul>
+              <li><a href="{{ github }}" target="_blank" rel="noopener noreferrer" data-nav-label="GitHub">GitHub</a></li>
+              <li><a href="{{ linkedin }}" target="_blank" rel="noopener noreferrer" data-nav-label="LinkedIn">LinkedIn</a></li>
+              <li><a href="mailto:{{ email }}" data-nav-label="Email">{{ ui.btn_email }}</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="wiki-main" id="main">
+      {% block breadcrumbs %}{% endblock %}
+      <article class="wiki-content">
+        {% block content %}{% endblock %}
+      </article>
+      <footer class="wiki-footer">
+        <p>{{ ui.copyright_prefix }} {{ year }} {{ site_name }}. {{ ui.wiki_footer_note }}</p>
+        <p class="wiki-footer__attr">{{ ui.wiki_attribution }}</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="wiki-sidebar-backdrop" id="wiki-sidebar-backdrop" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/js/main.js?v=15" defer></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>
