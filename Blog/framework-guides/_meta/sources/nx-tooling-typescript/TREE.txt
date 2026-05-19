@@ -1,0 +1,9 @@
+Tooling/Nx/
+├── public/
+│   └── index.html
+├── src/
+│   └── server.ts
+├── NX-Tooling-TypeScript.md
+├── package-lock.json
+├── package.json
+└── tsconfig.json

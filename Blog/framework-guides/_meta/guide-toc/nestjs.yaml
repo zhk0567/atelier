@@ -1,0 +1,32 @@
+id: nestjs
+tier: major
+official: https://docs.nestjs.com/
+essentials:
+  - id: controllers
+    title: 控制器
+  - id: providers
+    title: 提供者与服务
+  - id: modules
+    title: 模块
+  - id: middleware
+    title: 中间件
+  - id: exception-filters
+    title: 异常过滤器
+  - id: pipes
+    title: 管道与校验
+  - id: guards
+    title: 守卫
+  - id: interceptors
+    title: 拦截器
+  - id: custom-decorators
+    title: 自定义装饰器
+  - id: dto-validation
+    title: DTO 与 class-validator
+  - id: configuration
+    title: 配置模块
+  - id: openapi
+    title: OpenAPI 与 Swagger
+  - id: testing
+    title: 测试
+  - id: lifecycle
+    title: 请求生命周期

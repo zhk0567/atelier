@@ -7,3 +7,8 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 *.log
+
+# Local overrides (copy from config/site.example.json)
+config/site.local.json
+.env
+validate_out.txt

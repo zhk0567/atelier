@@ -14,24 +14,71 @@ XLSX_PATH = BASE_DIR / "zhita_settings.xlsx"
 IDENTITY_PATH = BASE_DIR / "site_identity.json"
 BLOG_DIR = BASE_DIR / "Blog"
 
-# slug -> folder under Blog/; title must match xlsx「文章」表首列以显示可点击卡片
-BLOG_POSTS: list[dict[str, str]] = [
-    {"slug": "jianpu", "folder": "认识简谱", "title": "认识简谱"},
+from app.config import blog_framework_dir_name, framework_manifest_path  # noqa: E402
+
+FRAMEWORK_MANIFEST_PATH = framework_manifest_path()
+_BLOG_FRAMEWORK_DIR = blog_framework_dir_name()
+
+# Standalone posts outside Framework manifest
+BLOG_STANDALONE: list[dict[str, str]] = [
+    {
+        "slug": "jianpu",
+        "folder": "认识简谱",
+        "title": "认识简谱",
+        "series": "",
+        "category": "音乐",
+    },
 ]
 
 
+@lru_cache(maxsize=1)
+def load_framework_manifest() -> dict:
+    if not FRAMEWORK_MANIFEST_PATH.is_file():
+        return {"posts": []}
+    return json.loads(FRAMEWORK_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+@lru_cache(maxsize=1)
+def load_all_blog_posts() -> list[dict[str, str]]:
+    posts: list[dict[str, str]] = [dict(p) for p in BLOG_STANDALONE]
+    manifest = load_framework_manifest()
+    for entry in manifest.get("posts", []):
+        if entry.get("status") != "published":
+            continue
+        folder = entry.get("folder") or f"{_BLOG_FRAMEWORK_DIR}/{entry['slug']}"
+        posts.append({
+            "slug": entry["slug"],
+            "folder": folder,
+            "title": entry.get("title", entry["slug"]),
+            "series": entry.get("series", "framework"),
+            "category": entry.get("category", ""),
+            "stack": entry.get("stack", ""),
+        })
+    return posts
+
+
 def blog_url_for_title(title: str) -> str:
-    for post in BLOG_POSTS:
+    for post in load_all_blog_posts():
         if post.get("title") == title:
             return f"/blog/{post['slug']}"
     return ""
 
 
 def get_blog_post(slug: str) -> dict[str, str] | None:
-    for post in BLOG_POSTS:
+    for post in load_all_blog_posts():
         if post.get("slug") == slug:
             return dict(post)
     return None
+
+
+def list_framework_posts(*, include_draft: bool = False) -> list[dict]:
+    manifest = load_framework_manifest()
+    out: list[dict] = []
+    for entry in manifest.get("posts", []):
+        if not include_draft and entry.get("status") != "published":
+            continue
+        out.append(dict(entry))
+    return out
 
 _GITHUB_REPO_RE = re.compile(r"github\.com/[^/]+/([^/?#]+)", re.I)
 

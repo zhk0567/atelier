@@ -1,0 +1,28 @@
+id: flask
+tier: major
+official: https://flask.palletsprojects.com/
+essentials:
+  - id: quickstart
+    title: 快速开始
+  - id: routing
+    title: 路由
+  - id: templates
+    title: 模板
+  - id: request
+    title: 请求对象
+  - id: json-api
+    title: JSON 与 API
+  - id: blueprints
+    title: 蓝图
+  - id: errors
+    title: 错误处理
+  - id: sessions
+    title: Session
+  - id: testing
+    title: 测试
+  - id: deployment
+    title: 部署概念
+  - id: extensions
+    title: 扩展生态
+  - id: wsgi-asgi
+    title: WSGI 与 ASGI 对照

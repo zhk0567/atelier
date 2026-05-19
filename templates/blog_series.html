@@ -1,0 +1,29 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ series_title }} · {{ site_name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="/blog">博客</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ series_title }}</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>{{ series_title }}</h1>
+<p class="lead">{{ series_lead }}</p>
+<p><strong>官方指南体例：</strong>单页含完整基础篇（对齐各栈官方 Tutorial）与 Framework 子工程实战。五篇标杆已发布；其余为结构完整的连载稿，持续扩写中。</p>
+<p>仓库总览：<a href="{{ wiki_overview_url }}">Framework Wiki 索引</a> · <a href="https://github.com/zhk0567/Framework" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+
+{% for category, items in by_category %}
+<h2>{{ category }} ({{ items|length }})</h2>
+<ul class="wiki-nav-list">
+  {% for p in items %}
+  <li><a href="/blog/{{ p.slug }}">{{ p.title }}</a>{% if p.stack %} <span class="wiki-tag">{{ p.stack }}</span>{% endif %}</li>
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,28 @@
+id: generic-backend
+tier: medium
+official: ""
+essentials:
+  - id: intro-runtime
+    title: 运行时与角色
+  - id: install
+    title: 安装与环境
+  - id: hello-server
+    title: 第一个 HTTP 服务
+  - id: routing
+    title: 路由与处理器
+  - id: request-response
+    title: 请求与响应
+  - id: json-api
+    title: JSON API
+  - id: validation
+    title: 参数与校验
+  - id: middleware
+    title: 中间件或钩子
+  - id: errors
+    title: 错误处理
+  - id: config
+    title: 配置与环境变量
+  - id: testing
+    title: 测试与调试
+  - id: deployment
+    title: 部署概念

@@ -1,0 +1,106 @@
+{
+  "pinned_ids": [
+    "learning-terminal",
+    "clothing-classification",
+    "framework",
+    "english-speaking-trainer"
+  ],
+  "projects": [
+    {
+      "id": "learning-terminal",
+      "title": "古韵薪传 · 智能学习终端",
+      "summary": "多端智能学习终端：Web 与微信小程序协同，覆盖故事内容管理、主题系统、状态管理与构建部署。",
+      "category": "教育 · 全栈",
+      "year": "2025",
+      "tags": ["Web", "微信小程序", "React", "主题系统"],
+      "github": "https://github.com/zhk0567/Intelligent-Learning-Terminal/tree/guyunxinchuan",
+      "wiki_slug": "Intelligent-Learning-Terminal-guyunxinchuan",
+      "thumb": 1,
+      "highlights": [
+        "Web 与小程序双端架构",
+        "可复用组件库与导航路由",
+        "数据流与故事内容管理"
+      ]
+    },
+    {
+      "id": "clothing-classification",
+      "title": "服装图像深度学习分类",
+      "summary": "基于 ResNet18 与 DeepFashion 数据集的服装图像分类系统，含训练流水线、数据分片与模型集成。",
+      "category": "深度学习 · CV",
+      "year": "2025",
+      "tags": ["Java", "ResNet18", "DeepFashion", "Kotlin"],
+      "github": "https://github.com/zhk0567/Clothing---Classification",
+      "wiki_slug": "Clothing-Classification",
+      "thumb": 2,
+      "highlights": [
+        "完整训练与评估流程",
+        "拍照 / 上传图片分类",
+        "后端 API 与模型部署"
+      ]
+    },
+    {
+      "id": "framework",
+      "title": "Framework 多技术栈示例",
+      "summary": "汇集 Laravel、Symfony、.NET、Go、Node、Python 等后端与 React Native、Svelte、Astro 等前端的模块化全栈参考实现。",
+      "category": "架构 · 全栈",
+      "year": "2025",
+      "tags": ["Laravel", "Go", "React Native", "Astro"],
+      "github": "https://github.com/zhk0567/Framework",
+      "wiki_slug": "Framework",
+      "thumb": 3,
+      "highlights": [
+        "多后端技术栈对照",
+        "多前端框架示例",
+        "API 与部署实践"
+      ]
+    },
+    {
+      "id": "english-speaking-trainer",
+      "title": "英语口语训练应用",
+      "summary": "基于 TED Talks 与 Psych2Go 内容的 Android 口语训练：文章阅读、语音模仿、单词查询与悬浮球查词。",
+      "category": "移动 · 教育",
+      "year": "2025",
+      "tags": ["Android", "Kotlin", "语音识别", "口语"],
+      "github": "https://github.com/zhk0567/English-Speaking-Trainer",
+      "wiki_slug": "English-Speaking-Trainer",
+      "thumb": 4,
+      "highlights": [
+        "跟读与发音反馈",
+        "单词查询系统",
+        "悬浮球快捷查词"
+      ]
+    },
+    {
+      "id": "nexus",
+      "title": "NEXUS Unified 智能语音交互平台",
+      "summary": "企业级智能语音交互：实时 ASR、DeepSeek 对话、Edge-TTS 合成，Jetpack Compose UI，支持连续对话与故事阅读。",
+      "category": "Android · 语音 AI",
+      "year": "2025",
+      "tags": ["Kotlin", "ASR", "TTS", "Compose"],
+      "github": "https://github.com/zhk0567/NEXUS",
+      "wiki_slug": "NEXUS",
+      "thumb": 5,
+      "highlights": [
+        "Dolphin ASR + DeepSeek + Edge-TTS",
+        "实时语音通话与历史记录",
+        "故事阅读与企业级监控"
+      ]
+    },
+    {
+      "id": "algorithm",
+      "title": "Algorithm 算法与数据结构",
+      "summary": "Python / C++ 双语言算法仓库：完整数据结构实现、LeetCode 题解、学习路线与面试高频专题。",
+      "category": "算法 · 面试",
+      "year": "2025",
+      "tags": ["Python", "C++", "LeetCode", "数据结构"],
+      "github": "https://github.com/zhk0567/Algorithm",
+      "wiki_slug": "Algorithm",
+      "thumb": 6,
+      "highlights": [
+        "线性 / 树 / 图与高级专题",
+        "LeetCode 题解与刷题指南",
+        "并发与数学工具链"
+      ]
+    }
+  ]
+}

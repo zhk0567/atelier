@@ -1,0 +1,36 @@
+id: react
+tier: major
+official: https://react.dev/learn
+essentials:
+  - id: describing-ui
+    title: 描述 UI
+  - id: components
+    title: 组件与 JSX
+  - id: props
+    title: Props
+  - id: state
+    title: State
+  - id: events
+    title: 事件响应
+  - id: state-as-snapshot
+    title: State 如同快照
+  - id: queueing-state
+    title: 批量更新 State
+  - id: updating-objects
+    title: 更新对象 State
+  - id: updating-arrays
+    title: 更新数组 State
+  - id: useeffect
+    title: useEffect
+  - id: usecontext
+    title: useContext
+  - id: usereducer
+    title: useReducer
+  - id: usememo-callback
+    title: useMemo 与 useCallback
+  - id: useref
+    title: useRef
+  - id: concurrent
+    title: 并发特性
+  - id: error-boundaries
+    title: 错误边界

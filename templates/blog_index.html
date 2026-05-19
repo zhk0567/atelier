@@ -1,0 +1,33 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}博客 · {{ site_name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>博客</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>博客</h1>
+<p class="lead">技术笔记与专题文章。</p>
+
+{% if posts_other %}
+<h2>专题</h2>
+<ul class="wiki-nav-list">
+  {% for p in posts_other %}
+  <li><a href="/blog/{{ p.slug }}">{{ p.title }}</a>{% if p.category %} <span class="wiki-tag">{{ p.category }}</span>{% endif %}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<h2>系列</h2>
+<ul class="wiki-nav-list">
+  <li>
+    <a href="{{ framework_series_url }}">Framework 技术栈</a>
+    <span class="wiki-tag">{{ framework_count }} 篇</span>
+  </li>
+</ul>
+{% endblock %}

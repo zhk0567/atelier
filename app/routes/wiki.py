@@ -1,0 +1,34 @@
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import HTMLResponse
+
+from app.constants import HTML_NO_CACHE
+from app.context import site_context, templates
+from app.markdown.wiki import render_wiki_markdown
+from app.projects import get_all_projects
+
+router = APIRouter()
+
+
+@router.get("/docs/{wiki_slug}/{page}", response_class=HTMLResponse)
+async def wiki_doc(request: Request, wiki_slug: str, page: str):
+    project = next((p for p in get_all_projects() if p["wiki_slug"] == wiki_slug), None)
+    html_body = render_wiki_markdown(wiki_slug, page)
+    return templates.TemplateResponse(
+        request=request,
+        name="wiki.html",
+        context={
+            **site_context(),
+            "wiki_slug": wiki_slug,
+            "page": page,
+            "content_html": html_body,
+            "project": project,
+            "project_url": f"/project/{project['id']}" if project else "/",
+        },
+        headers=HTML_NO_CACHE,
+    )
+
+
+@router.get("/wiki", include_in_schema=False)
+@router.get("/wiki/{path:path}", include_in_schema=False)
+async def wiki_raw_forbidden(path: str = ""):
+    raise HTTPException(status_code=404, detail="Not found")

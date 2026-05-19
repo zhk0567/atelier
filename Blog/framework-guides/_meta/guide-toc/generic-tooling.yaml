@@ -1,0 +1,20 @@
+id: generic-tooling
+tier: placeholder
+official: ""
+essentials:
+  - id: what-is-tool
+    title: 工具是什么
+  - id: install-cli
+    title: 安装与 CLI
+  - id: first-run
+    title: 第一次运行
+  - id: project-layout
+    title: 项目结构
+  - id: tasks
+    title: 任务与脚本
+  - id: integration
+    title: 与框架集成
+  - id: ci-cache
+    title: 缓存与 CI 概念
+  - id: placeholder-http
+    title: Framework 占位 HTTP 说明

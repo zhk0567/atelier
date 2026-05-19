@@ -1,0 +1,61 @@
+id: fastapi
+tier: major
+official: https://fastapi.tiangolo.com/tutorial/
+essentials:
+  - id: first-steps
+    title: 第一个应用与 Uvicorn
+    official_slug: first-steps
+  - id: path-params
+    title: 路径参数
+    official_slug: path-params
+  - id: query-params
+    title: 查询参数
+    official_slug: query-params
+  - id: request-body
+    title: 请求体
+    official_slug: body
+  - id: validation
+    title: 数据类型与校验
+    official_slug: body-fields
+  - id: path-config
+    title: 路径操作配置
+    official_slug: path-operation-configuration
+  - id: body-multiple
+    title: 请求体与多参数
+    official_slug: body-multiple-params
+  - id: nested-models
+    title: 嵌套模型
+    official_slug: body-nested-models
+  - id: extra-types
+    title: 额外数据类型
+    official_slug: extra-data-types
+  - id: cookie-header
+    title: Cookie 与 Header
+    official_slug: header-params
+  - id: response-model
+    title: 响应模型
+    official_slug: response-model
+  - id: status-code
+    title: 响应状态码
+    official_slug: response-status-code
+  - id: forms-files
+    title: 表单与文件上传
+    official_slug: request-forms-and-files
+  - id: errors
+    title: 错误处理
+    official_slug: handling-errors
+  - id: dependencies
+    title: 依赖注入
+    official_slug: dependencies
+  - id: security-basics
+    title: 安全基础
+    official_slug: security
+  - id: middleware
+    title: 中间件
+    official_slug: middleware
+  - id: cors
+    title: CORS
+    official_slug: cors
+  - id: testing
+    title: 测试
+    official_slug: testing

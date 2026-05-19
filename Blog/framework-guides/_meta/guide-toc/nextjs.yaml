@@ -1,0 +1,28 @@
+id: nextjs
+tier: major
+official: https://nextjs.org/docs
+essentials:
+  - id: app-router
+    title: App Router 入门
+  - id: pages-layouts
+    title: 页面与布局
+  - id: server-client
+    title: 服务端与客户端组件
+  - id: routing
+    title: 路由与导航
+  - id: data-fetching
+    title: 数据获取
+  - id: route-handlers
+    title: Route Handlers
+  - id: metadata
+    title: 元数据
+  - id: styling
+    title: 样式
+  - id: env-config
+    title: 环境变量与配置
+  - id: deployment
+    title: 部署概念
+  - id: api-patterns
+    title: API 设计模式
+  - id: fullstack-loop
+    title: 全栈闭环

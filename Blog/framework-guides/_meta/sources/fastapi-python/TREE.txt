@@ -1,0 +1,7 @@
+Back-end/Python/FastAPI/
+├── public/
+│   └── index.html
+├── .gitignore
+├── FASTAPI-Python.md
+├── main.py
+└── requirements.txt

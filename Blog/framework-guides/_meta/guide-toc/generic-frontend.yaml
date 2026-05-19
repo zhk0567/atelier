@@ -1,0 +1,28 @@
+id: generic-frontend
+tier: medium
+official: ""
+essentials:
+  - id: intro-ui
+    title: UI 库定位
+  - id: toolchain
+    title: 工具链与构建
+  - id: hello-component
+    title: 第一个组件
+  - id: state
+    title: 状态管理
+  - id: events
+    title: 事件与交互
+  - id: composition
+    title: 组合与复用
+  - id: side-effects
+    title: 副作用
+  - id: routing
+    title: 路由概念
+  - id: data
+    title: 数据获取
+  - id: styling
+    title: 样式
+  - id: performance
+    title: 性能基础
+  - id: build-deploy
+    title: 构建与预览
