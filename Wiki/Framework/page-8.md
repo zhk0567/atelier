@@ -2,21 +2,6 @@
 
 ## 前端组件 - Repository Wiki Page
 
-<details>
-<summary>Relevant source files</summary>
-
-- [frontend/repository_wiki.md](https://github.com/zhk0567/Framework/blob/main/frontend/repository_wiki.md)
-- [frontend/SVELTE-Vite-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/frontend/SVELTE-Vite-TypeScript.md)
-- [frontend/React-Native/REACT-NATIVE-Web-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/frontend/React-Native/REACT-NATIVE-Web-TypeScript.md)
-- [frontend/Fable/FABLE-DotNet.md](https://github.com/zhk0567/Framework/blob/main/frontend/Fable/FABLE-DotNet.md)
-- [Back-end/Node/Directus/DIRECTUS-Node-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Node/Directus/DIRECTUS-Node-TypeScript.md)
-- [Back-end/Go/OapiCodegen/OAPICodegen-Go.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Go/OapiCodegen/OAPICodegen-Go.md)
-- [Back-end/PHP/Laravel/LARAVEL-PHP.md](https://github.com/zhk0567/Framework/blob/main/Back-end/PHP/Laravel/LARAVEL-PHP.md)
-- [Back-end/Python/Django/DJANGO-Python.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Python/Django/DJANGO-Python.md)
-- [Back-end/Node/NestJS/NESTJS-Node-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Node/NestJS/NESTJS-Node-TypeScript.md)
-- [Full-stack/Astro/Astro-Vite-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Full-stack/Astro/Astro-Vite-TypeScript.md)
-</details>
-
 # 前端组件 - Repository Wiki Page
 
 本页面介绍前端组件在框架中的使用，主要聚焦于 Vite、Svelte、React Native、Fable、Laravel、Django、Node.js、Astro 等技术栈的组件和实现方式。本页面旨在为开发者提供一个快速参考，帮助理解和使用框架中的前端组件。

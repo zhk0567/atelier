@@ -1,13 +1,5 @@
 <!-- wiki_page_id: page-1 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/README.md)
-</details>
-
 # 项目简介
 
 English-Speaking-Trainer 是一个基于网页的英语口语训练工具，旨在通过语音识别和实时反馈帮助用户提升英语发音和口语表达能力。该项目采用现代前端技术栈构建，支持浏览器直接运行，无需后端服务即可完成核心功能。

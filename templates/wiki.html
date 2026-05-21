@@ -17,7 +17,38 @@
 {% endblock %}
 
 {% block content %}
-{% if wiki_doc_pages %}
+{% if wiki_is_index and wiki_doc_pages %}
+<section class="mp-section mp-section-full wiki-index-panel">
+  <h2 class="mp-title">{{ ui.label_wiki_toc }}</h2>
+  <ul class="mp-project-list">
+    {% for doc in wiki_doc_pages %}
+    <li class="mp-project-card">
+      <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.item_book }}');" aria-hidden="true"></span>
+      <div class="mp-project-card__body">
+        <h3><a href="{{ doc.view_url }}">{{ doc.title }}</a></h3>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% if content_html and content_html.strip() %}
+<div class="wiki-md wiki-index-intro">
+  {{ content_html | safe }}
+</div>
+{% endif %}
+{% else %}
+{% if wiki_inpage_toc %}
+<nav class="wiki-doc-nav wiki-doc-nav--inpage" aria-label="本页目录">
+  <p class="wiki-doc-nav__heading">本页目录</p>
+  <ol class="wiki-doc-nav__list">
+    {% for item in wiki_inpage_toc %}
+    <li class="wiki-doc-nav__item--{{ item.level }}">
+      <a href="#{{ item.anchor }}">{{ item.title }}</a>
+    </li>
+    {% endfor %}
+  </ol>
+</nav>
+{% elif wiki_doc_pages %}
 <nav class="wiki-doc-nav" aria-label="{{ ui.label_wiki_toc }}">
   <p class="wiki-doc-nav__heading">{{ ui.label_wiki_toc }}</p>
   <ol class="wiki-doc-nav__list">
@@ -33,8 +64,9 @@
 <div class="wiki-md">
   {{ content_html | safe }}
 </div>
+{% endif %}
 
-{% if wiki_doc_pages %}
+{% if wiki_doc_pages and not wiki_is_index %}
 <nav class="wiki-pager" aria-label="文档分页">
   <div class="wiki-pager__slot wiki-pager__slot--prev">
     {% if wiki_prev %}
@@ -59,5 +91,5 @@
 
 {% block extra_scripts %}
 <script src="/static/js/mermaid.min.js" defer></script>
-<script src="/static/js/mermaid-init.js?v=1" defer></script>
+<script src="/static/js/mermaid-init.js?v=2" defer></script>
 {% endblock %}

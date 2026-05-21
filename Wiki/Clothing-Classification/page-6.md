@@ -6,16 +6,6 @@
 
 Related topics: [系统架构](#page-2)
 
-<details>
-<summary>Relevant source files</summary>
-
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [scripts/train_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/train_deepfashion_complete.py)
-- [scripts/convert_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/convert_deepfashion_complete.py)
-- [scripts/update_model_for_android.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/update_model_for_android.py)
-- [scripts/generate_launcher_icons.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/generate_launcher_icons.py)
-</details>
-
 # 数据流
 
 ## 简介

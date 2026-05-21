@@ -1,19 +1,5 @@
 <!-- wiki_page_id: page-navigation -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [web\src\layout\BottomNav.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\layout\BottomNav.tsx)
-- [web\src\pages\Home.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\pages\Home.tsx)
-- [web\src\pages\About.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\pages\About.tsx)
-- [miniprogram\app.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\app.json)
-- [miniprogram\pages\tabBar\index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\pages\tabBar\index.json)
-- [miniprogram\pages\tabBar\index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\pages\tabBar\index.ts)
-- [miniprogram\pages\splash\index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\pages\splash\index.json)
-- [miniprogram\pages\splash\index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\pages\splash\index.ts)</details>
-
 # 导航与路由系统
 
 ## 概述

@@ -2,18 +2,6 @@
 
 ## 项目概述 - 项目概述
 
-<details>
-<summary>Relevant source files</summary>
-
-- [Back-end\PHP\Laravel\LARAVEL-PHP.md](https://github.com/zhk0567/Framework/blob/main/Back-end\PHP\Laravel\LARAVEL-PHP.md)
-- [Front-end\Expo\EXPO-React-Native-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Front-end\Expo\EXPO-React-Native-TypeScript.md)
-- [Back-end\DotNet\README.md](https://github.com/zhk0567/Framework/blob/main/Back-end\DotNet\README.md)
-- [Front-end\Tauri\README.md](https://github.com/zhk0567/Framework/blob/main/Front-end\Tauri\README.md)
-- [Front-end\Fable\FABLE-DotNet.md](https://github.com/zhk0567/Framework/blob/main/Front-end\Fable\FABLE-DotNet.md)
-- [Back-end\Node\Directus\DIRECTUS-Node-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Back-end\Node\Directus\DIRECTUS-Node-TypeScript.md)
-- [Back-end\Go\OapiCodegen\OAPICodegen-Go.md](https://github.com/zhk0567/Framework/blob/main/Back-end\Go\OapiCodegen\OAPICodegen-Go.md)
-</details>
-
 # 项目概述 - 项目概述
 
 本项目提供了一个框架示例，包含多种后端和前端技术栈，旨在展示不同技术在构建全栈应用时的应用场景。项目采用模块化设计，每个子目录对应一种技术或框架，并提供基本的 API 接口和页面展示。本概述将对每个子目录进行简要介绍，并提供关键信息。

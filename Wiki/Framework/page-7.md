@@ -2,15 +2,6 @@
 
 ## 前端组件 - Home Page
 
-<details>
-<summary>Relevant source files</summary>
-- [frontend/home_page.md](https://github.com/zhk0567/Framework/blob/main/frontend/home_page.md)
-- [frontend/components/HomeComponent.tsx](https://github.com/zhk0567/Framework/blob/main/frontend/components/HomeComponent.tsx)
-- [frontend/components/HomeComponent.styles.ts](https://github.com/zhk0567/Framework/blob/main/frontend/components/HomeComponent.styles.ts)
-- [frontend/utils/index.ts](https://github.com/zhk0567/Framework/blob/main/frontend/utils/index.ts)
-- [frontend/types/index.ts](https://github.com/zhk0567/Framework/blob/main/frontend/types/index.ts)
-</details>
-
 # 前端组件 - Home Page
 
 该组件负责展示首页的主要内容，包括计数器、列表和一些辅助功能。它利用了 Vite 构建工具、React 和 TypeScript，并结合了组件化设计，旨在提供一个可维护、可扩展的首页展示方案。

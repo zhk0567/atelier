@@ -1,23 +1,5 @@
 <!-- wiki_page_id: page-web-arch -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [web/README.md](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/README.md)
-- [web/package.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/package.json)
-- [web/vite.config.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/vite.config.ts)
-- [web/src/main.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/src/main.tsx)
-- [web/src/App.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/src/App.tsx)
-- [web/src/store/cartStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/src/store/cartStore.ts)
-- [web/src/store/playerStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/src/store/playerStore.ts)
-- [web/src/store/sessionStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/src/store/sessionStore.ts)
-- [web/src/store/themeStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/src/store/themeStore.ts)
-- [web/src/theme/ThemeProvider.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/src/theme/ThemeProvider.tsx)
-- [web/src/theme/tokens.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web/src/theme/tokens.ts)
-</details>
-
 # Web应用架构详解
 
 ## 项目概述

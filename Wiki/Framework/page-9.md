@@ -2,11 +2,6 @@
 
 ## 后端系统 - API Server
 
-<details>
-<summary>Relevant source files</summary>
-- [backend/api_server.md](https://github.com/zhk0567/Framework/blob/main/backend/api_server.md)
-</details>
-
 # 后端系统 - API Server
 
 后端系统 - API Server 是框架的核心组件之一，负责处理所有外部请求，提供数据服务。它采用 RESTful API 风格，并与前端系统进行数据交互。该系统主要负责健康检查、信息返回以及 `/` 呈现页的提供，是框架的基础设施。

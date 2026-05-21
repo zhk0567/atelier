@@ -1,15 +1,5 @@
 <!-- wiki_page_id: page-10 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [部署清单.md](https://github.com/zhk0567/NEXUS/blob/main/部署清单.md)
-- [requirements.txt](https://github.com/zhk0567/NEXUS/blob/main/requirements.txt)
-- [app.py](https://github.com/zhk0567/NEXUS/blob/main/app.py)
-</details>
-
 # 部署指南
 
 ## 环境要求

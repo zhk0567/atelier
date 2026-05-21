@@ -1,18 +1,5 @@
 <!-- wiki_page_id: page-11 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [cpp/include/alg_std.hpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/include/alg_std.hpp)
-- [cpp/algorithms/math/number_theory/number_theory.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/math/number_theory/number_theory.cpp)
-- [cpp/algorithms/math/combinatorics/combinatorics.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/math/combinatorics/combinatorics.cpp)
-- [cpp/algorithms/math/fast_power/fast_power.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/math/fast_power/fast_power.cpp)
-- [cpp/algorithms/math/matrix/matrix.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/math/matrix/matrix.cpp)
-- [cpp/algorithms/math/extended_gcd/extended_gcd.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/math/extended_gcd/extended_gcd.cpp)
-- [cpp/algorithms/math/probability/probability.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/math/probability/probability.cpp)</details>
-
 # 数学与工具函数
 
 ## 概述

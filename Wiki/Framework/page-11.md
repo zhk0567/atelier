@@ -2,16 +2,6 @@
 
 ## 部署/基础设施 - Cloud Deployment
 
-<details>
-<summary>Relevant source files</summary>
-
-- [deployment.md](https://github.com/zhk0567/Framework/blob/main/deployment.md)
-- [Front-end\Fable\README.md](https://github.com/zhk0567/Framework/blob/main/Front-end/Fable/README.md)
-- [Front-end\Svelte\SVELTE-Vite-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Front-end/Svelte/SVELTE-Vite-TypeScript.md)
-- [Back-end\Node\Directus\DIRECTUS-Node-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Node/Directus/DIRECTUS-Node-TypeScript.md)
-- [Back-end\PHP\Laravel\LARAVEL-PHP.md](https://github.com/zhk0567/Framework/blob/main/Back-end/PHP/Laravel/LARAVEL-PHP.md)
-</details>
-
 # 部署/基础设施 - Cloud Deployment
 
 本章节介绍框架的云部署基础设施，涵盖配置、环境、服务组件与数据存储等关键方面。该部署方案旨在提供稳定、可扩展、易维护的云服务，支持框架的各项功能。

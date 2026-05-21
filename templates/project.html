@@ -15,17 +15,23 @@
 {% block content %}
 <div class="mp-wrapper mp-wrapper--page">
   <section class="mp-section mp-page-header mp-section-full">
+    {% if project.cover_url %}
+    <div class="project-cover">
+      <img src="{{ project.cover_url }}" alt="{{ project.title }}" loading="lazy" />
+    </div>
+    {% endif %}
     <h1>{{ project.title }}</h1>
     <p class="lead">{{ project.summary }}</p>
     <p class="wiki-tags">
       <span class="wiki-tag">{{ project.category }}</span>
       <span class="wiki-tag">{{ project.year }}</span>
+      {% if project.project_type %}<span class="wiki-tag">{{ project.project_type }}</span>{% endif %}
       {% for tag in project.tags %}
       <span class="wiki-tag">{{ tag }}</span>
       {% endfor %}
     </p>
     <div class="mp-button-wrapper">
-      <a class="mp-button mp-button-has-image" href="{{ project.github }}" target="_blank" rel="noopener noreferrer" style="--button-image: url('{{ wiki_assets.crafting_table }}');">
+      <a class="mp-button mp-button-has-image" href="{{ project.github }}" target="_blank" rel="noopener noreferrer" style="--button-image: url('{{ project.thumb_url }}');">
         <span class="mp-button__inner">GitHub</span>
       </a>
       <a class="mp-button" href="{{ wiki_index_url }}">
@@ -34,22 +40,19 @@
     </div>
   </section>
 
-  {% set features = project.feature_lines or project.highlights %}
-  {% if features %}
+  {% if features_html %}
   <section class="mp-section mp-section-full">
     <h2 class="mp-title">主要功能</h2>
-    <ul class="wiki-list">
-      {% for item in features %}
-      <li>{{ item }}</li>
-      {% endfor %}
-    </ul>
+    <div class="wiki-md project-features-md">
+      {{ features_html | safe }}
+    </div>
   </section>
   {% endif %}
 
   {% if wiki_pages %}
   <section class="mp-section mp-section-full">
     <h2 class="mp-title">Wiki 文档</h2>
-    <p style="font-size:0.8125rem;margin-bottom:0.5rem;">点击标题在站内阅读 Wiki 文档。</p>
+    <p class="mp-page-note">点击标题在站内阅读 Wiki 文档。</p>
     <ul class="mp-project-list">
       {% for page in wiki_pages %}
       <li class="mp-project-card">
@@ -63,7 +66,7 @@
   </section>
   {% endif %}
 
-  <div class="mp-button-wrapper" style="width:100%;">
+  <div class="mp-button-wrapper mp-footer-actions">
     <a class="mp-button" href="/projects">
       <span class="mp-button__inner">{{ ui.label_all_projects_page }}</span>
     </a>

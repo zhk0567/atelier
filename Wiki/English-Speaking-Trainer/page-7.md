@@ -1,15 +1,5 @@
 <!-- wiki_page_id: page-7 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/README.md)
-- [audio_transcriber.py](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/audio_transcriber.py)
-- [video_transcriber.py](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/video_transcriber.py)
-</details>
-
 # 语音模仿与播放控制
 
 ## 功能概述

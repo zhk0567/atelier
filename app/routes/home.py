@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 
-from app.constants import HTML_NO_CACHE
-from app.context import site_context, templates
+from app.constants import HTML_CACHE_HEADERS
+from app.context import projects_with_thumbs, site_context, templates
 from app.projects import get_all_projects, get_pinned_projects
 
 router = APIRouter()
@@ -10,16 +10,17 @@ router = APIRouter()
 
 @router.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    pinned = get_pinned_projects()
+    ctx = site_context()
+    pinned = projects_with_thumbs(get_pinned_projects(), ctx["wiki_assets"])
     return templates.TemplateResponse(
         request=request,
         name="index.html",
         context={
-            **site_context(),
+            **ctx,
             "page_home": True,
             "projects": pinned,
             "project_count": len(pinned),
             "total_project_count": len(get_all_projects()),
         },
-        headers=HTML_NO_CACHE,
+        headers=HTML_CACHE_HEADERS,
     )

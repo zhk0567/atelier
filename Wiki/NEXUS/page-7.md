@@ -1,13 +1,5 @@
 <!-- wiki_page_id: page-7 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [backend/routes/realtime_routes.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/realtime_routes.py)
-</details>
-
 # 语音合成服务
 
 ## 概述

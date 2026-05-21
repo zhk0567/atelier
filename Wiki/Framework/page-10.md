@@ -2,15 +2,6 @@
 
 ## 模型集成 - AI Model Connection
 
-<details>
-<summary>Relevant source files</summary>
-- [Back-end\PHP\Laravel\LARAVEL-PHP.md](https://github.com/zhk0567/Framework/blob/main/Back-end\PHP\Laravel\LARAVEL-PHP.md)
-- [Front-end\Expo\EXPO-React-Native-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Front-end\Expo\EXPO-React-Native-TypeScript.md)
-- [Back-end\DotNet\README.md](https://github.com/zhk0567/Framework/blob/main/Back-end\DotNet\README.md)
-- [Front-end\Fable\FABLE-DotNet.md](https://github.com/zhk0567/Framework/blob/main/Front-end\Fable\FABLE-DotNet.md)
-- [Front-end\Svelte\SVELTE-Vite-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Front-end\Svelte\SVELTE-Vite-TypeScript.md)
-</details>
-
 # 模型集成 - AI Model Connection
 
 模型集成 - AI Model Connection 旨在简化在框架中集成 AI 模型的过程，提供统一的接口和配置，方便开发者快速调用和管理 AI 模型。本模块主要涉及模型加载、推理请求、结果处理、以及模型管理等功能。

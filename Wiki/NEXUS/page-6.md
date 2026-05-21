@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-6 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- backend/routes/realtime_routes.py
-- backend/routes/auth_routes.py
-</details>
-
 # AI对话服务
 
 ## 概述

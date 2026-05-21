@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
-from app.constants import HTML_NO_CACHE
+from app.constants import HTML_CACHE_HEADERS
 from app.context import site_context, templates
 from app.markdown.wiki import build_wiki_doc_nav, render_wiki_markdown
 from app.projects import get_all_projects
@@ -12,7 +12,7 @@ router = APIRouter()
 @router.get("/docs/{wiki_slug}/{page}", response_class=HTMLResponse)
 async def wiki_doc(request: Request, wiki_slug: str, page: str):
     project = next((p for p in get_all_projects() if p["wiki_slug"] == wiki_slug), None)
-    html_body = render_wiki_markdown(wiki_slug, page)
+    rendered = render_wiki_markdown(wiki_slug, page)
     doc_nav = build_wiki_doc_nav(wiki_slug, page)
     return templates.TemplateResponse(
         request=request,
@@ -21,12 +21,12 @@ async def wiki_doc(request: Request, wiki_slug: str, page: str):
             **site_context(),
             "wiki_slug": wiki_slug,
             "page": page,
-            "content_html": html_body,
+            **rendered,
             "project": project,
             "project_url": f"/project/{project['id']}" if project else "/",
             **doc_nav,
         },
-        headers=HTML_NO_CACHE,
+        headers=HTML_CACHE_HEADERS,
     )
 
 

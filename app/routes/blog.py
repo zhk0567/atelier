@@ -1,15 +1,13 @@
-import re
-
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 
-from app.constants import HTML_NO_CACHE
-from app.context import site_context, templates
-from app.markdown.blog import framework_guide_nav, render_blog_markdown
+from app.constants import HTML_CACHE_HEADERS
+from app.context import framework_stack_thumb_url, site_context, templates
+from app.markdown.blog import render_blog_markdown
+from app.markdown.render import framework_guide_nav, strip_blog_frontmatter
 from site_data import BLOG_DIR, list_framework_posts, load_all_blog_posts
 
 router = APIRouter()
-_BLOG_FRONTMATTER_RE = re.compile(r"^---\s*\r?\n.*?\r?\n---\s*\r?\n", re.DOTALL)
 
 
 @router.get("/blog", response_class=HTMLResponse)
@@ -26,35 +24,53 @@ async def blog_index(request: Request):
             "framework_count": len(framework),
             "framework_series_url": "/blog/series/framework",
         },
-        headers=HTML_NO_CACHE,
+        headers=HTML_CACHE_HEADERS,
     )
+
+
+def _group_framework_posts(posts: list[dict]) -> list[tuple[str, list[tuple[str, list[dict]]]]]:
+    tree: dict[str, dict[str, list[dict]]] = {}
+    for p in posts:
+        cat = p.get("category", "Other")
+        stack = p.get("stack", "Other")
+        tree.setdefault(cat, {}).setdefault(stack, []).append(p)
+    out: list[tuple[str, list[tuple[str, list[dict]]]]] = []
+    for cat in sorted(tree.keys()):
+        stacks: list[tuple[str, list[dict]]] = []
+        for stack in sorted(tree[cat].keys()):
+            items = sorted(tree[cat][stack], key=lambda x: x.get("title", ""))
+            stacks.append((stack, items))
+        out.append((cat, stacks))
+    return out
 
 
 @router.get("/blog/series/framework", response_class=HTMLResponse)
 async def blog_series_framework(request: Request):
-    posts = list_framework_posts()
-    by_category: dict[str, list[dict]] = {}
-    for p in posts:
-        cat = p.get("category", "Other")
-        by_category.setdefault(cat, []).append(p)
-    for items in by_category.values():
-        items.sort(key=lambda x: x.get("title", ""))
-    n = len(posts)
+    posts = list_framework_posts(include_draft=True)
+    ctx = site_context()
+    assets = ctx["wiki_assets"]
+    published_n = sum(1 for p in posts if p.get("status") == "published")
+    draft_n = len(posts) - published_n
     series_lead = (
-        f"已发布 {n} 篇官方指南（单页含基础篇与子工程实战）。"
-        "左侧导航进入各栈；正文采用侧栏目录 + 章节锚点。"
+        f"共 {len(posts)} 篇指南（已发布 {published_n} 篇"
+        + (f"，连载稿 {draft_n} 篇" if draft_n else "")
+        + "）。按分类与技术栈浏览；正文含侧栏目录与章节锚点。"
     )
+    by_category = _group_framework_posts(posts)
     return templates.TemplateResponse(
         request=request,
         name="blog_series.html",
         context={
-            **site_context(),
+            **ctx,
             "series_title": "Framework 技术栈",
             "series_lead": series_lead,
-            "by_category": sorted(by_category.items(), key=lambda x: x[0]),
+            "by_category": by_category,
+            "framework_stack_thumb": lambda stack, cat: framework_stack_thumb_url(
+                stack, cat, assets
+            ),
             "wiki_overview_url": "/docs/Framework/index.md",
         },
-        headers=HTML_NO_CACHE,
+        headers=HTML_CACHE_HEADERS,
     )
 
 
@@ -69,7 +85,7 @@ async def blog_post(request: Request, slug: str):
         index_path = BLOG_DIR / folder / "index.md"
         if index_path.is_file():
             raw = index_path.read_text(encoding="utf-8")
-            raw = _BLOG_FRONTMATTER_RE.sub("", raw, count=1)
+            raw = strip_blog_frontmatter(raw)
             guide_nav = framework_guide_nav(raw)
     return templates.TemplateResponse(
         request=request,
@@ -82,5 +98,5 @@ async def blog_post(request: Request, slug: str):
             "guide_nav": guide_nav,
             "is_framework_guide": post.get("series") == "framework",
         },
-        headers=HTML_NO_CACHE,
+        headers=HTML_CACHE_HEADERS,
     )

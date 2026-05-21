@@ -6,16 +6,6 @@
 
 Related topics: [项目概述](#page-1)
 
-<details>
-<summary>Relevant source files</summary>
-
-- [app/src/main/java/com/deepfashion/classifier/CameraActivity.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/app/src/main/java/com/deepfashion/classifier/CameraActivity.kt)
-- [scripts/train_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/train_deepfashion_complete.py)
-- [scripts/convert_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/convert_deepfashion_complete.py)
-- [scripts/update_model_for_android.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/update_model_for_android.py)
-- [scripts/generate_launcher_icons.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/generate_launcher_icons.py)
-</details>
-
 # 拍照分类
 
 ## 简介
@@ -111,7 +101,6 @@ DeepFashionClassifier 使用 ONNX 格式的模型进行推理。ONNX (Open Neura
 *   **Inference Engine:**  `onnxruntime` 库用于加载和运行 ONNX 模型。
 
 ```python
-# DeepFashionClassifier.py
 import onnxruntime
 import numpy as np
 # ...

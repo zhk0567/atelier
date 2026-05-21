@@ -1,16 +1,5 @@
 <!-- wiki_page_id: page-theme-system -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [web\src\theme\ThemeProvider.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\theme\ThemeProvider.tsx)
-- [web\src\theme\tokens.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\theme\tokens.ts)
-- [miniprogram\stores\themeStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\stores\themeStore.ts)
-- [miniprogram\utils\theme.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\utils\theme.ts)
-</details>
-
 # 主题系统实现
 
 ## 概述

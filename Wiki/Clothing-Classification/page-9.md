@@ -6,15 +6,6 @@
 
 Related topics: [系统架构](#page-2)
 
-<details>
-<summary>Relevant source files</summary>
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [DeepFashionClassifier/data/DeepFashionDataset.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/data/DeepFashionDataset.java)
-- [DeepFashionClassifier/data/split_file.py](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/data/split_file.py)
-- [DeepFashionClassifier/scripts/train_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/scripts/train_deepfashion_complete.py)
-- [DeepFashionClassifier/scripts/update_model_for_android.py](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/scripts/update_model_for_android.py)
-</details>
-
 # 后端系统
 
 后端系统是DeepFashion项目中的核心组件，负责处理图像数据、模型训练和模型部署。它主要负责数据的加载、预处理、模型训练、模型评估以及模型转换和部署。 本系统依赖于深度学习模型（ResNet18）进行图像分类，并提供训练和推理接口。
@@ -93,15 +84,5 @@ Related topics: [系统架构](#page-2)
 ## 总结
 
 后端系统是DeepFashion项目中的核心组件，负责处理图像数据、模型训练和模型部署。 它通过模块化的设计，实现了数据的加载、模型训练、模型评估和模型转换等关键功能。
-
-<details>
-<summary>Relevant source files</summary>
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [DeepFashionClassifier/data/DeepFashionDataset.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/data/DeepFashionDataset.java)
-- [DeepFashionClassifier/data/split_file.py](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/data/split_file.py)
-- [DeepFashionClassifier/scripts/train_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/scripts/train_deepfashion_complete.py)
-- [DeepFashionClassifier/scripts/update_model_for_android.py](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/scripts/update_model_for_android.py)
-</details>
-
 
 ---

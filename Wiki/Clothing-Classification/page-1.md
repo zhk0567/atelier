@@ -6,16 +6,6 @@
 
 Related topics: [系统架构](#page-2)
 
-<details>
-<summary>Relevant source files</summary>
-
-- [README.md](https://github.com/zhk0567/Clothing---Classification/blob/main/README.md)
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [DeepFashionClassifier/SplitFile.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/SplitFile.java)
-- [DeepFashionClassifier/TrainDeepFashionComplete.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/TrainDeepFashionComplete.java)
-- [DeepFashionClassifier/Utils.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/Utils.java)
-</details>
-
 # 项目概述
 
 该项目旨在构建一个基于深度学习的服装分类系统，用于对服装图像进行准确的分类。系统通过训练一个深度神经网络模型（ResNet18），并使用训练数据进行优化，最终实现对服装图像的识别和分类。该项目的核心模块是 `TrainDeepFashionComplete.java`，它负责训练模型、加载数据、保存模型、以及监控训练过程。此外，`SplitFile.java` 用于处理训练数据集的分片，`Utils.java` 提供了各种实用函数。

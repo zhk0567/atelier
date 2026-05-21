@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-9 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [backend/config.py](https://github.com/zhk0567/NEXUS/blob/main/backend/config.py)
-- [clear_tables.py](https://github.com/zhk0567/NEXUS/blob/main/clear_tables.py)
-</details>
-
 # 数据库设计
 
 ## 数据库连接配置

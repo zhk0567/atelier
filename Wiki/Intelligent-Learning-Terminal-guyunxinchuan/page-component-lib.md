@@ -1,21 +1,5 @@
 <!-- wiki_page_id: page-component-lib -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [miniprogram\components\cover\index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\components\cover\index.json)
-- [miniprogram\components\cover\index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\components\cover\index.ts)
-- [miniprogram\components\icon\index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\components\icon\index.json)
-- [miniprogram\components\icon\index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\components\icon\index.ts)
-- [miniprogram\components\section\index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\components\section\index.json)
-- [miniprogram\components\section\index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\components\section\index.ts)
-- [web\src\components\Cover.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\components\Cover.tsx)
-- [web\src\components\Icon.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\components\Icon.tsx)
-- [web\src\components\Section.tsx](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\components\Section.tsx)
-</details>
-
 # 可复用组件库
 
 ## 概述

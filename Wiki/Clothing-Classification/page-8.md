@@ -6,16 +6,6 @@
 
 Related topics: [项目概述](#page-1)
 
-<details>
-<summary>Relevant source files</summary>
-
-- [app/src/main/res/layout/activity_history.xml](https://github.com/zhk0567/Clothing---Classification/blob/main/app/src/main/res/layout/activity_history.xml)
-- [scripts/train_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/train_deepfashion_complete.py)
-- [scripts/convert_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/convert_deepfashion_complete.py)
-- [scripts/update_model_for_android.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/update_model_for_android.py)
-- [scripts/generate_launcher_icons.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/generate_launcher_icons.py)
-</details>
-
 # Repository Wiki Page
 
 This wiki page documents the `train_deepfashion_complete.py` script, which is responsible for training a DeepFashion classification model using a ResNet18 backbone. The script handles data loading, model training, checkpoint saving, and model conversion for Android deployment. The primary goal is to provide a comprehensive guide for understanding and utilizing this training pipeline.

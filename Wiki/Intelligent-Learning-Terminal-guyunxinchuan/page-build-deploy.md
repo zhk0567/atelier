@@ -1,16 +1,5 @@
 <!-- wiki_page_id: page-build-deploy -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [web\start.py](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\start.py)
-- [miniprogram\start.py](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\start.py)
-- [web\package.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\package.json)
-- [miniprogram\project.config.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\project.config.json)
-</details>
-
 # 构建与部署流程
 
 ## 项目结构概览
@@ -118,7 +107,6 @@ Web 应用支持多种部署方式：
 }
 ```
 
-### 后端启动
 
 小程序后端通过 `miniprogram/start.py` 启动，提供 API 接口支持。
 

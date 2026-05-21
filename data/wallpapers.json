@@ -1,6 +1,11 @@
 {
-  "default": "wallpaper-01-preview",
+  "default": "none",
   "items": [
+    {
+      "id": "none",
+      "file": "",
+      "label": "无壁纸"
+    },
     {
       "id": "wallpaper-01-preview",
       "file": "wallpaper-01-preview.mp4",

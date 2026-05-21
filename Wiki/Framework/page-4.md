@@ -2,16 +2,6 @@
 
 ## 核心功能 1 - 核心功能 1
 
-<details>
-<summary>Relevant source files</summary>
-
-- [Back-end/PHP/Laravel/LARAVEL-PHP.md](https://github.com/zhk0567/Framework/blob/main/Back-end/PHP/LARAVEL-PHP.md)
-- [Back-end/Node/Directus/DIRECTUS-Node-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Node/Directus/DIRECTUS-Node-TypeScript.md)
-- [Back-end/Go/OapiCodegen/OAPICodegen-Go.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Go/OapiCodegen/OAPICodegen-Go.md)
-- [Back-end/DotNet/README.md](https://github.com/zhk0567/Framework/blob/main/Back-end/DotNet/README.md)
-- [Front-end/Svelte/SVELTE-Vite-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Front-end/Svelte/SVELTE-Vite-TypeScript.md)
-</details>
-
 # 核心功能 1 - 核心功能 1
 
 本功能提供一个简单的 API 接口，用于获取健康状态和系统信息。它采用了 Laravel 的路由机制，并返回 JSON 格式的数据。

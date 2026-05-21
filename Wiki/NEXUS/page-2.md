@@ -1,29 +1,5 @@
 <!-- wiki_page_id: page-2 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [admin_panel.html](https://github.com/zhk0567/NEXUS/blob/main/admin_panel.html)
-- [app.py](https://github.com/zhk0567/NEXUS/blob/main/app.py)
-- [backend/__init__.py](https://github.com/zhk0567/NEXUS/blob/main/backend/__init__.py)
-- [backend/asr_service.py](https://github.com/zhk0567/NEXUS/blob/main/backend/asr_service.py)
-- [backend/config.py](https://github.com/zhk0567/NEXUS/blob/main/backend/config.py)
-- [backend/logger_config.py](https://github.com/zhk0567/NEXUS/blob/main/backend/logger_config.py)
-- [backend/routes/__init__.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/__init__.py)
-- [backend/routes/admin_story_routes.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/admin_story_routes.py)
-- [backend/routes/asr_routes.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/asr_routes.py)
-- [backend/routes/auth_routes.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/auth_routes.py)
-- [backend/routes/error_routes.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/error_routes.py)
-- [backend/routes/health_routes.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/health_routes.py)
-- [backend/routes/realtime_routes.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/realtime_routes.py)
-- [clear_tables.py](https://github.com/zhk0567/NEXUS/blob/main/clear_tables.py)
-- [requirements.txt](https://github.com/zhk0567/NEXUS/blob/main/requirements.txt)
-- [任务清单.md](https://github.com/zhk0567/NEXUS/blob/main/任务清单.md)
-- [部署清单.md](https://github.com/zhk0567/NEXUS/blob/main/部署清单.md)
-</details>
-
 # 项目结构
 
 NEXUS 是一个基于 Flask 的多模态 AI 服务平台，集成了语音识别（ASR）、实时通信和管理后台功能。项目采用模块化设计，核心组件包括后端 API 服务、前端管理界面和数据库交互层。

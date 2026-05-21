@@ -1,23 +1,5 @@
 <!-- wiki_page_id: page-7 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [cpp/algorithms/dynamic_programming/linear/linear_dp.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/dynamic_programming/linear/linear_dp.cpp)
-- [cpp/algorithms/dynamic_programming/interval/interval_dp.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/dynamic_programming/interval/interval_dp.cpp)
-- [cpp/algorithms/dynamic_programming/tree/tree_dp.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/dynamic_programming/tree/tree_dp.cpp)
-- [cpp/algorithms/dynamic_programming/knapsack/knapsack_dp.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/dynamic_programming/knapsack/knapsack_dp.cpp)
-- [cpp/algorithms/dynamic_programming/bitmask/bitmask_dp.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/dynamic_programming/bitmask/bitmask_dp.cpp)
-- [cpp/algorithms/dynamic_programming/digit/digit_dp.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/dynamic_programming/digit/digit_dp.cpp)
-- [cpp/algorithms/greedy/greedy.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/greedy/greedy.cpp)
-- [cpp/algorithms/two_pointers/two_pointers.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/two_pointers/two_pointers.cpp)
-- [cpp/algorithms/sliding_window/sliding_window.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/sliding_window/sliding_window.cpp)
-- [cpp/algorithms/prefix_sum/prefix_sum.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/prefix_sum/prefix_sum.cpp)
-- [cpp/algorithms/advanced/mo_algorithm/mo_algorithm.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/advanced/mo_algorithm/mo_algorithm.cpp)
-</details>
-
 # 高级算法专题
 
 ## 动态规划

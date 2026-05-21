@@ -6,15 +6,6 @@
 
 Related topics: [项目概述](#page-1), [深度学习模型](#page-3)
 
-<details>
-<summary>Relevant source files</summary>
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [app/build.gradle](https://github.com/zhk0567/Clothing---Classification/blob/main/app/build.gradle)
-- [scripts/train_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/train_deepfashion_complete.py)
-- [scripts/convert_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/convert_deepfashion_complete.py)
-- [scripts/update_model_for_android.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/update_model_for_android.py)
-</details>
-
 # 系统架构
 
 本页面概述 DeepFashion 分类器系统中的架构，重点介绍模型训练、模型转换和模型部署流程。该系统旨在实现对服装图像的准确分类，支持 50 个类别。以下架构图展示了系统主要组件及其交互关系。

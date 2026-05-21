@@ -2,21 +2,6 @@
 
 ## 可扩展性和定制 - Custom Module Development
 
-<details>
-<summary>Relevant source files</summary>
-
-- [customization.md](https://github.com/zhk0567/Framework/blob/main/customization.md)
-- [Front-end\Fable\FABLE-DotNet.md](https://github.com/zhk0567/Framework/blob/main/Front-end/Fable/FABLE-DotNet.md)
-- [Front-end\PHP\Laravel\LARAVEL-PHP.md](https://github.com/zhk0567/Framework/blob/main/Front-end/PHP/LARAVEL-PHP.md)
-- [Front-end\React-Native\REACT-NATIVE-Web-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Front-end/React-Native/REACT-NATIVE-Web-TypeScript.md)
-- [Front-end\Svelte\SVELTE-Vite-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Front-end/Svelte/SVELTE-Vite-TypeScript.md)
-- [Back-end\Go\OapiCodegen\OAPICodegen-Go.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Go/OapiCodegen/OAPICodegen-Go.md)
-- [Back-end\Node\Directus\DIRECTUS-Node-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Node/Directus/DIRECTUS-Node-TypeScript.md)
-- [Back-end\Go\OapiCodegen\OAPICodegen-Go.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Go/OapiCodegen/OAPICodegen-Go.md)
-- [Back-end\Node\NestJS\NESTJS-Node-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Node/NestJS/NESTJS-Node-TypeScript.md)
-- [Full-stack\Astro\README.md](https://github.com/zhk0567/Framework/blob/main/Full-stack/Astro/README.md)
-</details>
-
 # 可 扩展性和定制 - Custom Module Development
 
 本模块旨在提供灵活的扩展和定制机制，允许开发者根据自身需求修改和增强框架的功能。该机制主要体现在模块化设计、配置选项、以及可自定义的组件和逻辑上。通过以下方式，开发者可以更好地适应特定的应用场景和业务逻辑。

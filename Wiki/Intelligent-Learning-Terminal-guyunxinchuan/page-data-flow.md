@@ -1,20 +1,5 @@
 <!-- wiki_page_id: page-data-flow -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [data\故事\古琴.txt](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/data\故事\古琴.txt)
-- [data\故事\四平调.txt](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/data\故事\四平调.txt)
-- [data\故事\河南坠子.txt](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/data\故事\河南坠子.txt)
-- [data\故事\河洛大鼓.txt](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/data\故事\河洛大鼓.txt)
-- [data\故事\濮阳大弦戏.txt](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/data\故事\濮阳大弦戏.txt)
-- [data\故事\箜篌艺术.txt](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/data\故事\箜篌艺术.txt)
-- [miniprogram\data\story.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\data\story.ts)
-- [web\src\data\story.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\data\story.ts)
-</details>
-
 # 数据流与故事内容管理
 
 ## 数据结构设计

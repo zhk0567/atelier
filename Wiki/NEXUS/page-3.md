@@ -1,16 +1,5 @@
 <!-- wiki_page_id: page-3 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [app.py](https://github.com/zhk0567/NEXUS/blob/main/app.py)
-- [backend/__init__.py](https://github.com/zhk0567/NEXUS/blob/main/backend/__init__.py)
-- [backend/config.py](https://github.com/zhk0567/NEXUS/blob/main/backend/config.py)
-- [backend/routes/__init__.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/__init__.py)
-</details>
-
 # 系统架构概览
 
 NEXUS 是一个基于 Flask 的轻量级 Web 应用框架，采用模块化设计，核心组件包括应用入口、配置管理和路由系统。

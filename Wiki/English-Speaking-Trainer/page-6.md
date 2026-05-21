@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-6 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/README.md)
-- [generate_psych2go_articles.py](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/generate_psych2go_articles.py)
-</details>
-
 # 文章阅读功能
 
 ## 功能概述

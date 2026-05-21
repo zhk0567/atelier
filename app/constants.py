@@ -55,8 +55,8 @@ UI = {
     "skill_ui": "设计 UI / 动效",
     "skill_ops": "工程化 DevOps",
     "label_projects": "精选项目",
-    "link_all_projects": "全部项目",
-    "label_all_projects_page": "全部项目",
+    "link_all_projects": "项目",
+    "label_all_projects_page": "项目",
     "projects_page_lead": "与 GitHub 仓库同步的完整列表；首页仅展示置顶项目。",
     "badge_pinned": "置顶",
     "back_home": "返回首页",
@@ -102,6 +102,19 @@ SKILLS = [
 HIGHLIGHTS = [UI["highlight_1"], UI["highlight_2"], UI["highlight_3"], UI["highlight_4"]]
 
 HTML_NO_CACHE = {"Cache-Control": "no-cache, must-revalidate", "Pragma": "no-cache"}
+
+# HTML pages: short private cache (reduces repeat load on 2GB VPS)
+HTML_CACHE_HEADERS = {
+    "Cache-Control": "private, max-age=120, stale-while-revalidate=300",
+}
+
+STATIC_CACHE_HEADERS = {
+    "Cache-Control": "public, max-age=604800, immutable",
+}
+
+WALLPAPER_CACHE_HEADERS = {
+    "Cache-Control": "public, max-age=86400",
+}
 
 
 def load_site_identity() -> tuple[str, str]:

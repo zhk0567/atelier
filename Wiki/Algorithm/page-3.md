@@ -1,15 +1,5 @@
 <!-- wiki_page_id: page-3 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [cpp/data_structures/linked_list/linked_list.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/linked_list/linked_list.cpp)
-- [cpp/data_structures/stack/stack.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/stack/stack.cpp)
-- [cpp/data_structures/queue/queue.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/queue/queue.cpp)
-- [cpp/data_structures/hash_table/hash_table.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/hash_table/hash_table.cpp)</details>
-
 # 线性数据结构
 
 线性数据结构是计算机科学中最基础且重要的数据组织方式之一。在本项目中，我们实现了四种核心的线性数据结构：链表、栈、队列和哈希表。这些结构不仅是理解更复杂算法的基础，而且在实际软件开发中有着广泛的应用。
@@ -54,12 +44,10 @@ graph TD
 
 栈是一种遵循后进先出（LIFO，Last In First Out）原则的线性数据结构。
 
-### 特点
 - 只允许在一端（栈顶）进行插入和删除操作
 - 常用操作：push（入栈）、pop（出栈）、peek（查看栈顶）
 - 典型应用：函数调用栈、表达式求值、括号匹配、回溯算法
 
-### 实现细节
 在 `cpp/data_structures/stack/stack.cpp` 中，我们使用数组实现了顺序栈，包含：
 - 初始化指定容量的栈
 - push 操作：在栈顶添加元素
@@ -77,7 +65,6 @@ graph TD
     style E fill:#f9f,stroke:#333
 ```
 
-### 时间复杂度
 | 操作 | 时间复杂度 |
 |------|------------|
 | push | O(1)       |
@@ -89,12 +76,10 @@ graph TD
 
 队列是一种遵循先进先出（FIFO，First In First Out）原则的线性数据结构。
 
-### 特点
 - 只允许在一端（队尾）插入元素，在另一端（队头）删除元素
 - 常用操作：enqueue（入队）、dequeue（出队）、front（查看队头）
 - 典型应用：任务调度、广度优先搜索（BFS）、缓冲区管理、打印队列
 
-### 实现细节
 在 `cpp/data_structures/queue/queue.cpp` 中，我们实现了基于数组的循环队列，包含：
 - 初始化指定容量的队列
 - enqueue 操作：在队尾添加元素
@@ -113,7 +98,6 @@ graph TD
     style E fill:#9f9,stroke:#333
 ```
 
-### 时间复杂度
 | 操作 | 时间复杂度 |
 |------|------------|
 | enqueue | O(1)     |
@@ -125,13 +109,11 @@ graph TD
 
 哈希表是一种根据关键码直接进行访问的数据结构，通过哈希函数将关键码映射到表中的一个位置来访问记录。
 
-### 特点
 - 平均情况下具有 O(1) 的查找、插入和删除时间复杂度
 - 通过哈希函数将键映射到数组索引
 - 处理冲突的方法：开放地址法（线性探测、二次探测、再哈希）和链地址法
 - 典型应用：数据库索引、缓存、符号表、去重
 
-### 实现细节
 在 `cpp/data_structures/hash_table/hash_table.cpp` 中，我们实现了基于开放地址法的哈希表，使用线性探测解决冲突，包含：
 - 哈希函数：简单的取余法
 - 插入操作：通过哈希值定位位置，线性探测找到空槽
@@ -149,7 +131,6 @@ graph TD
     E -->|已占用| C
 ```
 
-### 时间复杂度
 | 操作 | 平均情况 | 最坏情况 |
 |------|----------|----------|
 | 查找 | O(1)     | O(n)     |

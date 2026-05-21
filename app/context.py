@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 from datetime import datetime
+from functools import lru_cache
 from pathlib import Path
 
 from fastapi.templating import Jinja2Templates
@@ -39,11 +40,19 @@ WALLPAPER_VIDEO_EXTS = {".mp4", ".webm", ".mov"}
 _WALLPAPER_PATHS: dict[str, Path] = {}
 
 # 全站导航与数据分类入口中不展示（/browse/* 仍可直链访问）
-NAV_EXCLUDED_HUB_IDS = frozenset({"hobbies", "school", "articles"})
+NAV_EXCLUDED_HUB_IDS = frozenset({"certs", "hobbies", "school", "articles"})
+
+PROJECT_THUMB_STEMS: tuple[str, ...] = (
+    "crafting_table",
+    "bookshelf",
+    "item_compass",
+    "item_map",
+    "oak_planks",
+    "cobblestone",
+)
 
 HUB_ICON_FILES: dict[str, str] = {
     "projects": "crafting_table",
-    "certs": "item_map",
     "hobbies": "item_compass",
     "books": "item_book",
     "anime": "bookshelf",
@@ -53,6 +62,13 @@ HUB_ICON_FILES: dict[str, str] = {
 }
 
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
+
+
+def _jinja_project_thumb(project: dict) -> str:
+    return project_thumb_url(project, load_wiki_assets())
+
+
+templates.env.filters["project_thumb"] = _jinja_project_thumb
 
 
 def media_type_for_path(path: Path) -> str:
@@ -96,6 +112,15 @@ def _load_wallpaper_manifest() -> tuple[str | None, list[dict]]:
         if not isinstance(entry, dict):
             continue
         wid = entry.get("id")
+        if wid == "none":
+            label = entry.get("label")
+            items.append({
+                "id": "none",
+                "file": "",
+                "label": label.strip() if isinstance(label, str) and label.strip() else "无壁纸",
+                "path": None,
+            })
+            continue
         filename = entry.get("file")
         if not isinstance(wid, str) or not isinstance(filename, str):
             continue
@@ -114,9 +139,7 @@ def _load_wallpaper_manifest() -> tuple[str | None, list[dict]]:
     return default_id if isinstance(default_id, str) else None, items
 
 
-def list_wallpapers() -> list[dict]:
-    global _WALLPAPER_PATHS
-    _WALLPAPER_PATHS.clear()
+def _list_wallpapers_uncached() -> list[dict]:
     if not DATA_DIR.is_dir():
         return []
 
@@ -125,8 +148,19 @@ def list_wallpapers() -> list[dict]:
 
     if manifest_items:
         for entry in manifest_items:
-            path = entry["path"]
             wid = entry["id"]
+            if wid == "none":
+                items.append({
+                    "id": "none",
+                    "label": entry.get("label", "无壁纸"),
+                    "url": "",
+                    "is_video": False,
+                    "default": default_id == "none" if default_id else False,
+                })
+                continue
+            path = entry.get("path")
+            if path is None:
+                continue
             _WALLPAPER_PATHS[wid] = path
             items.append({
                 "id": wid,
@@ -156,10 +190,19 @@ def list_wallpapers() -> list[dict]:
     return items
 
 
+@lru_cache(maxsize=1)
+def list_wallpapers() -> tuple[dict, ...]:
+    global _WALLPAPER_PATHS
+    _WALLPAPER_PATHS.clear()
+    return tuple(_list_wallpapers_uncached())
+
+
 def wallpaper_paths() -> dict[str, Path]:
-    return _WALLPAPER_PATHS
+    list_wallpapers()
+    return dict(_WALLPAPER_PATHS)
 
 
+@lru_cache(maxsize=1)
 def load_wiki_assets() -> dict[str, str]:
     out: dict[str, str] = {}
     if WIKI_IMG_DIR.is_dir():
@@ -167,12 +210,48 @@ def load_wiki_assets() -> dict[str, str]:
             out[path.stem] = f"/static/img/wiki/{path.name}"
         for path in WIKI_IMG_DIR.glob("*.gif"):
             out[path.stem] = f"/static/img/wiki/{path.name}"
-    return out
+    return dict(out)
 
 
 def build_hub_icons(assets: dict[str, str]) -> dict[str, str]:
     fallback = assets.get("crafting_table", "/static/img/wiki/crafting_table.png")
     return {hub_id: assets.get(stem, fallback) for hub_id, stem in HUB_ICON_FILES.items()}
+
+
+FRAMEWORK_CATEGORY_ICONS: dict[str, str] = {
+    "Back-end": "crafting_table",
+    "Front-end": "bookshelf",
+    "Mobile": "item_compass",
+    "Tooling": "item_map",
+    "Data": "oak_planks",
+    "Other": "cobblestone",
+}
+
+
+def framework_stack_thumb_url(stack: str, category: str, assets: dict[str, str]) -> str:
+    fallback = assets.get("crafting_table", "/static/img/wiki/crafting_table.png")
+    stem = FRAMEWORK_CATEGORY_ICONS.get(category) or FRAMEWORK_CATEGORY_ICONS.get("Other")
+    if stem and stem in assets:
+        return assets[stem]
+    if stack:
+        idx = sum(ord(c) for c in stack) % len(PROJECT_THUMB_STEMS)
+        return assets.get(PROJECT_THUMB_STEMS[idx], fallback)
+    return fallback
+
+
+def project_thumb_url(project: dict, assets: dict[str, str]) -> str:
+    fallback = assets.get("crafting_table", "/static/img/wiki/crafting_table.png")
+    thumb = project.get("thumb", 1)
+    try:
+        idx = (int(thumb) - 1) % len(PROJECT_THUMB_STEMS)
+    except (TypeError, ValueError):
+        idx = 0
+    stem = PROJECT_THUMB_STEMS[idx]
+    return assets.get(stem, fallback)
+
+
+def projects_with_thumbs(projects: list[dict], assets: dict[str, str]) -> list[dict]:
+    return [{**p, "thumb_url": project_thumb_url(p, assets)} for p in projects]
 
 
 def build_wiki_nav(hubs: list[dict]) -> list[dict]:
@@ -190,8 +269,16 @@ def build_wiki_nav(hubs: list[dict]) -> list[dict]:
     ]
 
 
-def site_context() -> dict:
+def clear_context_cache() -> None:
+    list_wallpapers.cache_clear()
+    load_wiki_assets.cache_clear()
+    _site_context_core.cache_clear()
+
+
+@lru_cache(maxsize=1)
+def _site_context_core() -> dict:
     hubs: list[dict] = []
+    sheet: dict = {}
     try:
         data = load_site_data()
         sheet = get_spreadsheet_context()
@@ -199,8 +286,6 @@ def site_context() -> dict:
         hubs = [h for h in all_hubs if h["id"] not in NAV_EXCLUDED_HUB_IDS]
     except Exception as exc:
         print(f"[atelier] zhita_settings.xlsx load failed: {exc}", flush=True)
-        sheet = {}
-        hubs = []
     site_name = sheet.get("site_name", SITE_NAME)
     sn = (site_name or "").strip()
     mark = sn[:4] if sn else "?"
@@ -215,20 +300,25 @@ def site_context() -> dict:
         "bio": sheet.get("bio", BIO),
         "focus": sheet.get("focus", FOCUS),
         "availability": sheet.get("availability", AVAILABILITY),
-        "location": LOCATION,
-        "email": EMAIL,
-        "github": GITHUB,
-        "twitter": TWITTER,
-        "year": datetime.now().year,
         "ui": ui,
         "stats": sheet.get("stats", STATS),
         "data_hubs": hubs,
         "wiki_nav": build_wiki_nav(hubs),
         "wiki_assets": wiki_assets,
         "hub_icons": build_hub_icons(wiki_assets),
-        "wallpapers": list_wallpapers(),
-        "highlights": sheet.get("highlights", HIGHLIGHTS),
-        "certificates": sheet.get("certificates", []),
+        "wallpapers": list(list_wallpapers()),
         "books_featured": sheet.get("books_featured", []),
         "games_count": sheet.get("games_count", 0),
+    }
+
+
+def site_context() -> dict:
+    return {
+        **_site_context_core(),
+        "location": LOCATION,
+        "email": EMAIL,
+        "github": GITHUB,
+        "twitter": TWITTER,
+        "year": datetime.now().year,
+        "highlights": HIGHLIGHTS,
     }

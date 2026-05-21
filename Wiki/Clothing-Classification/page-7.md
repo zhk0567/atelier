@@ -6,16 +6,6 @@
 
 Related topics: [项目概述](#page-1)
 
-<details>
-<summary>Relevant source files</summary>
-
-- [app/src/main/res/layout/activity_main.xml](https://github.com/zhk0567/Clothing---Classification/blob/main/app/src/main/res/layout/activity_main.xml)
-- [scripts/train_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/train_deepfashion_complete.py)
-- [scripts/generate_launcher_icons.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/generate_launcher_icons.py)
-- [scripts/convert_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/convert_deepfashion_complete.py)
-- [scripts/update_model_for_android.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/update_model_for_android.py)
-</details>
-
 # Home Page
 
 This wiki page documents the "Home Page" feature within the Clothing Classification project. The Home Page serves as the entry point for the application, handling initial setup, model loading, and basic user interaction. It orchestrates the training process, model conversion to TFLite format, and launcher icon generation for Android deployment. This page provides a detailed overview of the Home Page's architecture, components, and data flow, leveraging the code from the provided source files.

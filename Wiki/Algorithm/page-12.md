@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-12 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/Algorithm/blob/main/README.md)
-- [cpp/include/alg_std.hpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/include/alg_std.hpp)
-</details>
-
 # 开发指南与工具链
 
 ## 项目结构概览

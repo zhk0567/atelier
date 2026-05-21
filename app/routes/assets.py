@@ -9,6 +9,7 @@ from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 
 from app.config import ATELIER_ROOT
 from app.constants import HTML_NO_CACHE, SITE_NAME, SITE_TITLE
+from app.constants import WALLPAPER_CACHE_HEADERS
 from app.context import DATA_DIR, list_wallpapers, media_type_for_path, wallpaper_paths
 
 router = APIRouter()
@@ -45,4 +46,8 @@ async def serve_wallpaper(wp_id: str):
         path.resolve().relative_to(DATA_DIR.resolve())
     except ValueError:
         raise HTTPException(status_code=404, detail="Wallpaper not found") from None
-    return FileResponse(path, media_type=media_type_for_path(path))
+    return FileResponse(
+        path,
+        media_type=media_type_for_path(path),
+        headers=WALLPAPER_CACHE_HEADERS,
+    )

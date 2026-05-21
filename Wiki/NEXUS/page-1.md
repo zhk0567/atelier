@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-1 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/NEXUS/blob/main/README.md)
-- [任务情况说明.txt](https://github.com/zhk0567/NEXUS/blob/main/任务情况说明.txt)
-</details>
-
 # 项目简介
 
 NEXUS 是一个基于 Python 的网络安全工具集，旨在提供渗透测试、漏洞扫描和安全评估功能。该项目结合了多种安全检测技术，帮助安全研究人员和渗透测试人员快速识别系统中的安全风险。

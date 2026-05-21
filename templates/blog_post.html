@@ -2,85 +2,6 @@
 
 {% block title %}{{ post.title }} · {{ site_name }}{% endblock %}
 
-{% block extra_head %}
-{% if is_framework_guide %}
-<style>
-  .blog-guide-layout {
-    display: grid;
-    grid-template-columns: minmax(12rem, 16rem) 1fr;
-    gap: 2rem;
-    align-items: start;
-    max-width: 72rem;
-  }
-  @media (max-width: 900px) {
-    .blog-guide-layout { grid-template-columns: 1fr; }
-    .guide-sticky-toc { position: static !important; max-height: none !important; }
-  }
-  .guide-sticky-toc {
-    position: sticky;
-    top: 1rem;
-    max-height: calc(100vh - 2rem);
-    overflow-y: auto;
-    font-size: 0.85rem;
-    line-height: 1.45;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--wiki-border, #e2e8f0);
-    border-radius: 8px;
-    background: var(--wiki-card, #fff);
-  }
-  .guide-sticky-toc__title {
-    font-weight: 600;
-    margin: 0 0 0.5rem;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--wiki-muted, #64748b);
-  }
-  .guide-sticky-toc ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .guide-sticky-toc li { margin: 0.25rem 0; }
-  .guide-sticky-toc a {
-    color: inherit;
-    text-decoration: none;
-  }
-  .guide-sticky-toc a:hover { text-decoration: underline; }
-  .guide-sticky-toc a.is-active { color: var(--color-progressive, #36c); font-weight: 600; }
-  .blog-guide-md h2 {
-    scroll-margin-top: 1rem;
-    margin-top: 2.25rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--wiki-border, #e2e8f0);
-  }
-  .blog-guide-md h2:first-of-type { border-top: none; margin-top: 0; }
-  .blog-guide-md h3 { scroll-margin-top: 1rem; margin-top: 1.25rem; }
-  .blog-guide-layout .blog-guide-md {
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-  .blog-guide-md pre {
-    max-width: 100%;
-    white-space: pre;
-    word-break: normal;
-  }
-  .blog-guide-md table {
-    display: block;
-    max-width: 100%;
-    overflow-x: auto;
-  }
-  .blog-guide-md blockquote {
-    border-left: 4px solid #42b883;
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
-    background: rgba(66, 184, 131, 0.08);
-    color: inherit;
-  }
-</style>
-{% endif %}
-{% endblock %}
-
 {% block breadcrumbs %}
 <nav class="wiki-breadcrumbs" aria-label="breadcrumb">
   <a href="/">{{ ui.label_main_page }}</a>
@@ -98,14 +19,17 @@
 {% block content %}
 {% if is_framework_guide and guide_nav %}
 <div class="blog-guide-layout">
-  <nav class="guide-sticky-toc" aria-label="本页目录">
-    <p class="guide-sticky-toc__title">本页目录</p>
-    <ul>
-      {% for item in guide_nav %}
-      <li><a href="#{{ item.anchor }}">{{ item.title }}</a></li>
-      {% endfor %}
-    </ul>
-  </nav>
+  <details class="guide-toc-mobile">
+    <summary class="guide-toc-mobile__summary">本页目录</summary>
+    <nav class="guide-sticky-toc" aria-label="本页目录">
+      <p class="guide-sticky-toc__title">本页目录</p>
+      <ul>
+        {% for item in guide_nav %}
+        <li><a href="#{{ item.anchor }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </details>
   <div class="wiki-md blog-md blog-guide-md">
     {{ content_html | safe }}
   </div>
@@ -119,29 +43,5 @@
 
 {% block extra_scripts %}
 <script src="/static/js/mermaid.min.js" defer></script>
-<script src="/static/js/mermaid-init.js?v=1" defer></script>
-{% if is_framework_guide and guide_nav %}
-<script>
-(function () {
-  var links = document.querySelectorAll('.guide-sticky-toc a[href^="#"]');
-  if (!links.length) return;
-  var items = Array.prototype.map.call(links, function (a) {
-    var id = a.getAttribute('href').slice(1);
-    var el = document.getElementById(id);
-    return { link: a, el: el };
-  }).filter(function (x) { return x.el; });
-  function onScroll() {
-    var y = window.scrollY + 80;
-    var current = items[0];
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].el.offsetTop <= y) current = items[i];
-    }
-    items.forEach(function (x) { x.link.classList.remove('is-active'); });
-    if (current) current.link.classList.add('is-active');
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-</script>
-{% endif %}
+<script src="/static/js/mermaid-init.js?v=2" defer></script>
 {% endblock %}

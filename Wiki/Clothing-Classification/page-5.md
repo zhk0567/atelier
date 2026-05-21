@@ -6,16 +6,6 @@
 
 Related topics: [项目概述](#page-1)
 
-<details>
-<summary>Relevant source files</summary>
-
-- [app/src/main/java/com/deepfashion/classifier/FullImageActivity.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/app/src/main/java/com/deepfashion/classifier/FullImageActivity.kt)
-- [scripts/train_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/train_deepfashion_complete.py)
-- [scripts/convert_deepfashion_complete.py](https://github.com/zhk0567/Clothing---Classification/blob/main/scripts/convert_deepfashion_complete.py)
-- [Category and Attribute Prediction Benchmark/Anno_fine/train.txt](https://github.com/zhk0567/Clothing---Classification/blob/main/Category%20and%20Attribute%20Prediction%20Benchmark/Anno_fine/train.txt)
-- [Category and Attribute Prediction Benchmark/Anno_fine/train_cate.txt](https://github.com/zhk0567/Clothing---Classification/blob/main/Category%20and%20Attribute%20Prediction%20Benchmark/Anno_fine/train_cate.txt)
-</details>
-
 # 上传图片分类
 
 ## 简介

@@ -2,16 +2,6 @@
 
 ## 核心功能 2 - 核心功能 2
 
-<details>
-<summary>Relevant source files</summary>
-
-- [feature-2.md](https://github.com/zhk0567/Framework/blob/main/feature-2.md)
-- [src/components/ComponentA.ts](https://github.com/zhk0567/Framework/blob/main/src/components/ComponentA.ts)
-- [src/services/ServiceA.ts](https://github.com/zhk0567/Framework/blob/main/src/services/ServiceA.ts)
-- [src/utils/Utils.ts](https://github.com/zhk0567/Framework/blob/main/src/utils/Utils.ts)
-- [src/App.ts](https://github.com/zhk0567/Framework/blob/main/src/App.ts)
-</details>
-
 # 核心功能 2 - 核心功能 2
 
 核心功能 2 - 核心功能 2 是框架中用于处理特定数据场景的关键模块，它主要负责 [feature-2.md](https://github.com/zhk0567/Framework/blob/main/feature-2.md) 中的核心逻辑。该模块的设计目标是提供高效、可扩展的数据处理能力，并与框架的其他组件无缝集成。

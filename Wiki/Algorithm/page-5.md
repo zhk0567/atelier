@@ -1,18 +1,5 @@
 <!-- wiki_page_id: page-5 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [cpp/data_structures/graph/adjacency_list/graph_list.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/graph/adjacency_list/graph_list.cpp)
-- [cpp/data_structures/graph/adjacency_matrix/graph_matrix.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/graph/adjacency_matrix/graph_matrix.cpp)
-- [cpp/data_structures/graph/disjoint_set/union_find.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/graph/disjoint_set/union_find.cpp)
-- [cpp/data_structures/advanced/skip_list/skip_list.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/advanced/skip_list/skip_list.cpp)
-- [cpp/data_structures/advanced/bloom_filter/bloom_filter.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/advanced/bloom_filter/bloom_filter.cpp)
-- [cpp/data_structures/advanced/lru_cache/lru_cache.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/data_structures/advanced/lru_cache/lru_cache.cpp)
-</details>
-
 # 图与高级数据结构
 
 ## 概述

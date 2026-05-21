@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
-from app.constants import HTML_NO_CACHE
+from app.constants import HTML_CACHE_HEADERS
 from app.context import site_context, templates
 from site_data import get_browse_page
 
@@ -25,5 +25,5 @@ async def browse_hub(request: Request, hub_id: str):
             if page.get("sections")
             else len(page.get("items", [])),
         },
-        headers=HTML_NO_CACHE,
+        headers=HTML_CACHE_HEADERS,
     )

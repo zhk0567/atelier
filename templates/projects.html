@@ -21,7 +21,7 @@
     <ul class="mp-project-list">
       {% for project in projects %}
       <li class="mp-project-card">
-        <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.crafting_table }}');" aria-hidden="true"></span>
+        <span class="mp-project-card__thumb" style="background-image: url('{{ project.thumb_url }}');" aria-hidden="true"></span>
         <div class="mp-project-card__body">
           {% if project.id in pinned_ids %}
           <p><span class="wiki-tag">{{ ui.badge_pinned }}</span></p>

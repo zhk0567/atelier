@@ -6,15 +6,6 @@
 
 Related topics: [系统架构](#page-2)
 
-<details>
-<summary>Relevant source files</summary>
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [DeepFashionClassifier/utils/SplitFile.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/utils/SplitFile.java)
-- [DeepFashionClassifier/utils/CategoryLabelFile.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/utils/CategoryLabelFile.java)
-- [DeepFashionClassifier/utils/DataLoader.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/utils/DataLoader.java)
-- [DeepFashionClassifier/utils/DataPreprocess.java](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/utils/DataPreprocess.java)
-</details>
-
 # 部署/基础设施
 
 ## 简介

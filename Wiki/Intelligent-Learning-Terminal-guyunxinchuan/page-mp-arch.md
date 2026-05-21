@@ -1,23 +1,5 @@
 <!-- wiki_page_id: page-mp-arch -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [miniprogram/README.md](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/README.md)
-- [miniprogram/app.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/app.json)
-- [miniprogram/project.config.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/project.config.json)
-- [miniprogram/sitemap.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/sitemap.json)
-- [miniprogram/custom-tab-bar/index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/custom-tab-bar/index.json)
-- [miniprogram/custom-tab-bar/index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/custom-tab-bar/index.ts)
-- [miniprogram/pages/splash/index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/pages/splash/index.json)
-- [miniprogram/pages/splash/index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/pages/splash/index.ts)
-- [miniprogram/pages/story/index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/pages/story/index.json)
-- [miniprogram/pages/story/index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/pages/story/index.ts)
-- [miniprogram/pkg/story-list/index.json](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/pkg/story-list/index.json)
-- [miniprogram/pkg/story-list/index.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram/pkg/story-list/index.ts)</details>
-
 # 微信小程序架构详解
 
 ## 项目概述

@@ -1,13 +1,5 @@
 <!-- wiki_page_id: page-9 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/README.md)
-</details>
-
 # 悬浮球组件
 
 ## 组件概述

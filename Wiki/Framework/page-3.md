@@ -2,15 +2,6 @@
 
 ## 组件关系图 - 组件关系图
 
-<details>
-<summary>Relevant source files</summary>
-- [components_diagram.png](https://github.com/zhk0567/Framework/blob/main/components_diagram.png)
-- [Front-end\React-Native\README.md](https://github.com/zhk0567/Framework/blob/main/Front-end/React-Native/README.md)
-- [Front-end\Svelte\README.md](https://github.com/zhk0567/Framework/blob/main/Front-end/Svelte/README.md)
-- [Back-end\Node\Directus\DIRECTUS-Node-TypeScript.md](https://github.com/zhk0567/Framework/blob/main/Back-end/Node/Directus/DIRECTUS-Node-TypeScript.md)
-- [Back-end\PHP\Laravel\LARAVEL-PHP.md](https://github.com/zhk0567/Framework/blob/main/Back-end/PHP/Laravel/LARAVEL-PHP.md)
-</details>
-
 # 组件关系图 - 组件关系图
 
 本页面展示了项目中的组件关系图，旨在清晰地呈现各个组件之间的依赖关系和交互模式。该图基于提供的代码文件，特别是 `components_diagram.png`，对项目架构进行了可视化描述。  本图主要关注前端组件，以及与后端 API 的交互。
@@ -38,11 +29,6 @@
 数据在前端和后端之间通过 API 接口进行传输。  前端组件通过 `fetch` 或 `axios` 等方法向后端 API 发送请求，后端 API 处理请求并返回数据。  数据格式通常为 JSON。
 
 ![组件关系图](components_diagram.png)
-
-<details>
-<summary>Source: components_diagram.png</summary>
-该图展示了项目中的组件关系，包括前端组件（Svelte、React、Expo）和后端 API（Node.js、PHP、Go）。 节点代表不同的组件，箭头代表组件之间的依赖关系和数据流向。  图的布局反映了组件之间的组织结构和交互模式。
-</details>
 
 ## 详细组件描述
 

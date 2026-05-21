@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-8 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/README.md)
-- [transcriber_README.md](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/transcriber_README.md)
-</details>
-
 # 单词查询系统
 
 ## 概述

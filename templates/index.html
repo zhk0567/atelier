@@ -25,7 +25,7 @@
             <ul class="mp-project-list">
               {% for project in projects %}
               <li class="mp-project-card">
-                <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.crafting_table }}');" aria-hidden="true"></span>
+                <span class="mp-project-card__thumb" style="background-image: url('{{ project.thumb_url }}');" aria-hidden="true"></span>
                 <div class="mp-project-card__body">
                   <h3><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
                   <p class="mp-project-card__meta">{{ project.category }} {{ ui.sep_dot }} {{ project.year }}{% if project.project_type %} {{ ui.sep_dot }} {{ project.project_type }}{% endif %}</p>
@@ -75,7 +75,7 @@
           <li><span class="mp-profile-label">{{ ui.fact_status }}</span><span class="mp-profile-value">{{ availability }}</span></li>
           <li><span class="mp-profile-label">{{ ui.fact_email }}</span><span class="mp-profile-value"><a href="mailto:{{ email }}">{{ email }}</a></span></li>
         </ul>
-        <p style="margin-top:0.75rem;font-size:0.8125rem;">{{ bio }}</p>
+        <p class="mp-profile-bio">{{ bio }}</p>
       </section>
 
       <section class="mp-section collapsible" id="mp-stats">

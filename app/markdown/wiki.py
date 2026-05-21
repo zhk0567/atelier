@@ -5,11 +5,19 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-import markdown
 from fastapi import HTTPException
 
 from app.config import ATELIER_ROOT
-from app.markdown.mermaid import apply_mermaid_blocks
+from app.markdown.page_cache import file_cache_key, render_cached
+from app.markdown.render import (
+    dedupe_duplicate_headings,
+    extract_wiki_index_body,
+    markdown_to_html,
+    postprocess_content_html,
+    rewrite_wiki_links_markdown,
+    strip_wiki_details_blocks,
+    wiki_inpage_toc_from_html,
+)
 
 WIKI_DIR = ATELIER_ROOT / "Wiki"
 
@@ -30,9 +38,15 @@ _WIKI_GITHUB_LINK_RE = re.compile(
     r"\[([^\]]+)\]\((https?://(?:www\.)?(?:github|gitee)\.com/[^)]+)\)",
     re.I,
 )
+_WIKI_DETAILS_MD_RE = re.compile(
+    r"<details>[\s\S]*?</details>\s*",
+    re.I,
+)
 
 
-def sanitize_wiki_markdown(raw: str) -> str:
+def sanitize_wiki_markdown(raw: str, wiki_slug: str) -> str:
+    raw = strip_wiki_details_blocks(raw)
+    raw = _WIKI_DETAILS_MD_RE.sub("", raw)
     out: list[str] = []
     skip_section = False
     for line in raw.splitlines():
@@ -54,12 +68,20 @@ def sanitize_wiki_markdown(raw: str) -> str:
         if re.match(r"^[-*]\s*\[.*README\.md.*\]\(https?://", stripped, re.I):
             continue
         line = _WIKI_GITHUB_LINK_RE.sub(r"\1", line)
-        line = re.sub(r"\[([^\]]+)\]\(\./[^)]+\)", r"\1", line)
         out.append(line)
-    return "\n".join(out).strip() + "\n"
+    text = "\n".join(out).strip()
+    text = rewrite_wiki_links_markdown(text, wiki_slug)
+    text = dedupe_duplicate_headings(text)
+    return text + "\n" if text else ""
 
 
 def sanitize_wiki_html(html: str) -> str:
+    html = re.sub(
+        r"<details>[\s\S]*?Relevant\s+source\s+files[\s\S]*?</details>\s*",
+        "",
+        html,
+        flags=re.I,
+    )
     html = re.sub(
         r"<p>[^<]*(?:基于|参考).*README[^<]*(?:生成|源仓库)[^<]*</p>",
         "",
@@ -82,23 +104,57 @@ def sanitize_wiki_html(html: str) -> str:
     return html
 
 
-def render_wiki_markdown(wiki_slug: str, page: str) -> str:
+def _read_wiki_raw(wiki_slug: str, page: str) -> str:
     safe = Path(page).name
     file_path = WIKI_DIR / wiki_slug / safe
     if not file_path.is_file():
         raise HTTPException(status_code=404, detail="Wiki page not found")
     if file_path.resolve().parent != (WIKI_DIR / wiki_slug).resolve():
         raise HTTPException(status_code=404, detail="Wiki page not found")
-    raw = file_path.read_text(encoding="utf-8")
-    raw = re.sub(r"<!--.*?-->", "", raw, flags=re.DOTALL)
-    raw = sanitize_wiki_markdown(raw)
-    html = markdown.markdown(raw, extensions=["tables", "fenced_code", "nl2br"])
+    return file_path.read_text(encoding="utf-8")
+
+
+def _render_wiki_markdown_impl(wiki_slug: str, page: str) -> dict:
+    safe = Path(page).name
+    raw = _read_wiki_raw(wiki_slug, page)
+    is_index = safe == "index.md"
+
+    if is_index:
+        body_raw = extract_wiki_index_body(raw)
+    else:
+        body_raw = raw
+
+    body_raw = re.sub(r"<!--\s*wiki_page_id:[^>]*-->", "", body_raw, flags=re.I)
+    body_raw = strip_wiki_details_blocks(body_raw)
+    body_raw = sanitize_wiki_markdown(body_raw, wiki_slug)
+    html = markdown_to_html(body_raw)
     html = sanitize_wiki_html(html)
-    html, _ = apply_mermaid_blocks(html)
-    return html
+    html, _ = postprocess_content_html(
+        html, wiki_slug=wiki_slug, demote_h1=not is_index
+    )
+
+    inpage_toc = [] if is_index else wiki_inpage_toc_from_html(html)
+
+    return {
+        "content_html": html,
+        "wiki_is_index": is_index,
+        "wiki_inpage_toc": inpage_toc,
+    }
 
 
-def list_wiki_pages(wiki_slug: str) -> list[dict[str, str]]:
+def render_wiki_markdown(wiki_slug: str, page: str) -> dict:
+    """Return content_html and template flags (index mode, in-page TOC)."""
+    safe = Path(page).name
+    file_path = WIKI_DIR / wiki_slug / safe
+    key = file_cache_key(file_path)
+    return render_cached(
+        key,
+        f"wiki:{wiki_slug}:{safe}",
+        lambda: _render_wiki_markdown_impl(wiki_slug, page),
+    )
+
+
+def _list_wiki_pages_impl(wiki_slug: str) -> list[dict[str, str]]:
     index_path = WIKI_DIR / wiki_slug / "index.md"
     if not index_path.is_file():
         return []
@@ -114,6 +170,16 @@ def list_wiki_pages(wiki_slug: str) -> list[dict[str, str]]:
                 "view_url": f"/docs/{wiki_slug}/{page_file}",
             })
     return pages
+
+
+def list_wiki_pages(wiki_slug: str) -> list[dict[str, str]]:
+    index_path = WIKI_DIR / wiki_slug / "index.md"
+    key = file_cache_key(index_path)
+    return render_cached(
+        key,
+        f"wiki-index:{wiki_slug}",
+        lambda: _list_wiki_pages_impl(wiki_slug),
+    )
 
 
 def build_wiki_doc_nav(wiki_slug: str, page: str) -> dict:

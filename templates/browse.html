@@ -19,56 +19,103 @@
 
   {% if sections %}
     {% for section in sections %}
-    <section class="mp-section mp-section-full collapsible">
-      <h2 class="mp-title">
-        {{ section["title"] }} ({{ section["items"]|length }})
-        <button type="button" class="collapsetoggle" aria-expanded="true"></button>
-      </h2>
-      <div class="collapsible-content">
-        <div class="mp-section-inner">
-          <table class="mp-stats-table">
-            <thead>
-              <tr><th>名称</th><th>备注</th></tr>
-            </thead>
-            <tbody>
-              {% for item in section["items"] %}
-              <tr>
-                <th scope="row">{{ item.title }}</th>
-                <td>{{ item.meta or "—" }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+    <section class="mp-section mp-section-full{% if layout == 'cards' %} mp-section--gallery{% endif %}">
+      <h2 class="mp-title">{{ section["title"] }} ({{ section["items"]|length }})</h2>
+      {% if layout == 'cards' %}
+      <div class="mp-gallery-grid wiki-gallery" data-gallery>
+        {% for item in section["items"] %}
+        <div class="wiki-gallery__item"{% if item.meta %} data-meta="{{ item.meta }}"{% endif %}>
+          {% if item.image_url %}
+          <img src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy" />
+          {% else %}
+          <span class="wiki-gallery__placeholder" style="background-image: url('{{ wiki_assets.sprite_stone }}');" aria-hidden="true"></span>
+          {% endif %}
+          <p class="wiki-gallery__title" title="{{ item.title }}">{{ item.title }}</p>
+          {% if item.meta %}<p class="wiki-gallery__meta">{{ item.meta }}</p>{% endif %}
         </div>
+        {% endfor %}
       </div>
+      {% else %}
+      <div class="mp-section-inner">
+        <table class="mp-stats-table">
+          <thead>
+            <tr><th>名称</th><th>备注</th></tr>
+          </thead>
+          <tbody>
+            {% for item in section["items"] %}
+            <tr>
+              <th scope="row">{{ item.title }}</th>
+              <td>{{ item.meta or "—" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
     </section>
     {% endfor %}
   {% elif layout == 'cards' %}
   <section class="mp-section mp-section-full">
-    <div class="mp-gallery-grid wiki-gallery">
+    <div class="mp-gallery-grid wiki-gallery" data-gallery>
       {% for item in items %}
-      <div class="wiki-gallery__item">
+      <div class="wiki-gallery__item"{% if item.meta %} data-meta="{{ item.meta }}"{% endif %}>
         {% if item.image_url %}
-        <img src="{{ item.image_url }}" alt="" loading="lazy" />
+        <img src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy" />
         {% else %}
         <span class="wiki-gallery__placeholder" style="background-image: url('{{ wiki_assets.sprite_stone }}');" aria-hidden="true"></span>
         {% endif %}
-        <p class="wiki-gallery__title">{{ item.title }}</p>
+        <p class="wiki-gallery__title" title="{{ item.title }}">{{ item.title }}</p>
         {% if item.meta %}<p class="wiki-gallery__meta">{{ item.meta }}</p>{% endif %}
       </div>
+      {% else %}
+      <p class="mp-empty-note">暂无记录。</p>
       {% endfor %}
+    </div>
+  </section>
+  {% elif layout == 'table' and table_columns %}
+  <section class="mp-section mp-section-full">
+    <div class="browse-toolbar">
+      <label class="browse-toolbar__filter">
+        <span class="browse-toolbar__label">筛选</span>
+        <input type="search" class="browse-toolbar__input" data-browse-filter placeholder="输入关键词…" autocomplete="off" />
+      </label>
+      <span class="browse-toolbar__count">显示 <strong data-browse-count>{{ item_count }}</strong> 条</span>
+    </div>
+    <div class="wiki-table-scroll">
+      <table class="mp-stats-table mp-data-table" data-sortable>
+        <thead>
+          <tr>
+            {% for col in table_columns %}
+            <th scope="col">{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            {% for cell in item.cells %}
+            <td{% if loop.first %} scope="row"{% endif %}>{{ cell }}</td>
+            {% endfor %}
+          </tr>
+          {% else %}
+          <tr><td colspan="{{ table_columns|length }}">暂无记录。</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </section>
   {% elif layout == 'articles' %}
   <section class="mp-section mp-section-full">
     {% for item in items %}
-    <article class="mp-project-card" style="margin-bottom:8px;">
+    <article class="mp-project-card mp-article-row">
       <div class="mp-project-card__body">
         <h3>{% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
         {% if item.meta %}<p class="mp-project-card__meta">{{ item.meta }}</p>{% endif %}
         {% if item.excerpt %}<p>{{ item.excerpt }}</p>{% endif %}
       </div>
     </article>
+    {% else %}
+    <p class="mp-empty-note">暂无记录。</p>
     {% endfor %}
   </section>
   {% else %}
@@ -83,13 +130,15 @@
           <th scope="row">{{ item.title }}</th>
           <td>{{ item.meta or "—" }}</td>
         </tr>
+        {% else %}
+        <tr><td colspan="2">暂无记录。</td></tr>
         {% endfor %}
       </tbody>
     </table>
   </section>
   {% endif %}
 
-  <div class="mp-button-wrapper" style="width:100%;">
+  <div class="mp-button-wrapper mp-footer-actions">
     <a class="mp-button" href="/">
       <span class="mp-button__inner">{{ ui.back_home }}</span>
     </a>

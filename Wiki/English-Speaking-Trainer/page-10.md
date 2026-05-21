@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-10 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/README.md)
-- [requirements_transcriber.txt](https://github.com/zhk0567/English-Speaking-Trainer/blob/main/requirements_transcriber.txt)
-</details>
-
 # 开发环境与依赖
 
 ## 系统要求
@@ -61,7 +52,6 @@ venv\Scripts\activate
 # macOS/Linux:
 source venv/bin/activate
 
-# 安装依赖
 pip install -r requirements_transcriber.txt
 ```
 

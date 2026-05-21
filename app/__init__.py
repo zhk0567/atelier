@@ -8,9 +8,8 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-
 from app.config import ATELIER_ROOT
+from app.static_files import CachedStaticFiles
 from app.constants import SITE_NAME, SITE_TITLE
 from app.routes import assets, blog, browse, home, projects, wiki
 
@@ -32,6 +31,15 @@ async def _lifespan(app: FastAPI):
         prev_handler = loop.get_exception_handler()
         loop.set_exception_handler(_win_asyncio_exception_handler)
     try:
+        from app.context import list_wallpapers, load_wiki_assets
+        from app.projects import get_all_projects
+        from site_data import load_site_data
+
+        load_site_data()
+        get_all_projects()
+        load_wiki_assets()
+        list_wallpapers()
+        print("[atelier] warmed caches", flush=True)
         yield
     finally:
         if sys.platform == "win32" and prev_handler is not None:
@@ -52,7 +60,7 @@ def create_app() -> FastAPI:
     app.include_router(blog.router)
     app.include_router(wiki.router)
     static_dir = ATELIER_ROOT / "static"
-    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+    app.mount("/static", CachedStaticFiles(directory=static_dir), name="static")
     return app
 
 

@@ -1,27 +1,5 @@
 <!-- wiki_page_id: page-8 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [cpp/algorithms/graph/traversal/graph_traversal.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/traversal/graph_traversal.cpp)
-- [cpp/algorithms/graph/shortest_path/dijkstra.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/shortest_path/dijkstra.cpp)
-- [cpp/algorithms/graph/shortest_path/floyd_warshall.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/shortest_path/floyd_warshall.cpp)
-- [cpp/algorithms/graph/mst/kruskal.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/mst/kruskal.cpp)
-- [cpp/algorithms/graph/mst/prim.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/mst/prim.cpp)
-- [cpp/algorithms/graph/topological_sort/kahn.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/topological_sort/kahn.cpp)
-- [cpp/algorithms/graph/lca/lca.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/lca/lca.cpp)
-- [cpp/algorithms/graph/scc/tarjan.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/scc/tarjan.cpp)
-- [cpp/algorithms/graph/bipartite_matching/bipartite_matching.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/bipartite_matching/bipartite_matching.cpp)
-- [cpp/algorithms/graph/network_flow/edmonds_karp.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/graph/network_flow/edmonds_karp.cpp)
-- [cpp/algorithms/string/string_algorithms.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/string/string_algorithms.cpp)
-- [cpp/algorithms/string/kmp.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/string/kmp.cpp)
-- [cpp/algorithms/string/z_algorithm.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/string/z_algorithm.cpp)
-- [cpp/algorithms/string/ac_automaton.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/string/ac_automaton.cpp)
-- [cpp/algorithms/string/manacher.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/algorithms/string/manacher.cpp)
-</details>
-
 # 图算法与字符串处理
 
 ## 概述

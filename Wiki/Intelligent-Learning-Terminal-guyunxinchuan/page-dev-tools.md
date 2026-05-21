@@ -1,18 +1,5 @@
 <!-- wiki_page_id: page-dev-tools -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [tools\sync_stories_data.py](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/tools\sync_stories_data.py)
-- [tools\sync_story_covers.py](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/tools\sync_story_covers.py)
-- [tools\sync_shop_carousel.py](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/tools\sync_shop_carousel.py)
-- [tools\sync_wenchuang_shop.py](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/tools\sync_wenchuang_shop.py)
-- [tools\sync_basic_lesson_covers.py](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/tools\sync_basic_lesson_covers.py)
-- [tools\sync_basic_lesson_videos.py](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/tools\sync_basic_lesson_videos.py)
-</details>
-
 # 开发工具与数据同步脚本
 
 ## 概述

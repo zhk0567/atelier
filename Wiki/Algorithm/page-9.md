@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-9 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [cpp/problems/notes.md](https://github.com/zhk0567/Algorithm/blob/main/cpp/problems/notes.md)
-- [cpp/problems/hot100/notes.md](https://github.com/zhk0567/Algorithm/blob/main/cpp/problems/hot100/notes.md)
-- [cpp/problems/leetcode/0001_two_sum/solution.cpp](https://github.com/zhk0567/Algorithm/blob/main/cpp/problems/leetcode/0001_two_sum/solution.cpp)</details>
-
 # LeetCode 题解与刷题指南
 
 ## 项目结构概览

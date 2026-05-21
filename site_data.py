@@ -99,22 +99,17 @@ DEFAULT_SITE = {
         "label_interests": "爱好",
         "label_tech_tags": "技术栈",
         "browse_lead": "",
-        "stat_awards": "竞赛证书",
-        "stat_awards_unit": "项",
         "stat_projects": "应用项目",
         "stat_projects_unit": "个",
         "stat_skills": "数据分类",
         "stat_skills_unit": "类",
         "stat_media": "阅读与作品",
         "stat_media_unit": "部",
-        "label_highlights": "竞赛与认证",
-        "label_cert_gallery": "证书一览",
         "label_projects": "精选项目",
-        "link_all_projects": "全部项目",
-        "label_all_projects_page": "全部项目",
+        "link_all_projects": "项目",
+        "label_all_projects_page": "项目",
         "projects_page_lead": "表格「项目应用」与 Wiki 仓库同步；首页为置顶展示。",
         "badge_pinned": "置顶",
-        "label_achievements": "竞赛与认证",
         "fact_education": "教育",
         "fact_reading": "阅读",
     },
@@ -162,34 +157,17 @@ def _load_sheet_rows(sheet_name: str) -> list[list[object | None]]:
     return [list(row) for row in ws.iter_rows(values_only=True)]
 
 
-def _resolve_static_image_url(url: str) -> str:
-    """Return url only if the file exists under the project root (avoid 404)."""
+def _resolve_project_image_url(url: str) -> str:
     if not url:
         return ""
     ref = url.strip().replace("\\", "/")
     if ref.startswith("http://") or ref.startswith("https://"):
         return ref
     if not ref.startswith("/static/"):
-        ref = f"/static/uploads/events/{ref.lstrip('/')}"
+        ref = f"/static/uploads/projects/{ref.lstrip('/')}"
     rel = ref.lstrip("/")
     path = BASE_DIR / rel.replace("/", os.sep)
     return ref if path.is_file() else ""
-
-
-def _parse_certificates() -> list[dict]:
-    rows = _load_sheet_rows("活动竞赛证书")
-    if len(rows) < 2:
-        return []
-    items: list[dict] = []
-    for row in rows[1:]:
-        if not row or not row[0]:
-            continue
-        name = _cell_str(row[0])
-        if not name:
-            continue
-        image = _cell_str(row[1]) if len(row) > 1 else ""
-        items.append({"name": name, "image_url": _resolve_static_image_url(image)})
-    return items
 
 
 def _parse_hobbies_split() -> tuple[list[str], list[str]]:
@@ -316,6 +294,7 @@ def _parse_projects_from_xlsx() -> list[dict]:
         feature_lines = [h.strip() for h in feat_raw.split("\n") if h.strip()]
         github = _cell_str(row[4]) if len(row) > 4 else ""
         summary = _cell_str(row[3]) if len(row) > 3 else ""
+        raw_img = _cell_str(row[7]) if len(row) > 7 else ""
         projects.append({
             "id": _slug_from_name(name),
             "title": name,
@@ -329,7 +308,8 @@ def _parse_projects_from_xlsx() -> list[dict]:
             "thumb": (len(projects) % 6) + 1,
             "highlights": feature_lines[:6] if feature_lines else [],
             "feature_lines": feature_lines,
-            "image_url": _cell_str(row[7]) if len(row) > 7 else "",
+            "image_url": raw_img,
+            "cover_url": _resolve_project_image_url(raw_img),
             "repo_key": _github_repo_key(github),
         })
     return projects
@@ -355,7 +335,7 @@ def _parse_skills_from_projects(projects: list[dict]) -> list[dict]:
     ]
 
 
-def _build_bio(school: dict, certs: list[dict], xlsx_projects: list[dict]) -> str:
+def _build_bio(school: dict, xlsx_projects: list[dict]) -> str:
     parts: list[str] = []
     if school.get("headline"):
         parts.append(f"{school['headline']}在读")
@@ -368,9 +348,6 @@ def _build_bio(school: dict, certs: list[dict], xlsx_projects: list[dict]) -> st
                 domains.append(d.split("、")[0][:24])
         if domains:
             parts.append(f"近期项目：{'、'.join(domains)}。")
-    if certs:
-        top = [c["name"] for c in certs[:3]]
-        parts.append("竞赛：" + "；".join(top) + ("等。" if len(certs) > 3 else "。"))
     return "".join(parts) if parts else DEFAULT_SITE["bio"]
 
 
@@ -432,13 +409,6 @@ def build_data_hubs(data: dict, project_count: int) -> list[dict]:
             "url": "/projects",
         },
         {
-            "id": "certs",
-            "label": "竞赛证书",
-            "sheet": "活动竞赛证书",
-            "count": len(data.get("certificates", [])),
-            "url": "/browse/certs",
-        },
-        {
             "id": "hobbies",
             "label": "爱好兴趣",
             "sheet": "爱好兴趣",
@@ -483,7 +453,7 @@ def build_data_hubs(data: dict, project_count: int) -> list[dict]:
     ]
 
 
-DISABLED_HUB_IDS = frozenset({"hobbies", "school", "articles"})
+DISABLED_HUB_IDS = frozenset({"certs", "hobbies", "school", "articles"})
 
 
 def get_browse_page(hub_id: str) -> dict | None:
@@ -507,14 +477,6 @@ def get_browse_page(hub_id: str) -> dict | None:
             })
         return out
 
-    if hub_id == "certs":
-        return {
-            "hub_id": hub_id,
-            "page_title": "竞赛与证书",
-            "sheet_name": "活动竞赛证书",
-            "layout": "cards",
-            "items": _items_titled(data.get("certificates", []), "name"),
-        }
     if hub_id == "hobbies":
         hobbies = data.get("hobbies_list", [])
         interests = data.get("interests_list", [])
@@ -535,57 +497,92 @@ def get_browse_page(hub_id: str) -> dict | None:
             ],
         }
     if hub_id == "books":
+        books = sorted(data.get("books", []), key=lambda b: (b.get("title") or "").lower())
         return {
             "hub_id": hub_id,
             "page_title": "书籍",
             "sheet_name": "书籍",
-            "layout": "list",
-            "items": _items_titled(
-                data.get("books", []),
-                meta_fn=lambda b: " · ".join(x for x in [b.get("author", ""), b.get("category", "")] if x),
-            ),
+            "layout": "table",
+            "table_columns": ["书名", "作者", "分类"],
+            "items": [
+                {
+                    "title": b.get("title", ""),
+                    "cells": [
+                        b.get("title", ""),
+                        b.get("author", "") or "—",
+                        b.get("category", "") or "—",
+                    ],
+                    "meta": "",
+                    "image_url": "",
+                    "excerpt": "",
+                }
+                for b in books
+                if b.get("title")
+            ],
         }
     if hub_id == "anime":
+        rows = sorted(data.get("anime", []), key=lambda r: (r.get("name") or "").lower())
         return {
             "hub_id": hub_id,
             "page_title": "番剧",
             "sheet_name": "番剧",
-            "layout": "list",
-            "items": _items_titled(
-                data.get("anime", []),
-                "name",
-                meta_fn=lambda r: f"系列：{r['series']}" if r.get("series") else "",
-            ),
+            "layout": "table",
+            "table_columns": ["名称", "系列"],
+            "items": [
+                {
+                    "title": r.get("name", ""),
+                    "cells": [r.get("name", ""), r.get("series", "") or "—"],
+                    "meta": "",
+                    "image_url": "",
+                    "excerpt": "",
+                }
+                for r in rows
+                if r.get("name")
+            ],
         }
     if hub_id == "movies":
+        rows = sorted(data.get("movies", []), key=lambda r: (r.get("name") or "").lower())
         return {
             "hub_id": hub_id,
             "page_title": "电影",
             "sheet_name": "电影",
-            "layout": "list",
-            "items": _items_titled(
-                data.get("movies", []),
-                "name",
-                meta_fn=lambda r: f"系列：{r['series']}" if r.get("series") else "",
-            ),
+            "layout": "table",
+            "table_columns": ["名称", "系列"],
+            "items": [
+                {
+                    "title": r.get("name", ""),
+                    "cells": [r.get("name", ""), r.get("series", "") or "—"],
+                    "meta": "",
+                    "image_url": "",
+                    "excerpt": "",
+                }
+                for r in rows
+                if r.get("name")
+            ],
         }
     if hub_id == "games":
+        rows = sorted(data.get("games", []), key=lambda r: (r.get("name") or "").lower())
         return {
             "hub_id": hub_id,
             "page_title": "游戏",
             "sheet_name": "游戏",
-            "layout": "list",
-            "items": _items_titled(
-                data.get("games", []),
-                "name",
-                meta_fn=lambda g: " · ".join(
-                    x for x in [
-                        f"系列：{g['series']}" if g.get("series") else "",
-                        g.get("platform", ""),
-                    ]
-                    if x
-                ),
-            ),
+            "layout": "table",
+            "table_columns": ["名称", "系列", "平台"],
+            "items": [
+                {
+                    "title": r.get("name", ""),
+                    "cells": [
+                        r.get("name", ""),
+                        r.get("series", "") or "—",
+                        r.get("platform", "") or "—",
+                    ],
+                    "meta": "",
+                    "image_url": "",
+                    "excerpt": "",
+                }
+                for r in rows
+                if r.get("name")
+            ],
         }
     if hub_id == "school":
         timeline = data.get("school_timeline", [])
@@ -624,15 +621,22 @@ def merge_projects_catalog(base_projects: list[dict], xlsx_projects: list[dict] 
             if x.get("tags"):
                 p["tags"] = x["tags"]
             if x.get("highlights"):
-                p["highlights"] = x["highlights"]
+                hl = list(x["highlights"])
+                summary = (p.get("summary") or "").strip()
+                p["highlights"] = [h for h in hl if h.strip() and h.strip() != summary]
             if x.get("feature_lines"):
-                p["feature_lines"] = x["feature_lines"]
+                fl = list(x["feature_lines"])
+                summary = (p.get("summary") or "").strip()
+                p["feature_lines"] = [h for h in fl if h.strip() and h.strip() != summary]
             if x.get("category"):
                 p["category"] = x["category"]
             if x.get("project_type"):
                 p["project_type"] = x["project_type"]
             if x.get("image_url"):
                 p["image_url"] = x["image_url"]
+                p["cover_url"] = _resolve_project_image_url(x["image_url"])
+        if not p.get("cover_url") and p.get("image_url"):
+            p["cover_url"] = _resolve_project_image_url(p["image_url"])
         if not p.get("feature_lines") and p.get("highlights"):
             p["feature_lines"] = list(p["highlights"])
         merged.append(p)
@@ -646,6 +650,21 @@ def merge_projects_catalog(base_projects: list[dict], xlsx_projects: list[dict] 
     return merged
 
 
+def clear_site_data_cache() -> None:
+    """Call after zhita_settings.xlsx changes (or restart the server)."""
+    load_site_data.cache_clear()
+    try:
+        from app.projects import clear_projects_cache
+        from app.context import clear_context_cache
+        from app.markdown.page_cache import clear_render_cache
+
+        clear_projects_cache()
+        clear_context_cache()
+        clear_render_cache()
+    except ImportError:
+        pass
+
+
 @lru_cache(maxsize=1)
 def load_site_data() -> dict:
     identity = _load_identity_json()
@@ -653,7 +672,6 @@ def load_site_data() -> dict:
     site_name = identity["site_name"]
     site_title = identity["site_title"]
 
-    certs = _parse_certificates()
     hobbies, interests = _parse_hobbies_split()
     school = _parse_school()
     books = _parse_books()
@@ -680,17 +698,15 @@ def load_site_data() -> dict:
         "site_title": site_title,
         "tagline": DEFAULT_SITE["tagline"],
         "hero_subtitle": _build_hero_subtitle(xlsx_projects),
-        "bio": _build_bio(school, certs, xlsx_projects),
+        "bio": _build_bio(school, xlsx_projects),
         "focus": _build_focus(hobbies, interests, xlsx_projects),
         "availability": school.get("headline") or DEFAULT_SITE["availability"],
         "education_line": school.get("education_line", ""),
         "school_timeline": school.get("timeline", []),
         "ui": ui,
-        "highlights": [c["name"] for c in certs] or DEFAULT_SITE.get("highlights", []),
         "skills": skills,
         "hobby_tags": hobby_tags,
         "tech_tags": tech_tags_unique[:14],
-        "certificates": certs,
         "books": books,
         "books_featured": books[:6],
         "anime": anime,
@@ -705,7 +721,6 @@ def load_site_data() -> dict:
     }
     hub_count = len(build_data_hubs(payload, len(xlsx_projects)))
     payload["stats"] = [
-        {"value": len(certs), "unit": ui["stat_awards_unit"], "label": ui["stat_awards"]},
         {"value": len(xlsx_projects), "unit": ui["stat_projects_unit"], "label": ui["stat_projects"]},
         {"value": hub_count, "unit": ui["stat_skills_unit"], "label": ui["stat_skills"]},
         {"value": media_count, "unit": ui["stat_media_unit"], "label": ui["stat_media"]},
@@ -726,12 +741,10 @@ def get_spreadsheet_context() -> dict:
         "education_line": data["education_line"],
         "reading_line": data["reading_line"],
         "ui": data["ui"],
-        "highlights": data["highlights"],
         "skills": data["skills"],
         "hobby_tags": data["hobby_tags"],
         "tech_tags": data["tech_tags"],
         "stats": data["stats"],
-        "certificates": data["certificates"],
         "books_featured": data["books_featured"],
         "games_count": data["games_count"],
     }

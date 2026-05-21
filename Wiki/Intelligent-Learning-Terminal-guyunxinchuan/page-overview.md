@@ -1,13 +1,5 @@
 <!-- wiki_page_id: page-overview -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [README.md](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/README.md)
-</details>
-
 # 项目概述与架构
 
 ## 项目简介

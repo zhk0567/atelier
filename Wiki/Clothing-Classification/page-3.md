@@ -6,16 +6,6 @@
 
 Related topics: [项目概述](#page-1), [系统架构](#page-2)
 
-<details>
-<summary>Relevant source files</summary>
-
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-- [DeepFashionClassifier/DeepFashionClassifier.kt](https://github.com/zhk0567/Clothing---Classification/blob/main/DeepFashionClassifier/DeepFashionClassifier.kt)
-</details>
-
 # 深度学习模型
 
 深度学习模型是Clothing - Classification项目中用于图像分类的关键组件。它基于ResNet18架构，通过深度卷积神经网络提取图像特征，并最终将特征映射到50个服饰类别。该模型旨在实现高准确率的服饰识别，为后续的属性预测和推荐提供基础。 本文档将详细介绍该模型的架构、训练过程、以及关键组件。

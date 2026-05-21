@@ -1,14 +1,5 @@
 <!-- wiki_page_id: page-8 -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [backend/routes/admin_story_routes.py](https://github.com/zhk0567/NEXUS/blob/main/backend/routes/admin_story_routes.py)
-- [admin_panel.html](https://github.com/zhk0567/NEXUS/blob/main/admin_panel.html)
-</details>
-
 # 故事阅读系统
 
 ## 概述

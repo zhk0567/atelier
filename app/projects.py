@@ -5,13 +5,24 @@ from __future__ import annotations
 from app.config import all_projects_seed, pinned_project_ids
 from site_data import merge_projects_catalog
 
+_projects_cache: list[dict] | None = None
+
+
+def clear_projects_cache() -> None:
+    global _projects_cache
+    _projects_cache = None
+
 
 def get_all_projects() -> list[dict]:
+    global _projects_cache
+    if _projects_cache is not None:
+        return _projects_cache
     try:
-        return merge_projects_catalog(all_projects_seed())
+        _projects_cache = merge_projects_catalog(all_projects_seed())
     except Exception as exc:
         print(f"[atelier] project merge failed: {exc}", flush=True)
-        return list(all_projects_seed())
+        _projects_cache = list(all_projects_seed())
+    return _projects_cache
 
 
 def get_pinned_projects() -> list[dict]:

@@ -1,20 +1,5 @@
 <!-- wiki_page_id: page-state-mgmt -->
 
-<details>
-<summary>Relevant source files</summary>
-
-The following files were used as context for generating this wiki page:
-
-- [web\src\store\cartStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\store\cartStore.ts)
-- [web\src\store\playerStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\store\playerStore.ts)
-- [web\src\store\sessionStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\store\sessionStore.ts)
-- [web\src\store\themeStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/web\src\store\themeStore.ts)
-- [miniprogram\stores\cartStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\stores\cartStore.ts)
-- [miniprogram\stores\playerStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\stores\playerStore.ts)
-- [miniprogram\stores\sessionStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\stores\sessionStore.ts)
-- [miniprogram\stores\themeStore.ts](https://github.com/zhk0567/Intelligent-Learning-Terminal/blob/guyunxinchuan/miniprogram\stores\themeStore.ts)
-</details>
-
 # 状态管理机制
 
 ## 概述
