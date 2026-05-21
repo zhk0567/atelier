@@ -12,3 +12,4 @@ Desktop.ini
 config/site.local.json
 .env
 validate_out.txt
+_server.pid

@@ -396,8 +396,9 @@ def _parse_articles() -> list[dict]:
     return items
 
 
-def build_data_hubs(data: dict, project_count: int) -> list[dict]:
-    """Homepage hub tiles — one entry per spreadsheet category."""
+def build_data_hubs(data: dict, project_count: int = 0) -> list[dict]:
+    """Homepage hub tiles — browse categories (projects use /projects under 站点)."""
+    del project_count  # kept for call-site compatibility
     hobbies: list[str] = data.get("hobbies_list", [])
     interests: list[str] = data.get("interests_list", [])
     return [
@@ -442,13 +443,6 @@ def build_data_hubs(data: dict, project_count: int) -> list[dict]:
             "sheet": "学校组织",
             "count": len(data.get("school_timeline", [])),
             "url": "/browse/school",
-        },
-        {
-            "id": "projects",
-            "label": "应用项目",
-            "sheet": "项目应用",
-            "count": project_count,
-            "url": "/projects",
         },
     ]
 

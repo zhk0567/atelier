@@ -4,13 +4,14 @@
   const html = document.documentElement;
   const WALLPAPER_STORAGE_KEY = "wallpaper-mode";
 
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   function initWallpaper() {
     const dataEl = document.getElementById("wiki-wallpapers-data");
-    const layer = document.getElementById("wiki-wallpaper");
-    const video = document.getElementById("wiki-wallpaper-video");
     const image = document.getElementById("wiki-wallpaper-image");
     const select = document.getElementById("wallpaper-select");
-    if (!dataEl || !layer || !video || !image) return;
+    if (!dataEl || !image) return;
 
     let wallpapers;
     try {
@@ -24,91 +25,100 @@
       wallpapers.find((w) => w.default)?.id || wallpapers[0].id;
 
     const LEGACY_WALLPAPER_IDS = {
-      "wp-0": "wallpaper-02-preview-alt",
-      "wp-1": "wallpaper-01-preview",
-      "wp-2": "wallpaper-03-minecraft",
-      "wp-3": "wallpaper-04-cloud-pixel",
+      "wp-0": "chunze-2",
+      "wp-1": "chunze-1",
+      "wp-2": "chunze-3",
+      "wp-3": "chunze-4",
+      "wallpaper-01-preview": "chunze-1",
+      "wallpaper-02-preview-alt": "chunze-2",
+      "wallpaper-03-minecraft": "chunze-3",
+      "wallpaper-04-cloud-pixel": "chunze-4",
+      "春泽_1_original": "chunze-1",
+      "春泽_2_original": "chunze-2",
+      "春泽_3_original": "chunze-3",
+      "春泽_4_original": "chunze-4",
+      "春泽_5_original": "chunze-5",
+      "春泽_6_original": "chunze-6",
+      "栖野_1_original": "qiye-1",
+      "栖野_3_original": "qiye-3",
+      "栖野_4_original": "qiye-4",
+      "栖野_6_original": "qiye-6",
+      "渊光_1_original": "yuanguang-1",
+      "渊光_2_original": "yuanguang-2",
+      "渊光_3_original": "yuanguang-3",
+      "渊光_4_original": "yuanguang-4",
+      "渊光_5_original": "yuanguang-5",
+      "渊光_6_original": "yuanguang-6",
     };
-
-    let activeWallpaperId = null;
 
     const wallpaperUrl = (item) => new URL(item.url, window.location.href).href;
 
-    const videoHasSrc = (url) => {
-      const target = new URL(url, window.location.href).pathname;
-      if (!video.currentSrc && !video.getAttribute("src")) return false;
+    const imageShows = (url) => {
+      if (!image.src) return false;
       try {
-        return new URL(video.currentSrc || video.src, window.location.href).pathname === target;
+        return (
+          new URL(image.src, window.location.href).pathname ===
+          new URL(url, window.location.href).pathname
+        );
       } catch {
         return false;
       }
     };
 
-    const playVideo = () => video.play().catch(() => {});
+    const onImageOk = () => html.classList.remove("wallpaper-img-failed");
+    const onImageFail = () => html.classList.add("wallpaper-img-failed");
 
-    const setWallpaperVideoActive = (on) => {
-      html.classList.toggle("wallpaper-video-active", Boolean(on));
-    };
+    image.addEventListener("load", onImageOk);
+    image.addEventListener("error", onImageFail);
 
-    const markVideoActive = () => setWallpaperVideoActive(true);
+    let wallpaperHasShown = false;
 
-    video.addEventListener("playing", markVideoActive);
-    video.addEventListener("loadeddata", markVideoActive);
-    video.addEventListener("emptied", () => setWallpaperVideoActive(false));
-    video.addEventListener("error", () => {
-      setWallpaperVideoActive(false);
-      html.classList.add("wallpaper-load-failed");
-    });
-    video.addEventListener("playing", () => html.classList.remove("wallpaper-load-failed"));
-
-    const applyWallpaper = (item, forceReload) => {
-      if (!item || !item.url) {
-        return;
-      }
+    const applyWallpaper = (item) => {
+      if (!item || !item.url) return;
       document.body.classList.add("has-wallpaper");
       html.classList.add("wallpaper-enabled");
-      setWallpaperVideoActive(true);
       const url = wallpaperUrl(item);
-      if (item.is_video) {
-        image.hidden = true;
-        image.removeAttribute("src");
-        video.hidden = false;
-        const needsLoad =
-          forceReload || activeWallpaperId !== item.id || !videoHasSrc(url);
-        if (needsLoad) {
-          activeWallpaperId = item.id;
-          if (forceReload || !videoHasSrc(url)) {
-            video.pause();
-            video.src = url;
-            video.load();
-          }
-          video.addEventListener("loadeddata", playVideo, { once: true });
-          video.addEventListener("canplay", playVideo, { once: true });
-          playVideo();
-        } else if (video.paused) {
-          playVideo();
-        } else {
-          markVideoActive();
-        }
-      } else {
-        activeWallpaperId = item.id;
-        video.pause();
-        video.removeAttribute("src");
-        video.hidden = true;
-        image.hidden = false;
-        if (forceReload || image.src !== url) {
-          image.src = url;
-        }
+      if (imageShows(url)) {
+        if (image.complete && image.naturalWidth > 0) onImageOk();
+        return;
       }
+
+      const reveal = () => {
+        image.classList.remove("is-fading");
+        wallpaperHasShown = true;
+        if (image.complete && image.naturalWidth > 0) onImageOk();
+      };
+
+      const assignSrc = () => {
+        image.src = url;
+        if (image.complete && image.naturalWidth > 0) {
+          reveal();
+          return;
+        }
+        const onReveal = () => {
+          image.removeEventListener("load", onReveal);
+          image.removeEventListener("error", onReveal);
+          reveal();
+        };
+        image.addEventListener("load", onReveal);
+        image.addEventListener("error", onReveal);
+      };
+
+      if (prefersReducedMotion() || !wallpaperHasShown) {
+        assignSrc();
+        return;
+      }
+
+      image.classList.add("is-fading");
+      const preload = new Image();
+      preload.onload = assignSrc;
+      preload.onerror = assignSrc;
+      preload.src = url;
     };
 
     const resolveId = () => {
       let stored = localStorage.getItem(WALLPAPER_STORAGE_KEY);
-      if (stored === "random") stored = null;
-      if (stored === "none") {
-        stored = null;
-        localStorage.removeItem(WALLPAPER_STORAGE_KEY);
-      }
+      if (stored === "random" || stored === "none") stored = null;
       if (stored && LEGACY_WALLPAPER_IDS[stored]) {
         stored = LEGACY_WALLPAPER_IDS[stored];
         localStorage.setItem(WALLPAPER_STORAGE_KEY, stored);
@@ -122,45 +132,15 @@
     const resolveWallpaper = () =>
       wallpapers.find((w) => w.id === resolveId()) || wallpapers[0];
 
-    const initial = resolveWallpaper();
-    if (video.currentSrc || video.getAttribute("src")) {
-      activeWallpaperId = initial.id;
-    }
-    applyWallpaper(initial);
-
-    const unlockAutoplay = () => {
-      if (!document.body.classList.contains("has-wallpaper") || video.hidden) return;
-      if (video.paused && (video.src || video.currentSrc)) playVideo();
-    };
-    document.addEventListener("click", unlockAutoplay, { once: true, capture: true });
-    document.addEventListener("keydown", unlockAutoplay, { once: true, capture: true });
-    window.addEventListener("load", unlockAutoplay);
-
-    const syncVideoPlayback = () => {
-      if (!video || video.hidden) return;
-      if (document.hidden) {
-        video.pause();
-      } else if (video.src) {
-        video.play().catch(() => {});
-      }
-    };
-    document.addEventListener("visibilitychange", syncVideoPlayback);
-    syncVideoPlayback();
+    applyWallpaper(resolveWallpaper());
 
     if (select) {
-      const syncSelect = () => {
-        select.value = resolveId();
-      };
-      syncSelect();
+      select.value = resolveId();
       select.addEventListener("change", () => {
         const next = select.value;
         localStorage.setItem(WALLPAPER_STORAGE_KEY, next);
         const item = wallpapers.find((w) => w.id === next);
-        if (item) {
-          activeWallpaperId = null;
-          applyWallpaper(item, true);
-          syncSelect();
-        }
+        if (item) applyWallpaper(item);
       });
     }
   }
@@ -221,9 +201,38 @@
   document.querySelectorAll(".theme-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      if (!prefersReducedMotion()) {
+        html.classList.add("theme-transitioning");
+        window.setTimeout(() => html.classList.remove("theme-transitioning"), 220);
+      }
       applyTheme(next);
     });
   });
+
+  function initUiReady() {
+    if (prefersReducedMotion()) {
+      document.body.classList.add("is-ui-ready");
+      return;
+    }
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.body.classList.add("is-ui-ready");
+      });
+    });
+  }
+
+  function initHeaderScroll() {
+    const header = document.querySelector(".wiki-header");
+    if (!header) return;
+    const onScroll = () => {
+      header.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  initUiReady();
+  initHeaderScroll();
 
   const sidebar = document.getElementById("wiki-sidebar");
   const backdrop = document.getElementById("wiki-sidebar-backdrop");

@@ -68,7 +68,7 @@ UI = {
     "label_data_portal": "数据分类",
     "wiki_footer_note": "个人站点",
     "wiki_attribution": "部分图标来自 Minecraft Wiki（CC BY-SA 3.0）",
-    "label_wallpaper": "动态壁纸",
+    "label_wallpaper": "壁纸",
     "wallpaper_random": "随机",
     "label_contact": "快速联系",
     "ph_name": "姓名",

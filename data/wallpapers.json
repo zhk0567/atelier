@@ -1,25 +1,85 @@
 {
-  "default": "wallpaper-01-preview",
+  "default": "chunze-1",
   "items": [
     {
-      "id": "wallpaper-01-preview",
-      "file": "wallpaper-01-preview.mp4",
-      "label": "壁纸 1（默认）"
+      "id": "chunze-1",
+      "file": "春泽_1_original.png",
+      "label": "春泽 1"
     },
     {
-      "id": "wallpaper-02-preview-alt",
-      "file": "wallpaper-02-preview-alt.mp4",
-      "label": "壁纸 2"
+      "id": "chunze-2",
+      "file": "春泽_2_original.png",
+      "label": "春泽 2"
     },
     {
-      "id": "wallpaper-03-minecraft",
-      "file": "wallpaper-03-minecraft.mp4",
-      "label": "壁纸 3"
+      "id": "chunze-3",
+      "file": "春泽_3_original.png",
+      "label": "春泽 3"
     },
     {
-      "id": "wallpaper-04-cloud-pixel",
-      "file": "wallpaper-04-cloud-pixel.mp4",
-      "label": "壁纸 4"
+      "id": "chunze-4",
+      "file": "春泽_4_original.png",
+      "label": "春泽 4"
+    },
+    {
+      "id": "chunze-5",
+      "file": "春泽_5_original.png",
+      "label": "春泽 5"
+    },
+    {
+      "id": "chunze-6",
+      "file": "春泽_6_original.png",
+      "label": "春泽 6"
+    },
+    {
+      "id": "qiye-1",
+      "file": "栖野_1_original.png",
+      "label": "栖野 1"
+    },
+    {
+      "id": "qiye-3",
+      "file": "栖野_3_original.png",
+      "label": "栖野 3"
+    },
+    {
+      "id": "qiye-4",
+      "file": "栖野_4_original.png",
+      "label": "栖野 4"
+    },
+    {
+      "id": "qiye-6",
+      "file": "栖野_6_original.png",
+      "label": "栖野 6"
+    },
+    {
+      "id": "yuanguang-1",
+      "file": "渊光_1_original.png",
+      "label": "渊光 1"
+    },
+    {
+      "id": "yuanguang-2",
+      "file": "渊光_2_original.png",
+      "label": "渊光 2"
+    },
+    {
+      "id": "yuanguang-3",
+      "file": "渊光_3_original.png",
+      "label": "渊光 3"
+    },
+    {
+      "id": "yuanguang-4",
+      "file": "渊光_4_original.png",
+      "label": "渊光 4"
+    },
+    {
+      "id": "yuanguang-5",
+      "file": "渊光_5_original.png",
+      "label": "渊光 5"
+    },
+    {
+      "id": "yuanguang-6",
+      "file": "渊光_6_original.png",
+      "label": "渊光 6"
     }
   ]
 }

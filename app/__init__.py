@@ -31,14 +31,23 @@ async def _lifespan(app: FastAPI):
         prev_handler = loop.get_exception_handler()
         loop.set_exception_handler(_win_asyncio_exception_handler)
     try:
-        from app.context import list_wallpapers, load_wiki_assets
+        from app.context import clear_context_cache, list_wallpapers, load_wiki_assets
         from app.projects import get_all_projects
         from site_data import load_site_data
 
+        clear_context_cache()
         load_site_data()
         get_all_projects()
         load_wiki_assets()
-        list_wallpapers()
+        wallpapers = list_wallpapers()
+        if wallpapers:
+            default = next((w for w in wallpapers if w.get("default")), wallpapers[0])
+            print(
+                f"[atelier] wallpapers: {len(wallpapers)} static, default={default['id']!r}",
+                flush=True,
+            )
+        else:
+            print("[atelier] wallpapers: none", flush=True)
         print("[atelier] warmed caches", flush=True)
         yield
     finally:

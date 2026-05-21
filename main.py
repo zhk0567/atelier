@@ -47,5 +47,5 @@ if __name__ == "__main__":
         "main:app",
         host=UVICORN_HOST,
         port=UVICORN_PORT,
-        reload=False,
+        reload=True,
     )

@@ -38,7 +38,7 @@ WIKI_IMG_DIR = STATIC_DIR / "img" / "wiki"
 WALLPAPER_EXTS = {".mp4", ".webm", ".mov", ".jpg", ".jpeg", ".png", ".webp", ".gif"}
 WALLPAPER_VIDEO_EXTS = {".mp4", ".webm", ".mov"}
 # 全站导航与数据分类入口中不展示（/browse/* 仍可直链访问）
-NAV_EXCLUDED_HUB_IDS = frozenset({"certs", "hobbies", "school", "articles"})
+NAV_EXCLUDED_HUB_IDS = frozenset({"certs", "hobbies", "school", "articles", "projects"})
 
 PROJECT_THUMB_STEMS: tuple[str, ...] = (
     "crafting_table",
@@ -116,6 +116,8 @@ def _load_wallpaper_manifest() -> tuple[str | None, list[dict]]:
         path = DATA_DIR / filename
         if not path.is_file() or path.suffix.lower() not in WALLPAPER_EXTS:
             continue
+        if path.suffix.lower() in WALLPAPER_VIDEO_EXTS:
+            continue
         label = entry.get("label")
         if not isinstance(label, str) or not label.strip():
             label = _wallpaper_label_from_stem(path.stem)
@@ -154,8 +156,9 @@ def _build_wallpaper_catalog() -> tuple[list[dict], dict[str, Path]]:
             items[0]["default"] = True
         return items, paths
 
+    image_exts = WALLPAPER_EXTS - WALLPAPER_VIDEO_EXTS
     files = sorted(
-        (p for p in DATA_DIR.iterdir() if p.is_file() and p.suffix.lower() in WALLPAPER_EXTS),
+        (p for p in DATA_DIR.iterdir() if p.is_file() and p.suffix.lower() in image_exts),
         key=lambda p: p.name.lower(),
     )
     for i, path in enumerate(files):
@@ -239,7 +242,13 @@ def projects_with_thumbs(projects: list[dict], assets: dict[str, str]) -> list[d
 
 
 def build_wiki_nav(hubs: list[dict]) -> list[dict]:
-    portal_children = [{"label": h["label"], "url": h["url"], "external": False} for h in hubs]
+    # 项目入口仅在「站点」下；数据分类不重复展示应用项目 /projects
+    portal_children = [
+        {"label": h["label"], "url": h["url"], "external": False}
+        for h in hubs
+        if h.get("id") not in NAV_EXCLUDED_HUB_IDS
+        and h.get("url") not in ("/projects", "/browse/projects")
+    ]
     return [
         {
             "label": "站点",

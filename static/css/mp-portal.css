@@ -18,6 +18,11 @@ html[data-theme="dark"] body.wiki-site .mp-wrapper {
   --button-color-progressive: #137342;
   --button-text-color: #fff;
   --button-border-color: #242424;
+  --button-text-shadow-color: #00000055;
+}
+
+body.wiki-site.has-wallpaper .mp-wrapper {
+  --button-text-shadow-color: #00000045;
 }
 
 body.wiki-site.page-home .wiki-content {
@@ -90,8 +95,8 @@ body.wiki-site .mp-section {
   box-shadow: var(--panel-inset-shadow);
   padding: 14px 16px;
   contain: layout style;
-  border-radius: var(--radius-md, 4px);
-  transition: border-color 0.15s ease;
+  border-radius: 4px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 body.wiki-site .mp-section:hover {
   border-color: var(--panel-border-hover);
@@ -101,6 +106,51 @@ body.wiki-site.has-wallpaper .mp-section {
   background-color: var(--scrim-wallpaper);
   -webkit-backdrop-filter: var(--scrim-wallpaper-blur);
   backdrop-filter: var(--scrim-wallpaper-blur);
+  border-color: var(--scrim-wallpaper-border, var(--panel-border));
+  box-shadow: var(--box-shadow-elevated), var(--panel-inset-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body.wiki-site.has-wallpaper .mp-section:hover {
+    box-shadow: var(--shadow-lift, var(--box-shadow-elevated)), var(--panel-inset-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+  }
+  body.wiki-site .mp-section {
+    transition: border-color var(--duration-normal, 220ms) var(--ease-out, ease),
+      box-shadow var(--duration-normal, 220ms) var(--ease-out, ease),
+      transform var(--duration-normal, 220ms) var(--ease-out, ease);
+  }
+}
+
+body.wiki-site.has-wallpaper .mp-banner__lead .lead,
+body.wiki-site.has-wallpaper .mp-banner__status {
+  color: var(--text-muted-on-glass, var(--color-subtle));
+}
+
+body.wiki-site.has-wallpaper .mp-banner__lead .mp-banner__title,
+body.wiki-site.has-wallpaper .mp-profile-label {
+  color: var(--text-on-glass, var(--color-emphasized));
+}
+
+body.wiki-site.has-wallpaper .mp-profile-bio,
+body.wiki-site.has-wallpaper .mp-profile-value {
+  color: var(--text-on-glass, var(--color-base));
+}
+
+body.wiki-site.has-wallpaper .mp-profile-list li {
+  border-bottom-color: var(--border-color-base);
+}
+
+body.wiki-site.has-wallpaper .mp-stats-table thead th,
+body.wiki-site.has-wallpaper .mp-stats-table th {
+  background: var(--surface-solid-muted);
+}
+
+body.wiki-site.has-wallpaper .mp-stats-table td,
+body.wiki-site.has-wallpaper .mp-stats-table tbody tr:nth-child(even) td,
+body.wiki-site.has-wallpaper .mp-stats-table tbody tr:nth-child(even) th[scope="row"] {
+  background: var(--surface-solid);
 }
 
 body.wiki-site .mp-section.mp-section-full {
@@ -247,11 +297,20 @@ body.wiki-site .collapsible:not(.collapsed) .mp-title .collapsetoggle::after {
 }
 
 body.wiki-site.client-js .mp-wrapper .collapsible-content {
-  display: block;
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--duration-normal, 220ms) var(--ease-out, ease);
+  overflow: hidden;
+}
+
+body.wiki-site.client-js .mp-wrapper .collapsible-content > .mp-section-inner,
+body.wiki-site.client-js .mp-wrapper .collapsible-content > * {
+  min-height: 0;
+  overflow: hidden;
 }
 
 body.wiki-site.client-js .mp-wrapper .collapsible.collapsed .collapsible-content {
-  display: none;
+  grid-template-rows: 0fr;
 }
 
 body.wiki-site .mp-section-inner {
@@ -436,12 +495,9 @@ body.wiki-site .mp-project-card {
   border: 1px solid var(--border-color-subtle, #c8ccd1);
   border-radius: var(--radius-md, 4px);
   background: var(--panel-bg);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-body.wiki-site .mp-project-card:hover {
-  border-color: var(--border-color-base, #a2a9b1);
-  box-shadow: var(--box-shadow-subtle, 0 1px 2px rgba(0, 0, 0, 0.06));
+  transition: border-color var(--duration-normal, 220ms) var(--ease-out, ease),
+    box-shadow var(--duration-normal, 220ms) var(--ease-out, ease),
+    transform var(--duration-normal, 220ms) var(--ease-out, ease);
 }
 
 body.wiki-site .mp-project-card__thumb {
@@ -453,6 +509,19 @@ body.wiki-site .mp-project-card__thumb {
   background-position: center;
   background-repeat: no-repeat;
   image-rendering: pixelated;
+  transition: transform var(--duration-normal, 220ms) var(--ease-out, ease);
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body.wiki-site .mp-project-card:hover {
+    border-color: var(--border-color-base, #a2a9b1);
+    box-shadow: var(--shadow-lift, 0 6px 20px rgba(0, 0, 0, 0.12));
+    transform: translateY(-2px);
+  }
+  body.wiki-site .mp-project-card:hover .mp-project-card__thumb {
+    transform: scale(1.03);
+  }
 }
 
 body.wiki-site .mp-project-card__body {
@@ -609,8 +678,13 @@ body.wiki-site .mp-wrapper--page .mp-project-card h3 a:visited {
   body.wiki-site .mp-title .collapsetoggle::after,
   body.wiki-site .mp-section,
   body.wiki-site .mp-project-card,
-  body.wiki-site .mp-icon-img {
+  body.wiki-site .mp-icon-img,
+  body.wiki-site.client-js .mp-wrapper .collapsible-content {
     transition: none;
+  }
+  body.wiki-site.has-wallpaper .mp-section:hover,
+  body.wiki-site .mp-project-card:hover {
+    transform: none;
   }
   body.wiki-site .mp-icon:hover .mp-icon-img {
     transform: none;
