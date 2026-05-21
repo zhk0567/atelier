@@ -98,7 +98,9 @@ body.wiki-site .mp-section:hover {
 }
 
 body.wiki-site.has-wallpaper .mp-section {
-  background-color: var(--background-color-base, #fff);
+  background-color: var(--scrim-wallpaper);
+  -webkit-backdrop-filter: var(--scrim-wallpaper-blur);
+  backdrop-filter: var(--scrim-wallpaper-blur);
 }
 
 body.wiki-site .mp-section.mp-section-full {

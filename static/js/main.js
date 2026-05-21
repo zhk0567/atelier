@@ -30,7 +30,6 @@
       "wp-3": "wallpaper-04-cloud-pixel",
     };
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let activeWallpaperId = null;
 
     const wallpaperUrl = (item) => new URL(item.url, window.location.href).href;
@@ -47,21 +46,28 @@
 
     const playVideo = () => video.play().catch(() => {});
 
+    const setWallpaperVideoActive = (on) => {
+      html.classList.toggle("wallpaper-video-active", Boolean(on));
+    };
+
+    const markVideoActive = () => setWallpaperVideoActive(true);
+
+    video.addEventListener("playing", markVideoActive);
+    video.addEventListener("loadeddata", markVideoActive);
+    video.addEventListener("emptied", () => setWallpaperVideoActive(false));
+    video.addEventListener("error", () => {
+      setWallpaperVideoActive(false);
+      html.classList.add("wallpaper-load-failed");
+    });
+    video.addEventListener("playing", () => html.classList.remove("wallpaper-load-failed"));
+
     const applyWallpaper = (item, forceReload) => {
       if (!item || !item.url) {
         return;
       }
-      if (prefersReducedMotion.matches) {
-        document.body.classList.remove("has-wallpaper");
-        video.pause();
-        video.removeAttribute("src");
-        video.hidden = true;
-        image.hidden = true;
-        image.removeAttribute("src");
-        activeWallpaperId = null;
-        return;
-      }
       document.body.classList.add("has-wallpaper");
+      html.classList.add("wallpaper-enabled");
+      setWallpaperVideoActive(true);
       const url = wallpaperUrl(item);
       if (item.is_video) {
         image.hidden = true;
@@ -71,14 +77,18 @@
           forceReload || activeWallpaperId !== item.id || !videoHasSrc(url);
         if (needsLoad) {
           activeWallpaperId = item.id;
-          video.pause();
-          video.src = url;
-          video.load();
+          if (forceReload || !videoHasSrc(url)) {
+            video.pause();
+            video.src = url;
+            video.load();
+          }
           video.addEventListener("loadeddata", playVideo, { once: true });
           video.addEventListener("canplay", playVideo, { once: true });
           playVideo();
         } else if (video.paused) {
           playVideo();
+        } else {
+          markVideoActive();
         }
       } else {
         activeWallpaperId = item.id;
@@ -112,23 +122,22 @@
     const resolveWallpaper = () =>
       wallpapers.find((w) => w.id === resolveId()) || wallpapers[0];
 
-    applyWallpaper(resolveWallpaper());
-
-    if (prefersReducedMotion.matches) {
-      video.pause();
+    const initial = resolveWallpaper();
+    if (video.currentSrc || video.getAttribute("src")) {
+      activeWallpaperId = initial.id;
     }
+    applyWallpaper(initial);
 
-    document.addEventListener(
-      "click",
-      () => {
-        if (!document.body.classList.contains("has-wallpaper") || video.hidden) return;
-        if (video.paused && video.src) playVideo();
-      },
-      { once: true, capture: true }
-    );
+    const unlockAutoplay = () => {
+      if (!document.body.classList.contains("has-wallpaper") || video.hidden) return;
+      if (video.paused && (video.src || video.currentSrc)) playVideo();
+    };
+    document.addEventListener("click", unlockAutoplay, { once: true, capture: true });
+    document.addEventListener("keydown", unlockAutoplay, { once: true, capture: true });
+    window.addEventListener("load", unlockAutoplay);
 
     const syncVideoPlayback = () => {
-      if (!video || video.hidden || prefersReducedMotion.matches) return;
+      if (!video || video.hidden) return;
       if (document.hidden) {
         video.pause();
       } else if (video.src) {
@@ -137,11 +146,6 @@
     };
     document.addEventListener("visibilitychange", syncVideoPlayback);
     syncVideoPlayback();
-
-    prefersReducedMotion.addEventListener("change", () => {
-      activeWallpaperId = null;
-      applyWallpaper(resolveWallpaper());
-    });
 
     if (select) {
       const syncSelect = () => {

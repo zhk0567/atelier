@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="light"{% if wallpapers %} class="wallpaper-enabled"{% endif %}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,23 +14,38 @@
   {% block meta %}{% endblock %}
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/static/css/wiki.css?v=19" />
-  <link rel="stylesheet" href="/static/css/mp-portal.css?v=6" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=23" />
+  <link rel="stylesheet" href="/static/css/mp-portal.css?v=8" />
+  {% if wallpapers %}
+  {% set default_wp = wallpapers | selectattr('default') | first | default(wallpapers[0]) %}
+  <link rel="preload" href="{{ default_wp.url }}" as="video" type="video/mp4" />
+  {% endif %}
   {% block extra_head %}{% endblock %}
 </head>
-<body class="wiki-site{% if page_home %} page-home{% endif %}">
+<body class="wiki-site{% if wallpapers %} has-wallpaper{% endif %}{% if page_home %} page-home{% endif %}">
   {% if wallpapers %}
   <div class="wiki-wallpaper" id="wiki-wallpaper" aria-hidden="true">
-    <video class="wiki-wallpaper__media wiki-wallpaper__video" id="wiki-wallpaper-video" muted loop playsinline autoplay preload="metadata"></video>
+    <video
+      class="wiki-wallpaper__media wiki-wallpaper__video"
+      id="wiki-wallpaper-video"
+      src="{{ default_wp.url }}"
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      autoplay
+      preload="auto"
+      disablepictureinpicture
+      disableremoteplayback
+    ></video>
     <img class="wiki-wallpaper__media wiki-wallpaper__image" id="wiki-wallpaper-image" alt="" hidden />
   </div>
   <script id="wiki-wallpapers-data" type="application/json">{{ wallpapers | tojson }}</script>
   <script>
     (function () {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      var dataEl = document.getElementById("wiki-wallpapers-data");
       var video = document.getElementById("wiki-wallpaper-video");
-      if (!dataEl || !video) return;
+      var dataEl = document.getElementById("wiki-wallpapers-data");
+      if (!video || !dataEl) return;
       var list;
       try {
         list = JSON.parse(dataEl.textContent || "[]");
@@ -54,13 +69,33 @@
           : defaultItem.id;
       var item = list.find(function (w) { return w.id === id; }) || defaultItem;
       if (!item || !item.url) return;
-      document.body.classList.add("has-wallpaper");
-      if (item.is_video) {
-        video.hidden = false;
-        video.src = item.url;
-        video.load();
-        video.play().catch(function () {});
+      document.documentElement.classList.add("wallpaper-video-active");
+      var target = new URL(item.url, window.location.href).href;
+      var play = function () {
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      };
+      if (video.src !== target) {
+        video.src = target;
       }
+      video.load();
+      video.addEventListener("playing", function () {
+        document.documentElement.classList.remove("wallpaper-load-failed");
+      });
+      video.addEventListener("error", function () {
+        document.documentElement.classList.add("wallpaper-load-failed");
+      });
+      video.addEventListener("loadeddata", play, { once: true });
+      video.addEventListener("canplay", play, { once: true });
+      play();
+      var tries = 0;
+      var retry = setInterval(function () {
+        if (!video.paused || tries++ > 12) {
+          clearInterval(retry);
+          return;
+        }
+        play();
+      }, 400);
     })();
   </script>
   {% endif %}
@@ -149,7 +184,7 @@
     <p class="wiki-lightbox__caption" id="wiki-lightbox-caption" hidden></p>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/static/js/main.js?v=30" defer></script>
+  <script src="/static/js/main.js?v=34" defer></script>
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>

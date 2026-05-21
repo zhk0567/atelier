@@ -43,8 +43,12 @@ async def serve_wallpaper(wp_id: str):
         path.resolve().relative_to(DATA_DIR.resolve())
     except ValueError:
         raise HTTPException(status_code=404, detail="Wallpaper not found") from None
+    headers = {
+        **WALLPAPER_CACHE_HEADERS,
+        "Accept-Ranges": "bytes",
+    }
     return FileResponse(
         path,
         media_type=media_type_for_path(path),
-        headers=WALLPAPER_CACHE_HEADERS,
+        headers=headers,
     )
