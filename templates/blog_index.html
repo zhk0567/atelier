@@ -11,23 +11,42 @@
 {% endblock %}
 
 {% block content %}
-<h1>博客</h1>
-<p class="lead">技术笔记与专题文章。</p>
+<div class="mp-wrapper mp-wrapper--page">
+  <section class="mp-section mp-page-header mp-section-full">
+    <h1>博客</h1>
+    <p class="lead">技术笔记与专题文章。</p>
+  </section>
 
-{% if posts_other %}
-<h2>专题</h2>
-<ul class="wiki-nav-list">
-  {% for p in posts_other %}
-  <li><a href="/blog/{{ p.slug }}">{{ p.title }}</a>{% if p.category %} <span class="wiki-tag">{{ p.category }}</span>{% endif %}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+  {% if posts_other %}
+  <section class="mp-section mp-section-full">
+    <h2 class="mp-title">专题</h2>
+    <ul class="mp-project-list">
+      {% for p in posts_other %}
+      <li class="mp-project-card">
+        <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.item_book }}');" aria-hidden="true"></span>
+        <div class="mp-project-card__body">
+          <h3><a href="/blog/{{ p.slug }}">{{ p.title }}</a></h3>
+          {% if p.category %}<p class="wiki-tags"><span class="wiki-tag">{{ p.category }}</span></p>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
 
-<h2>系列</h2>
-<ul class="wiki-nav-list">
-  <li>
-    <a href="{{ framework_series_url }}">Framework 技术栈</a>
-    <span class="wiki-tag">{{ framework_count }} 篇</span>
-  </li>
-</ul>
+  <section class="mp-section mp-section-full">
+    <h2 class="mp-title">系列</h2>
+    <div class="mp-button-wrapper">
+      <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ framework_series_url }}" style="--button-image: url('{{ wiki_assets.bookshelf }}');">
+        <span class="mp-button__inner">{{ ui.link_framework_guides }} · {{ framework_count }} 篇</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="mp-button-wrapper" style="width:100%;">
+    <a class="mp-button" href="/">
+      <span class="mp-button__inner">{{ ui.back_home }}</span>
+    </a>
+  </div>
+</div>
 {% endblock %}

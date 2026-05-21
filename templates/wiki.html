@@ -1,6 +1,6 @@
 {% extends "wiki/base.html" %}
 
-{% block title %}{{ page }} · Wiki · {{ site_name }}{% endblock %}
+{% block title %}{{ wiki_doc_title }} · Wiki · {{ site_name }}{% endblock %}
 
 {% block breadcrumbs %}
 <nav class="wiki-breadcrumbs" aria-label="breadcrumb">
@@ -10,12 +10,54 @@
   <a href="{{ project_url }}">{{ project.title }}</a>
   {% endif %}
   <span class="wiki-breadcrumbs__sep">/</span>
-  <span>{{ page }}</span>
+  <a href="{{ wiki_index_url }}">Wiki</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ wiki_doc_title }}</span>
 </nav>
 {% endblock %}
 
 {% block content %}
+{% if wiki_doc_pages %}
+<nav class="wiki-doc-nav" aria-label="{{ ui.label_wiki_toc }}">
+  <p class="wiki-doc-nav__heading">{{ ui.label_wiki_toc }}</p>
+  <ol class="wiki-doc-nav__list">
+    {% for doc in wiki_doc_pages %}
+    <li>
+      <a href="{{ doc.view_url }}"{% if doc.is_current %} class="is-current" aria-current="page"{% endif %}>{{ doc.title }}</a>
+    </li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}
+
 <div class="wiki-md">
   {{ content_html | safe }}
 </div>
+
+{% if wiki_doc_pages %}
+<nav class="wiki-pager" aria-label="文档分页">
+  <div class="wiki-pager__slot wiki-pager__slot--prev">
+    {% if wiki_prev %}
+    <a class="wiki-pager__link wiki-pager__link--prev" href="{{ wiki_prev.view_url }}">
+      <span class="wiki-pager__label">{{ ui.wiki_pager_prev }}</span>
+      <span class="wiki-pager__title">{{ wiki_prev.title }}</span>
+    </a>
+    {% endif %}
+  </div>
+  <a class="wiki-pager__index" href="{{ wiki_index_url }}">{{ ui.link_wiki_index }}</a>
+  <div class="wiki-pager__slot wiki-pager__slot--next">
+    {% if wiki_next %}
+    <a class="wiki-pager__link wiki-pager__link--next" href="{{ wiki_next.view_url }}">
+      <span class="wiki-pager__label">{{ ui.wiki_pager_next }}</span>
+      <span class="wiki-pager__title">{{ wiki_next.title }}</span>
+    </a>
+    {% endif %}
+  </div>
+</nav>
+{% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/mermaid.min.js" defer></script>
+<script src="/static/js/mermaid-init.js?v=1" defer></script>
 {% endblock %}

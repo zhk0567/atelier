@@ -11,27 +11,40 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ ui.label_all_projects_page }}</h1>
-<p class="lead">{{ ui.projects_page_lead }}</p>
+<div class="mp-wrapper mp-wrapper--page">
+  <section class="mp-section mp-page-header mp-section-full">
+    <h1>{{ ui.label_all_projects_page }}</h1>
+    <p class="lead">{{ ui.projects_page_lead }}</p>
+  </section>
 
-<ul class="wiki-portal-list">
-  {% for project in projects %}
-  <li>
-    <span class="wiki-portal-thumb" style="background-image: url('{{ wiki_assets.crafting_table }}');" aria-hidden="true"></span>
-    {% if project.id in pinned_ids %}
-    <p><span class="wiki-tag">{{ ui.badge_pinned }}</span></p>
-    {% endif %}
-    <h3><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
-    <p class="meta">{{ project.category }} {{ ui.sep_dot }} {{ project.year }}</p>
-    <p>{{ project.summary }}</p>
-    {% if project.tags %}
-    <p class="wiki-tags">
-      {% for tag in project.tags[:3] %}
-      <span class="wiki-tag">{{ tag }}</span>
+  <section class="mp-section mp-section-full">
+    <ul class="mp-project-list">
+      {% for project in projects %}
+      <li class="mp-project-card">
+        <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.crafting_table }}');" aria-hidden="true"></span>
+        <div class="mp-project-card__body">
+          {% if project.id in pinned_ids %}
+          <p><span class="wiki-tag">{{ ui.badge_pinned }}</span></p>
+          {% endif %}
+          <h3><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
+          <p class="mp-project-card__meta">{{ project.category }} {{ ui.sep_dot }} {{ project.year }}</p>
+          <p>{{ project.summary }}</p>
+          {% if project.tags %}
+          <p class="wiki-tags">
+            {% for tag in project.tags[:3] %}
+            <span class="wiki-tag">{{ tag }}</span>
+            {% endfor %}
+          </p>
+          {% endif %}
+        </div>
+      </li>
       {% endfor %}
-    </p>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
+    </ul>
+    <div class="mp-button-wrapper">
+      <a class="mp-button" href="/">
+        <span class="mp-button__inner">{{ ui.back_home }}</span>
+      </a>
+    </div>
+  </section>
+</div>
 {% endblock %}

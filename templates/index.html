@@ -3,110 +3,119 @@
 {% block title %}{{ site_name }} Wiki{% endblock %}
 
 {% block content %}
-<div class="wiki-notice wiki-ambox">{{ availability }}{% if ui.badge_available %} · {{ ui.badge_available }}{% endif %}</div>
+<div class="mp-wrapper">
+  <div class="mp-banner mp-section">
+    <div class="mp-banner__lead">
+      <h1 class="mp-banner__title">{{ site_name }} Wiki</h1>
+      <p class="lead">{{ tagline }}</p>
+      <p class="mp-banner__status">{{ availability }}</p>
+    </div>
+  </div>
 
-<h1>{{ site_name }} Wiki</h1>
-<p class="lead">{{ tagline }}</p>
-<p>{{ bio }}</p>
+  <div class="mp-inline-sections">
+    <div class="mp-left">
+      <section class="mp-section collapsible" id="mp-featured">
+        <h2 class="mp-title">
+          {{ ui.label_featured_projects }}
+          <button type="button" class="collapsetoggle" aria-expanded="true" aria-controls="mp-featured-body"></button>
+        </h2>
+        <div class="collapsible-content" id="mp-featured-body">
+          <div class="mp-section-inner">
+            <p>{{ hero_subtitle }}</p>
+            <ul class="mp-project-list">
+              {% for project in projects %}
+              <li class="mp-project-card">
+                <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.crafting_table }}');" aria-hidden="true"></span>
+                <div class="mp-project-card__body">
+                  <h3><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
+                  <p class="mp-project-card__meta">{{ project.category }} {{ ui.sep_dot }} {{ project.year }}{% if project.project_type %} {{ ui.sep_dot }} {{ project.project_type }}{% endif %}</p>
+                  <p>{{ project.summary }}</p>
+                  {% if project.tags %}
+                  <p class="wiki-tags">
+                    {% for tag in project.tags[:4] %}
+                    <span class="wiki-tag">{{ tag }}</span>
+                    {% endfor %}
+                  </p>
+                  {% endif %}
+                </div>
+              </li>
+              {% else %}
+              <li><p>暂无置顶项目。</p></li>
+              {% endfor %}
+            </ul>
+            <div class="mp-button-wrapper">
+              <a class="mp-button mp-button-progressive mp-button-has-image" href="/projects" style="--button-image: url('{{ wiki_assets.crafting_table }}');">
+                <span class="mp-button__inner">{{ ui.link_all_projects }}（{{ total_project_count }}）</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<table class="infobox">
-  <caption class="infobox-title">{{ ui.label_profile }}</caption>
-  <tbody>
-    <tr><th scope="row">{{ ui.hello }}</th><td><strong>{{ site_name }}</strong></td></tr>
-    <tr><th scope="row">{{ ui.fact_focus }}</th><td>{{ focus }}</td></tr>
-    <tr><th scope="row">{{ ui.fact_status }}</th><td>{{ availability }}</td></tr>
-    {% if education_line %}
-    <tr><th scope="row">{{ ui.fact_education }}</th><td>{{ education_line }}</td></tr>
-    {% endif %}
-    {% if reading_line %}
-    <tr><th scope="row">{{ ui.fact_reading }}</th><td>{{ reading_line }}</td></tr>
-    {% endif %}
-    <tr><th scope="row">{{ ui.fact_email }}</th><td><a href="mailto:{{ email }}">{{ email }}</a></td></tr>
-    <tr><th scope="row">GitHub</th><td><a href="{{ github }}" target="_blank" rel="noopener noreferrer">{{ github }}</a></td></tr>
-  </tbody>
-</table>
+      <section class="mp-section" id="mp-blog">
+        <h2 class="mp-title">{{ ui.label_blog }}</h2>
+        <p>{{ ui.blog_home_lead }}</p>
+        <div class="mp-button-wrapper">
+          <a class="mp-button mp-button-has-image" href="/blog" style="--button-image: url('{{ wiki_assets.item_book }}');">
+            <span class="mp-button__inner">{{ ui.label_blog }}</span>
+          </a>
+          <a class="mp-button mp-button-has-image" href="/blog/series/framework" style="--button-image: url('{{ wiki_assets.bookshelf }}');">
+            <span class="mp-button__inner">{{ ui.link_framework_guides }}</span>
+          </a>
+        </div>
+      </section>
+    </div>
 
-<div class="clearfix"></div>
+    <div class="mp-right mp-sticky">
+      <section class="mp-section">
+        <h2 class="mp-title">{{ ui.label_profile }}</h2>
+        <ul class="mp-profile-list">
+          <li><span class="mp-profile-label">{{ ui.hello }}</span><span class="mp-profile-value"><strong>{{ site_name }}</strong></span></li>
+          <li><span class="mp-profile-label">{{ ui.fact_focus }}</span><span class="mp-profile-value">{{ focus }}</span></li>
+          <li><span class="mp-profile-label">{{ ui.fact_status }}</span><span class="mp-profile-value">{{ availability }}</span></li>
+          <li><span class="mp-profile-label">{{ ui.fact_email }}</span><span class="mp-profile-value"><a href="mailto:{{ email }}">{{ email }}</a></span></li>
+        </ul>
+        <p style="margin-top:0.75rem;font-size:0.8125rem;">{{ bio }}</p>
+      </section>
 
-<h2 id="stats">{{ ui.label_stats }}</h2>
-<table class="wikitable">
-  <caption>站点数据概览</caption>
-  <thead>
-    <tr>
-      <th>指标</th>
-      <th>数值</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for s in stats %}
-    <tr>
-      <th scope="row">{{ s.label }}</th>
-      <td><strong>{{ s.value }}</strong> {{ s.unit }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+      <section class="mp-section collapsible" id="mp-stats">
+        <h2 class="mp-title">
+          {{ ui.label_stats }}
+          <button type="button" class="collapsetoggle" aria-expanded="true" aria-controls="mp-stats-body"></button>
+        </h2>
+        <div class="collapsible-content" id="mp-stats-body">
+          <div class="mp-section-inner">
+            <table class="mp-stats-table">
+              <tbody>
+                {% for s in stats %}
+                <tr>
+                  <th scope="row">{{ s.label }}</th>
+                  <td><strong>{{ s.value }}</strong> {{ s.unit }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
 
-<h2 id="featured">{{ ui.label_featured_projects }}</h2>
-<p>{{ hero_subtitle }}</p>
-<ul class="wiki-portal-list">
-  {% for project in projects %}
-  <li>
-    <span class="wiki-portal-thumb" style="background-image: url('{{ wiki_assets.crafting_table }}');" aria-hidden="true"></span>
-    <h3><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
-    <p class="meta">{{ project.category }} {{ ui.sep_dot }} {{ project.year }}{% if project.project_type %} {{ ui.sep_dot }} {{ project.project_type }}{% endif %}</p>
-    <p>{{ project.summary }}</p>
-    {% if project.tags %}
-    <p class="wiki-tags">
-      {% for tag in project.tags[:4] %}
-      <span class="wiki-tag">{{ tag }}</span>
-      {% endfor %}
-    </p>
-    {% endif %}
-  </li>
-  {% else %}
-  <li><p>暂无置顶项目。</p></li>
-  {% endfor %}
-</ul>
-<p><a href="/projects">{{ ui.link_all_projects }}</a>（共 {{ total_project_count }} 个）</p>
-
-<h2 id="blog">{{ ui.label_blog }}</h2>
-<p>{{ ui.blog_home_lead }}</p>
-<ul class="wiki-portal-list">
-  <li>
-    <h3><a href="/blog">{{ ui.label_blog }}</a></h3>
-    <p class="meta">技术笔记与专题</p>
-  </li>
-  <li>
-    <h3><a href="/blog/series/framework">{{ ui.link_framework_guides }}</a></h3>
-    <p class="meta">多栈官方指南连载（Go / Node / …）</p>
-  </li>
-</ul>
-
-<h2 id="portal">{{ ui.label_data_portal }}</h2>
-<p>以下内容来自 <code>zhita_settings.xlsx</code>，按工作表分类浏览。</p>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th></th>
-      <th>分类</th>
-      <th>工作表</th>
-      <th>条数</th>
-      <th>链接</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for hub in data_hubs %}
-    <tr>
-      <td class="wiki-icon-cell">
-        <span class="wiki-icon-box" style="background-image: url('{{ hub_icons[hub.id] }}');" aria-hidden="true"></span>
-      </td>
-      <th scope="row">{{ hub.label }}</th>
-      <td>{{ hub.sheet }}</td>
-      <td>{{ hub.count }}</td>
-      <td><a href="{{ hub.url }}">浏览</a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    <div id="mp-section-site" class="mp-section mp-section-full">
+      <h2 class="mp-title">{{ ui.label_data_portal }}</h2>
+      <div class="mp-icon-wrapper mp-main-icons">
+        {% for hub in data_hubs %}
+        <div class="mp-icon">
+          <div class="mp-icon-img">
+            <a href="{{ hub.url }}">
+              <span class="mp-icon-sprite" style="background-image: url('{{ hub_icons[hub.id] }}');" role="img" aria-label="{{ hub.label }}"></span>
+            </a>
+          </div>
+          <p class="mp-icon-link"><a href="{{ hub.url }}">{{ hub.label }}</a></p>
+          <p class="mp-icon-meta">{{ hub.count }} 条</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -7,10 +7,11 @@
   {% block meta %}{% endblock %}
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/static/css/wiki.css?v=4" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=8" />
+  <link rel="stylesheet" href="/static/css/mp-portal.css?v=3" />
   {% block extra_head %}{% endblock %}
 </head>
-<body class="wiki-site">
+<body class="wiki-site{% if page_home %} page-home{% endif %}">
   {% if wallpapers %}
   <div class="wiki-wallpaper" id="wiki-wallpaper" aria-hidden="true">
     <video class="wiki-wallpaper__media wiki-wallpaper__video" id="wiki-wallpaper-video" muted loop playsinline preload="metadata"></video>
@@ -34,14 +35,12 @@
       <label class="wiki-wallpaper-picker">
         <span class="wiki-wallpaper-picker__label">{{ ui.label_wallpaper }}</span>
         <select id="wallpaper-select" class="wiki-wallpaper-picker__select" aria-label="{{ ui.label_wallpaper }}">
-          <option value="random">{{ ui.wallpaper_random }}</option>
           {% for w in wallpapers %}
-          <option value="{{ w.id }}">{{ w.label }}</option>
+          <option value="{{ w.id }}"{% if w.default %} selected{% endif %}>{{ w.label }}</option>
           {% endfor %}
         </select>
       </label>
       {% endif %}
-      <a href="{{ github }}" class="wiki-tool-link" target="_blank" rel="noopener noreferrer">GitHub</a>
       <button type="button" class="wiki-tool-btn theme-toggle" aria-label="{{ ui.toggle_theme }}">☀</button>
     </div>
   </header>
@@ -63,11 +62,22 @@
             </ul>
           </div>
           {% endfor %}
+          {% if wiki_doc_pages and wiki_slug != 'Framework' %}
+          <div class="wiki-nav__group wiki-nav__group--doc">
+            <p class="wiki-nav__group-title">{{ ui.label_wiki_toc }}</p>
+            <ul>
+              <li><a href="{{ wiki_index_url }}" data-nav-label="{{ ui.link_wiki_index }}">{{ ui.link_wiki_index }}</a></li>
+              {% for doc in wiki_doc_pages %}
+              <li>
+                <a href="{{ doc.view_url }}" data-nav-label="{{ doc.title }}"{% if doc.is_current %} class="is-current" aria-current="page"{% endif %}>{{ doc.title }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
           <div class="wiki-nav__group">
             <p class="wiki-nav__group-title">外部链接</p>
             <ul>
-              <li><a href="{{ github }}" target="_blank" rel="noopener noreferrer" data-nav-label="GitHub">GitHub</a></li>
-              <li><a href="{{ linkedin }}" target="_blank" rel="noopener noreferrer" data-nav-label="LinkedIn">LinkedIn</a></li>
               <li><a href="mailto:{{ email }}" data-nav-label="Email">{{ ui.btn_email }}</a></li>
             </ul>
           </div>
@@ -89,7 +99,7 @@
 
   <div class="wiki-sidebar-backdrop" id="wiki-sidebar-backdrop" hidden></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/static/js/main.js?v=15" defer></script>
+  <script src="/static/js/main.js?v=19" defer></script>
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>

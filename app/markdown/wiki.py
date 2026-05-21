@@ -9,6 +9,7 @@ import markdown
 from fastapi import HTTPException
 
 from app.config import ATELIER_ROOT
+from app.markdown.mermaid import apply_mermaid_blocks
 
 WIKI_DIR = ATELIER_ROOT / "Wiki"
 
@@ -92,7 +93,9 @@ def render_wiki_markdown(wiki_slug: str, page: str) -> str:
     raw = re.sub(r"<!--.*?-->", "", raw, flags=re.DOTALL)
     raw = sanitize_wiki_markdown(raw)
     html = markdown.markdown(raw, extensions=["tables", "fenced_code", "nl2br"])
-    return sanitize_wiki_html(html)
+    html = sanitize_wiki_html(html)
+    html, _ = apply_mermaid_blocks(html)
+    return html
 
 
 def list_wiki_pages(wiki_slug: str) -> list[dict[str, str]]:
@@ -104,8 +107,34 @@ def list_wiki_pages(wiki_slug: str) -> list[dict[str, str]]:
     for line in index_path.read_text(encoding="utf-8").splitlines():
         match = link_re.match(line.strip())
         if match:
+            page_file = match.group(2)
             pages.append({
                 "title": match.group(1),
-                "view_url": f"/docs/{wiki_slug}/{match.group(2)}",
+                "page": page_file,
+                "view_url": f"/docs/{wiki_slug}/{page_file}",
             })
     return pages
+
+
+def build_wiki_doc_nav(wiki_slug: str, page: str) -> dict:
+    """Current wiki TOC, prev/next links, and index URL for doc templates."""
+    pages = list_wiki_pages(wiki_slug)
+    index_url = f"/docs/{wiki_slug}/index.md"
+    safe_page = Path(page).name
+    idx = next((i for i, p in enumerate(pages) if p["page"] == safe_page), None)
+
+    doc_pages: list[dict[str, str | bool]] = []
+    for i, entry in enumerate(pages):
+        doc_pages.append({**entry, "is_current": i == idx})
+
+    wiki_prev = pages[idx - 1] if idx is not None and idx > 0 else None
+    wiki_next = pages[idx + 1] if idx is not None and idx < len(pages) - 1 else None
+    doc_title = pages[idx]["title"] if idx is not None else safe_page.removesuffix(".md")
+
+    return {
+        "wiki_doc_pages": doc_pages,
+        "wiki_prev": wiki_prev,
+        "wiki_next": wiki_next,
+        "wiki_index_url": index_url,
+        "wiki_doc_title": doc_title,
+    }

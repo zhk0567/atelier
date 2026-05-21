@@ -3,7 +3,7 @@ Ensure certificate images from zhita_settings.xlsx exist under static/uploads/ev
 
 Usage (from project root):
   pip install requests openpyxl
-  python scripts/fetch_cert_images.py
+  python scripts/site/fetch_cert_images.py
 
 Optional: set CERT_SOURCE_DIR to a folder containing the image files by basename.
 """
@@ -22,7 +22,7 @@ try:
 except ImportError:
     requests = None
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 XLSX = ROOT / "zhita_settings.xlsx"
 OUT_DIR = ROOT / "static" / "uploads" / "events"
 SHEET = "活动竞赛证书"

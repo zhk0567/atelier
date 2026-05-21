@@ -11,61 +11,88 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ page_title }}</h1>
-<p class="lead">{{ ui.browse_lead }} <span class="wiki-tag">{{ sheet_name }}</span></p>
+<div class="mp-wrapper mp-wrapper--page">
+  <section class="mp-section mp-page-header mp-section-full">
+    <h1>{{ page_title }}</h1>
+    {% if ui.browse_lead %}<p class="lead">{{ ui.browse_lead }}</p>{% endif %}
+  </section>
 
-{% if sections %}
-  {% for section in sections %}
-  <h2>{{ section["title"] }} ({{ section["items"]|length }})</h2>
-  <table class="wikitable">
-    <thead>
-      <tr><th>名称</th><th>备注</th></tr>
-    </thead>
-    <tbody>
-      {% for item in section["items"] %}
-      <tr>
-        <th scope="row">{{ item.title }}</th>
-        <td>{{ item.meta or "—" }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% endfor %}
-{% elif layout == 'cards' %}
-<div class="wiki-gallery">
-  {% for item in items %}
-  <div class="wiki-gallery__item">
-    {% if item.image_url %}
-    <img src="{{ item.image_url }}" alt="" loading="lazy" />
-    {% else %}
-    <span class="wiki-gallery__placeholder" style="background-image: url('{{ wiki_assets.sprite_stone }}');" aria-hidden="true"></span>
-    {% endif %}
-    <p class="wiki-gallery__title">{{ item.title }}</p>
-    {% if item.meta %}<p class="wiki-gallery__meta">{{ item.meta }}</p>{% endif %}
-  </div>
-  {% endfor %}
-</div>
-{% elif layout == 'articles' %}
-{% for item in items %}
-<article class="wiki-article-card">
-  <h3>{% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
-  {% if item.meta %}<p class="cat">{{ item.meta }}</p>{% endif %}
-  {% if item.excerpt %}<p class="excerpt">{{ item.excerpt }}</p>{% endif %}
-</article>
-{% endfor %}
-{% else %}
-<table class="wikitable">
-  <thead>
-    <tr><th>名称</th><th>备注</th></tr>
-  </thead>
-  <tbody>
-    {% for item in items %}
-    <tr>
-      <th scope="row">{{ item.title }}</th>
-      <td>{{ item.meta or "—" }}</td>
-    </tr>
+  {% if sections %}
+    {% for section in sections %}
+    <section class="mp-section mp-section-full collapsible">
+      <h2 class="mp-title">
+        {{ section["title"] }} ({{ section["items"]|length }})
+        <button type="button" class="collapsetoggle" aria-expanded="true"></button>
+      </h2>
+      <div class="collapsible-content">
+        <div class="mp-section-inner">
+          <table class="mp-stats-table">
+            <thead>
+              <tr><th>名称</th><th>备注</th></tr>
+            </thead>
+            <tbody>
+              {% for item in section["items"] %}
+              <tr>
+                <th scope="row">{{ item.title }}</th>
+                <td>{{ item.meta or "—" }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
     {% endfor %}
-  </tbody>
-</table>
-{% endif %}
+  {% elif layout == 'cards' %}
+  <section class="mp-section mp-section-full">
+    <div class="mp-gallery-grid wiki-gallery">
+      {% for item in items %}
+      <div class="wiki-gallery__item">
+        {% if item.image_url %}
+        <img src="{{ item.image_url }}" alt="" loading="lazy" />
+        {% else %}
+        <span class="wiki-gallery__placeholder" style="background-image: url('{{ wiki_assets.sprite_stone }}');" aria-hidden="true"></span>
+        {% endif %}
+        <p class="wiki-gallery__title">{{ item.title }}</p>
+        {% if item.meta %}<p class="wiki-gallery__meta">{{ item.meta }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% elif layout == 'articles' %}
+  <section class="mp-section mp-section-full">
+    {% for item in items %}
+    <article class="mp-project-card" style="margin-bottom:8px;">
+      <div class="mp-project-card__body">
+        <h3>{% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
+        {% if item.meta %}<p class="mp-project-card__meta">{{ item.meta }}</p>{% endif %}
+        {% if item.excerpt %}<p>{{ item.excerpt }}</p>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+  {% else %}
+  <section class="mp-section mp-section-full">
+    <table class="mp-stats-table">
+      <thead>
+        <tr><th>名称</th><th>备注</th></tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <th scope="row">{{ item.title }}</th>
+          <td>{{ item.meta or "—" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+
+  <div class="mp-button-wrapper" style="width:100%;">
+    <a class="mp-button" href="/">
+      <span class="mp-button__inner">{{ ui.back_home }}</span>
+    </a>
+  </div>
+</div>
 {% endblock %}

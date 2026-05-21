@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 
 from app.constants import HTML_NO_CACHE
 from app.context import site_context, templates
-from app.markdown.wiki import render_wiki_markdown
+from app.markdown.wiki import build_wiki_doc_nav, render_wiki_markdown
 from app.projects import get_all_projects
 
 router = APIRouter()
@@ -13,6 +13,7 @@ router = APIRouter()
 async def wiki_doc(request: Request, wiki_slug: str, page: str):
     project = next((p for p in get_all_projects() if p["wiki_slug"] == wiki_slug), None)
     html_body = render_wiki_markdown(wiki_slug, page)
+    doc_nav = build_wiki_doc_nav(wiki_slug, page)
     return templates.TemplateResponse(
         request=request,
         name="wiki.html",
@@ -23,6 +24,7 @@ async def wiki_doc(request: Request, wiki_slug: str, page: str):
             "content_html": html_body,
             "project": project,
             "project_url": f"/project/{project['id']}" if project else "/",
+            **doc_nav,
         },
         headers=HTML_NO_CACHE,
     )

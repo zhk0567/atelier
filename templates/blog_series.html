@@ -13,17 +13,46 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ series_title }}</h1>
-<p class="lead">{{ series_lead }}</p>
-<p><strong>官方指南体例：</strong>单页含完整基础篇（对齐各栈官方 Tutorial）与 Framework 子工程实战。五篇标杆已发布；其余为结构完整的连载稿，持续扩写中。</p>
-<p>仓库总览：<a href="{{ wiki_overview_url }}">Framework Wiki 索引</a> · <a href="https://github.com/zhk0567/Framework" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+<div class="mp-wrapper mp-wrapper--page">
+  <section class="mp-section mp-page-header mp-section-full">
+    <h1>{{ series_title }}</h1>
+    <p class="lead">{{ series_lead }}</p>
+    <p style="font-size:0.8125rem;margin-top:0.5rem;"><strong>官方指南体例：</strong>单页含完整基础篇（对齐各栈官方 Tutorial）与 Framework 子工程实战。五篇标杆已发布；其余为结构完整的连载稿，持续扩写中。</p>
+    <p style="font-size:0.8125rem;">
+      <a href="{{ wiki_overview_url }}">Framework Wiki 索引</a>
+      ·
+      <a href="https://github.com/zhk0567/Framework" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+  </section>
 
-{% for category, items in by_category %}
-<h2>{{ category }} ({{ items|length }})</h2>
-<ul class="wiki-nav-list">
-  {% for p in items %}
-  <li><a href="/blog/{{ p.slug }}">{{ p.title }}</a>{% if p.stack %} <span class="wiki-tag">{{ p.stack }}</span>{% endif %}</li>
+  {% for category, items in by_category %}
+  <section class="mp-section mp-section-full collapsible">
+    <h2 class="mp-title">
+      {{ category }} ({{ items|length }})
+      <button type="button" class="collapsetoggle" aria-expanded="true"></button>
+    </h2>
+    <div class="collapsible-content">
+      <div class="mp-section-inner">
+        <ul class="mp-project-list">
+          {% for p in items %}
+          <li class="mp-project-card">
+            <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.bookshelf }}');" aria-hidden="true"></span>
+            <div class="mp-project-card__body">
+              <h3><a href="/blog/{{ p.slug }}">{{ p.title }}</a></h3>
+              {% if p.stack %}<p class="wiki-tags"><span class="wiki-tag">{{ p.stack }}</span></p>{% endif %}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
   {% endfor %}
-</ul>
-{% endfor %}
+
+  <div class="mp-button-wrapper" style="width:100%;">
+    <a class="mp-button" href="/blog">
+      <span class="mp-button__inner">返回博客</span>
+    </a>
+  </div>
+</div>
 {% endblock %}

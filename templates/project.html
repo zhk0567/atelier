@@ -13,38 +13,60 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ project.title }}</h1>
-<p class="lead">{{ project.summary }}</p>
-<p class="wiki-tags">
-  <span class="wiki-tag">{{ project.category }}</span>
-  <span class="wiki-tag">{{ project.year }}</span>
-  {% for tag in project.tags %}
-  <span class="wiki-tag">{{ tag }}</span>
-  {% endfor %}
-</p>
-<p>
-  <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
-  ·
-  <a href="{{ wiki_index_url }}">Wiki 总览</a>
-</p>
+<div class="mp-wrapper mp-wrapper--page">
+  <section class="mp-section mp-page-header mp-section-full">
+    <h1>{{ project.title }}</h1>
+    <p class="lead">{{ project.summary }}</p>
+    <p class="wiki-tags">
+      <span class="wiki-tag">{{ project.category }}</span>
+      <span class="wiki-tag">{{ project.year }}</span>
+      {% for tag in project.tags %}
+      <span class="wiki-tag">{{ tag }}</span>
+      {% endfor %}
+    </p>
+    <div class="mp-button-wrapper">
+      <a class="mp-button mp-button-has-image" href="{{ project.github }}" target="_blank" rel="noopener noreferrer" style="--button-image: url('{{ wiki_assets.crafting_table }}');">
+        <span class="mp-button__inner">GitHub</span>
+      </a>
+      <a class="mp-button" href="{{ wiki_index_url }}">
+        <span class="mp-button__inner">Wiki 总览</span>
+      </a>
+    </div>
+  </section>
 
-{% set features = project.feature_lines or project.highlights %}
-{% if features %}
-<h2>主要功能</h2>
-<ul class="wiki-list">
-  {% for item in features %}
-  <li>{{ item }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+  {% set features = project.feature_lines or project.highlights %}
+  {% if features %}
+  <section class="mp-section mp-section-full">
+    <h2 class="mp-title">主要功能</h2>
+    <ul class="wiki-list">
+      {% for item in features %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
 
-{% if wiki_pages %}
-<h2>Wiki 文档</h2>
-<p>点击标题在站内阅读 Wiki 文档。</p>
-<ul class="wiki-links">
-  {% for page in wiki_pages %}
-  <li><a href="{{ page.view_url }}">{{ page.title }}</a></li>
-  {% endfor %}
-</ul>
-{% endif %}
+  {% if wiki_pages %}
+  <section class="mp-section mp-section-full">
+    <h2 class="mp-title">Wiki 文档</h2>
+    <p style="font-size:0.8125rem;margin-bottom:0.5rem;">点击标题在站内阅读 Wiki 文档。</p>
+    <ul class="mp-project-list">
+      {% for page in wiki_pages %}
+      <li class="mp-project-card">
+        <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.item_book }}');" aria-hidden="true"></span>
+        <div class="mp-project-card__body">
+          <h3><a href="{{ page.view_url }}">{{ page.title }}</a></h3>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <div class="mp-button-wrapper" style="width:100%;">
+    <a class="mp-button" href="/projects">
+      <span class="mp-button__inner">{{ ui.label_all_projects_page }}</span>
+    </a>
+  </div>
+</div>
 {% endblock %}

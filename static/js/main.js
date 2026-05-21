@@ -20,7 +20,15 @@
     }
     if (!wallpapers.length) return;
 
-    const pickRandom = () => wallpapers[Math.floor(Math.random() * wallpapers.length)];
+    const defaultId =
+      wallpapers.find((w) => w.default)?.id || wallpapers[0].id;
+
+    const LEGACY_WALLPAPER_IDS = {
+      "wp-0": "wallpaper-02-preview-alt",
+      "wp-1": "wallpaper-01-preview",
+      "wp-2": "wallpaper-03-minecraft",
+      "wp-3": "wallpaper-04-cloud-pixel",
+    };
 
     const applyWallpaper = (item) => {
       document.body.classList.add("has-wallpaper");
@@ -43,28 +51,69 @@
       }
     };
 
-    const resolveChoice = () => {
-      const mode = localStorage.getItem(WALLPAPER_STORAGE_KEY) || "random";
-      if (mode === "random") return pickRandom();
-      return wallpapers.find((w) => w.id === mode) || pickRandom();
+    const resolveId = () => {
+      let stored = localStorage.getItem(WALLPAPER_STORAGE_KEY);
+      if (stored === "random") stored = null;
+      if (stored && LEGACY_WALLPAPER_IDS[stored]) {
+        stored = LEGACY_WALLPAPER_IDS[stored];
+        localStorage.setItem(WALLPAPER_STORAGE_KEY, stored);
+      }
+      if (stored && wallpapers.some((w) => w.id === stored)) {
+        return stored;
+      }
+      return defaultId;
     };
 
-    const current = resolveChoice();
-    applyWallpaper(current);
+    const resolveWallpaper = () =>
+      wallpapers.find((w) => w.id === resolveId()) || wallpapers[0];
+
+    applyWallpaper(resolveWallpaper());
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduceMotion.matches) {
+      video.pause();
+    }
+
+    const syncVideoPlayback = () => {
+      if (!video || video.hidden || reduceMotion.matches) return;
+      if (document.hidden) {
+        video.pause();
+      } else if (video.getAttribute("src")) {
+        video.play().catch(() => {});
+      }
+    };
+    document.addEventListener("visibilitychange", syncVideoPlayback);
+    syncVideoPlayback();
 
     if (select) {
-      const mode = localStorage.getItem(WALLPAPER_STORAGE_KEY) || "random";
-      select.value = wallpapers.some((w) => w.id === mode) ? mode : "random";
+      select.value = resolveId();
       select.addEventListener("change", () => {
         const next = select.value;
         localStorage.setItem(WALLPAPER_STORAGE_KEY, next);
-        const item = next === "random" ? pickRandom() : wallpapers.find((w) => w.id === next);
+        const item = wallpapers.find((w) => w.id === next);
         if (item) applyWallpaper(item);
       });
     }
   }
 
   initWallpaper();
+
+  function initMpPortal() {
+    document.body.classList.add("client-js");
+
+    document.querySelectorAll(".mp-wrapper .collapsible .collapsetoggle").forEach((btn) => {
+      const section = btn.closest(".collapsible");
+      if (!section) return;
+      const expanded = !section.classList.contains("collapsed");
+      btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+      btn.addEventListener("click", () => {
+        const isCollapsed = section.classList.toggle("collapsed");
+        btn.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+      });
+    });
+  }
+
+  initMpPortal();
 
   const stored = localStorage.getItem("theme");
   if (stored) {

@@ -1,0 +1,25 @@
+{
+  "default": "wallpaper-01-preview",
+  "items": [
+    {
+      "id": "wallpaper-01-preview",
+      "file": "wallpaper-01-preview.mp4",
+      "label": "1"
+    },
+    {
+      "id": "wallpaper-02-preview-alt",
+      "file": "wallpaper-02-preview-alt.mp4",
+      "label": "2"
+    },
+    {
+      "id": "wallpaper-03-minecraft",
+      "file": "wallpaper-03-minecraft.mp4",
+      "label": "3"
+    },
+    {
+      "id": "wallpaper-04-cloud-pixel",
+      "file": "wallpaper-04-cloud-pixel.mp4",
+      "label": "4"
+    }
+  ]
+}

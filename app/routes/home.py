@@ -16,6 +16,7 @@ async def index(request: Request):
         name="index.html",
         context={
             **site_context(),
+            "page_home": True,
             "projects": pinned,
             "project_count": len(pinned),
             "total_project_count": len(get_all_projects()),

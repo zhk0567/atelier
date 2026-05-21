@@ -98,7 +98,7 @@ DEFAULT_SITE = {
         "label_skills": "数据入口",
         "label_interests": "爱好",
         "label_tech_tags": "技术栈",
-        "browse_lead": "以下内容来自 zhita_settings.xlsx，点击分类浏览。",
+        "browse_lead": "",
         "stat_awards": "竞赛证书",
         "stat_awards_unit": "项",
         "stat_projects": "应用项目",
@@ -480,18 +480,16 @@ def build_data_hubs(data: dict, project_count: int) -> list[dict]:
             "count": len(data.get("school_timeline", [])),
             "url": "/browse/school",
         },
-        {
-            "id": "articles",
-            "label": "文章",
-            "sheet": "文章",
-            "count": len(data.get("articles", [])),
-            "url": "/browse/articles",
-        },
     ]
+
+
+DISABLED_HUB_IDS = frozenset({"hobbies", "school", "articles"})
 
 
 def get_browse_page(hub_id: str) -> dict | None:
     """Build list/section payload for /browse/{hub_id}."""
+    if hub_id in DISABLED_HUB_IDS:
+        return None
     data = load_site_data()
 
     def _items_titled(rows: list[dict], title_key: str = "title", meta_fn=None) -> list[dict]:
@@ -605,24 +603,6 @@ def get_browse_page(hub_id: str) -> dict | None:
                 }
                 for t in timeline
             ],
-        }
-    if hub_id == "articles":
-        article_items: list[dict] = []
-        for a in data.get("articles", []):
-            title = a.get("title", "")
-            url = blog_url_for_title(title)
-            article_items.append({
-                "title": title,
-                "meta": a.get("category", ""),
-                "excerpt": a.get("excerpt", ""),
-                "url": url,
-            })
-        return {
-            "hub_id": hub_id,
-            "page_title": "文章",
-            "sheet_name": "文章",
-            "layout": "articles",
-            "items": article_items,
         }
     return None
 

@@ -22,7 +22,7 @@ atelier/
 ├── docs/ARCHITECTURE.md    # Wiki vs Blog 分工说明
 ├── scripts/                # 指南校验与站点工具
 ├── static/
-├── data/                   # 首页壁纸
+├── data/                   # 动态壁纸（wallpaper-NN-slug.ext + wallpapers.json）
 └── templates/
 ```
 
@@ -53,6 +53,12 @@ Set-Location -LiteralPath 'F:\commercial\atelier'
 ```
 
 浏览器打开 `http://127.0.0.1:8000`。
+
+### 动态壁纸命名
+
+- 视频文件：`data/wallpaper-NN-<slug>.mp4`（如 `wallpaper-01-preview.mp4`）
+- 清单与中文显示名：`data/wallpapers.json`（`id` / `file` / `label`，`default` 指定默认项）
+- 新增壁纸：按上述格式放入 `data/`，在 `wallpapers.json` 的 `items` 中追加一项
 
 ## Framework 指南维护
 

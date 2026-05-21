@@ -118,6 +118,8 @@
 {% endblock %}
 
 {% block extra_scripts %}
+<script src="/static/js/mermaid.min.js" defer></script>
+<script src="/static/js/mermaid-init.js?v=1" defer></script>
 {% if is_framework_guide and guide_nav %}
 <script>
 (function () {

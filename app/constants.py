@@ -18,13 +18,12 @@ BIO = (
 FOCUS = "Python · CV / OCR · 移动与多模态"
 AVAILABILITY = "在读学生 · 项目与竞赛导向"
 LOCATION = "中国"
-EMAIL = "hello@example.com"
+EMAIL = "3283409866@qq.com"
 GITHUB = "https://github.com/zhk0567"
 LINKEDIN = "https://linkedin.com"
 TWITTER = "https://x.com"
 
 UI = {
-    "badge_available": "可接项目",
     "copyright_prefix": "©",
     "sep_dot": "·",
     "toggle_theme": "切换主题",
@@ -50,7 +49,7 @@ UI = {
     "highlight_3": "语音与多模态",
     "highlight_4": "数模与算法实践",
     "label_skills": "数据入口",
-    "browse_lead": "以下内容来自 zhita_settings.xlsx，按工作表分类浏览。",
+    "browse_lead": "",
     "skill_fe": "前端 React / TS",
     "skill_be": "后端 Python / API",
     "skill_ui": "设计 UI / 动效",
@@ -67,7 +66,7 @@ UI = {
     "label_stats": "统计",
     "label_featured_projects": "特色项目",
     "label_data_portal": "数据分类",
-    "wiki_footer_note": "个人 Wiki · 数据来自 zhita_settings.xlsx",
+    "wiki_footer_note": "个人 Wiki",
     "wiki_attribution": "部分图标来自 Minecraft Wiki（CC BY-SA 3.0）",
     "label_wallpaper": "动态壁纸",
     "wallpaper_random": "随机",
@@ -80,6 +79,10 @@ UI = {
     "label_blog": "博客",
     "link_framework_guides": "Framework 技术栈指南",
     "blog_home_lead": "Framework 官方指南连载与其它技术笔记。",
+    "label_wiki_toc": "本文档",
+    "link_wiki_index": "目录总览",
+    "wiki_pager_prev": "上一页",
+    "wiki_pager_next": "下一页",
 }
 
 STATS = [
