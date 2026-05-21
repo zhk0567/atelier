@@ -402,13 +402,6 @@ def build_data_hubs(data: dict, project_count: int) -> list[dict]:
     interests: list[str] = data.get("interests_list", [])
     return [
         {
-            "id": "projects",
-            "label": "应用项目",
-            "sheet": "项目应用",
-            "count": project_count,
-            "url": "/projects",
-        },
-        {
             "id": "hobbies",
             "label": "爱好兴趣",
             "sheet": "爱好兴趣",
@@ -449,6 +442,13 @@ def build_data_hubs(data: dict, project_count: int) -> list[dict]:
             "sheet": "学校组织",
             "count": len(data.get("school_timeline", [])),
             "url": "/browse/school",
+        },
+        {
+            "id": "projects",
+            "label": "应用项目",
+            "sheet": "项目应用",
+            "count": project_count,
+            "url": "/projects",
         },
     ]
 

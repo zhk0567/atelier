@@ -1,6 +1,6 @@
 {% extends "wiki/base.html" %}
 
-{% block title %}{{ wiki_doc_title }} · Wiki · {{ site_name }}{% endblock %}
+{% block title %}{{ wiki_doc_title }} · {{ site_name }}{% endblock %}
 
 {% block breadcrumbs %}
 <nav class="wiki-breadcrumbs" aria-label="breadcrumb">
@@ -10,7 +10,7 @@
   <a href="{{ project_url }}">{{ project.title }}</a>
   {% endif %}
   <span class="wiki-breadcrumbs__sep">/</span>
-  <a href="{{ wiki_index_url }}">Wiki</a>
+  <a href="{{ wiki_index_url }}">{{ site_name }}</a>
   <span class="wiki-breadcrumbs__sep">/</span>
   <span>{{ wiki_doc_title }}</span>
 </nav>

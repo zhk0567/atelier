@@ -30,7 +30,12 @@
   --radius-lg: 6px;
   --space-section: 1rem;
   --surface-elevated: #fff;
-  --scrim-wallpaper: rgba(255, 255, 255, 0.97);
+  --scrim-wallpaper: rgba(255, 255, 255, 0.82);
+  --panel-bg: #fcfcfc;
+  --panel-border: #bbb;
+  --panel-border-hover: #999;
+  --panel-inset-shadow: inset -1px -1px 0 #00000012, inset 1px 1px 0 #ffffff80;
+  --table-stripe: #f8f9fa;
   --font-sans: system-ui, -apple-system, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
   --font-serif: "Linux Libertine", "Noto Serif SC", Georgia, "Times New Roman", serif;
   --sidebar-width: 11.5rem;
@@ -70,7 +75,12 @@
   --box-shadow-elevated: 0 2px 12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.06);
   --box-shadow-focus: inset 0 0 0 1px #69f;
   --surface-elevated: #27292d;
-  --scrim-wallpaper: rgba(32, 33, 34, 0.96);
+  --scrim-wallpaper: rgba(32, 33, 34, 0.84);
+  --panel-bg: #2a2b2c;
+  --panel-border: #54595d;
+  --panel-border-hover: #686b6f;
+  --panel-inset-shadow: inset -1px -1px 0 #00000040, inset 1px 1px 0 #ffffff12;
+  --table-stripe: rgba(255, 255, 255, 0.04);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,6 +88,7 @@
 html {
   font-size: 100%;
   scroll-behavior: smooth;
+  background: var(--background-color-neutral-subtle);
 }
 
 body.wiki-site {
@@ -120,14 +131,14 @@ body.wiki-site.has-wallpaper::before {
   background: none;
 }
 
-/* Dynamic wallpaper (unchanged behavior) */
+/* Full-viewport video layer — below header/content (z-index 1+) */
 .wiki-wallpaper {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  background: #0a0a10;
+  background: transparent;
 }
 .wiki-wallpaper__media {
   position: absolute;
@@ -138,15 +149,15 @@ body.wiki-site.has-wallpaper::before {
   transform: translateZ(0);
 }
 .wiki-wallpaper__video {
-  opacity: 0.42;
+  opacity: 0.52;
 }
-.wiki-wallpaper__image { opacity: 0.38; }
+.wiki-wallpaper__image { opacity: 0.45; }
 [data-theme="dark"] .wiki-wallpaper__video,
-[data-theme="dark"] .wiki-wallpaper__image { opacity: 0.32; }
+[data-theme="dark"] .wiki-wallpaper__image { opacity: 0.42; }
 .wiki-wallpaper__media[hidden] { display: none; }
 
 body.wiki-site.has-wallpaper {
-  background: var(--background-color-neutral-subtle);
+  background: transparent;
 }
 body.wiki-site.has-wallpaper .wiki-header {
   background: var(--scrim-wallpaper);
@@ -165,26 +176,11 @@ body.wiki-site.has-wallpaper .wiki-main {
 }
 
 @media (max-width: 720px) {
-  .wiki-wallpaper {
-    display: none !important;
-  }
-  body.wiki-site.has-wallpaper::before {
-    opacity: 0.45;
-    background:
-      linear-gradient(180deg, rgba(120, 185, 255, 0.35) 0%, rgba(120, 185, 255, 0.08) 38%, transparent 48%),
-      url("/static/img/wiki/grass_block.png") repeat;
-    background-size: auto, 32px 32px;
-  }
-  body.wiki-site[data-theme="dark"].has-wallpaper::before {
-    opacity: 0.12;
-    background: url("/static/img/wiki/stone.png") repeat;
-    background-size: 32px 32px;
-  }
   body.wiki-site.has-wallpaper .wiki-main,
   body.wiki-site.has-wallpaper .wiki-header,
   body.wiki-site.has-wallpaper .wiki-sidebar {
     box-shadow: none;
-    background: var(--background-color-base);
+    background: var(--scrim-wallpaper);
   }
 }
 
@@ -350,6 +346,8 @@ button, input, select {
 
 /* ── Layout ─────────────────────────────────────────────────────────────── */
 .wiki-body {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: flex-start;
   max-width: calc(var(--content-max) + var(--sidebar-width) + 4rem);
@@ -684,7 +682,7 @@ button, input, select {
 }
 .wikitable > tbody > tr:nth-child(even) > td,
 .wikitable > tr:nth-child(even) > td {
-  background: var(--background-color-neutral-subtle);
+  background: var(--table-stripe);
 }
 
 /* ── Lists & portal ───────────────────────────────────────────────────────── */
@@ -1054,6 +1052,16 @@ button, input, select {
 .wiki-content .blog-md th {
   background: var(--background-color-neutral);
   font-weight: 700;
+  color: var(--color-emphasized);
+}
+.wiki-content .wiki-md td,
+.wiki-content .blog-md td {
+  background: var(--background-color-base);
+  color: var(--color-base);
+}
+.wiki-content .wiki-md tr:nth-child(even) td,
+.wiki-content .blog-md tr:nth-child(even) td {
+  background: var(--table-stripe);
 }
 
 /* Blog / wiki 正文配图：限制超大 PNG 原尺寸撑破版面 */
@@ -1388,14 +1396,10 @@ body.sidebar-open .wiki-sidebar-backdrop {
 }
 .wiki-content .wiki-index-panel {
   margin-bottom: 1rem;
-  border: 2px solid #bbb;
-  background: var(--background-color-base);
+  border: 2px solid var(--panel-border);
+  background: var(--panel-bg);
   padding: 14px 16px;
   border-radius: var(--radius-md);
-}
-body.wiki-site[data-theme="dark"] .wiki-content .wiki-index-panel {
-  border-color: #202125;
-  background: #2a2b2c;
 }
 
 .wiki-table-scroll {
@@ -1442,10 +1446,20 @@ body.wiki-site[data-theme="dark"] .wiki-content .wiki-index-panel {
 }
 @media (min-width: 901px) {
   .guide-toc-mobile {
-    display: contents;
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
   }
   .guide-toc-mobile__summary {
     display: none;
+  }
+  .guide-toc-mobile .guide-sticky-toc {
+    display: block;
+  }
+  .blog-guide-layout .blog-guide-md {
+    grid-column: 2;
+    grid-row: 1;
   }
 }
 

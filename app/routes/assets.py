@@ -36,10 +36,7 @@ async def favicon():
 
 @router.get("/wallpaper/{wp_id}", include_in_schema=False)
 async def serve_wallpaper(wp_id: str):
-    paths = wallpaper_paths()
-    if wp_id not in paths:
-        list_wallpapers()
-    path = paths.get(wp_id)
+    path = wallpaper_paths().get(wp_id)
     if not path or not path.is_file():
         raise HTTPException(status_code=404, detail="Wallpaper not found")
     try:

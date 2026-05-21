@@ -37,8 +37,6 @@ WIKI_IMG_DIR = STATIC_DIR / "img" / "wiki"
 
 WALLPAPER_EXTS = {".mp4", ".webm", ".mov", ".jpg", ".jpeg", ".png", ".webp", ".gif"}
 WALLPAPER_VIDEO_EXTS = {".mp4", ".webm", ".mov"}
-_WALLPAPER_PATHS: dict[str, Path] = {}
-
 # 全站导航与数据分类入口中不展示（/browse/* 仍可直链访问）
 NAV_EXCLUDED_HUB_IDS = frozenset({"certs", "hobbies", "school", "articles"})
 
@@ -112,15 +110,6 @@ def _load_wallpaper_manifest() -> tuple[str | None, list[dict]]:
         if not isinstance(entry, dict):
             continue
         wid = entry.get("id")
-        if wid == "none":
-            label = entry.get("label")
-            items.append({
-                "id": "none",
-                "file": "",
-                "label": label.strip() if isinstance(label, str) and label.strip() else "无壁纸",
-                "path": None,
-            })
-            continue
         filename = entry.get("file")
         if not isinstance(wid, str) or not isinstance(filename, str):
             continue
@@ -139,29 +128,21 @@ def _load_wallpaper_manifest() -> tuple[str | None, list[dict]]:
     return default_id if isinstance(default_id, str) else None, items
 
 
-def _list_wallpapers_uncached() -> list[dict]:
+def _build_wallpaper_catalog() -> tuple[list[dict], dict[str, Path]]:
     if not DATA_DIR.is_dir():
-        return []
+        return [], {}
 
     default_id, manifest_items = _load_wallpaper_manifest()
     items: list[dict] = []
+    paths: dict[str, Path] = {}
 
     if manifest_items:
         for entry in manifest_items:
             wid = entry["id"]
-            if wid == "none":
-                items.append({
-                    "id": "none",
-                    "label": entry.get("label", "无壁纸"),
-                    "url": "",
-                    "is_video": False,
-                    "default": default_id == "none" if default_id else False,
-                })
-                continue
             path = entry.get("path")
             if path is None:
                 continue
-            _WALLPAPER_PATHS[wid] = path
+            paths[wid] = path
             items.append({
                 "id": wid,
                 "label": entry["label"],
@@ -171,7 +152,7 @@ def _list_wallpapers_uncached() -> list[dict]:
             })
         if items and not any(i["default"] for i in items):
             items[0]["default"] = True
-        return items
+        return items, paths
 
     files = sorted(
         (p for p in DATA_DIR.iterdir() if p.is_file() and p.suffix.lower() in WALLPAPER_EXTS),
@@ -179,7 +160,7 @@ def _list_wallpapers_uncached() -> list[dict]:
     )
     for i, path in enumerate(files):
         wid = path.stem if _WALLPAPER_SLUG_RE.match(path.stem) else f"wallpaper-{i:02d}"
-        _WALLPAPER_PATHS[wid] = path
+        paths[wid] = path
         items.append({
             "id": wid,
             "label": _wallpaper_label_from_stem(path.stem),
@@ -187,19 +168,22 @@ def _list_wallpapers_uncached() -> list[dict]:
             "is_video": path.suffix.lower() in WALLPAPER_VIDEO_EXTS,
             "default": i == 0,
         })
-    return items
+    return items, paths
 
 
 @lru_cache(maxsize=1)
+def _wallpaper_catalog() -> tuple[tuple[dict, ...], dict[str, str]]:
+    items, paths = _build_wallpaper_catalog()
+    path_index = {wid: str(path) for wid, path in paths.items()}
+    return tuple(items), path_index
+
+
 def list_wallpapers() -> tuple[dict, ...]:
-    global _WALLPAPER_PATHS
-    _WALLPAPER_PATHS.clear()
-    return tuple(_list_wallpapers_uncached())
+    return _wallpaper_catalog()[0]
 
 
 def wallpaper_paths() -> dict[str, Path]:
-    list_wallpapers()
-    return dict(_WALLPAPER_PATHS)
+    return {wid: Path(p) for wid, p in _wallpaper_catalog()[1].items()}
 
 
 @lru_cache(maxsize=1)
@@ -270,7 +254,7 @@ def build_wiki_nav(hubs: list[dict]) -> list[dict]:
 
 
 def clear_context_cache() -> None:
-    list_wallpapers.cache_clear()
+    _wallpaper_catalog.cache_clear()
     load_wiki_assets.cache_clear()
     _site_context_core.cache_clear()
 

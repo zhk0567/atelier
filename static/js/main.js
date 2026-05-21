@@ -31,49 +31,74 @@
     };
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const isNarrowViewport = window.matchMedia("(max-width: 720px)");
+    let activeWallpaperId = null;
 
-    const applyWallpaper = (item) => {
-      if (!item || !item.url || item.id === "none") {
+    const wallpaperUrl = (item) => new URL(item.url, window.location.href).href;
+
+    const videoHasSrc = (url) => {
+      const target = new URL(url, window.location.href).pathname;
+      if (!video.currentSrc && !video.getAttribute("src")) return false;
+      try {
+        return new URL(video.currentSrc || video.src, window.location.href).pathname === target;
+      } catch {
+        return false;
+      }
+    };
+
+    const playVideo = () => video.play().catch(() => {});
+
+    const applyWallpaper = (item, forceReload) => {
+      if (!item || !item.url) {
+        return;
+      }
+      if (prefersReducedMotion.matches) {
         document.body.classList.remove("has-wallpaper");
         video.pause();
         video.removeAttribute("src");
         video.hidden = true;
         image.hidden = true;
         image.removeAttribute("src");
-        return;
-      }
-      if (prefersReducedMotion.matches || (isNarrowViewport.matches && item.is_video)) {
-        document.body.classList.remove("has-wallpaper");
-        video.pause();
-        video.removeAttribute("src");
-        video.hidden = true;
-        image.hidden = true;
+        activeWallpaperId = null;
         return;
       }
       document.body.classList.add("has-wallpaper");
+      const url = wallpaperUrl(item);
       if (item.is_video) {
         image.hidden = true;
+        image.removeAttribute("src");
         video.hidden = false;
-        if (video.getAttribute("src") !== item.url) {
-          video.setAttribute("src", item.url);
-          const play = () => video.play().catch(() => {});
-          if (video.readyState >= 2) play();
-          else video.addEventListener("loadeddata", play, { once: true });
+        const needsLoad =
+          forceReload || activeWallpaperId !== item.id || !videoHasSrc(url);
+        if (needsLoad) {
+          activeWallpaperId = item.id;
+          video.pause();
+          video.src = url;
+          video.load();
+          video.addEventListener("loadeddata", playVideo, { once: true });
+          video.addEventListener("canplay", playVideo, { once: true });
+          playVideo();
         } else if (video.paused) {
-          video.play().catch(() => {});
+          playVideo();
         }
       } else {
+        activeWallpaperId = item.id;
         video.pause();
+        video.removeAttribute("src");
         video.hidden = true;
         image.hidden = false;
-        image.src = item.url;
+        if (forceReload || image.src !== url) {
+          image.src = url;
+        }
       }
     };
 
     const resolveId = () => {
       let stored = localStorage.getItem(WALLPAPER_STORAGE_KEY);
       if (stored === "random") stored = null;
+      if (stored === "none") {
+        stored = null;
+        localStorage.removeItem(WALLPAPER_STORAGE_KEY);
+      }
       if (stored && LEGACY_WALLPAPER_IDS[stored]) {
         stored = LEGACY_WALLPAPER_IDS[stored];
         localStorage.setItem(WALLPAPER_STORAGE_KEY, stored);
@@ -93,31 +118,45 @@
       video.pause();
     }
 
+    document.addEventListener(
+      "click",
+      () => {
+        if (!document.body.classList.contains("has-wallpaper") || video.hidden) return;
+        if (video.paused && video.src) playVideo();
+      },
+      { once: true, capture: true }
+    );
+
     const syncVideoPlayback = () => {
-      if (!video || video.hidden || prefersReducedMotion.matches || isNarrowViewport.matches) return;
+      if (!video || video.hidden || prefersReducedMotion.matches) return;
       if (document.hidden) {
         video.pause();
-      } else if (video.getAttribute("src")) {
+      } else if (video.src) {
         video.play().catch(() => {});
       }
     };
     document.addEventListener("visibilitychange", syncVideoPlayback);
     syncVideoPlayback();
 
-    isNarrowViewport.addEventListener("change", () => {
-      applyWallpaper(resolveWallpaper());
-    });
     prefersReducedMotion.addEventListener("change", () => {
+      activeWallpaperId = null;
       applyWallpaper(resolveWallpaper());
     });
 
     if (select) {
-      select.value = resolveId();
+      const syncSelect = () => {
+        select.value = resolveId();
+      };
+      syncSelect();
       select.addEventListener("change", () => {
         const next = select.value;
         localStorage.setItem(WALLPAPER_STORAGE_KEY, next);
         const item = wallpapers.find((w) => w.id === next);
-        if (item) applyWallpaper(item);
+        if (item) {
+          activeWallpaperId = null;
+          applyWallpaper(item, true);
+          syncSelect();
+        }
       });
     }
   }
@@ -141,26 +180,44 @@
 
   initMpPortal();
 
-  const stored = localStorage.getItem("theme");
-  if (stored) {
-    html.setAttribute("data-theme", stored);
-  } else {
-    html.setAttribute("data-theme", "light");
+  function initGuideTocMobile() {
+    const details = document.querySelector(".guide-toc-mobile");
+    if (!details) return;
+    const mq = window.matchMedia("(min-width: 901px)");
+    const apply = () => {
+      if (mq.matches) {
+        details.setAttribute("open", "");
+      } else {
+        details.removeAttribute("open");
+      }
+    };
+    apply();
+    mq.addEventListener("change", apply);
   }
+
+  initGuideTocMobile();
 
   const syncThemeToggleIcon = () => {
     document.querySelectorAll(".theme-toggle").forEach((btn) => {
       btn.textContent = html.getAttribute("data-theme") === "dark" ? "☀" : "☽";
     });
   };
-  syncThemeToggleIcon();
+
+  const applyTheme = (theme) => {
+    html.setAttribute("data-theme", theme);
+    document.body.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    syncThemeToggleIcon();
+  };
+
+  const stored = localStorage.getItem("theme");
+  const initialTheme = stored === "dark" ? "dark" : "light";
+  applyTheme(initialTheme);
 
   document.querySelectorAll(".theme-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      html.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-      syncThemeToggleIcon();
+      applyTheme(next);
     });
   });
 

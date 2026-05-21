@@ -1,30 +1,25 @@
 {
-  "default": "none",
+  "default": "wallpaper-01-preview",
   "items": [
-    {
-      "id": "none",
-      "file": "",
-      "label": "无壁纸"
-    },
     {
       "id": "wallpaper-01-preview",
       "file": "wallpaper-01-preview.mp4",
-      "label": "1"
+      "label": "壁纸 1（默认）"
     },
     {
       "id": "wallpaper-02-preview-alt",
       "file": "wallpaper-02-preview-alt.mp4",
-      "label": "2"
+      "label": "壁纸 2"
     },
     {
       "id": "wallpaper-03-minecraft",
       "file": "wallpaper-03-minecraft.mp4",
-      "label": "3"
+      "label": "壁纸 3"
     },
     {
       "id": "wallpaper-04-cloud-pixel",
       "file": "wallpaper-04-cloud-pixel.mp4",
-      "label": "4"
+      "label": "壁纸 4"
     }
   ]
 }

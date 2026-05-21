@@ -66,11 +66,10 @@ UI = {
     "label_stats": "统计",
     "label_featured_projects": "特色项目",
     "label_data_portal": "数据分类",
-    "wiki_footer_note": "个人 Wiki",
+    "wiki_footer_note": "个人站点",
     "wiki_attribution": "部分图标来自 Minecraft Wiki（CC BY-SA 3.0）",
     "label_wallpaper": "动态壁纸",
     "wallpaper_random": "随机",
-    "wallpaper_none": "无壁纸",
     "label_contact": "快速联系",
     "ph_name": "姓名",
     "ph_email": "邮箱",
@@ -113,7 +112,7 @@ STATIC_CACHE_HEADERS = {
 }
 
 WALLPAPER_CACHE_HEADERS = {
-    "Cache-Control": "public, max-age=86400",
+    "Cache-Control": "public, max-age=3600",
 }
 
 

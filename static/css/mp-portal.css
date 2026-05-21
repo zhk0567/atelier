@@ -13,7 +13,7 @@ body.wiki-site .mp-wrapper {
   max-width: none;
 }
 
-body.wiki-site[data-theme="dark"] .mp-wrapper {
+html[data-theme="dark"] body.wiki-site .mp-wrapper {
   --button-color: #48494a;
   --button-color-progressive: #137342;
   --button-text-color: #fff;
@@ -85,21 +85,16 @@ body.wiki-site .mp-sticky {
 }
 
 body.wiki-site .mp-section {
-  border: 2px solid #bbb;
-  background-color: #fcfcfc;
-  box-shadow: inset -1px -1px 0 #00000012, inset 1px 1px 0 #ffffff80;
+  border: 2px solid var(--panel-border);
+  background-color: var(--panel-bg);
+  box-shadow: var(--panel-inset-shadow);
   padding: 14px 16px;
   contain: layout style;
   border-radius: var(--radius-md, 4px);
   transition: border-color 0.15s ease;
 }
 body.wiki-site .mp-section:hover {
-  border-color: #999;
-}
-
-body.wiki-site[data-theme="dark"] .mp-section {
-  border-color: #202125;
-  background-color: #2a2b2c;
+  border-color: var(--panel-border-hover);
 }
 
 body.wiki-site.has-wallpaper .mp-section {
@@ -209,12 +204,7 @@ body.wiki-site .mp-stats-table th {
 
 body.wiki-site .mp-stats-table tbody tr:nth-child(even) td,
 body.wiki-site .mp-stats-table tbody tr:nth-child(even) th[scope="row"] {
-  background: var(--background-color-neutral-subtle, #f8f9fa);
-}
-
-body.wiki-site[data-theme="dark"] .mp-stats-table tbody tr:nth-child(even) td,
-body.wiki-site[data-theme="dark"] .mp-stats-table tbody tr:nth-child(even) th[scope="row"] {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--table-stripe);
 }
 
 /* Collapsible */
@@ -369,7 +359,7 @@ body.wiki-site .mp-icon-img {
   transition: background-color 0.1s, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-body.wiki-site[data-theme="dark"] .mp-icon-img {
+html[data-theme="dark"] body.wiki-site .mp-icon-img {
   background-color: #ffffff10;
   border-color: #242424;
   box-shadow: inset 0 4px #00000030, inset 0 -4px #ffffff20;
@@ -443,17 +433,13 @@ body.wiki-site .mp-project-card {
   padding: 10px;
   border: 1px solid var(--border-color-subtle, #c8ccd1);
   border-radius: var(--radius-md, 4px);
-  background: var(--background-color-base, #fff);
+  background: var(--panel-bg);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 body.wiki-site .mp-project-card:hover {
   border-color: var(--border-color-base, #a2a9b1);
   box-shadow: var(--box-shadow-subtle, 0 1px 2px rgba(0, 0, 0, 0.06));
-}
-
-body.wiki-site[data-theme="dark"] .mp-project-card {
-  background: var(--background-color-neutral-subtle, #27292d);
 }
 
 body.wiki-site .mp-project-card__thumb {
@@ -590,13 +576,8 @@ body.wiki-site .mp-wrapper--page .mp-section + .mp-section {
 }
 
 body.wiki-site .mp-gallery-grid .wiki-gallery__item {
-  border: 2px solid #bbb;
-  background: #fcfcfc;
-}
-
-body.wiki-site[data-theme="dark"] .mp-gallery-grid .wiki-gallery__item {
-  border-color: #202125;
-  background-color: #2a2b2c;
+  border: 2px solid var(--panel-border);
+  background: var(--panel-bg);
 }
 
 body.wiki-site .mp-wrapper--page .wiki-list {
