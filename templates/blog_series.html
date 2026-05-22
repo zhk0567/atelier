@@ -17,11 +17,11 @@
   <section class="mp-section mp-page-header mp-section-full">
     <h1>{{ series_title }}</h1>
     <p class="lead">{{ series_lead }}</p>
-    <p class="mp-page-note"><strong>官方指南体例：</strong>单页含完整基础篇（对齐各栈官方 Tutorial）与 Framework 子工程实战。五篇标杆已发布；其余为结构完整的连载稿，持续扩写中。</p>
+    <p class="mp-page-note">{{ series_note }}</p>
     <p class="mp-page-links">
-      <a href="{{ wiki_overview_url }}">Framework Wiki 索引</a>
+      <a href="{{ wiki_overview_url }}">{% if series_mode == 'algorithm' %}Algorithm 仓库{% else %}Framework Wiki 索引{% endif %}</a>
       ·
-      <a href="https://github.com/zhk0567/Framework" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="{{ github_repo_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
     </p>
   </section>
 

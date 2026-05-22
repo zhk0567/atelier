@@ -9,7 +9,7 @@
   <a href="/blog">博客</a>
   {% if series_url %}
   <span class="wiki-breadcrumbs__sep">/</span>
-  <a href="{{ series_url }}">Framework</a>
+  <a href="{{ series_url }}">{% if is_algorithm_guide %}Algorithm{% else %}Framework{% endif %}</a>
   {% endif %}
   <span class="wiki-breadcrumbs__sep">/</span>
   <span>{{ post.title }}</span>
@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block content %}
-{% if is_framework_guide and guide_nav %}
+{% if (is_framework_guide or is_algorithm_guide) and guide_nav %}
 <div class="blog-guide-layout">
   <details class="guide-toc-mobile" open>
     <summary class="guide-toc-mobile__summary">本页目录</summary>

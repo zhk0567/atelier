@@ -1,0 +1,16 @@
+id: topic-algorithm
+tier: medium
+official: ""
+essentials:
+  - id: intuition
+    title: 直觉与定义
+  - id: complexity
+    title: 复杂度分析
+  - id: template
+    title: 代码模板
+  - id: variants
+    title: 变体与技巧
+  - id: pitfalls
+    title: 易错点
+  - id: practice
+    title: 练习建议

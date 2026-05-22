@@ -27,7 +27,7 @@
           <p><span class="wiki-tag">{{ ui.badge_pinned }}</span></p>
           {% endif %}
           <h3><a href="/project/{{ project.id }}">{{ project.title }}</a></h3>
-          <p class="mp-project-card__meta">{{ project.category }} {{ ui.sep_dot }} {{ project.year }}</p>
+          <p class="mp-project-card__meta">{{ project.category }}{% if project.project_type %} {{ ui.sep_dot }} {{ project.project_type }}{% endif %}</p>
           <p>{{ project.summary }}</p>
           {% if project.tags %}
           <p class="wiki-tags">

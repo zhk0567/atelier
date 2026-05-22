@@ -1,0 +1,16 @@
+id: overview
+tier: major
+official: https://github.com/zhk0567/Algorithm
+essentials:
+  - id: repo-layout
+    title: 仓库结构与约定
+  - id: study-roadmap
+    title: 学习路线
+  - id: bilingual
+    title: 双语言对照
+  - id: run-solutions
+    title: 运行与自测
+  - id: problem-template
+    title: 单题目录模板
+  - id: toolchain
+    title: C++ 工具链要点

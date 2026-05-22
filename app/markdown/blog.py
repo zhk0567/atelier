@@ -30,7 +30,7 @@ def _render_blog_markdown_impl(slug: str) -> tuple[dict[str, str], str]:
     raw = index_path.read_text(encoding="utf-8")
     raw = strip_blog_frontmatter(raw)
     raw = strip_blog_editorial_sections(raw)
-    if post.get("series") == "framework":
+    if post.get("series") in ("framework", "algorithm"):
         raw = strip_guide_inline_toc(raw)
     raw = rewrite_blog_image_paths(raw, slug)
     html = markdown_to_html(raw)

@@ -1,0 +1,1339 @@
+{
+  "series": "algorithm",
+  "github_repo": "https://github.com/zhk0567/Algorithm",
+  "scanned_at": "2026-05-21",
+  "count": 83,
+  "posts": [
+    {
+      "slug": "algo-",
+      "title": "算法 · ",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms",
+      "repo_paths": [
+        "python/algorithms/notes.md",
+        "cpp/algorithms/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms",
+      "folder": "algorithm-guides/algo-",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-advanced",
+      "title": "算法 · Advanced",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/advanced",
+      "repo_paths": [
+        "python/algorithms/advanced/notes.md",
+        "cpp/algorithms/advanced/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/advanced",
+      "folder": "algorithm-guides/algo-advanced",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-advanced-mo-algorithm",
+      "title": "算法 · Advanced Mo Algorithm",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/advanced/mo_algorithm",
+      "repo_paths": [
+        "python/algorithms/advanced/mo_algorithm/notes.md",
+        "cpp/algorithms/advanced/mo_algorithm/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/advanced/mo_algorithm",
+      "folder": "algorithm-guides/algo-advanced-mo-algorithm",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-backtracking",
+      "title": "算法 · Backtracking",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/backtracking",
+      "repo_paths": [
+        "python/algorithms/backtracking/notes.md",
+        "cpp/algorithms/backtracking/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/backtracking",
+      "folder": "algorithm-guides/algo-backtracking",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-bit-manipulation",
+      "title": "算法 · Bit Manipulation",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/bit_manipulation",
+      "repo_paths": [
+        "python/algorithms/bit_manipulation/notes.md",
+        "cpp/algorithms/bit_manipulation/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/bit_manipulation",
+      "folder": "algorithm-guides/algo-bit-manipulation",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-divide-and-conquer",
+      "title": "算法 · Divide And Conquer",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/divide_and_conquer",
+      "repo_paths": [
+        "python/algorithms/divide_and_conquer/notes.md",
+        "cpp/algorithms/divide_and_conquer/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/divide_and_conquer",
+      "folder": "algorithm-guides/algo-divide-and-conquer",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-dp-bitmask",
+      "title": "算法 · Dp Bitmask",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/dynamic_programming/bitmask",
+      "repo_paths": [
+        "python/algorithms/dynamic_programming/bitmask/notes.md",
+        "cpp/algorithms/dynamic_programming/bitmask/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/dynamic_programming/bitmask",
+      "folder": "algorithm-guides/algo-dp-bitmask",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-dp-digit",
+      "title": "算法 · Dp Digit",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/dynamic_programming/digit",
+      "repo_paths": [
+        "python/algorithms/dynamic_programming/digit/notes.md",
+        "cpp/algorithms/dynamic_programming/digit/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/dynamic_programming/digit",
+      "folder": "algorithm-guides/algo-dp-digit",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-dp-interval",
+      "title": "算法 · Dp Interval",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/dynamic_programming/interval",
+      "repo_paths": [
+        "python/algorithms/dynamic_programming/interval/notes.md",
+        "cpp/algorithms/dynamic_programming/interval/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/dynamic_programming/interval",
+      "folder": "algorithm-guides/algo-dp-interval",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-dp-knapsack",
+      "title": "算法 · Dp Knapsack",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/dynamic_programming/knapsack",
+      "repo_paths": [
+        "python/algorithms/dynamic_programming/knapsack/notes.md",
+        "cpp/algorithms/dynamic_programming/knapsack/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/dynamic_programming/knapsack",
+      "folder": "algorithm-guides/algo-dp-knapsack",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-dp-linear",
+      "title": "算法 · Dp Linear",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/dynamic_programming/linear",
+      "repo_paths": [
+        "python/algorithms/dynamic_programming/linear/notes.md",
+        "cpp/algorithms/dynamic_programming/linear/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/dynamic_programming/linear",
+      "folder": "algorithm-guides/algo-dp-linear",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-dp-tree",
+      "title": "算法 · Dp Tree",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/dynamic_programming/tree",
+      "repo_paths": [
+        "python/algorithms/dynamic_programming/tree/notes.md",
+        "cpp/algorithms/dynamic_programming/tree/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/dynamic_programming/tree",
+      "folder": "algorithm-guides/algo-dp-tree",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-dynamic-programming",
+      "title": "算法 · Dynamic Programming",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/dynamic_programming",
+      "repo_paths": [
+        "python/algorithms/dynamic_programming/notes.md",
+        "cpp/algorithms/dynamic_programming/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/dynamic_programming",
+      "folder": "algorithm-guides/algo-dynamic-programming",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-graph",
+      "title": "算法 · Graph",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph",
+      "repo_paths": [
+        "python/algorithms/graph/notes.md",
+        "cpp/algorithms/graph/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph",
+      "folder": "algorithm-guides/algo-graph",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-graph-bipartite-matching",
+      "title": "算法 · Graph Bipartite Matching",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph/bipartite_matching",
+      "repo_paths": [
+        "python/algorithms/graph/bipartite_matching/notes.md",
+        "cpp/algorithms/graph/bipartite_matching/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph/bipartite_matching",
+      "folder": "algorithm-guides/algo-graph-bipartite-matching",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-graph-lca",
+      "title": "算法 · Graph Lca",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph/lca",
+      "repo_paths": [
+        "python/algorithms/graph/lca/notes.md",
+        "cpp/algorithms/graph/lca/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph/lca",
+      "folder": "algorithm-guides/algo-graph-lca",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-graph-mst",
+      "title": "算法 · Graph Mst",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph/mst",
+      "repo_paths": [
+        "python/algorithms/graph/mst/notes.md",
+        "cpp/algorithms/graph/mst/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph/mst",
+      "folder": "algorithm-guides/algo-graph-mst",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-graph-network-flow",
+      "title": "算法 · Graph Network Flow",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph/network_flow",
+      "repo_paths": [
+        "python/algorithms/graph/network_flow/notes.md",
+        "cpp/algorithms/graph/network_flow/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph/network_flow",
+      "folder": "algorithm-guides/algo-graph-network-flow",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-graph-scc",
+      "title": "算法 · Graph Scc",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph/scc",
+      "repo_paths": [
+        "python/algorithms/graph/scc/notes.md",
+        "cpp/algorithms/graph/scc/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph/scc",
+      "folder": "algorithm-guides/algo-graph-scc",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-graph-shortest-path",
+      "title": "算法 · Graph Shortest Path",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph/shortest_path",
+      "repo_paths": [
+        "python/algorithms/graph/shortest_path/notes.md",
+        "cpp/algorithms/graph/shortest_path/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph/shortest_path",
+      "folder": "algorithm-guides/algo-graph-shortest-path",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-graph-topological-sort",
+      "title": "算法 · Graph Topological Sort",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph/topological_sort",
+      "repo_paths": [
+        "python/algorithms/graph/topological_sort/notes.md",
+        "cpp/algorithms/graph/topological_sort/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph/topological_sort",
+      "folder": "algorithm-guides/algo-graph-topological-sort",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-graph-traversal",
+      "title": "算法 · Graph Traversal",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/graph/traversal",
+      "repo_paths": [
+        "python/algorithms/graph/traversal/notes.md",
+        "cpp/algorithms/graph/traversal/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/graph/traversal",
+      "folder": "algorithm-guides/algo-graph-traversal",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-greedy",
+      "title": "算法 · Greedy",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/greedy",
+      "repo_paths": [
+        "python/algorithms/greedy/notes.md",
+        "cpp/algorithms/greedy/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/greedy",
+      "folder": "algorithm-guides/algo-greedy",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-math",
+      "title": "算法 · Math",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/math",
+      "repo_paths": [
+        "python/algorithms/math/notes.md",
+        "cpp/algorithms/math/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/math",
+      "folder": "algorithm-guides/algo-math",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-math-combinatorics",
+      "title": "算法 · Math Combinatorics",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/math/combinatorics",
+      "repo_paths": [
+        "python/algorithms/math/combinatorics/notes.md",
+        "cpp/algorithms/math/combinatorics/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/math/combinatorics",
+      "folder": "algorithm-guides/algo-math-combinatorics",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-math-extended-gcd",
+      "title": "算法 · Math Extended Gcd",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/math/extended_gcd",
+      "repo_paths": [
+        "python/algorithms/math/extended_gcd/notes.md",
+        "cpp/algorithms/math/extended_gcd/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/math/extended_gcd",
+      "folder": "algorithm-guides/algo-math-extended-gcd",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-math-fast-power",
+      "title": "算法 · Math Fast Power",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/math/fast_power",
+      "repo_paths": [
+        "python/algorithms/math/fast_power/notes.md",
+        "cpp/algorithms/math/fast_power/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/math/fast_power",
+      "folder": "algorithm-guides/algo-math-fast-power",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-math-geometry",
+      "title": "算法 · Math Geometry",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/math/geometry",
+      "repo_paths": [
+        "python/algorithms/math/geometry/notes.md",
+        "cpp/algorithms/math/geometry/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/math/geometry",
+      "folder": "algorithm-guides/algo-math-geometry",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-math-matrix",
+      "title": "算法 · Math Matrix",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/math/matrix",
+      "repo_paths": [
+        "python/algorithms/math/matrix/notes.md",
+        "cpp/algorithms/math/matrix/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/math/matrix",
+      "folder": "algorithm-guides/algo-math-matrix",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-math-number-theory",
+      "title": "算法 · Math Number Theory",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/math/number_theory",
+      "repo_paths": [
+        "python/algorithms/math/number_theory/notes.md",
+        "cpp/algorithms/math/number_theory/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/math/number_theory",
+      "folder": "algorithm-guides/algo-math-number-theory",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-math-probability",
+      "title": "算法 · Math Probability",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/math/probability",
+      "repo_paths": [
+        "python/algorithms/math/probability/notes.md",
+        "cpp/algorithms/math/probability/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/math/probability",
+      "folder": "algorithm-guides/algo-math-probability",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-prefix-sum",
+      "title": "算法 · Prefix Sum",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/prefix_sum",
+      "repo_paths": [
+        "python/algorithms/prefix_sum/notes.md",
+        "cpp/algorithms/prefix_sum/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/prefix_sum",
+      "folder": "algorithm-guides/algo-prefix-sum",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-recursion",
+      "title": "算法 · Recursion",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/recursion",
+      "repo_paths": [
+        "python/algorithms/recursion/notes.md",
+        "cpp/algorithms/recursion/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/recursion",
+      "folder": "algorithm-guides/algo-recursion",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-searching",
+      "title": "算法 · Searching",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/searching",
+      "repo_paths": [
+        "python/algorithms/searching/notes.md",
+        "cpp/algorithms/searching/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/searching",
+      "folder": "algorithm-guides/algo-searching",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-sliding-window",
+      "title": "算法 · Sliding Window",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/sliding_window",
+      "repo_paths": [
+        "python/algorithms/sliding_window/notes.md",
+        "cpp/algorithms/sliding_window/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/sliding_window",
+      "folder": "algorithm-guides/algo-sliding-window",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "algo-sorting",
+      "title": "算法 · Sorting",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/sorting",
+      "repo_paths": [
+        "python/algorithms/sorting/notes.md",
+        "cpp/algorithms/sorting/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/sorting",
+      "folder": "algorithm-guides/algo-sorting",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-string",
+      "title": "算法 · String",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/string",
+      "repo_paths": [
+        "python/algorithms/string/notes.md",
+        "cpp/algorithms/string/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/string",
+      "folder": "algorithm-guides/algo-string",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "algo-two-pointers",
+      "title": "算法 · Two Pointers",
+      "series": "algorithm",
+      "category": "Algorithms",
+      "topic_path": "algorithms/two_pointers",
+      "repo_paths": [
+        "python/algorithms/two_pointers/notes.md",
+        "cpp/algorithms/two_pointers/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/algorithms/two_pointers",
+      "folder": "algorithm-guides/algo-two-pointers",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-",
+      "title": "数据结构 · ",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures",
+      "repo_paths": [
+        "python/data_structures/notes.md",
+        "cpp/data_structures/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures",
+      "folder": "algorithm-guides/ds-",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-advanced-bloom-filter",
+      "title": "数据结构 · Advanced Bloom Filter",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/advanced/bloom_filter",
+      "repo_paths": [
+        "python/data_structures/advanced/bloom_filter/notes.md",
+        "cpp/data_structures/advanced/bloom_filter/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/advanced/bloom_filter",
+      "folder": "algorithm-guides/ds-advanced-bloom-filter",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-advanced-lru-cache",
+      "title": "数据结构 · Advanced Lru Cache",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/advanced/lru_cache",
+      "repo_paths": [
+        "python/data_structures/advanced/lru_cache/notes.md",
+        "cpp/data_structures/advanced/lru_cache/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/advanced/lru_cache",
+      "folder": "algorithm-guides/ds-advanced-lru-cache",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-advanced-skip-list",
+      "title": "数据结构 · Advanced Skip List",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/advanced/skip_list",
+      "repo_paths": [
+        "python/data_structures/advanced/skip_list/notes.md",
+        "cpp/data_structures/advanced/skip_list/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/advanced/skip_list",
+      "folder": "algorithm-guides/ds-advanced-skip-list",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-graph-adjacency-list",
+      "title": "数据结构 · Graph Adjacency List",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/graph/adjacency_list",
+      "repo_paths": [
+        "python/data_structures/graph/adjacency_list/notes.md",
+        "cpp/data_structures/graph/adjacency_list/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/graph/adjacency_list",
+      "folder": "algorithm-guides/ds-graph-adjacency-list",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-graph-adjacency-matrix",
+      "title": "数据结构 · Graph Adjacency Matrix",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/graph/adjacency_matrix",
+      "repo_paths": [
+        "python/data_structures/graph/adjacency_matrix/notes.md",
+        "cpp/data_structures/graph/adjacency_matrix/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/graph/adjacency_matrix",
+      "folder": "algorithm-guides/ds-graph-adjacency-matrix",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-graph-disjoint-set",
+      "title": "数据结构 · Graph Disjoint Set",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/graph/disjoint_set",
+      "repo_paths": [
+        "python/data_structures/graph/disjoint_set/notes.md",
+        "cpp/data_structures/graph/disjoint_set/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/graph/disjoint_set",
+      "folder": "algorithm-guides/ds-graph-disjoint-set",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-linear",
+      "title": "数据结构 · 线性结构总览",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/linear",
+      "repo_paths": [
+        "python/data_structures/linear/array/notes.md",
+        "python/data_structures/linear/linked_list/notes.md",
+        "python/data_structures/linear/stack/notes.md",
+        "python/data_structures/linear/queue/notes.md",
+        "cpp/data_structures/linear/array/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/linear",
+      "folder": "algorithm-guides/ds-linear",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-linear-array",
+      "title": "数据结构 · Linear Array",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/linear/array",
+      "repo_paths": [
+        "python/data_structures/linear/array/notes.md",
+        "cpp/data_structures/linear/array/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/linear/array",
+      "folder": "algorithm-guides/ds-linear-array",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-linear-deque",
+      "title": "数据结构 · Linear Deque",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/linear/deque",
+      "repo_paths": [
+        "python/data_structures/linear/deque/notes.md",
+        "cpp/data_structures/linear/deque/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/linear/deque",
+      "folder": "algorithm-guides/ds-linear-deque",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-linear-hash-table",
+      "title": "数据结构 · Linear Hash Table",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/linear/hash_table",
+      "repo_paths": [
+        "python/data_structures/linear/hash_table/notes.md",
+        "cpp/data_structures/linear/hash_table/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/linear/hash_table",
+      "folder": "algorithm-guides/ds-linear-hash-table",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-linear-linked-list",
+      "title": "数据结构 · Linear Linked List",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/linear/linked_list",
+      "repo_paths": [
+        "python/data_structures/linear/linked_list/notes.md",
+        "cpp/data_structures/linear/linked_list/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/linear/linked_list",
+      "folder": "algorithm-guides/ds-linear-linked-list",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-linear-queue",
+      "title": "数据结构 · Linear Queue",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/linear/queue",
+      "repo_paths": [
+        "python/data_structures/linear/queue/notes.md",
+        "cpp/data_structures/linear/queue/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/linear/queue",
+      "folder": "algorithm-guides/ds-linear-queue",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-linear-stack",
+      "title": "数据结构 · Linear Stack",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/linear/stack",
+      "repo_paths": [
+        "python/data_structures/linear/stack/notes.md",
+        "cpp/data_structures/linear/stack/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/linear/stack",
+      "folder": "algorithm-guides/ds-linear-stack",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-tree-avl",
+      "title": "数据结构 · Tree Avl",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/tree/avl",
+      "repo_paths": [
+        "python/data_structures/tree/avl/notes.md",
+        "cpp/data_structures/tree/avl/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/tree/avl",
+      "folder": "algorithm-guides/ds-tree-avl",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-tree-binary-tree",
+      "title": "数据结构 · Tree Binary Tree",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/tree/binary_tree",
+      "repo_paths": [
+        "python/data_structures/tree/binary_tree/notes.md",
+        "cpp/data_structures/tree/binary_tree/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/tree/binary_tree",
+      "folder": "algorithm-guides/ds-tree-binary-tree",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-tree-bst",
+      "title": "数据结构 · Tree Bst",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/tree/bst",
+      "repo_paths": [
+        "python/data_structures/tree/bst/notes.md",
+        "cpp/data_structures/tree/bst/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/tree/bst",
+      "folder": "algorithm-guides/ds-tree-bst",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-tree-fenwick-tree",
+      "title": "数据结构 · Tree Fenwick Tree",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/tree/fenwick_tree",
+      "repo_paths": [
+        "python/data_structures/tree/fenwick_tree/notes.md",
+        "cpp/data_structures/tree/fenwick_tree/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/tree/fenwick_tree",
+      "folder": "algorithm-guides/ds-tree-fenwick-tree",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-tree-heap",
+      "title": "数据结构 · Tree Heap",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/tree/heap",
+      "repo_paths": [
+        "python/data_structures/tree/heap/notes.md",
+        "cpp/data_structures/tree/heap/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/tree/heap",
+      "folder": "algorithm-guides/ds-tree-heap",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-tree-red-black-tree",
+      "title": "数据结构 · Tree Red Black Tree",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/tree/red_black_tree",
+      "repo_paths": [
+        "python/data_structures/tree/red_black_tree/notes.md",
+        "cpp/data_structures/tree/red_black_tree/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/tree/red_black_tree",
+      "folder": "algorithm-guides/ds-tree-red-black-tree",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-tree-segment-tree",
+      "title": "数据结构 · Tree Segment Tree",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/tree/segment_tree",
+      "repo_paths": [
+        "python/data_structures/tree/segment_tree/notes.md",
+        "cpp/data_structures/tree/segment_tree/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/tree/segment_tree",
+      "folder": "algorithm-guides/ds-tree-segment-tree",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "ds-tree-trie",
+      "title": "数据结构 · Tree Trie",
+      "series": "algorithm",
+      "category": "DataStructures",
+      "topic_path": "data_structures/tree/trie",
+      "repo_paths": [
+        "python/data_structures/tree/trie/notes.md",
+        "cpp/data_structures/tree/trie/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/data_structures/tree/trie",
+      "folder": "algorithm-guides/ds-tree-trie",
+      "status": "published",
+      "guide_toc": "topic-ds",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-",
+      "title": "面试专题 · ",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview",
+      "repo_paths": [
+        "python/interview/notes.md",
+        "cpp/interview/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview",
+      "folder": "algorithm-guides/iv-",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-lfu-cache",
+      "title": "面试专题 · Classic Lfu Cache",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/lfu_cache",
+      "repo_paths": [
+        "python/interview/classic/lfu_cache/notes.md",
+        "cpp/interview/classic/lfu_cache/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/lfu_cache",
+      "folder": "algorithm-guides/iv-classic-lfu-cache",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-lockfree-stack",
+      "title": "面试专题 · Classic Lockfree Stack",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/lockfree_stack",
+      "repo_paths": [
+        "python/interview/classic/lockfree_stack/notes.md",
+        "cpp/interview/classic/lockfree_stack/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/lockfree_stack",
+      "folder": "algorithm-guides/iv-classic-lockfree-stack",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-lru-cache",
+      "title": "面试专题 · Classic Lru Cache",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/lru_cache",
+      "repo_paths": [
+        "python/interview/classic/lru_cache/notes.md",
+        "cpp/interview/classic/lru_cache/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/lru_cache",
+      "folder": "algorithm-guides/iv-classic-lru-cache",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-mpmc-queue",
+      "title": "面试专题 · Classic Mpmc Queue",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/mpmc_queue",
+      "repo_paths": [
+        "python/interview/classic/mpmc_queue/notes.md",
+        "cpp/interview/classic/mpmc_queue/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/mpmc_queue",
+      "folder": "algorithm-guides/iv-classic-mpmc-queue",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-rate-limiter",
+      "title": "面试专题 · Classic Rate Limiter",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/rate_limiter",
+      "repo_paths": [
+        "python/interview/classic/rate_limiter/notes.md",
+        "cpp/interview/classic/rate_limiter/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/rate_limiter",
+      "folder": "algorithm-guides/iv-classic-rate-limiter",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-ring-buffer",
+      "title": "面试专题 · Classic Ring Buffer",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/ring_buffer",
+      "repo_paths": [
+        "python/interview/classic/ring_buffer/notes.md",
+        "cpp/interview/classic/ring_buffer/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/ring_buffer",
+      "folder": "algorithm-guides/iv-classic-ring-buffer",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-rwlock",
+      "title": "面试专题 · Classic Rwlock",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/rwlock",
+      "repo_paths": [
+        "python/interview/classic/rwlock/notes.md",
+        "cpp/interview/classic/rwlock/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/rwlock",
+      "folder": "algorithm-guides/iv-classic-rwlock",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-rwlock-writer-pref",
+      "title": "面试专题 · Classic Rwlock Writer Pref",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/rwlock_writer_pref",
+      "repo_paths": [
+        "python/interview/classic/rwlock_writer_pref/notes.md",
+        "cpp/interview/classic/rwlock_writer_pref/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/rwlock_writer_pref",
+      "folder": "algorithm-guides/iv-classic-rwlock-writer-pref",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-semaphore",
+      "title": "面试专题 · Classic Semaphore",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/semaphore",
+      "repo_paths": [
+        "python/interview/classic/semaphore/notes.md",
+        "cpp/interview/classic/semaphore/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/semaphore",
+      "folder": "algorithm-guides/iv-classic-semaphore",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-singleton",
+      "title": "面试专题 · Classic Singleton",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/singleton",
+      "repo_paths": [
+        "python/interview/classic/singleton/notes.md",
+        "cpp/interview/classic/singleton/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/singleton",
+      "folder": "algorithm-guides/iv-classic-singleton",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-tas-spinlock",
+      "title": "面试专题 · Classic Tas Spinlock",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/tas_spinlock",
+      "repo_paths": [
+        "python/interview/classic/tas_spinlock/notes.md",
+        "cpp/interview/classic/tas_spinlock/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/tas_spinlock",
+      "folder": "algorithm-guides/iv-classic-tas-spinlock",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-thread-pool",
+      "title": "面试专题 · Classic Thread Pool",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/thread_pool",
+      "repo_paths": [
+        "python/interview/classic/thread_pool/notes.md",
+        "cpp/interview/classic/thread_pool/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/thread_pool",
+      "folder": "algorithm-guides/iv-classic-thread-pool",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-thread-safe-queue",
+      "title": "面试专题 · Classic Thread Safe Queue",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/thread_safe_queue",
+      "repo_paths": [
+        "python/interview/classic/thread_safe_queue/notes.md",
+        "cpp/interview/classic/thread_safe_queue/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/thread_safe_queue",
+      "folder": "algorithm-guides/iv-classic-thread-safe-queue",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-classic-ticket-lock",
+      "title": "面试专题 · Classic Ticket Lock",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/classic/ticket_lock",
+      "repo_paths": [
+        "python/interview/classic/ticket_lock/notes.md",
+        "cpp/interview/classic/ticket_lock/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/classic/ticket_lock",
+      "folder": "algorithm-guides/iv-classic-ticket-lock",
+      "status": "published",
+      "guide_toc": "interview-classic",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "iv-top-frequent",
+      "title": "面试专题 · Top Frequent",
+      "series": "algorithm",
+      "category": "Interview",
+      "topic_path": "interview/top_frequent",
+      "repo_paths": [
+        "python/interview/top_frequent/notes.md",
+        "cpp/interview/top_frequent/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/interview/top_frequent",
+      "folder": "algorithm-guides/iv-top-frequent",
+      "status": "published",
+      "guide_toc": "topic-algorithm",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "overview",
+      "title": "Algorithm 仓库导读：双语言算法与刷题",
+      "series": "algorithm",
+      "category": "Overview",
+      "topic_path": "overview",
+      "repo_paths": [
+        "python/notes.md",
+        "cpp/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python",
+      "folder": "algorithm-guides/overview",
+      "status": "published",
+      "guide_toc": "overview",
+      "guide_tier": "major"
+    },
+    {
+      "slug": "prob-",
+      "title": "题单 · ",
+      "series": "algorithm",
+      "category": "Problems",
+      "topic_path": "problems",
+      "repo_paths": [
+        "python/problems/notes.md",
+        "cpp/problems/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/problems",
+      "folder": "algorithm-guides/prob-",
+      "status": "published",
+      "guide_toc": "problem-index",
+      "guide_tier": "medium"
+    },
+    {
+      "slug": "prob-codetop",
+      "title": "题单 · Codetop",
+      "series": "algorithm",
+      "category": "Problems",
+      "topic_path": "problems/codetop",
+      "repo_paths": [
+        "python/problems/codetop/notes.md",
+        "cpp/problems/codetop/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/problems/codetop",
+      "folder": "algorithm-guides/prob-codetop",
+      "status": "published",
+      "guide_toc": "problem-index",
+      "guide_tier": "index"
+    },
+    {
+      "slug": "prob-hot100",
+      "title": "题单 · Hot100",
+      "series": "algorithm",
+      "category": "Problems",
+      "topic_path": "problems/hot100",
+      "repo_paths": [
+        "python/problems/hot100/notes.md",
+        "cpp/problems/hot100/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/problems/hot100",
+      "folder": "algorithm-guides/prob-hot100",
+      "status": "published",
+      "guide_toc": "problem-index",
+      "guide_tier": "index"
+    },
+    {
+      "slug": "prob-luogu",
+      "title": "题单 · Luogu",
+      "series": "algorithm",
+      "category": "Problems",
+      "topic_path": "problems/luogu",
+      "repo_paths": [
+        "python/problems/luogu/notes.md",
+        "cpp/problems/luogu/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/problems/luogu",
+      "folder": "algorithm-guides/prob-luogu",
+      "status": "published",
+      "guide_toc": "problem-index",
+      "guide_tier": "index"
+    },
+    {
+      "slug": "prob-nowcoder",
+      "title": "题单 · Nowcoder",
+      "series": "algorithm",
+      "category": "Problems",
+      "topic_path": "problems/nowcoder",
+      "repo_paths": [
+        "python/problems/nowcoder/notes.md",
+        "cpp/problems/nowcoder/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/problems/nowcoder",
+      "folder": "algorithm-guides/prob-nowcoder",
+      "status": "published",
+      "guide_toc": "problem-index",
+      "guide_tier": "index"
+    },
+    {
+      "slug": "prob-offer",
+      "title": "题单 · Offer",
+      "series": "algorithm",
+      "category": "Problems",
+      "topic_path": "problems/offer",
+      "repo_paths": [
+        "python/problems/offer/notes.md",
+        "cpp/problems/offer/notes.md"
+      ],
+      "github": "https://github.com/zhk0567/Algorithm/tree/main/python/problems/offer",
+      "folder": "algorithm-guides/prob-offer",
+      "status": "published",
+      "guide_toc": "problem-index",
+      "guide_tier": "index"
+    }
+  ]
+}

@@ -40,6 +40,9 @@
       <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ framework_series_url }}" style="--button-image: url('{{ wiki_assets.bookshelf }}');">
         <span class="mp-button__inner">{{ ui.link_framework_guides }} · {{ framework_count }} 篇</span>
       </a>
+      <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ algorithm_series_url }}" style="--button-image: url('{{ wiki_assets.item_book }}');">
+        <span class="mp-button__inner">{{ ui.link_algorithm_guides }} · {{ algorithm_count }} 篇{% if algorithm_published_count < algorithm_count %}（{{ algorithm_published_count }} 已发布）{% endif %}</span>
+      </a>
     </div>
   </section>
 

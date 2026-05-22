@@ -10,7 +10,9 @@ from pathlib import Path
 ATELIER_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_DIR = ATELIER_ROOT / "config"
 DEFAULT_FRAMEWORK_ROOT = Path(r"F:\Study\Framework")
+DEFAULT_ALGORITHM_ROOT = Path(r"F:\Study\Algorithm")
 DEFAULT_BLOG_FRAMEWORK_DIR = "framework-guides"
+DEFAULT_BLOG_ALGORITHM_DIR = "algorithm-guides"
 
 
 def _deep_merge(base: dict, overlay: dict) -> dict:
@@ -39,6 +41,9 @@ def load_site_settings() -> dict:
     env_root = os.environ.get("FRAMEWORK_ROOT", "").strip()
     if env_root:
         settings["framework_root"] = env_root
+    env_algo = os.environ.get("ALGORITHM_ROOT", "").strip()
+    if env_algo:
+        settings["algorithm_root"] = env_algo
     return settings
 
 
@@ -65,6 +70,31 @@ def framework_manifest_path() -> Path:
 
 def guide_toc_dir() -> Path:
     return blog_framework_path() / "_meta" / "guide-toc"
+
+
+def algorithm_root() -> Path:
+    raw = load_site_settings().get("algorithm_root", "")
+    if raw:
+        return Path(str(raw)).expanduser()
+    return DEFAULT_ALGORITHM_ROOT
+
+
+def blog_algorithm_dir_name() -> str:
+    return str(
+        load_site_settings().get("blog_algorithm_dir", DEFAULT_BLOG_ALGORITHM_DIR)
+    ).strip() or DEFAULT_BLOG_ALGORITHM_DIR
+
+
+def blog_algorithm_path() -> Path:
+    return ATELIER_ROOT / "Blog" / blog_algorithm_dir_name()
+
+
+def algorithm_manifest_path() -> Path:
+    return blog_algorithm_path() / "manifest.json"
+
+
+def algorithm_guide_toc_dir() -> Path:
+    return blog_algorithm_path() / "_meta" / "guide-toc"
 
 
 @lru_cache(maxsize=1)

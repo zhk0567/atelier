@@ -14,10 +14,17 @@ XLSX_PATH = BASE_DIR / "zhita_settings.xlsx"
 IDENTITY_PATH = BASE_DIR / "site_identity.json"
 BLOG_DIR = BASE_DIR / "Blog"
 
-from app.config import blog_framework_dir_name, framework_manifest_path  # noqa: E402
+from app.config import (  # noqa: E402
+    blog_algorithm_dir_name,
+    blog_framework_dir_name,
+    algorithm_manifest_path,
+    framework_manifest_path,
+)
 
 FRAMEWORK_MANIFEST_PATH = framework_manifest_path()
+ALGORITHM_MANIFEST_PATH = algorithm_manifest_path()
 _BLOG_FRAMEWORK_DIR = blog_framework_dir_name()
+_BLOG_ALGORITHM_DIR = blog_algorithm_dir_name()
 
 # Standalone posts outside Framework manifest
 BLOG_STANDALONE: list[dict[str, str]] = [
@@ -39,21 +46,37 @@ def load_framework_manifest() -> dict:
 
 
 @lru_cache(maxsize=1)
+def load_algorithm_manifest() -> dict:
+    if not ALGORITHM_MANIFEST_PATH.is_file():
+        return {"posts": []}
+    return json.loads(ALGORITHM_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _manifest_entry_to_post(entry: dict, default_dir: str) -> dict[str, str]:
+    folder = entry.get("folder") or f"{default_dir}/{entry['slug']}"
+    return {
+        "slug": entry["slug"],
+        "folder": folder,
+        "title": entry.get("title", entry["slug"]),
+        "series": entry.get("series", ""),
+        "category": entry.get("category", ""),
+        "stack": entry.get("stack", entry.get("topic_path", "")),
+        "topic_path": entry.get("topic_path", ""),
+        "guide_tier": entry.get("guide_tier", ""),
+    }
+
+
+@lru_cache(maxsize=1)
 def load_all_blog_posts() -> list[dict[str, str]]:
     posts: list[dict[str, str]] = [dict(p) for p in BLOG_STANDALONE]
-    manifest = load_framework_manifest()
-    for entry in manifest.get("posts", []):
+    for entry in load_framework_manifest().get("posts", []):
         if entry.get("status") != "published":
             continue
-        folder = entry.get("folder") or f"{_BLOG_FRAMEWORK_DIR}/{entry['slug']}"
-        posts.append({
-            "slug": entry["slug"],
-            "folder": folder,
-            "title": entry.get("title", entry["slug"]),
-            "series": entry.get("series", "framework"),
-            "category": entry.get("category", ""),
-            "stack": entry.get("stack", ""),
-        })
+        posts.append(_manifest_entry_to_post(entry, _BLOG_FRAMEWORK_DIR))
+    for entry in load_algorithm_manifest().get("posts", []):
+        if entry.get("status") != "published":
+            continue
+        posts.append(_manifest_entry_to_post(entry, _BLOG_ALGORITHM_DIR))
     return posts
 
 
@@ -68,11 +91,27 @@ def get_blog_post(slug: str) -> dict[str, str] | None:
     for post in load_all_blog_posts():
         if post.get("slug") == slug:
             return dict(post)
+    for entry in load_framework_manifest().get("posts", []):
+        if entry.get("slug") == slug:
+            return _manifest_entry_to_post(entry, _BLOG_FRAMEWORK_DIR)
+    for entry in load_algorithm_manifest().get("posts", []):
+        if entry.get("slug") == slug:
+            return _manifest_entry_to_post(entry, _BLOG_ALGORITHM_DIR)
     return None
 
 
 def list_framework_posts(*, include_draft: bool = False) -> list[dict]:
     manifest = load_framework_manifest()
+    out: list[dict] = []
+    for entry in manifest.get("posts", []):
+        if not include_draft and entry.get("status") != "published":
+            continue
+        out.append(dict(entry))
+    return out
+
+
+def list_algorithm_posts(*, include_draft: bool = False) -> list[dict]:
+    manifest = load_algorithm_manifest()
     out: list[dict] = []
     for entry in manifest.get("posts", []):
         if not include_draft and entry.get("status") != "published":

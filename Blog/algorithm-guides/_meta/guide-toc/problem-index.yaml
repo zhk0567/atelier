@@ -1,0 +1,12 @@
+id: problem-index
+tier: index
+official: ""
+essentials:
+  - id: purpose
+    title: 题单用途
+  - id: mapping
+    title: 与 Study 目录映射
+  - id: how-to-use
+    title: 如何使用题解树
+  - id: maintenance
+    title: 维护与对齐

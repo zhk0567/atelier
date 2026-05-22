@@ -24,7 +24,6 @@
     <p class="lead">{{ project.summary }}</p>
     <p class="wiki-tags">
       <span class="wiki-tag">{{ project.category }}</span>
-      <span class="wiki-tag">{{ project.year }}</span>
       {% if project.project_type %}<span class="wiki-tag">{{ project.project_type }}</span>{% endif %}
       {% for tag in project.tags %}
       <span class="wiki-tag">{{ tag }}</span>

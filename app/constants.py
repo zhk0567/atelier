@@ -77,6 +77,7 @@ UI = {
     "btn_send": "发送演示",
     "label_blog": "博客",
     "link_framework_guides": "Framework 技术栈指南",
+    "link_algorithm_guides": "Algorithm 算法与刷题",
     "blog_home_lead": "Framework 官方指南连载与其它技术笔记。",
     "label_wiki_toc": "本文档",
     "link_wiki_index": "目录总览",

@@ -1,0 +1,16 @@
+id: topic-ds
+tier: medium
+official: ""
+essentials:
+  - id: abstract
+    title: 抽象模型
+  - id: operations
+    title: 核心操作
+  - id: implementation
+    title: 实现要点
+  - id: applications
+    title: 典型应用
+  - id: pitfalls
+    title: 易错点
+  - id: practice
+    title: 练习建议

@@ -1,0 +1,16 @@
+id: interview-classic
+tier: medium
+official: ""
+essentials:
+  - id: problem
+    title: 题意与接口
+  - id: design
+    title: 设计与数据结构
+  - id: concurrency
+    title: 并发与边界
+  - id: complexity
+    title: 复杂度
+  - id: pitfalls
+    title: 易错点
+  - id: extensions
+    title: 扩展追问
