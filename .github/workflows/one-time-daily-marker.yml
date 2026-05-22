@@ -1,0 +1,46 @@
+# One-time scheduled commit for 2026-05-23 (Beijing). Safe to delete after that day.
+name: One-time daily marker (2026-05-23)
+
+on:
+  schedule:
+    # 10:00 Asia/Shanghai = 02:00 UTC, May 23
+    - cron: "0 2 23 5 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Skip unless target day
+        id: gate
+        run: |
+          TARGET="2026-05-23"
+          TODAY="$(TZ=Asia/Shanghai date +%Y-%m-%d)"
+          echo "today=$TODAY" >> "$GITHUB_OUTPUT"
+          if [ "$TODAY" != "$TARGET" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Not $TARGET (today is $TODAY), skipping."
+          elif grep -q "^${TARGET} " data/github-daily-marker.txt 2>/dev/null; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Marker for $TARGET already exists, skipping."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Write marker and push
+        if: steps.gate.outputs.skip != 'true'
+        run: |
+          TARGET="2026-05-23"
+          NOW="$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M %z')"
+          echo "${TARGET} automated marker at ${NOW}" >> data/github-daily-marker.txt
+          # Use your linked GitHub email so the contribution graph counts it.
+          git config user.name "zhk0567"
+          git config user.email "3283409866@qq.com"
+          git add data/github-daily-marker.txt
+          git commit -m "chore: daily marker for ${TARGET}"
+          git push
