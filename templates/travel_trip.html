@@ -24,7 +24,13 @@
     <div class="mp-gallery-grid wiki-gallery" data-gallery>
       {% for photo in photos %}
       <div class="wiki-gallery__item"{% if photo.meta %} data-meta="{{ photo.meta }}"{% endif %}>
-        <img src="{{ photo.image_url }}" alt="{{ photo.title }}" loading="lazy" />
+        <img
+          src="{{ photo.thumb_url | default(photo.image_url) }}"
+          data-full-src="{{ photo.image_url }}"
+          alt="{{ photo.title }}"
+          loading="lazy"
+          decoding="async"
+        />
         <p class="wiki-gallery__title" title="{{ photo.title }}">{{ photo.title }}</p>
       </div>
       {% else %}

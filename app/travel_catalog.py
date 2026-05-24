@@ -7,6 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from app.config import ATELIER_ROOT
+from app.media_derivatives import ensure_travel_derivatives
 
 TRAVEL_DATA_DIR = ATELIER_ROOT / "data" / "travel"
 TRIPS_MANIFEST = TRAVEL_DATA_DIR / "trips.json"
@@ -59,20 +60,34 @@ def _enrich_trip(trip: dict) -> dict:
         path = base_dir / filename
         if not path.is_file():
             continue
-        url = f"{UPLOAD_URL_PREFIX}/{trip_id}/{filename}"
+        thumb_name, web_name = ensure_travel_derivatives(base_dir, filename)
+        orig_url = f"{UPLOAD_URL_PREFIX}/{trip_id}/{filename}"
+        thumb_url = (
+            f"{UPLOAD_URL_PREFIX}/{trip_id}/{thumb_name}"
+            if thumb_name
+            else orig_url
+        )
+        display_url = (
+            f"{UPLOAD_URL_PREFIX}/{trip_id}/{web_name}" if web_name else orig_url
+        )
         photos.append({
             "id": photo.get("id") or f"{i:02d}",
             "file": filename,
             "title": photo.get("title") or f"照片 {i:02d}",
             "meta": photo.get("meta", ""),
-            "image_url": url,
+            "thumb_url": thumb_url,
+            "image_url": display_url,
         })
     cover_file = trip.get("cover") or (photos[0]["file"] if photos else "")
     cover_url = ""
     if cover_file and (base_dir / cover_file).is_file():
-        cover_url = f"{UPLOAD_URL_PREFIX}/{trip_id}/{cover_file}"
+        thumb_name, _ = ensure_travel_derivatives(base_dir, cover_file)
+        if thumb_name:
+            cover_url = f"{UPLOAD_URL_PREFIX}/{trip_id}/{thumb_name}"
+        else:
+            cover_url = f"{UPLOAD_URL_PREFIX}/{trip_id}/{cover_file}"
     elif photos:
-        cover_url = photos[0]["image_url"]
+        cover_url = photos[0].get("thumb_url") or photos[0]["image_url"]
     return {
         "id": trip_id,
         "title": trip.get("title") or trip_id,

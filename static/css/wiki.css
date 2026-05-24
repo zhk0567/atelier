@@ -1002,7 +1002,7 @@ button, input, select {
   justify-content: center;
   padding: 1.5rem;
   background: rgba(0, 0, 0, 0.82);
-  touch-action: pan-y pinch-zoom;
+  touch-action: none;
 }
 .wiki-lightbox[hidden] {
   display: none;

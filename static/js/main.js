@@ -51,7 +51,10 @@
       "渊光_6_original": "yuanguang-6",
     };
 
-    const wallpaperUrl = (item) => new URL(item.url, window.location.href).href;
+    const wallpaperUrl = (item) => {
+      const raw = item.preview_url || item.url;
+      return new URL(raw, window.location.href).href;
+    };
 
     const imageShows = (url) => {
       if (!image.src) return false;
@@ -74,7 +77,7 @@
     let wallpaperHasShown = false;
 
     const applyWallpaper = (item) => {
-      if (!item || !item.url) return;
+      if (!item || !(item.preview_url || item.url)) return;
       document.body.classList.add("has-wallpaper");
       html.classList.add("wallpaper-enabled");
       const url = wallpaperUrl(item);
@@ -342,13 +345,30 @@
     let index = 0;
     let touchStartX = 0;
     let touchStartY = 0;
+    let touchTracking = false;
+
+    const isOpen = () => overlay.classList.contains("is-open");
+
+    const slideUrl = (thumb) => {
+      const raw =
+        thumb.getAttribute("data-full-src") ||
+        thumb.getAttribute("src") ||
+        thumb.currentSrc ||
+        thumb.src ||
+        "";
+      try {
+        return new URL(raw, window.location.href).href;
+      } catch {
+        return raw;
+      }
+    };
 
     const buildSlides = (gallery) =>
       Array.from(gallery.querySelectorAll(".wiki-gallery__item img")).map((thumb) => {
         const item = thumb.closest(".wiki-gallery__item");
         return {
-          src: thumb.currentSrc || thumb.src,
-          alt: thumb.alt || "",
+          src: slideUrl(thumb),
+          alt: thumb.getAttribute("alt") || "",
           meta: item?.dataset.meta || "",
         };
       });
@@ -367,7 +387,13 @@
       if (!slides.length) return;
       index = (nextIndex + slides.length) % slides.length;
       const slide = slides[index];
-      imgEl.src = slide.src;
+      const nextSrc = slide.src;
+      if (imgEl.src !== nextSrc) {
+        imgEl.src = nextSrc;
+      } else {
+        imgEl.removeAttribute("src");
+        imgEl.src = nextSrc;
+      }
       imgEl.alt = slide.alt;
       if (captionEl) {
         const parts = [slide.alt, slide.meta].filter(Boolean);
@@ -385,16 +411,19 @@
     const openAt = (gallery, startIndex) => {
       slides = buildSlides(gallery);
       if (!slides.length) return;
-      show(startIndex);
       overlay.hidden = false;
+      overlay.classList.add("is-open");
+      show(startIndex);
       document.body.style.overflow = "hidden";
       closeBtn?.focus();
     };
 
     const close = () => {
+      overlay.classList.remove("is-open");
       overlay.hidden = true;
       slides = [];
       index = 0;
+      touchTracking = false;
       imgEl.removeAttribute("src");
       if (captionEl) {
         captionEl.textContent = "";
@@ -409,9 +438,20 @@
       document.body.style.overflow = "";
     };
 
+    const onSwipeEnd = (dx, dy) => {
+      if (!isOpen() || slides.length < 2) return;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0) step(1);
+      else step(-1);
+    };
+
     document.querySelectorAll("[data-gallery]").forEach((gallery) => {
       gallery.querySelectorAll(".wiki-gallery__item img").forEach((thumb, i) => {
-        thumb.addEventListener("click", () => openAt(gallery, i));
+        thumb.style.cursor = "pointer";
+        thumb.addEventListener("click", (e) => {
+          e.preventDefault();
+          openAt(gallery, i);
+        });
       });
     });
 
@@ -420,10 +460,12 @@
       close();
     });
     prevBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
       step(-1);
     });
     nextBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
       step(1);
     });
@@ -435,29 +477,64 @@
     overlay.addEventListener(
       "touchstart",
       (e) => {
-        if (overlay.hidden || slides.length < 2) return;
-        const t = e.changedTouches[0];
+        if (!isOpen() || slides.length < 2) return;
+        if (!e.touches.length) return;
+        const t = e.touches[0];
         touchStartX = t.clientX;
         touchStartY = t.clientY;
+        touchTracking = true;
       },
       { passive: true }
     );
     overlay.addEventListener(
-      "touchend",
+      "touchmove",
       (e) => {
-        if (overlay.hidden || slides.length < 2) return;
-        const t = e.changedTouches[0];
+        if (!touchTracking || !isOpen()) return;
+        if (!e.touches.length) return;
+        const t = e.touches[0];
         const dx = t.clientX - touchStartX;
         const dy = t.clientY - touchStartY;
-        if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
-        if (dx < 0) step(1);
-        else step(-1);
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+          e.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+    overlay.addEventListener(
+      "touchend",
+      (e) => {
+        if (!touchTracking) return;
+        touchTracking = false;
+        const t = e.changedTouches[0];
+        if (!t) return;
+        onSwipeEnd(t.clientX - touchStartX, t.clientY - touchStartY);
+      },
+      { passive: true }
+    );
+    overlay.addEventListener(
+      "touchcancel",
+      () => {
+        touchTracking = false;
       },
       { passive: true }
     );
 
+    overlay.addEventListener("pointerdown", (e) => {
+      if (!isOpen() || slides.length < 2 || e.pointerType === "touch") return;
+      if (e.target.closest(".wiki-lightbox__nav, .wiki-lightbox__close")) return;
+      touchStartX = e.clientX;
+      touchStartY = e.clientY;
+      touchTracking = true;
+    });
+    overlay.addEventListener("pointerup", (e) => {
+      if (!touchTracking || e.pointerType === "touch") return;
+      touchTracking = false;
+      if (e.target.closest(".wiki-lightbox__nav, .wiki-lightbox__close")) return;
+      onSwipeEnd(e.clientX - touchStartX, e.clientY - touchStartY);
+    });
+
     document.addEventListener("keydown", (e) => {
-      if (overlay.hidden) return;
+      if (!isOpen()) return;
       if (e.key === "Escape") close();
       else if (e.key === "ArrowLeft") {
         e.preventDefault();

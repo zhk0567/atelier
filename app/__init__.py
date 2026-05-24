@@ -32,10 +32,19 @@ async def _lifespan(app: FastAPI):
         loop.set_exception_handler(_win_asyncio_exception_handler)
     try:
         from app.context import clear_context_cache, list_wallpapers, load_wiki_assets
+        from app.media_derivatives import warmup_media_derivatives
         from app.projects import get_all_projects
         from app.travel_catalog import load_travel_trips
         from site_data import load_site_data
 
+        media_stats = warmup_media_derivatives()
+        if media_stats["wallpapers"] or media_stats["travel_photos"]:
+            print(
+                f"[atelier] media derivatives: "
+                f"{media_stats['wallpapers']} wallpapers, "
+                f"{media_stats['travel_photos']} travel photos",
+                flush=True,
+            )
         clear_context_cache()
         load_site_data()
         load_travel_trips()

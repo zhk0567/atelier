@@ -27,6 +27,7 @@ from app.constants import (
     UI,
     HERO_SUBTITLE,
 )
+from app.media_derivatives import ensure_wallpaper_preview, wallpaper_preview_url
 from app.projects import get_all_projects
 from site_data import build_data_hubs, get_spreadsheet_context, load_site_data
 
@@ -145,10 +146,16 @@ def _build_wallpaper_catalog() -> tuple[list[dict], dict[str, Path]]:
             if path is None:
                 continue
             paths[wid] = path
+            preview_url = (
+                wallpaper_preview_url(wid)
+                if ensure_wallpaper_preview(wid, path)
+                else f"/wallpaper/{wid}"
+            )
             items.append({
                 "id": wid,
                 "label": entry["label"],
                 "url": f"/wallpaper/{wid}",
+                "preview_url": preview_url,
                 "is_video": path.suffix.lower() in WALLPAPER_VIDEO_EXTS,
                 "default": default_id == wid if default_id else False,
             })
@@ -164,10 +171,16 @@ def _build_wallpaper_catalog() -> tuple[list[dict], dict[str, Path]]:
     for i, path in enumerate(files):
         wid = path.stem if _WALLPAPER_SLUG_RE.match(path.stem) else f"wallpaper-{i:02d}"
         paths[wid] = path
+        preview_url = (
+            wallpaper_preview_url(wid)
+            if ensure_wallpaper_preview(wid, path)
+            else f"/wallpaper/{wid}"
+        )
         items.append({
             "id": wid,
             "label": _wallpaper_label_from_stem(path.stem),
             "url": f"/wallpaper/{wid}",
+            "preview_url": preview_url,
             "is_video": path.suffix.lower() in WALLPAPER_VIDEO_EXTS,
             "default": i == 0,
         })
