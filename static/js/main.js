@@ -332,17 +332,60 @@
     const overlay = document.getElementById("wiki-lightbox");
     const imgEl = document.getElementById("wiki-lightbox-img");
     const captionEl = document.getElementById("wiki-lightbox-caption");
+    const counterEl = document.getElementById("wiki-lightbox-counter");
     const closeBtn = document.getElementById("wiki-lightbox-close");
+    const prevBtn = document.getElementById("wiki-lightbox-prev");
+    const nextBtn = document.getElementById("wiki-lightbox-next");
     if (!overlay || !imgEl) return;
 
-    const open = (src, alt, meta) => {
-      imgEl.src = src;
-      imgEl.alt = alt || "";
+    let slides = [];
+    let index = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    const buildSlides = (gallery) =>
+      Array.from(gallery.querySelectorAll(".wiki-gallery__item img")).map((thumb) => {
+        const item = thumb.closest(".wiki-gallery__item");
+        return {
+          src: thumb.currentSrc || thumb.src,
+          alt: thumb.alt || "",
+          meta: item?.dataset.meta || "",
+        };
+      });
+
+    const updateChrome = () => {
+      const multi = slides.length > 1;
+      if (prevBtn) prevBtn.hidden = !multi;
+      if (nextBtn) nextBtn.hidden = !multi;
+      if (counterEl) {
+        counterEl.hidden = !multi;
+        counterEl.textContent = multi ? `${index + 1} / ${slides.length}` : "";
+      }
+    };
+
+    const show = (nextIndex) => {
+      if (!slides.length) return;
+      index = (nextIndex + slides.length) % slides.length;
+      const slide = slides[index];
+      imgEl.src = slide.src;
+      imgEl.alt = slide.alt;
       if (captionEl) {
-        const parts = [alt, meta].filter(Boolean);
+        const parts = [slide.alt, slide.meta].filter(Boolean);
         captionEl.textContent = parts.join(" · ");
         captionEl.hidden = !parts.length;
       }
+      updateChrome();
+    };
+
+    const step = (delta) => {
+      if (slides.length < 2) return;
+      show(index + delta);
+    };
+
+    const openAt = (gallery, startIndex) => {
+      slides = buildSlides(gallery);
+      if (!slides.length) return;
+      show(startIndex);
       overlay.hidden = false;
       document.body.style.overflow = "hidden";
       closeBtn?.focus();
@@ -350,28 +393,79 @@
 
     const close = () => {
       overlay.hidden = true;
+      slides = [];
+      index = 0;
       imgEl.removeAttribute("src");
       if (captionEl) {
         captionEl.textContent = "";
         captionEl.hidden = true;
       }
+      if (counterEl) {
+        counterEl.textContent = "";
+        counterEl.hidden = true;
+      }
+      if (prevBtn) prevBtn.hidden = true;
+      if (nextBtn) nextBtn.hidden = true;
       document.body.style.overflow = "";
     };
 
-    document.querySelectorAll("[data-gallery] .wiki-gallery__item img").forEach((thumb) => {
-      thumb.addEventListener("click", () => {
-        const item = thumb.closest(".wiki-gallery__item");
-        const meta = item?.dataset.meta || "";
-        open(thumb.src, thumb.alt, meta);
+    document.querySelectorAll("[data-gallery]").forEach((gallery) => {
+      gallery.querySelectorAll(".wiki-gallery__item img").forEach((thumb, i) => {
+        thumb.addEventListener("click", () => openAt(gallery, i));
       });
     });
 
-    closeBtn?.addEventListener("click", close);
+    closeBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      close();
+    });
+    prevBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      step(-1);
+    });
+    nextBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      step(1);
+    });
+    imgEl.addEventListener("click", (e) => e.stopPropagation());
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) close();
     });
+
+    overlay.addEventListener(
+      "touchstart",
+      (e) => {
+        if (overlay.hidden || slides.length < 2) return;
+        const t = e.changedTouches[0];
+        touchStartX = t.clientX;
+        touchStartY = t.clientY;
+      },
+      { passive: true }
+    );
+    overlay.addEventListener(
+      "touchend",
+      (e) => {
+        if (overlay.hidden || slides.length < 2) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - touchStartX;
+        const dy = t.clientY - touchStartY;
+        if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+        if (dx < 0) step(1);
+        else step(-1);
+      },
+      { passive: true }
+    );
+
     document.addEventListener("keydown", (e) => {
-      if (!overlay.hidden && e.key === "Escape") close();
+      if (overlay.hidden) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        step(-1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        step(1);
+      }
     });
   }
 

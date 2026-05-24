@@ -14,7 +14,7 @@
   {% block meta %}{% endblock %}
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/static/css/wiki.css?v=32" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=34" />
   <link rel="stylesheet" href="/static/css/mp-portal.css?v=10" />
   {% if wallpapers %}
   {% set default_wp = wallpapers | selectattr('default') | first | default(wallpapers[0]) %}
@@ -115,11 +115,14 @@
   <div class="wiki-sidebar-backdrop" id="wiki-sidebar-backdrop" hidden></div>
   <div class="wiki-lightbox" id="wiki-lightbox" hidden role="dialog" aria-modal="true" aria-label="图片预览">
     <button type="button" class="wiki-lightbox__close" id="wiki-lightbox-close" aria-label="关闭">×</button>
+    <button type="button" class="wiki-lightbox__nav wiki-lightbox__nav--prev" id="wiki-lightbox-prev" aria-label="上一张" hidden>‹</button>
+    <button type="button" class="wiki-lightbox__nav wiki-lightbox__nav--next" id="wiki-lightbox-next" aria-label="下一张" hidden>›</button>
     <img class="wiki-lightbox__img" id="wiki-lightbox-img" alt="" />
     <p class="wiki-lightbox__caption" id="wiki-lightbox-caption" hidden></p>
+    <p class="wiki-lightbox__counter" id="wiki-lightbox-counter" hidden aria-live="polite"></p>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/static/js/main.js?v=38" defer></script>
+  <script src="/static/js/main.js?v=39" defer></script>
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>
