@@ -1,0 +1,47 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ ui.label_travel }} · {{ site_name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ ui.label_travel }} ({{ trip_count }})</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="mp-wrapper mp-wrapper--page">
+  <section class="mp-section mp-page-header mp-section-full">
+    <h1>{{ ui.label_travel }}</h1>
+    <p class="lead">{{ ui.travel_index_lead }}</p>
+  </section>
+
+  <section class="mp-section mp-section-full">
+    <ul class="mp-project-list travel-trip-list">
+      {% for trip in trips %}
+      <li class="mp-project-card travel-trip-card">
+        {% if trip.cover_url %}
+        <a class="travel-trip-card__cover" href="{{ trip.url }}" aria-hidden="true" tabindex="-1">
+          <img src="{{ trip.cover_url }}" alt="" loading="lazy" />
+        </a>
+        {% endif %}
+        <div class="mp-project-card__body">
+          <h3><a href="{{ trip.url }}">{{ trip.title }}</a></h3>
+          {% if trip.date %}<p class="mp-project-card__meta">{{ trip.date }} {{ ui.sep_dot }} {{ trip.photo_count }} 张</p>{% else %}<p class="mp-project-card__meta">{{ trip.photo_count }} 张</p>{% endif %}
+          {% if trip.summary %}<p>{{ trip.summary }}</p>{% endif %}
+        </div>
+      </li>
+      {% else %}
+      <li><p class="mp-empty-note">暂无旅行记录。</p></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <div class="mp-button-wrapper mp-footer-actions">
+    <a class="mp-button" href="/">
+      <span class="mp-button__inner">{{ ui.back_home }}</span>
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -256,6 +256,7 @@ def build_wiki_nav(hubs: list[dict]) -> list[dict]:
                 {"label": "主页面", "url": "/", "external": False},
                 {"label": "项目", "url": "/projects", "external": False},
                 {"label": UI["label_blog"], "url": "/blog", "external": False},
+                {"label": UI["label_travel"], "url": "/travel", "external": False},
             ],
         },
         {"label": "数据分类", "children": portal_children},
@@ -266,6 +267,12 @@ def clear_context_cache() -> None:
     _wallpaper_catalog.cache_clear()
     load_wiki_assets.cache_clear()
     _site_context_core.cache_clear()
+    try:
+        from app.travel_catalog import clear_travel_cache
+
+        clear_travel_cache()
+    except ImportError:
+        pass
 
 
 @lru_cache(maxsize=1)

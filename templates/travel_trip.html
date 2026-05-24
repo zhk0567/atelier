@@ -1,0 +1,45 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ title }} · {{ ui.label_travel }} · {{ site_name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="/travel">{{ ui.label_travel }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ title }} ({{ item_count }})</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="mp-wrapper mp-wrapper--page">
+  <section class="mp-section mp-page-header mp-section-full">
+    <h1>{{ title }}</h1>
+    {% if summary %}<p class="lead">{{ summary }}</p>{% endif %}
+    {% if date %}<p class="mp-project-card__meta">{{ date }} · {{ item_count }} 张</p>{% endif %}
+  </section>
+
+  <section class="mp-section mp-section-full mp-section--gallery">
+    <div class="mp-gallery-grid wiki-gallery" data-gallery>
+      {% for photo in photos %}
+      <div class="wiki-gallery__item"{% if photo.meta %} data-meta="{{ photo.meta }}"{% endif %}>
+        <img src="{{ photo.image_url }}" alt="{{ photo.title }}" loading="lazy" />
+        <p class="wiki-gallery__title" title="{{ photo.title }}">{{ photo.title }}</p>
+      </div>
+      {% else %}
+      <p class="mp-empty-note">暂无照片。</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <div class="mp-button-wrapper mp-footer-actions">
+    <a class="mp-button" href="/travel">
+      <span class="mp-button__inner">{{ ui.travel_back_index }}</span>
+    </a>
+    <a class="mp-button" href="/">
+      <span class="mp-button__inner">{{ ui.back_home }}</span>
+    </a>
+  </div>
+</div>
+{% endblock %}

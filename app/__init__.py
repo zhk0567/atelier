@@ -11,7 +11,7 @@ from fastapi import FastAPI
 from app.config import ATELIER_ROOT
 from app.static_files import CachedStaticFiles
 from app.constants import SITE_NAME, SITE_TITLE
-from app.routes import assets, blog, browse, home, projects, wiki
+from app.routes import assets, blog, browse, home, projects, travel, wiki
 
 
 def _win_asyncio_exception_handler(loop: asyncio.AbstractEventLoop, context: dict) -> None:
@@ -33,10 +33,12 @@ async def _lifespan(app: FastAPI):
     try:
         from app.context import clear_context_cache, list_wallpapers, load_wiki_assets
         from app.projects import get_all_projects
+        from app.travel_catalog import load_travel_trips
         from site_data import load_site_data
 
         clear_context_cache()
         load_site_data()
+        load_travel_trips()
         get_all_projects()
         load_wiki_assets()
         wallpapers = list_wallpapers()
@@ -67,6 +69,7 @@ def create_app() -> FastAPI:
     app.include_router(browse.router)
     app.include_router(projects.router)
     app.include_router(blog.router)
+    app.include_router(travel.router)
     app.include_router(wiki.router)
     static_dir = ATELIER_ROOT / "static"
     app.mount("/static", CachedStaticFiles(directory=static_dir), name="static")
