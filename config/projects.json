@@ -87,6 +87,22 @@
       ]
     },
     {
+      "id": "llm-agents",
+      "title": "llm-agents · 多语言 AI Agent 框架探索",
+      "summary": "多语言主流 AI Agent 框架对比与实现，统一基准任务下覆盖 LangGraph、CrewAI、LlamaIndex 等，支持 Ollama 本地模型。",
+      "category": "AI · Agent",
+      "year": "2025",
+      "tags": ["Python", "LangGraph", "CrewAI", "Ollama"],
+      "github": "https://github.com/zhk0567/llm-agents",
+      "wiki_slug": "llm-agents",
+      "thumb": 1,
+      "highlights": [
+        "框架对比矩阵与选型指南",
+        "Python / TypeScript / .NET / Java 参考实现",
+        "Ollama 本地模型与 Smoke 测试"
+      ]
+    },
+    {
       "id": "algorithm",
       "title": "Algorithm 算法与数据结构",
       "summary": "Python / C++ 双语言算法仓库：完整数据结构实现、LeetCode 题解、学习路线与面试高频专题。",

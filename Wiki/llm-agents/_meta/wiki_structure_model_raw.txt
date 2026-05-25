@@ -1,0 +1,236 @@
+<wiki_structure>
+  <title>llm-agents 项目 Wiki</title>
+  <description>多语言主流 AI Agent 框架探索与实现仓库，提供统一基准任务下的各主流框架对比实现，支持 Ollama 本地模型。</description><sections>
+    <section id="section-1">
+      <title>项目概览</title>
+      <pages>
+        <page_ref>page-1</page_ref><page_ref>page-2</page_ref>
+      </pages>
+    </section><section id="section-2">
+      <title>框架实现详解</title>
+      <pages>
+        <page_ref>page-3</page_ref>
+        <page_ref>page-4</page_ref>
+        <page_ref>page-5</page_ref>
+        <page_ref>page-6</page_ref>
+        <page_ref>page-7</page_ref>
+      </pages>
+      <subsections>
+        <section_ref>section-3</section_ref>
+      </subsections>
+    </section>
+    <section id="section-3">
+      <title>配置与工具</title>
+      <pages>
+        <page_ref>page-8</page_ref>
+        <page_ref>page-9</page_ref>
+        <page_ref>page-10</page_ref>
+      </pages>
+    </section>
+    <section id="section-4">
+      <title>开发与测试</title>
+      <pages>
+        <page_ref>page-11</page_ref>
+        <page_ref>page-12</page_ref>
+      </pages>
+    </section>
+  </sections><pages>
+    <page id="page-1">
+      <title>项目介绍与目录结构</title>
+      <description>项目总体介绍、目标、技术栈以及完整的目录结构说明。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>CONTRIBUTING.md</file_path>
+      </relevant_files>
+      <related_pages><related>page-2</related><related>page-8</related></related_pages>
+      <parent_section>section-1</parent_section>
+    </page>
+    <page id="page-2"><title>框架对比矩阵与选型指南</title>
+      <description>各框架特点对比、适用场景以及如何根据需求选择合适的框架。</description>
+      <importance>high</importance>
+      <relevant_files><file_path>docs/FRAMEWORK_MATRIX.md</file_path>
+        <file_path>docs/COMPARISON_REPORT.md</file_path>
+        <file_path>README.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related>
+        <related>page-3</related>
+        <related>page-4</related>
+        <related>page-5</related>
+        <related>page-6</related>
+        <related>page-7</related>
+      </related_pages>
+      <parent_section>section-1</parent_section>
+    </page><page id="page-3">
+      <title>Python 框架实现：LangGraph</title>
+      <description>LangGraph 框架的实现细节、工作流程以及如何运行示例。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>python/langgraph/README.md</file_path>
+        <file_path>python/langgraph/main.py</file_path>
+        <file_path>python/langgraph/crew_research.py</file_path>
+        <file_path>python/langgraph/HITL.md</file_path>
+      </relevant_files>
+      <related_pages><related>page-2</related><related>page-4</related><related>page-9</related></related_pages>
+      <parent_section>section-2</parent_section>
+    </page>
+    <page id="page-4"><title>Python 框架实现：CrewAI</title>
+      <description>CrewAI 框架的实现细节、团队角色协作机制以及如何运行示例。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>python/crewai/README.md</file_path>
+        <file_path>python/crewai/main.py</file_path>
+        <file_path>python/crewai/crew_research.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-2</related>
+        <related>page-3</related>
+        <related>page-9</related>
+      </related_pages>
+      <parent_section>section-2</parent_section>
+    </page>
+    <page id="page-5">
+      <title>Python 框架实现：LlamaIndex、Haystack、DSPy 等</title>
+      <description>其他 Python 框架（LlamaIndex、Haystack、DSPy 等）的实现细节和特点。</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>python/llamaindex/README.md</file_path>
+        <file_path>python/llamaindex/main.py</file_path>
+        <file_path>python/haystack/README.md</file_path>
+        <file_path>python/haystack/main.py</file_path>
+        <file_path>python/dspy/README.md</file_path>
+        <file_path>python/dspy/main.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-2</related>
+        <related>page-3</related>
+        <related>page-4</related>
+        <related>page-9</related>
+      </related_pages>
+      <parent_section>section-2</parent_section></page>
+    <page id="page-6">
+      <title>TypeScript 框架实现：LangGraph.js 与 OpenAI Agents SDK</title>
+      <description>TypeScript 实现的 LangGraph.js 和 OpenAI Agents SDK 框架细节。</description>
+      <importance>medium</importance>
+      <relevant_files>
+        <file_path>typescript/langgraph-js/README.md</file_path>
+        <file_path>typescript/langgraph-js/main.ts</file_path>
+        <file_path>typescript/openai-agents/README.md</file_path>
+        <file_path>typescript/openai-agents/main.ts</file_path><file_path>typescript/package.json</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-2</related>
+        <related>page-3</related>
+        <related>page-9</related>
+      </related_pages>
+      <parent_section>section-2</parent_section></page>
+    <page id="page-7">
+      <li>dotnet 和 Java 参考实现</li>
+      <title>dotnet 和 Java 参考实现</title>
+      <description>dotnet 和 Java 目录下的参考代码说明，包括结构和用途。</description>
+      <importance>low</importance>
+      <relevant_files>
+        <file_path>dotnet/README.md</file_path>
+        <file_path>dotnet/src/TopicResearchAgent/Program.cs</file_path>
+        <file_path>java/README.md</file_path>
+        <file_path>java/google-adk/src/main/java/com/llmagents/adk/TopicResearchApp.java</file_path>
+        <file_path>java/langchain4j/src/main/java/com/llmagents/TopicResearchApp.java</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-2</related>
+        <related>page-8</related>
+      </related_pages>
+      <parent_section>section-2</parent_section></page>
+    <page id="page-8">
+      <title>配置文件说明</title>
+      <description>项目配置文件的详细说明，包括 Ollama 配置、Agent 配置以及共享配置。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>config/ollama.json</file_path>
+        <file_path>config/agent.json</file_path><file_path>python/llm_agents_common/config.py</file_path>
+        <file_path>typescript/shared/config.ts</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related>
+        <related>page-9</related>
+        <related>page-10</related>
+      </related_pages>
+      <parent_section>section-3</parent_section></page>
+    <page id="page-9">
+      <title>共享工具与通用组件</title>
+      <description>共享目录下的工具和通用组件，包括搜索工具、提示词、输出验证等。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>shared/tools/duckduckgo_search.py</file_path>
+        <file_path>shared/tools/mock_search.py</file_path>
+        <file_path>shared/prompts/research.txt</file_path>
+        <file_path>shared/schema/research_output.json</file_path>
+        <file_path>python/llm_agents_common/mock_search.py</file_path>
+        <file_path>python/llm_agents_common/search.py</file_path>
+        <file_path>python/llm_agents_common/output.py</file_path>
+        <file_path>python/llm_agents_common/validate.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-3</related>
+        <related>page-4</related>
+        <related>page-5</related>
+        <related>page-6</related>
+        <related>page-8</related>
+        <related>page-10</related></related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-10">
+      <title>Ollama 本地模型使用指南</title>
+      <description>如何配置和使用本地 Ollama 模型，包括模型拉取、服务启动和连通性检查。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>scripts/setup-ollama.ps1</file_path>
+        <file_path>scripts/check-ollama.ps1</file_path>
+        <file_path>scripts/pull-models.ps1</file_path>
+        <file_path>scripts/run-smoke-live.ps1</file_path>
+        <file_path>config/ollama.json</file_path></relevant_files>
+      <related_pages>
+        <related>page-1</related>
+        <related>page-8</related>
+        <related>page-11</related>
+      </related_pages>
+      <parent_section>section-3</parent_section>
+    </page>
+    <page id="page-11">
+      <title>快速开始与环境搭建</title>
+      <description>项目的快速开始指南，包括前置条件、一键初始化、环境搭建和依赖安装。</description>
+      <importance>high</importance>
+      <relevant_files>
+        <file_path>README.md</file_path>
+        <file_path>scripts/bootstrap.ps1</file_path>
+        <file_path>scripts/install-all.ps1</file_path>
+        <file_path>python/requirements.txt</file_path>
+        <file_path>python/scripts/validate_stdout.py</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related>
+        <related>page-10</related>
+        <related>page-12</related>
+      </related_pages><parent_section>section-4</parent_section>
+    </page>
+    <page id="page-12">
+      <title>Smoke 测试与验证</title><description>项目的 smoke 测试流程、运行方式以及结果验证方法。</description>
+      <importance>high</importance>
+      <relevant_files><file_path>scripts/run-all-smoke.ps1</file_path>
+        <file_path>scripts/run-smoke-live.ps1</file_path>
+        <file_path>scripts/update-matrix-from-smoke.ps1</file_path>
+        <file_path>tests/test_config.py</file_path>
+        <file_path>tests/test_mock_search.py</file_path>
+        <file_path>docs/smoke-log.txt</file_path>
+        <file_path>docs/benchmarks.md</file_path>
+      </relevant_files>
+      <related_pages>
+        <related>page-1</related>
+        <related>page-10</related>
+        <related>page-11</related>
+      </related_pages>
+      <parent_section>section-4</parent_section>
+    </page>
+  </pages>
+</wiki_structure>
