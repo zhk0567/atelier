@@ -14,8 +14,8 @@
   {% block meta %}{% endblock %}
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/static/css/wiki.css?v=35" />
-  <link rel="stylesheet" href="/static/css/mp-portal.css?v=10" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=42" />
+  <link rel="stylesheet" href="/static/css/mp-portal.css?v=14" />
   {% if wallpapers %}
   {% set default_wp = wallpapers | selectattr('default') | first | default(wallpapers[0]) %}
   {% set default_wp_src = default_wp.preview_url | default(default_wp.url) %}
@@ -45,9 +45,34 @@
         <span class="wiki-logo__text">{{ site_name }}</span>
       </a>
     </div>
-    <div class="wiki-search">
-      <input type="search" class="wiki-search__input" id="wiki-search" placeholder="{{ ui.search_placeholder }}" autocomplete="off" aria-controls="wiki-sidebar" />
+    <div class="wiki-search" id="wiki-search-wrap">
+      <label class="wiki-search__label" for="wiki-search">
+        <span class="visually-hidden">{{ ui.search_placeholder }}</span>
+        <input
+          type="search"
+          class="wiki-search__input"
+          id="wiki-search"
+          placeholder="{{ ui.search_placeholder }}"
+          autocomplete="off"
+          enterkeyhint="search"
+          role="combobox"
+          aria-expanded="false"
+          aria-controls="wiki-search-results"
+          aria-autocomplete="list"
+          aria-activedescendant=""
+        />
+      </label>
+      <div
+        class="wiki-search__panel"
+        id="wiki-search-results"
+        hidden
+        role="listbox"
+        aria-label="{{ ui.search_placeholder }}"
+        data-empty="{{ ui.search_no_results }}"
+      ></div>
+      <p class="wiki-search__hint" id="wiki-search-hint" hidden>{{ ui.search_hint }}</p>
     </div>
+    <script id="wiki-search-index" type="application/json">{{ search_index | tojson }}</script>
     <div class="wiki-header__tools">
       {% if wallpapers %}
       <label class="wiki-wallpaper-picker">
@@ -96,7 +121,20 @@
           <div class="wiki-nav__group">
             <p class="wiki-nav__group-title">外部链接</p>
             <ul>
-              <li><a href="mailto:{{ email }}" data-nav-label="Email">{{ ui.btn_email }}</a></li>
+              <li>
+                <a href="{{ github }}" target="_blank" rel="noopener noreferrer" data-nav-label="GitHub">{{ ui.link_github }}</a>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="wiki-nav__action"
+                  data-copy-email="{{ email }}"
+                  data-nav-label="Email"
+                  data-toast-success="{{ ui.email_copied }}"
+                  data-toast-error="{{ ui.email_copy_failed }}"
+                  title="{{ email }}"
+                >{{ ui.btn_email }}</button>
+              </li>
             </ul>
           </div>
         </nav>
@@ -125,7 +163,7 @@
     <p class="wiki-lightbox__counter" id="wiki-lightbox-counter" hidden aria-live="polite"></p>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/static/js/main.js?v=41" defer></script>
+  <script src="/static/js/main.js?v=45" defer></script>
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>

@@ -329,7 +329,9 @@
   }
 
   initInpageTocSpy(".wiki-doc-nav--inpage a[href^=\"#\"]");
-  initInpageTocSpy(".guide-sticky-toc a[href^=\"#\"]");
+  initInpageTocSpy(
+    ".wiki-doc-nav--guide a[href^=\"#\"], .guide-sticky-toc a[href^=\"#\"]"
+  );
 
   function initGalleryLightbox() {
     const overlay = document.getElementById("wiki-lightbox");
@@ -598,19 +600,276 @@
 
   initBrowseTables();
 
-  const searchInput = document.getElementById("wiki-search");
-  if (searchInput) {
-    const navLinks = Array.from(document.querySelectorAll(".wiki-nav a[data-nav-label]"));
-    searchInput.addEventListener("input", () => {
-      const q = searchInput.value.trim().toLowerCase();
+  function initSiteSearch() {
+    const wrap = document.getElementById("wiki-search-wrap");
+    const input = document.getElementById("wiki-search");
+    const panel = document.getElementById("wiki-search-results");
+    const indexEl = document.getElementById("wiki-search-index");
+    if (!wrap || !input || !panel || !indexEl) return;
+
+    let index = [];
+    try {
+      index = JSON.parse(indexEl.textContent || "[]");
+    } catch {
+      return;
+    }
+    if (!Array.isArray(index)) return;
+
+    const navLinks = Array.from(
+      document.querySelectorAll(
+        ".wiki-nav a[data-nav-label], .wiki-nav__action[data-nav-label]"
+      )
+    );
+    const navGroups = Array.from(
+      document.querySelectorAll(".wiki-nav__group")
+    );
+    const homeCards = document.body.classList.contains("page-home")
+      ? Array.from(document.querySelectorAll("#mp-featured .mp-project-card"))
+      : [];
+
+    const noResultsText =
+      panel.dataset.empty || "未找到匹配页面";
+
+    let activeIndex = -1;
+    let flatOptions = [];
+
+    const scoreItem = (item, q) => {
+      if (!q) return -1;
+      const title = (item.title || "").toLowerCase();
+      const subtitle = (item.subtitle || "").toLowerCase();
+      const keywords = (item.keywords || "").toLowerCase();
+      const group = (item.group || "").toLowerCase();
+      if (
+        !title.includes(q) &&
+        !subtitle.includes(q) &&
+        !keywords.includes(q) &&
+        !group.includes(q)
+      ) {
+        return -1;
+      }
+      if (title === q) return 100;
+      if (title.startsWith(q)) return 85;
+      if (title.includes(q)) return 70;
+      if (subtitle.includes(q)) return 55;
+      if (keywords.includes(q)) return 40;
+      return 25;
+    };
+
+    const rankResults = (q) => {
+      const ranked = index
+        .map((item) => ({ item, score: scoreItem(item, q) }))
+        .filter((x) => x.score >= 0)
+        .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title, "zh-CN"));
+      return ranked.slice(0, 12).map((x) => x.item);
+    };
+
+    const filterSidebar = (q) => {
       navLinks.forEach((link) => {
         const label = (link.dataset.navLabel || link.textContent || "").toLowerCase();
-        const match = !q || label.includes(q);
+        const href = (link.getAttribute("href") || "").toLowerCase();
+        const match = !q || label.includes(q) || href.includes(q.replace(/\s+/g, ""));
         link.classList.toggle("is-hidden", !match);
         link.closest("li")?.classList.toggle("is-hidden", !match);
       });
+      navGroups.forEach((group) => {
+        const anyVisible = group.querySelector("li:not(.is-hidden) a");
+        group.classList.toggle("is-hidden", !!q && !anyVisible);
+      });
+    };
+
+    const filterHomeProjects = (q) => {
+      homeCards.forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        const match = !q || text.includes(q);
+        card.classList.toggle("is-hidden", !match);
+        card.hidden = !match;
+      });
+    };
+
+    const setActiveOption = (next) => {
+      flatOptions.forEach((el, i) => {
+        const on = i === next;
+        el.classList.toggle("is-active", on);
+        el.setAttribute("aria-selected", on ? "true" : "false");
+        if (on) input.setAttribute("aria-activedescendant", el.id);
+      });
+      activeIndex = next;
+      if (next < 0) input.removeAttribute("aria-activedescendant");
+    };
+
+    const closePanel = () => {
+      panel.hidden = true;
+      wrap.classList.remove("is-open");
+      input.setAttribute("aria-expanded", "false");
+      setActiveOption(-1);
+      flatOptions = [];
+      panel.innerHTML = "";
+    };
+
+    const openPanel = () => {
+      panel.hidden = false;
+      wrap.classList.add("is-open");
+      input.setAttribute("aria-expanded", "true");
+    };
+
+    const navigateTo = (url) => {
+      if (!url) return;
+      closePanel();
+      window.location.href = url;
+    };
+
+    const renderPanel = (results) => {
+      panel.innerHTML = "";
+      flatOptions = [];
+      activeIndex = -1;
+
+      if (!results.length) {
+        const empty = document.createElement("p");
+        empty.className = "wiki-search__empty";
+        empty.textContent = noResultsText;
+        panel.appendChild(empty);
+        return;
+      }
+
+      const byGroup = new Map();
+      results.forEach((item) => {
+        const g = item.group || "其它";
+        if (!byGroup.has(g)) byGroup.set(g, []);
+        byGroup.get(g).push(item);
+      });
+
+      let optionId = 0;
+      byGroup.forEach((items, groupLabel) => {
+        const heading = document.createElement("p");
+        heading.className = "wiki-search__group-label";
+        heading.textContent = groupLabel;
+        panel.appendChild(heading);
+
+        items.forEach((item) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "wiki-search__option";
+          btn.id = `wiki-search-opt-${optionId++}`;
+          btn.setAttribute("role", "option");
+          btn.setAttribute("aria-selected", "false");
+          btn.dataset.url = item.url;
+
+          const titleEl = document.createElement("span");
+          titleEl.className = "wiki-search__option-title";
+          titleEl.textContent = item.title;
+          btn.appendChild(titleEl);
+
+          if (item.subtitle) {
+            const sub = document.createElement("span");
+            sub.className = "wiki-search__option-sub";
+            sub.textContent = item.subtitle;
+            btn.appendChild(sub);
+          }
+
+          btn.addEventListener("click", () => navigateTo(item.url));
+          btn.addEventListener("mouseenter", () => {
+            const idx = flatOptions.indexOf(btn);
+            if (idx >= 0) setActiveOption(idx);
+          });
+
+          panel.appendChild(btn);
+          flatOptions.push(btn);
+        });
+      });
+
+      setActiveOption(0);
+    };
+
+    const applyQuery = () => {
+      const q = input.value.trim().toLowerCase();
+      filterSidebar(q);
+      filterHomeProjects(q);
+
+      if (!q) {
+        closePanel();
+        return;
+      }
+
+      const results = rankResults(q);
+      openPanel();
+      renderPanel(results);
+
+      if (window.matchMedia("(max-width: 720px)").matches && !document.body.classList.contains("sidebar-open")) {
+        document.body.classList.add("sidebar-open");
+        document.querySelector(".wiki-nav-toggle")?.setAttribute("aria-expanded", "true");
+      }
+    };
+
+    let debounceTimer = 0;
+    input.addEventListener("input", () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(applyQuery, 80);
+    });
+
+    input.addEventListener("focus", () => {
+      if (input.value.trim()) applyQuery();
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (!panel.hidden) {
+          e.preventDefault();
+          closePanel();
+          return;
+        }
+        input.value = "";
+        applyQuery();
+        return;
+      }
+
+      if (!panel.hidden && flatOptions.length) {
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          setActiveOption((activeIndex + 1) % flatOptions.length);
+          flatOptions[activeIndex]?.scrollIntoView({ block: "nearest" });
+          return;
+        }
+        if (e.key === "ArrowUp") {
+          e.preventDefault();
+          setActiveOption((activeIndex - 1 + flatOptions.length) % flatOptions.length);
+          flatOptions[activeIndex]?.scrollIntoView({ block: "nearest" });
+          return;
+        }
+        if (e.key === "Enter") {
+          e.preventDefault();
+          const target =
+            activeIndex >= 0
+              ? flatOptions[activeIndex]?.dataset.url
+              : rankResults(input.value.trim().toLowerCase())[0]?.url;
+          navigateTo(target);
+          return;
+        }
+      }
+
+      if (e.key === "Enter" && input.value.trim()) {
+        const first = rankResults(input.value.trim().toLowerCase())[0];
+        if (first?.url) {
+          e.preventDefault();
+          navigateTo(first.url);
+        }
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!wrap.contains(e.target)) closePanel();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+      const tag = (e.target && e.target.tagName) || "";
+      if (/^(INPUT|TEXTAREA|SELECT)$/i.test(tag) || e.target?.isContentEditable) return;
+      e.preventDefault();
+      input.focus();
+      input.select();
     });
   }
+
+  initSiteSearch();
 
   document.querySelectorAll("[data-count]").forEach((el) => {
     const target = parseInt(el.dataset.count, 10);
@@ -657,5 +916,38 @@
     }
     showToast("感谢留言！当前为演示模式，消息未发送至服务器。", "success");
     form.reset();
+  });
+
+  const copyText = async (text) => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    ta.remove();
+    return ok;
+  };
+
+  document.querySelectorAll("[data-copy-email]").forEach((el) => {
+    el.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const addr = (el.dataset.copyEmail || "").trim();
+      if (!addr) return;
+      const okMsg = el.dataset.toastSuccess || "邮箱已复制到剪贴板";
+      const errMsg = el.dataset.toastError || "复制失败，请手动复制";
+      try {
+        const ok = await copyText(addr);
+        showToast(ok ? okMsg : errMsg, ok ? "success" : "error");
+      } catch {
+        showToast(errMsg, "error");
+      }
+    });
   });
 })();

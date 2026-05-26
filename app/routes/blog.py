@@ -5,7 +5,14 @@ from app.constants import HTML_CACHE_HEADERS
 from app.context import framework_stack_thumb_url, site_context, templates
 from app.markdown.blog import render_blog_markdown
 from app.markdown.render import framework_guide_nav, strip_blog_frontmatter
-from site_data import BLOG_DIR, list_algorithm_posts, list_framework_posts, load_all_blog_posts
+from site_data import (
+    BLOG_DIR,
+    list_algorithm_posts,
+    list_framework_posts,
+    list_hotspot_posts,
+    load_all_blog_posts,
+    load_hotspot_manifest,
+)
 
 router = APIRouter()
 
@@ -15,7 +22,12 @@ async def blog_index(request: Request):
     posts = load_all_blog_posts()
     framework = [p for p in posts if p.get("series") == "framework"]
     algorithm = [p for p in posts if p.get("series") == "algorithm"]
-    other = [p for p in posts if p.get("series") not in ("framework", "algorithm")]
+    hotspot = [p for p in posts if p.get("series") == "hotspot"]
+    other = [
+        p
+        for p in posts
+        if p.get("series") not in ("framework", "algorithm", "hotspot")
+    ]
     algo_all = list_algorithm_posts(include_draft=True)
     return templates.TemplateResponse(
         request=request,
@@ -28,6 +40,9 @@ async def blog_index(request: Request):
             "algorithm_count": len(algo_all),
             "algorithm_published_count": len(algorithm),
             "algorithm_series_url": "/blog/series/algorithm",
+            "hotspot_posts": hotspot,
+            "hotspot_count": len(hotspot),
+            "hotspot_series_url": "/blog/series/hotspot",
         },
         headers=HTML_CACHE_HEADERS,
     )
@@ -136,6 +151,25 @@ async def blog_series_algorithm(request: Request):
     )
 
 
+@router.get("/blog/series/hotspot", response_class=HTMLResponse)
+async def blog_series_hotspot(request: Request):
+    manifest = load_hotspot_manifest()
+    posts = list_hotspot_posts(include_draft=False)
+    ctx = site_context()
+    ui = ctx["ui"]
+    return templates.TemplateResponse(
+        request=request,
+        name="blog_series_hotspot.html",
+        context={
+            **ctx,
+            "series_title": manifest.get("title") or ui.get("label_blog_hotspot", "热点"),
+            "series_lead": manifest.get("description") or ui.get("blog_hotspot_lead", ""),
+            "posts": posts,
+        },
+        headers=HTML_CACHE_HEADERS,
+    )
+
+
 @router.get("/blog/{slug}", response_class=HTMLResponse)
 async def blog_post(request: Request, slug: str):
     post, html_body = render_blog_markdown(slug)
@@ -146,6 +180,8 @@ async def blog_post(request: Request, slug: str):
         series_url = "/blog/series/framework"
     elif series == "algorithm":
         series_url = "/blog/series/algorithm"
+    elif series == "hotspot":
+        series_url = "/blog/series/hotspot"
     if series in ("framework", "algorithm"):
         folder = post.get("folder", "")
         index_path = BLOG_DIR / folder / "index.md"
@@ -164,6 +200,7 @@ async def blog_post(request: Request, slug: str):
             "guide_nav": guide_nav,
             "is_framework_guide": series == "framework",
             "is_algorithm_guide": series == "algorithm",
+            "is_hotspot": series == "hotspot",
         },
         headers=HTML_CACHE_HEADERS,
     )

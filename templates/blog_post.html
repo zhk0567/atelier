@@ -9,7 +9,7 @@
   <a href="/blog">博客</a>
   {% if series_url %}
   <span class="wiki-breadcrumbs__sep">/</span>
-  <a href="{{ series_url }}">{% if is_algorithm_guide %}Algorithm{% else %}Framework{% endif %}</a>
+  <a href="{{ series_url }}">{% if is_hotspot %}{{ ui.label_blog_hotspot }}{% elif is_algorithm_guide %}Algorithm{% else %}Framework{% endif %}</a>
   {% endif %}
   <span class="wiki-breadcrumbs__sep">/</span>
   <span>{{ post.title }}</span>
@@ -18,27 +18,18 @@
 
 {% block content %}
 {% if (is_framework_guide or is_algorithm_guide) and guide_nav %}
-<div class="blog-guide-layout">
-  <details class="guide-toc-mobile" open>
-    <summary class="guide-toc-mobile__summary">本页目录</summary>
-    <nav class="guide-sticky-toc" aria-label="本页目录">
-      <p class="guide-sticky-toc__title">本页目录</p>
-      <ul>
-        {% for item in guide_nav %}
-        <li><a href="#{{ item.anchor }}">{{ item.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </nav>
-  </details>
-  <div class="wiki-md blog-md blog-guide-md">
-    {{ content_html | safe }}
-  </div>
-</div>
-{% else %}
-<div class="wiki-md blog-md">
+<nav class="wiki-doc-nav wiki-doc-nav--guide blog-guide-toc" aria-label="本页目录">
+  <p class="wiki-doc-nav__heading">本页目录</p>
+  <ol class="wiki-doc-nav__list">
+    {% for item in guide_nav %}
+    <li><a href="#{{ item.anchor }}">{{ item.title }}</a></li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}
+<div class="wiki-md blog-md{% if guide_nav %} blog-guide-md{% endif %}">
   {{ content_html | safe }}
 </div>
-{% endif %}
 {% endblock %}
 
 {% block extra_scripts %}

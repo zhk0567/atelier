@@ -13,6 +13,7 @@ DEFAULT_FRAMEWORK_ROOT = Path(r"F:\Study\Framework")
 DEFAULT_ALGORITHM_ROOT = Path(r"F:\Study\Algorithm")
 DEFAULT_BLOG_FRAMEWORK_DIR = "framework-guides"
 DEFAULT_BLOG_ALGORITHM_DIR = "algorithm-guides"
+DEFAULT_BLOG_HOTSPOT_DIR = "hotspot"
 
 
 def _deep_merge(base: dict, overlay: dict) -> dict:
@@ -95,6 +96,20 @@ def algorithm_manifest_path() -> Path:
 
 def algorithm_guide_toc_dir() -> Path:
     return blog_algorithm_path() / "_meta" / "guide-toc"
+
+
+def blog_hotspot_dir_name() -> str:
+    return str(
+        load_site_settings().get("blog_hotspot_dir", DEFAULT_BLOG_HOTSPOT_DIR)
+    ).strip() or DEFAULT_BLOG_HOTSPOT_DIR
+
+
+def blog_hotspot_path() -> Path:
+    return ATELIER_ROOT / "Blog" / blog_hotspot_dir_name()
+
+
+def hotspot_manifest_path() -> Path:
+    return blog_hotspot_path() / "manifest.json"
 
 
 @lru_cache(maxsize=1)

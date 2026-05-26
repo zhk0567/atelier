@@ -1,0 +1,45 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ series_title }} · {{ site_name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="/blog">博客</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ series_title }}</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="mp-wrapper mp-wrapper--page">
+  <section class="mp-section mp-page-header mp-section-full">
+    <h1>{{ series_title }}</h1>
+    <p class="lead">{{ series_lead }}</p>
+  </section>
+
+  <section class="mp-section mp-section-full">
+    <ul class="mp-project-list">
+      {% for p in posts %}
+      <li class="mp-project-card">
+        <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.item_map }}');" aria-hidden="true"></span>
+        <div class="mp-project-card__body">
+          <h3><a href="/blog/{{ p.slug }}">{{ p.title }}</a></h3>
+          {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+          {% if p.category %}<p class="wiki-tags"><span class="wiki-tag">{{ p.category }}</span></p>{% endif %}
+        </div>
+      </li>
+      {% else %}
+      <li><p class="mp-empty-note">暂无热点文章。</p></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <div class="mp-button-wrapper mp-footer-actions">
+    <a class="mp-button" href="/blog">
+      <span class="mp-button__inner">返回博客</span>
+    </a>
+  </div>
+</div>
+{% endblock %}

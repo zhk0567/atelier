@@ -1,0 +1,16 @@
+{
+  "series": "hotspot",
+  "title": "热点",
+  "description": "追踪人工智能、神经科技与人机交互等领域的前沿动态与思辨。",
+  "posts": [
+    {
+      "slug": "brain-computer-interface",
+      "folder": "hotspot/brain-computer-interface",
+      "title": "脑机接口：从神经信号到数字意图",
+      "series": "hotspot",
+      "category": "脑机接口",
+      "status": "published",
+      "summary": "梳理 BCI 的信号链路、技术路线、典型应用与伦理边界。"
+    }
+  ]
+}

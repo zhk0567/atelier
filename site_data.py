@@ -17,14 +17,17 @@ BLOG_DIR = BASE_DIR / "Blog"
 from app.config import (  # noqa: E402
     blog_algorithm_dir_name,
     blog_framework_dir_name,
+    blog_hotspot_dir_name,
     algorithm_manifest_path,
     framework_manifest_path,
+    hotspot_manifest_path,
 )
 
 FRAMEWORK_MANIFEST_PATH = framework_manifest_path()
 ALGORITHM_MANIFEST_PATH = algorithm_manifest_path()
 _BLOG_FRAMEWORK_DIR = blog_framework_dir_name()
 _BLOG_ALGORITHM_DIR = blog_algorithm_dir_name()
+_BLOG_HOTSPOT_DIR = blog_hotspot_dir_name()
 
 # Standalone posts outside Framework manifest
 BLOG_STANDALONE: list[dict[str, str]] = [
@@ -34,6 +37,7 @@ BLOG_STANDALONE: list[dict[str, str]] = [
         "title": "认识简谱",
         "series": "",
         "category": "音乐",
+        "summary": "从零读懂简谱：音高、节奏与休止，看懂数字记谱即可哼唱旋律。",
     },
 ]
 
@@ -52,6 +56,14 @@ def load_algorithm_manifest() -> dict:
     return json.loads(ALGORITHM_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
+@lru_cache(maxsize=1)
+def load_hotspot_manifest() -> dict:
+    path = hotspot_manifest_path()
+    if not path.is_file():
+        return {"posts": []}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def _manifest_entry_to_post(entry: dict, default_dir: str) -> dict[str, str]:
     folder = entry.get("folder") or f"{default_dir}/{entry['slug']}"
     return {
@@ -63,6 +75,7 @@ def _manifest_entry_to_post(entry: dict, default_dir: str) -> dict[str, str]:
         "stack": entry.get("stack", entry.get("topic_path", "")),
         "topic_path": entry.get("topic_path", ""),
         "guide_tier": entry.get("guide_tier", ""),
+        "summary": entry.get("summary", ""),
     }
 
 
@@ -77,6 +90,10 @@ def load_all_blog_posts() -> list[dict[str, str]]:
         if entry.get("status") != "published":
             continue
         posts.append(_manifest_entry_to_post(entry, _BLOG_ALGORITHM_DIR))
+    for entry in load_hotspot_manifest().get("posts", []):
+        if entry.get("status") != "published":
+            continue
+        posts.append(_manifest_entry_to_post(entry, _BLOG_HOTSPOT_DIR))
     return posts
 
 
@@ -97,6 +114,9 @@ def get_blog_post(slug: str) -> dict[str, str] | None:
     for entry in load_algorithm_manifest().get("posts", []):
         if entry.get("slug") == slug:
             return _manifest_entry_to_post(entry, _BLOG_ALGORITHM_DIR)
+    for entry in load_hotspot_manifest().get("posts", []):
+        if entry.get("slug") == slug:
+            return _manifest_entry_to_post(entry, _BLOG_HOTSPOT_DIR)
     return None
 
 
@@ -117,6 +137,16 @@ def list_algorithm_posts(*, include_draft: bool = False) -> list[dict]:
         if not include_draft and entry.get("status") != "published":
             continue
         out.append(dict(entry))
+    return out
+
+
+def list_hotspot_posts(*, include_draft: bool = False) -> list[dict]:
+    manifest = load_hotspot_manifest()
+    out: list[dict] = []
+    for entry in manifest.get("posts", []):
+        if not include_draft and entry.get("status") != "published":
+            continue
+        out.append(_manifest_entry_to_post(entry, _BLOG_HOTSPOT_DIR))
     return out
 
 _GITHUB_REPO_RE = re.compile(r"github\.com/[^/]+/([^/?#]+)", re.I)

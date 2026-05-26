@@ -54,14 +54,52 @@
       <section class="mp-section" id="mp-blog">
         <h2 class="mp-title">{{ ui.label_blog }}</h2>
         <p>{{ ui.blog_home_lead }}</p>
-        <div class="mp-button-wrapper">
-          <a class="mp-button mp-button-has-image" href="/blog" style="--button-image: url('{{ wiki_assets.item_book }}');">
-            <span class="mp-button__inner">{{ ui.label_blog }}</span>
-          </a>
-          <a class="mp-button mp-button-has-image" href="/blog/series/framework" style="--button-image: url('{{ wiki_assets.bookshelf }}');">
-            <span class="mp-button__inner">{{ ui.link_framework_guides }}</span>
+        <div class="mp-button-wrapper mp-button-wrapper--primary">
+          <a class="mp-button mp-button-progressive mp-button-has-image" href="/blog" style="--button-image: url('{{ wiki_assets.item_book }}');">
+            <span class="mp-button__inner">{{ ui.link_blog_enter }}</span>
           </a>
         </div>
+        <nav class="mp-subnav" aria-label="{{ ui.label_blog_projects }}">
+          <p class="mp-subnav__heading">{{ ui.label_blog_projects }}</p>
+          <ul class="mp-subnav__list">
+            <li class="mp-subnav__item">
+              <a class="mp-subnav__link" href="{{ framework_series_url }}">
+                <span class="mp-subnav__icon" style="background-image: url('{{ wiki_assets.bookshelf }}');" aria-hidden="true"></span>
+                <span class="mp-subnav__body">
+                  <span class="mp-subnav__title">{{ ui.link_framework_guides }}</span>
+                  <span class="mp-subnav__meta">{{ framework_count }} {{ ui.blog_series_unit }}</span>
+                </span>
+              </a>
+            </li>
+            <li class="mp-subnav__item">
+              <a class="mp-subnav__link" href="{{ algorithm_series_url }}">
+                <span class="mp-subnav__icon" style="background-image: url('{{ wiki_assets.item_compass }}');" aria-hidden="true"></span>
+                <span class="mp-subnav__body">
+                  <span class="mp-subnav__title">{{ ui.link_algorithm_guides }}</span>
+                  <span class="mp-subnav__meta">
+                    {{ algorithm_count }} {{ ui.blog_series_unit }}{% if algorithm_published_count < algorithm_count %}（{{ algorithm_published_count }} 已发布）{% endif %}
+                  </span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        {% if hotspot_count %}
+        <nav class="mp-subnav" aria-label="{{ ui.label_blog_hotspot }}">
+          <p class="mp-subnav__heading">{{ ui.label_blog_hotspot }}</p>
+          <ul class="mp-subnav__list">
+            <li class="mp-subnav__item">
+              <a class="mp-subnav__link" href="{{ hotspot_series_url }}">
+                <span class="mp-subnav__icon" style="background-image: url('{{ wiki_assets.item_map }}');" aria-hidden="true"></span>
+                <span class="mp-subnav__body">
+                  <span class="mp-subnav__title">{{ ui.link_hotspot_series }}</span>
+                  <span class="mp-subnav__meta">{{ hotspot_count }} {{ ui.blog_series_unit }}</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        {% endif %}
       </section>
     </div>
 

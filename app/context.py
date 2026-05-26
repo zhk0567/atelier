@@ -29,6 +29,7 @@ from app.constants import (
 )
 from app.media_derivatives import ensure_wallpaper_preview, wallpaper_preview_url
 from app.projects import get_all_projects
+from app.search_index import build_site_search_index, clear_search_index_cache
 from site_data import build_data_hubs, get_spreadsheet_context, load_site_data
 
 TEMPLATES_DIR = ATELIER_ROOT / "templates"
@@ -279,6 +280,7 @@ def build_wiki_nav(hubs: list[dict]) -> list[dict]:
 def clear_context_cache() -> None:
     _wallpaper_catalog.cache_clear()
     load_wiki_assets.cache_clear()
+    clear_search_index_cache()
     _site_context_core.cache_clear()
     try:
         from app.travel_catalog import clear_travel_cache
@@ -322,6 +324,7 @@ def _site_context_core() -> dict:
         "wallpapers": list(list_wallpapers()),
         "books_featured": sheet.get("books_featured", []),
         "games_count": sheet.get("games_count", 0),
+        "search_index": list(build_site_search_index()),
     }
 
 
