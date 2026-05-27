@@ -9,7 +9,7 @@ from app.config import ATELIER_ROOT
 
 SITE_NAME = "zhk"
 SITE_TITLE = "zhk · 创作者与工程师"
-TAGLINE = "用数据与工程，把算法做成能上线、好用、可维护的产品"
+TAGLINE = "用数据与工程，把算法做成能上线的产品"
 HERO_SUBTITLE = "数据科学 · Android / Kotlin · 计算机视觉"
 BIO = (
     "数据科学与大数据技术在读，主攻 Python / Kotlin 与 Android，做 CV、语音与 OCR 从训练到端侧落地。"

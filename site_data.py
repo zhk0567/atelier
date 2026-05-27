@@ -154,7 +154,7 @@ _GITHUB_REPO_RE = re.compile(r"github\.com/[^/]+/([^/?#]+)", re.I)
 DEFAULT_SITE = {
     "site_name": "zhk",
     "site_title": "zhk · 创作者与工程师",
-    "tagline": "用数据与工程，把算法做成能上线、好用、可维护的产品",
+    "tagline": "用数据与工程，把算法做成能上线的产品",
     "hero_subtitle": "数据科学 · Android / Kotlin · 计算机视觉",
     "bio": (
         "数据科学与大数据技术在读，主攻 Python / Kotlin 与 Android，做 CV、语音与 OCR 从训练到端侧落地。"
