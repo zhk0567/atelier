@@ -1,0 +1,31 @@
+[Unit]
+Description=atelier personal site
+After=network.target
+
+[Service]
+Type=simple
+User=atelier
+Group=atelier
+WorkingDirectory=/opt/atelier
+Environment=PATH=/opt/atelier/.venv/bin
+Environment=ATELIER_ENV=production
+Environment=TRUSTED_HOSTS=zhkun.xyz,www.zhkun.xyz,127.0.0.1,localhost
+Environment=BLOCK_PROBE_PATHS=1
+Environment=RATE_LIMIT_DEFAULT=120/minute
+Environment=RATE_LIMIT_WALLPAPER=30/minute
+ExecStart=/opt/atelier/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
+# Create dedicated user (once):
+#   sudo useradd -r -s /sbin/nologin -d /opt/atelier atelier
+#   sudo chown -R atelier:atelier /opt/atelier
+# Copy to /etc/systemd/system/atelier.service then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now atelier

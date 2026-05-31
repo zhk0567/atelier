@@ -80,38 +80,32 @@ pip install -r requirements.txt
 
 > 系统默认 `python3` 若为 3.6，**必须用 `python3.11`（或 3.9+）** 创建虚拟环境，否则无法安装 FastAPI。
 
-**systemd**（`/etc/systemd/system/atelier.service`）：
+**专用用户（推荐）**：
 
-```ini
-[Unit]
-Description=atelier personal site
-After=network.target
-
-[Service]
-Type=simple
-User=root
-WorkingDirectory=/opt/atelier
-Environment=PATH=/opt/atelier/.venv/bin
-ExecStart=/opt/atelier/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000
-Restart=always
-RestartSec=3
-
-[Install]
-WantedBy=multi-user.target
+```bash
+sudo useradd -r -s /sbin/nologin -d /opt/atelier atelier
+sudo chown -R atelier:atelier /opt/atelier
 ```
+
+**systemd**：复制 [`deploy/systemd/atelier.service.example`](deploy/systemd/atelier.service.example) 为 `/etc/systemd/system/atelier.service`（含 `ATELIER_ENV=production`、非 root 用户）。
 
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable --now atelier
 ```
 
-**Nginx**（`/etc/nginx/conf.d/atelier.conf`）反代到 `127.0.0.1:8000`，`server_name` 填你的域名后：
+**Nginx**：
+
+1. 将 [`deploy/nginx/nginx-http-snippet.conf`](deploy/nginx/nginx-http-snippet.conf) 中的 `limit_req_zone` / `limit_conn_zone` 合并进 `/etc/nginx/nginx.conf` 的 `http {}`
+2. 复制 [`deploy/nginx/atelier.conf.example`](deploy/nginx/atelier.conf.example) 为 `/etc/nginx/conf.d/atelier.conf`，按需修改 `server_name`
 
 ```bash
 sudo nginx -t && sudo systemctl enable --now nginx
 sudo certbot --nginx -d zhkun.xyz -d www.zhkun.xyz
 curl -I http://127.0.0.1:8000
 ```
+
+**安全与限流**详见 [docs/SECURITY.md](docs/SECURITY.md)（应用中间件、Fail2ban 可选、CDN 升级路径）。
 
 ### 性能说明
 

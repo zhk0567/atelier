@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
+from app.config import wiki_slug_is_valid
 from app.constants import HTML_CACHE_HEADERS
 from app.context import site_context, templates
 from app.markdown.wiki import build_wiki_doc_nav, render_wiki_markdown
@@ -11,6 +12,8 @@ router = APIRouter()
 
 @router.get("/docs/{wiki_slug}/{page}", response_class=HTMLResponse)
 async def wiki_doc(request: Request, wiki_slug: str, page: str):
+    if not wiki_slug_is_valid(wiki_slug):
+        raise HTTPException(status_code=404, detail="Wiki not found")
     project = next((p for p in get_all_projects() if p["wiki_slug"] == wiki_slug), None)
     rendered = render_wiki_markdown(wiki_slug, page)
     doc_nav = build_wiki_doc_nav(wiki_slug, page)

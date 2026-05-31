@@ -2,15 +2,12 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 
-from app.config import ATELIER_ROOT
-from app.constants import HTML_NO_CACHE, SITE_NAME, SITE_TITLE
-from app.constants import WALLPAPER_CACHE_HEADERS
-from app.context import DATA_DIR, list_wallpapers, media_type_for_path, wallpaper_paths
+from app.config import ATELIER_ROOT, is_production
+from app.constants import HTML_NO_CACHE, SITE_NAME, SITE_TITLE, WALLPAPER_CACHE_HEADERS
+from app.context import DATA_DIR, media_type_for_path, wallpaper_paths
 
 router = APIRouter()
 
@@ -18,15 +15,14 @@ router = APIRouter()
 @router.get("/api/site", include_in_schema=False)
 @router.get("/atelier-site.json", include_in_schema=False)
 async def api_site():
-    return JSONResponse(
-        {
-            "site_name": SITE_NAME,
-            "site_title": SITE_TITLE,
-            "main_py": str((ATELIER_ROOT / "main.py").resolve()),
-            "identity_json": str((ATELIER_ROOT / "site_identity.json").resolve()),
-        },
-        headers=HTML_NO_CACHE,
-    )
+    payload: dict[str, str] = {
+        "site_name": SITE_NAME,
+        "site_title": SITE_TITLE,
+    }
+    if not is_production():
+        payload["main_py"] = str((ATELIER_ROOT / "main.py").resolve())
+        payload["identity_json"] = str((ATELIER_ROOT / "site_identity.json").resolve())
+    return JSONResponse(payload, headers=HTML_NO_CACHE)
 
 
 @router.get("/favicon.ico", include_in_schema=False)

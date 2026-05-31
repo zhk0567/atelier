@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from functools import lru_cache
 from pathlib import Path
 
@@ -14,6 +15,79 @@ DEFAULT_ALGORITHM_ROOT = Path(r"F:\Study\Algorithm")
 DEFAULT_BLOG_FRAMEWORK_DIR = "framework-guides"
 DEFAULT_BLOG_ALGORITHM_DIR = "algorithm-guides"
 DEFAULT_BLOG_HOTSPOT_DIR = "hotspot"
+
+WIKI_DIR = ATELIER_ROOT / "Wiki"
+DEFAULT_TRUSTED_HOSTS = "zhkun.xyz,www.zhkun.xyz,127.0.0.1,localhost"
+DEFAULT_RATE_LIMIT = "120/minute"
+DEFAULT_RATE_LIMIT_WALLPAPER = "30/minute"
+
+
+def _env_bool(name: str, default: bool = False) -> bool:
+    raw = os.environ.get(name, "").strip().lower()
+    if not raw:
+        return default
+    return raw in ("1", "true", "yes", "on")
+
+
+def atelier_env() -> str:
+    raw = os.environ.get("ATELIER_ENV", "development").strip().lower()
+    return raw if raw in ("development", "production") else "development"
+
+
+def is_production() -> bool:
+    return atelier_env() == "production"
+
+
+def trusted_hosts() -> list[str]:
+    raw = os.environ.get("TRUSTED_HOSTS", DEFAULT_TRUSTED_HOSTS).strip()
+    return [h.strip() for h in raw.split(",") if h.strip()]
+
+
+def rate_limit_default() -> str:
+    return os.environ.get("RATE_LIMIT_DEFAULT", DEFAULT_RATE_LIMIT).strip() or DEFAULT_RATE_LIMIT
+
+
+def rate_limit_wallpaper() -> str:
+    return (
+        os.environ.get("RATE_LIMIT_WALLPAPER", DEFAULT_RATE_LIMIT_WALLPAPER).strip()
+        or DEFAULT_RATE_LIMIT_WALLPAPER
+    )
+
+
+def block_probe_paths() -> bool:
+    return _env_bool("BLOCK_PROBE_PATHS", default=True)
+
+
+def parse_rate_limit(spec: str) -> tuple[int, float]:
+    """Parse '120/minute' -> (120, 60.0 seconds window)."""
+    spec = spec.strip().lower()
+    if "/" not in spec:
+        return 120, 60.0
+    count_s, unit = spec.split("/", 1)
+    try:
+        count = max(1, int(count_s.strip()))
+    except ValueError:
+        count = 120
+    unit = unit.strip().rstrip("s")
+    windows = {
+        "second": 1.0,
+        "minute": 60.0,
+        "hour": 3600.0,
+        "day": 86400.0,
+    }
+    window = windows.get(unit, 60.0)
+    return count, window
+
+
+def wiki_slug_is_valid(wiki_slug: str) -> bool:
+    if not wiki_slug or not re.fullmatch(r"[a-zA-Z0-9_-]+", wiki_slug):
+        return False
+    wiki_path = (WIKI_DIR / wiki_slug).resolve()
+    try:
+        wiki_path.relative_to(WIKI_DIR.resolve())
+    except ValueError:
+        return False
+    return wiki_path.is_dir()
 
 
 def _deep_merge(base: dict, overlay: dict) -> dict:

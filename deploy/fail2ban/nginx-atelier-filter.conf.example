@@ -1,0 +1,10 @@
+# Optional Fail2ban filter for nginx access log (404/429 flood from scanners)
+# Install: sudo dnf install fail2ban
+#
+# 1. Copy filter to /etc/fail2ban/filter.d/nginx-atelier.conf
+# 2. Copy jail to /etc/fail2ban/jail.d/nginx-atelier.conf
+# 3. sudo systemctl enable --now fail2ban
+
+[Definition]
+failregex = ^<HOST> -.*"(GET|POST|HEAD) .* HTTP.*" (404|429|403) 
+ignoreregex =

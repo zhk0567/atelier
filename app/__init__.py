@@ -11,6 +11,7 @@ from fastapi import FastAPI
 from app.config import ATELIER_ROOT
 from app.static_files import CachedStaticFiles
 from app.constants import SITE_NAME, SITE_TITLE
+from app.middleware import register_security_middleware
 from app.routes import assets, blog, browse, home, projects, travel, wiki
 
 
@@ -73,6 +74,7 @@ def create_app() -> FastAPI:
         redoc_url=None,
         lifespan=_lifespan,
     )
+    register_security_middleware(app)
     app.include_router(assets.router)
     app.include_router(home.router)
     app.include_router(browse.router)

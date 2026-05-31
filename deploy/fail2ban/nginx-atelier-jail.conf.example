@@ -1,0 +1,8 @@
+[nginx-atelier]
+enabled = true
+port = http,https
+filter = nginx-atelier
+logpath = /var/log/nginx/access.log
+maxretry = 30
+findtime = 120
+bantime = 3600
