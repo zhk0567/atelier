@@ -23,12 +23,14 @@
 {% endblock %}
 
 {% block content %}
-{% if (is_framework_guide or is_algorithm_guide) and guide_nav %}
+{% if guide_nav %}
 <nav class="wiki-doc-nav wiki-doc-nav--guide blog-guide-toc" aria-label="本页目录">
   <p class="wiki-doc-nav__heading">本页目录</p>
   <ol class="wiki-doc-nav__list">
     {% for item in guide_nav %}
-    <li><a href="#{{ item.anchor }}">{{ item.title }}</a></li>
+    <li{% if item.level is defined %} class="wiki-doc-nav__item--{{ item.level }}"{% endif %}>
+      <a href="#{{ item.anchor }}">{{ item.title }}</a>
+    </li>
     {% endfor %}
   </ol>
 </nav>

@@ -1819,7 +1819,8 @@ body.sidebar-open .wiki-sidebar-backdrop {
 .wiki-content pre > code.language-shell::before { content: "shell"; }
 .wiki-content pre > code.language-mermaid::before { content: "mermaid"; }
 
-.wiki-doc-nav--inpage .wiki-doc-nav__item--h3 {
+.wiki-doc-nav--inpage .wiki-doc-nav__item--h3,
+.wiki-doc-nav--guide .wiki-doc-nav__item--h3 {
   padding-left: 0.75rem;
   font-size: 0.75rem;
 }
@@ -1903,7 +1904,7 @@ body.sidebar-open .wiki-sidebar-backdrop {
   margin-bottom: 0.3rem;
 }
 
-/* Framework / Algorithm blog guide TOC：顶部全宽，不浮动、不 sticky */
+/* Framework / Algorithm blog guide TOC：顶部全宽，不浮动、不 sticky，高度随内容展开 */
 .wiki-doc-nav--guide,
 .blog-guide-toc {
   clear: both;
@@ -1912,11 +1913,10 @@ body.sidebar-open .wiki-sidebar-backdrop {
   max-width: 100%;
   margin: 0 0 1.25rem;
   position: static;
+  max-height: none;
+  overflow: visible;
 }
 @media (min-width: 900px) {
-  .wiki-doc-nav--guide {
-    max-height: min(14rem, 38vh);
-  }
   .wiki-doc-nav--guide .wiki-doc-nav__list {
     columns: 2;
     column-gap: 1.5rem;

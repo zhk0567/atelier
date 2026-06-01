@@ -4,7 +4,11 @@ from fastapi.responses import HTMLResponse
 from app.constants import HTML_CACHE_HEADERS
 from app.context import framework_stack_thumb_url, site_context, templates
 from app.markdown.blog import render_blog_markdown
-from app.markdown.render import framework_guide_nav, strip_blog_frontmatter
+from app.markdown.render import (
+    framework_guide_nav,
+    strip_blog_frontmatter,
+    wiki_inpage_toc_from_html,
+)
 from site_data import (
     BLOG_DIR,
     list_algorithm_posts,
@@ -189,6 +193,8 @@ async def blog_post(request: Request, slug: str):
             raw = index_path.read_text(encoding="utf-8")
             raw = strip_blog_frontmatter(raw)
             guide_nav = framework_guide_nav(raw)
+    elif slug == "dataviz-ch09":
+        guide_nav = wiki_inpage_toc_from_html(html_body)
     return templates.TemplateResponse(
         request=request,
         name="blog_post.html",
