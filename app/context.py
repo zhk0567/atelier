@@ -10,7 +10,12 @@ from pathlib import Path
 
 from fastapi.templating import Jinja2Templates
 
-from app.config import ATELIER_ROOT
+from app.config import (
+    ATELIER_ROOT,
+    MC_VTUBER_STATIC_PREFIX,
+    mc_vtuber_live2d_ready,
+    mc_vtuber_model_url,
+)
 from app.constants import (
     AVAILABILITY,
     BIO,
@@ -325,6 +330,11 @@ def _site_context_core() -> dict:
         "books_featured": sheet.get("books_featured", []),
         "games_count": sheet.get("games_count", 0),
         "search_index": list(build_site_search_index()),
+        "live2d_mc_vtuber": {
+            "enabled": mc_vtuber_live2d_ready(),
+            "assets_base": MC_VTUBER_STATIC_PREFIX,
+            "model_url": mc_vtuber_model_url(),
+        },
     }
 
 

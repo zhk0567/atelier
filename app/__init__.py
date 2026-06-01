@@ -8,9 +8,9 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
-from app.config import ATELIER_ROOT
+from app.config import ATELIER_ROOT, MC_VTUBER_DIR, mc_vtuber_live2d_ready
 from app.static_files import CachedStaticFiles
-from app.constants import SITE_NAME, SITE_TITLE
+from app.constants import MC_VTUBER_CACHE_HEADERS, SITE_NAME, SITE_TITLE
 from app.middleware import register_security_middleware
 from app.routes import assets, blog, browse, home, projects, travel, wiki
 
@@ -83,6 +83,15 @@ def create_app() -> FastAPI:
     app.include_router(travel.router)
     app.include_router(wiki.router)
     static_dir = ATELIER_ROOT / "static"
+    if mc_vtuber_live2d_ready():
+        app.mount(
+            "/static/MC_Vtuber",
+            CachedStaticFiles(
+                directory=MC_VTUBER_DIR,
+                cache_headers=MC_VTUBER_CACHE_HEADERS,
+            ),
+            name="mc-vtuber-model",
+        )
     app.mount("/static", CachedStaticFiles(directory=static_dir), name="static")
     return app
 

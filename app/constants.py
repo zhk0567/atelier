@@ -131,6 +131,11 @@ STATIC_CACHE_HEADERS = {
     "Cache-Control": "public, max-age=604800, immutable",
 }
 
+# Live2D 贴图会随用户替换皮肤变化，不宜长期 immutable 缓存
+MC_VTUBER_CACHE_HEADERS = {
+    "Cache-Control": "public, max-age=300, must-revalidate",
+}
+
 WALLPAPER_CACHE_HEADERS = {
     "Cache-Control": "public, max-age=3600",
 }

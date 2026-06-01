@@ -200,3 +200,26 @@ def pinned_project_ids() -> tuple[str, ...]:
 
 def all_projects_seed() -> list[dict]:
     return list(load_projects_config().get("projects", []))
+
+
+MC_VTUBER_DIR = ATELIER_ROOT / "MC_Vtuber"
+
+
+@lru_cache(maxsize=1)
+def mc_vtuber_live2d_ready() -> bool:
+    """True when Cubism model assets exist under MC_Vtuber/."""
+    textures = MC_VTUBER_DIR / "MC_Vtuber.2048"
+    return (
+        (MC_VTUBER_DIR / "MC_Vtuber.model3.json").is_file()
+        and (MC_VTUBER_DIR / "MC_Vtuber.moc3").is_file()
+        and (textures / "texture_00.png").is_file()
+        and (textures / "texture_01.png").is_file()
+        and (textures / "texture_02.png").is_file()
+    )
+
+
+MC_VTUBER_STATIC_PREFIX = "/static/MC_Vtuber"
+
+
+def mc_vtuber_model_url() -> str:
+    return f"{MC_VTUBER_STATIC_PREFIX}/MC_Vtuber.model3.json"

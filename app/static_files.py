@@ -11,6 +11,15 @@ from app.constants import STATIC_CACHE_HEADERS
 
 
 class CachedStaticFiles(StaticFiles):
+    def __init__(
+        self,
+        *args,
+        cache_headers: dict[str, str] | None = None,
+        **kwargs,
+    ) -> None:
+        super().__init__(*args, **kwargs)
+        self._cache_headers = cache_headers or STATIC_CACHE_HEADERS
+
     async def get_response(self, path: str, scope):  # type: ignore[override]
         response: Response = await super().get_response(path, scope)
         if response.status_code == 200:
@@ -28,5 +37,5 @@ class CachedStaticFiles(StaticFiles):
                 ".woff",
                 ".woff2",
             }:
-                response.headers.update(STATIC_CACHE_HEADERS)
+                response.headers.update(self._cache_headers)
         return response

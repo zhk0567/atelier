@@ -22,7 +22,7 @@ def _is_blog_chart_embed(path: str) -> bool:
 def _content_security_policy(*, frame_ancestors: str = "'none'") -> str:
     return (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline'; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval'; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: blob:; "
         "media-src 'self' blob:; "

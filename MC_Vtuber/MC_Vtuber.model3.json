@@ -1,0 +1,40 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "MC_Vtuber.moc3",
+		"Textures": [
+			"MC_Vtuber.2048/texture_00.png",
+			"MC_Vtuber.2048/texture_01.png",
+			"MC_Vtuber.2048/texture_02.png"
+		],
+		"Physics": "MC_Vtuber.physics3.json",
+		"DisplayInfo": "MC_Vtuber.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "01.waiyi",
+				"File": "motions/01.waiyi.exp3.json"
+			},
+			{
+				"Name": "02.L",
+				"File": "motions/02.L.exp3.json"
+			},
+			{
+				"Name": "03.R",
+				"File": "motions/03.R.exp3.json"
+			}
+		]
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		}
+	],
+	"HitAreas": []
+}

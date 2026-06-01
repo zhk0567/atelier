@@ -1,0 +1,266 @@
+/* MC_Vtuber — fixed bottom-right */
+#live2d-mc-vtuber {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 250;
+  width: 360px;
+  height: 460px;
+  max-width: 46vw;
+  max-height: 58vh;
+  padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) 0;
+  box-sizing: border-box;
+  overflow: visible;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.2));
+}
+
+#live2d-mc-vtuber.is-ready {
+  pointer-events: auto;
+}
+
+#live2d-mc-vtuber canvas,
+#live2d-mc-vtuber .live2d-mc-vtuber__canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* MC 风格对话框（GUI 灰底 + 黑边浮雕 + 经验条绿条） */
+.live2d-mc-vtuber__bubble {
+  --mc-gui: #c6c6c6;
+  --mc-gui-light: #ffffff;
+  --mc-gui-dark: #555555;
+  --mc-border: #000000;
+  --mc-text: #3f3f3f;
+  --mc-accent: #80ff20;
+  --mc-accent-dark: #1e7a12;
+  position: absolute;
+  right: 33px;
+  bottom: 200px;
+  z-index: 5;
+  max-width: min(280px, 72vw);
+  padding: 10px 12px 10px 16px;
+  font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  color: var(--mc-text);
+  background: var(--mc-gui);
+  border: 2px solid var(--mc-border);
+  border-radius: 0;
+  box-shadow:
+    inset 2px 2px 0 0 var(--mc-gui-light),
+    inset -2px -2px 0 0 var(--mc-gui-dark),
+    4px 4px 0 0 rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.12s steps(2), transform 0.12s steps(2);
+  image-rendering: pixelated;
+}
+
+.live2d-mc-vtuber__bubble::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--mc-accent) 0%, var(--mc-accent-dark) 100%);
+  border-right: 2px solid var(--mc-border);
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.35);
+}
+
+.live2d-mc-vtuber__bubble.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 方块小尾巴（替代圆角三角） */
+.live2d-mc-vtuber__bubble::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  bottom: -12px;
+  width: 10px;
+  height: 10px;
+  background: var(--mc-gui);
+  border: 2px solid var(--mc-border);
+  box-shadow:
+    inset 1px 1px 0 0 var(--mc-gui-light),
+    inset -1px -1px 0 0 var(--mc-gui-dark),
+    2px 2px 0 0 rgba(0, 0, 0, 0.45);
+  transform: rotate(45deg);
+}
+
+html[data-theme="dark"] .live2d-mc-vtuber__bubble {
+  --mc-gui: #48494a;
+  --mc-gui-light: #8b8b8b;
+  --mc-gui-dark: #2d2d2d;
+  --mc-text: #ffffff;
+  --mc-accent: #55ff55;
+  --mc-accent-dark: #137342;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live2d-mc-vtuber__bubble {
+    transition: none;
+  }
+}
+
+/* ── Debug: canvas frame + rulers ─────────────────────────────────────────── */
+#live2d-mc-vtuber.is-debug {
+  margin-top: 20px;
+  margin-left: 24px;
+  outline: 1px solid rgba(229, 57, 53, 0.35);
+  background: rgba(16, 16, 24, 0.04);
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__stage-frame {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed #e53935;
+  pointer-events: none;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__stage-label {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  z-index: 3;
+  padding: 2px 6px;
+  font:
+    11px/1.2 ui-monospace,
+    "Cascadia Mono",
+    Consolas,
+    monospace;
+  color: #b71c1c;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #e53935;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-label {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 3;
+  max-width: calc(100% - 8px);
+  padding: 2px 6px;
+  font:
+    10px/1.25 ui-monospace,
+    Consolas,
+    monospace;
+  color: #1b5e20;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #00c853;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__ruler {
+  position: absolute;
+  pointer-events: none;
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #90a4ae;
+  box-sizing: border-box;
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__ruler--x {
+  left: 0;
+  bottom: 100%;
+  width: 100%;
+  height: 18px;
+  margin-bottom: 2px;
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__ruler--y {
+  right: 100%;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  margin-right: 2px;
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__tick {
+  position: absolute;
+  box-sizing: border-box;
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__ruler--x .live2d-mc-vtuber__tick {
+  bottom: 0;
+  width: 1px;
+  height: 6px;
+  background: #546e7a;
+  transform: translateX(-0.5px);
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__ruler--x .live2d-mc-vtuber__tick--label {
+  height: auto;
+  background: none;
+  bottom: 7px;
+  transform: translateX(-50%);
+  font:
+    9px/1 ui-monospace,
+    Consolas,
+    monospace;
+  color: #37474f;
+  white-space: nowrap;
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__ruler--y .live2d-mc-vtuber__tick {
+  left: 0;
+  height: 1px;
+  width: 6px;
+  background: #546e7a;
+  transform: translateY(-0.5px);
+}
+
+#live2d-mc-vtuber.is-debug .live2d-mc-vtuber__ruler--y .live2d-mc-vtuber__tick--label {
+  width: auto;
+  background: none;
+  left: 7px;
+  transform: translateY(-50%);
+  font:
+    9px/1 ui-monospace,
+    Consolas,
+    monospace;
+  color: #37474f;
+  white-space: nowrap;
+}
+
+html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__ruler {
+  background: rgba(30, 30, 36, 0.94);
+  border-color: #546e7a;
+}
+
+html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__stage-label,
+html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-label {
+  background: rgba(30, 30, 36, 0.94);
+  color: #ff8a80;
+}
+
+html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-label {
+  color: #69f0ae;
+}
+
+@media (max-width: 640px) {
+  #live2d-mc-vtuber {
+    width: 260px;
+    height: 340px;
+  }
+}
+
+@media print {
+  #live2d-mc-vtuber {
+    display: none !important;
+  }
+}

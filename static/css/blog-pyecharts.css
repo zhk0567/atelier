@@ -102,20 +102,18 @@
   white-space: nowrap;
 }
 
-/* Annotated core program blocks */
-.blog-md .pyecharts-code {
+/* Annotated core program blocks — always dark panel (overrides wiki pre on wallpaper/light) */
+.wiki-content .blog-md .pyecharts-code,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code {
   margin: 0.85rem 0 1.25rem;
-  border: 1px solid var(--wiki-border, rgba(0, 0, 0, 0.1));
+  border: 1px solid #3d4451;
   border-radius: 8px;
   overflow: hidden;
-  background: var(--wiki-code-bg, #1a1b1e);
+  background: #161b22;
 }
 
-[data-theme="dark"] .blog-md .pyecharts-code {
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.pyecharts-code__legend {
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__legend,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__legend {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -124,92 +122,114 @@
   padding: 0.5rem 0.75rem;
   font-size: 0.75rem;
   line-height: 1.4;
-  background: rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #21262d;
+  border-bottom: 1px solid #3d4451;
+  color: #e6edf3;
 }
 
 .pec-chip {
   display: inline-block;
-  padding: 0.12rem 0.5rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 4px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.02em;
 }
 
 .pec-chip.pec-data {
-  background: rgba(33, 150, 243, 0.22);
-  color: #90caf9;
+  background: #1f6feb;
+  color: #ffffff;
 }
 .pec-chip.pec-step {
-  background: rgba(76, 175, 80, 0.22);
-  color: #a5d6a7;
+  background: #238636;
+  color: #ffffff;
 }
 .pec-chip.pec-config {
-  background: rgba(255, 193, 7, 0.2);
-  color: #ffe082;
+  background: #9e6a03;
+  color: #ffffff;
 }
 .pec-chip.pec-compose {
-  background: rgba(156, 39, 176, 0.22);
-  color: #ce93d8;
+  background: #8957e5;
+  color: #ffffff;
 }
 .pec-chip.pec-output {
-  background: rgba(255, 87, 34, 0.22);
-  color: #ffab91;
+  background: #bd561d;
+  color: #ffffff;
 }
 .pec-chip.pec-note {
-  background: rgba(158, 158, 158, 0.2);
-  color: #e0e0e0;
+  background: #484f58;
+  color: #f0f6fc;
 }
 
-.blog-md .pyecharts-code__pre {
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre {
   margin: 0;
   padding: 0.65rem 0;
   overflow-x: auto;
-  background: transparent;
   border: 0;
   border-radius: 0;
+  background: #161b22;
 }
 
-.blog-md .pyecharts-code__pre code {
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre code,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre code {
   display: block;
   padding: 0 0.85rem;
   font-size: 0.8125rem;
   line-height: 1.55;
-  color: #d4d4d4;
+  color: #e6edf3;
   background: transparent;
+  border: none;
+  font-family: ui-monospace, Consolas, "Cascadia Mono", monospace;
 }
 
-.blog-md .pyecharts-code__pre .pec-line {
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line {
   display: block;
   margin: 0 -0.85rem;
   padding: 0 0.85rem 0 0.72rem;
-  border-left: 3px solid transparent;
+  border-left: 4px solid transparent;
+  color: #e6edf3;
 }
 
-.blog-md .pyecharts-code__pre .pec-line.pec-data {
-  border-left-color: #42a5f5;
-  background: rgba(33, 150, 243, 0.1);
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-data,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-data {
+  border-left-color: #58a6ff;
+  background: rgba(31, 111, 235, 0.38);
+  color: #f0f7ff;
 }
-.blog-md .pyecharts-code__pre .pec-line.pec-step {
-  border-left-color: #66bb6a;
-  background: rgba(76, 175, 80, 0.09);
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-step,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-step {
+  border-left-color: #3fb950;
+  background: rgba(35, 134, 54, 0.35);
+  color: #edfff0;
 }
-.blog-md .pyecharts-code__pre .pec-line.pec-config {
-  border-left-color: #ffca28;
-  background: rgba(255, 193, 7, 0.08);
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-config,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-config {
+  border-left-color: #d29922;
+  background: rgba(158, 106, 3, 0.42);
+  color: #fff8e6;
 }
-.blog-md .pyecharts-code__pre .pec-line.pec-compose {
-  border-left-color: #ab47bc;
-  background: rgba(156, 39, 176, 0.1);
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-compose,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-compose {
+  border-left-color: #a371f7;
+  background: rgba(137, 87, 229, 0.38);
+  color: #f7f0ff;
 }
-.blog-md .pyecharts-code__pre .pec-line.pec-output {
-  border-left-color: #ff7043;
-  background: rgba(255, 87, 34, 0.1);
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-output,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-output {
+  border-left-color: #f0883e;
+  background: rgba(189, 86, 29, 0.4);
+  color: #fff3eb;
 }
-.blog-md .pyecharts-code__pre .pec-line.pec-note {
-  border-left-color: #9e9e9e;
-  background: rgba(158, 158, 158, 0.06);
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-note,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-note {
+  border-left-color: #8b949e;
+  background: rgba(72, 79, 88, 0.55);
+  color: #d8dee4;
 }
-.blog-md .pyecharts-code__pre .pec-line.pec-muted {
-  border-left-color: rgba(255, 255, 255, 0.06);
+.wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-muted,
+body.wiki-site.has-wallpaper .wiki-content .blog-md .pyecharts-code .pyecharts-code__pre .pec-line.pec-muted {
+  border-left-color: #30363d;
+  background: rgba(48, 54, 61, 0.45);
+  color: #c9d1d9;
 }

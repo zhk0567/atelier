@@ -142,3 +142,28 @@ python scripts\validate_guide.py --all-published --strict
 ## Wiki 维护
 
 见 [Wiki/README.md](./Wiki/README.md)。
+
+## 右下角 Live2D（MC_Vtuber）
+
+模型目录：`MC_Vtuber/`（需含 `MC_Vtuber.model3.json` 与 `MC_Vtuber.moc3`）。  
+全站右下角展示；首次部署请安装 Web 运行时：
+
+```powershell
+python scripts\ensure_live2d_vendor.py
+```
+
+然后重启服务。点击模型可随机切换表情（`01.waiyi` / `02.L` / `03.R`）。
+
+说明：网站直接挂载 `MC_Vtuber/` → `/static/MC_Vtuber/`。**配布包自带的 `texture_00.png` 是默认史蒂夫皮肤**，不是网站 bug；要换成你的人设，必须把皮肤文件替换进该目录（见下）。换皮后请 Ctrl+F5 强刷（贴图缓存 5 分钟）。
+
+换皮肤（二选一）：
+
+```powershell
+# 1) 本地已有 64×64 或 64×32 皮肤 PNG
+python scripts\apply_minecraft_skin.py --skin D:\path\to\your_skin.png
+
+# 2) 正版 MC 角色名（Mojang 能查到的用户名）
+python scripts\apply_minecraft_skin.py --username 你的游戏ID
+```
+
+然后重启服务。若 Live2D 空白，执行 `ensure_live2d_vendor.py` 并看控制台 `[live2d]`。

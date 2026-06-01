@@ -1,0 +1,10 @@
+{
+	"Type": "Live2D Expression",
+	"Parameters": [
+		{
+			"Id": "kiri_biaoqing1",
+			"Value": 1,
+			"Blend": "Add"
+		}
+	]
+}

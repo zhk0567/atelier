@@ -14,7 +14,7 @@
   {% block meta %}{% endblock %}
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/static/css/wiki.css?v=42" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=44" />
   <link rel="stylesheet" href="/static/css/mp-portal.css?v=14" />
   {% if wallpapers %}
   {% set default_wp = wallpapers | selectattr('default') | first | default(wallpapers[0]) %}
@@ -163,6 +163,20 @@
     <p class="wiki-lightbox__counter" id="wiki-lightbox-counter" hidden aria-live="polite"></p>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  {% if live2d_mc_vtuber.enabled %}
+  <div
+    id="live2d-mc-vtuber"
+    data-enabled="1"
+    data-model-url="{{ live2d_mc_vtuber.model_url }}"
+    aria-hidden="true"
+  ></div>
+  <link rel="stylesheet" href="/static/css/live2d-mc-vtuber.css?v=15" />
+  <script src="/static/vendor/live2d/live2dcubismcore.min.js" defer></script>
+  <script src="/static/vendor/live2d/pixi.min.js" defer></script>
+  <script src="/static/vendor/live2d/unsafe-eval.min.js" defer></script>
+  <script src="/static/vendor/live2d/cubism4.min.js" defer></script>
+  <script src="/static/js/live2d-mc-vtuber.js?v=26" defer></script>
+  {% endif %}
   <script src="/static/js/main.js?v=45" defer></script>
   {% block extra_scripts %}{% endblock %}
 </body>

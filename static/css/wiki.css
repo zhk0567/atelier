@@ -33,6 +33,13 @@
   --scrim-wallpaper: rgba(255, 255, 255, 0.82);
   --scrim-wallpaper-blur: blur(14px) saturate(1.12);
   --scrim-wallpaper-border: rgba(0, 0, 0, 0.1);
+  --wallpaper-image-filter: none;
+  --wallpaper-overlay: none;
+  --wallpaper-vignette: radial-gradient(
+    ellipse 120% 100% at 50% 50%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
   --surface-solid: #ffffff;
   --surface-solid-muted: #eef0f3;
   --text-on-glass: #0a0c0e;
@@ -98,6 +105,9 @@
   --scrim-wallpaper: rgba(22, 24, 26, 0.84);
   --scrim-wallpaper-blur: blur(14px) saturate(1.12);
   --scrim-wallpaper-border: rgba(255, 255, 255, 0.1);
+  --wallpaper-image-filter: none;
+  --wallpaper-overlay: rgba(0, 0, 0, 0.32);
+  --wallpaper-vignette: none;
   --surface-solid: #2e3033;
   --surface-solid-muted: #383b40;
   --text-on-glass: #f3f4f6;
@@ -187,13 +197,21 @@ body.wiki-site.has-wallpaper {
   object-position: center;
   transform: translateZ(0);
   opacity: 1;
+  filter: var(--wallpaper-image-filter, none);
 }
 .wiki-wallpaper::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.08) 100%);
+  background: var(--wallpaper-overlay, transparent);
+}
+.wiki-wallpaper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--wallpaper-vignette, none);
 }
 
 body.wiki-site.has-wallpaper .wiki-header {
@@ -1966,10 +1984,15 @@ body.wiki-site.has-wallpaper .blog-guide-md blockquote {
 /* ── Motion & texture (prefers-reduced-motion: no-preference) ───────────── */
 @media (prefers-reduced-motion: no-preference) {
   .wiki-wallpaper__image {
-    transition: opacity var(--duration-slow) var(--ease-out);
+    transition: opacity var(--duration-slow) var(--ease-out),
+      filter var(--duration-normal) var(--ease-in-out);
   }
   .wiki-wallpaper__image.is-fading {
     opacity: 0;
+  }
+  .wiki-wallpaper::after,
+  .wiki-wallpaper::before {
+    transition: background var(--duration-normal) var(--ease-in-out);
   }
 
   html.theme-transitioning,
