@@ -39,6 +39,14 @@ BLOG_STANDALONE: list[dict[str, str]] = [
         "category": "音乐",
         "summary": "从零读懂简谱：音高、节奏与休止，看懂数字记谱即可哼唱旋律。",
     },
+    {
+        "slug": "dataviz-ch09",
+        "folder": "数据可视化-第九章",
+        "title": "数据可视化技术 · 第九章 pyecharts",
+        "series": "",
+        "category": "课程笔记",
+        "summary": "pyecharts 从入门到组合图、主题与 Web 整合，含教材例程、虎扑实战与课后习题全文。",
+    },
 ]
 
 

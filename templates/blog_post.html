@@ -2,6 +2,12 @@
 
 {% block title %}{{ post.title }} · {{ site_name }}{% endblock %}
 
+{% block extra_head %}
+{% if post.slug == 'dataviz-ch09' %}
+<link rel="stylesheet" href="/static/css/blog-pyecharts.css?v=3" />
+{% endif %}
+{% endblock %}
+
 {% block breadcrumbs %}
 <nav class="wiki-breadcrumbs" aria-label="breadcrumb">
   <a href="/">{{ ui.label_main_page }}</a>
@@ -35,4 +41,7 @@
 {% block extra_scripts %}
 <script src="/static/js/mermaid.min.js" defer></script>
 <script src="/static/js/mermaid-init.js?v=2" defer></script>
+{% if post.slug == 'dataviz-ch09' %}
+<script src="/static/js/blog-pyecharts-embed.js?v=2" defer></script>
+{% endif %}
 {% endblock %}

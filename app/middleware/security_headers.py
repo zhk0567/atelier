@@ -2,12 +2,24 @@
 
 from __future__ import annotations
 
+import re
+
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
 
+# pyecharts chapter: chart HTML must be embeddable in same-origin blog iframes.
+_BLOG_CHART_HTML = re.compile(
+    r"^/static/blog/dataviz-ch09/[a-z0-9_.-]+\.html$",
+    re.I,
+)
 
-def _content_security_policy() -> str:
+
+def _is_blog_chart_embed(path: str) -> bool:
+    return bool(_BLOG_CHART_HTML.match(path))
+
+
+def _content_security_policy(*, frame_ancestors: str = "'none'") -> str:
     return (
         "default-src 'self'; "
         "script-src 'self' 'unsafe-inline'; "
@@ -16,7 +28,8 @@ def _content_security_policy() -> str:
         "media-src 'self' blob:; "
         "font-src 'self'; "
         "connect-src 'self'; "
-        "frame-ancestors 'none'; "
+        "frame-src 'self'; "
+        f"frame-ancestors {frame_ancestors}; "
         "base-uri 'self'; "
         "form-action 'self'"
     )
@@ -25,13 +38,26 @@ def _content_security_policy() -> str:
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next) -> Response:
         response = await call_next(request)
+        path = request.url.path
+        embeddable_chart = _is_blog_chart_embed(path)
+
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
-        response.headers.setdefault("X-Frame-Options", "DENY")
+        if embeddable_chart:
+            # Allow /blog/dataviz-ch09 to iframe these HTML files (same origin only).
+            response.headers["X-Frame-Options"] = "SAMEORIGIN"
+            response.headers["Content-Security-Policy"] = _content_security_policy(
+                frame_ancestors="'self'"
+            )
+        else:
+            response.headers.setdefault("X-Frame-Options", "DENY")
+            response.headers.setdefault(
+                "Content-Security-Policy",
+                _content_security_policy(),
+            )
         response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
         response.headers.setdefault(
             "Permissions-Policy",
             "camera=(), microphone=(), geolocation=(), payment=()",
         )
-        response.headers.setdefault("Content-Security-Policy", _content_security_policy())
         response.headers.setdefault("X-Permitted-Cross-Domain-Policies", "none")
         return response

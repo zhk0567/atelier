@@ -1,0 +1,215 @@
+/* In-page pyecharts embeds (dataviz-ch09 blog) */
+.blog-md .pyecharts-figure {
+  margin: 1.25rem 0 1.75rem;
+  padding: 0;
+  border: 1px solid var(--wiki-border, rgba(0, 0, 0, 0.08));
+  border-radius: 10px;
+  background: var(--wiki-surface, #fff);
+  overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 360px;
+}
+
+[data-theme="dark"] .blog-md .pyecharts-figure {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pyecharts-embed {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background: var(--wiki-bg, #fafafa);
+}
+
+.pyecharts-embed__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  min-height: inherit;
+}
+
+.pyecharts-embed__placeholder img {
+  max-width: 100%;
+  height: auto;
+  opacity: 0.92;
+  border-radius: 4px;
+}
+
+.pyecharts-embed__hint {
+  font-size: 0.8125rem;
+  color: var(--wiki-muted, #666);
+}
+
+.pyecharts-embed__skeleton {
+  width: min(100%, 560px);
+  height: 180px;
+  border-radius: 6px;
+  background: linear-gradient(
+    110deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: pyecharts-shimmer 1.4s ease-in-out infinite;
+}
+
+[data-theme="dark"] .pyecharts-embed__skeleton {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes pyecharts-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.pyecharts-embed.is-loaded .pyecharts-embed__placeholder {
+  display: none;
+}
+
+.pyecharts-embed__frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+.pyecharts-figure__caption {
+  margin: 0;
+  padding: 0.5rem 0.85rem 0.65rem;
+  font-size: 0.875rem;
+  color: var(--wiki-muted, #555);
+  border-top: 1px solid var(--wiki-border, rgba(0, 0, 0, 0.06));
+}
+
+.pyecharts-figure__caption a {
+  white-space: nowrap;
+}
+
+/* Annotated core program blocks */
+.blog-md .pyecharts-code {
+  margin: 0.85rem 0 1.25rem;
+  border: 1px solid var(--wiki-border, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--wiki-code-bg, #1a1b1e);
+}
+
+[data-theme="dark"] .blog-md .pyecharts-code {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.pyecharts-code__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pec-chip {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.pec-chip.pec-data {
+  background: rgba(33, 150, 243, 0.22);
+  color: #90caf9;
+}
+.pec-chip.pec-step {
+  background: rgba(76, 175, 80, 0.22);
+  color: #a5d6a7;
+}
+.pec-chip.pec-config {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffe082;
+}
+.pec-chip.pec-compose {
+  background: rgba(156, 39, 176, 0.22);
+  color: #ce93d8;
+}
+.pec-chip.pec-output {
+  background: rgba(255, 87, 34, 0.22);
+  color: #ffab91;
+}
+.pec-chip.pec-note {
+  background: rgba(158, 158, 158, 0.2);
+  color: #e0e0e0;
+}
+
+.blog-md .pyecharts-code__pre {
+  margin: 0;
+  padding: 0.65rem 0;
+  overflow-x: auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.blog-md .pyecharts-code__pre code {
+  display: block;
+  padding: 0 0.85rem;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: #d4d4d4;
+  background: transparent;
+}
+
+.blog-md .pyecharts-code__pre .pec-line {
+  display: block;
+  margin: 0 -0.85rem;
+  padding: 0 0.85rem 0 0.72rem;
+  border-left: 3px solid transparent;
+}
+
+.blog-md .pyecharts-code__pre .pec-line.pec-data {
+  border-left-color: #42a5f5;
+  background: rgba(33, 150, 243, 0.1);
+}
+.blog-md .pyecharts-code__pre .pec-line.pec-step {
+  border-left-color: #66bb6a;
+  background: rgba(76, 175, 80, 0.09);
+}
+.blog-md .pyecharts-code__pre .pec-line.pec-config {
+  border-left-color: #ffca28;
+  background: rgba(255, 193, 7, 0.08);
+}
+.blog-md .pyecharts-code__pre .pec-line.pec-compose {
+  border-left-color: #ab47bc;
+  background: rgba(156, 39, 176, 0.1);
+}
+.blog-md .pyecharts-code__pre .pec-line.pec-output {
+  border-left-color: #ff7043;
+  background: rgba(255, 87, 34, 0.1);
+}
+.blog-md .pyecharts-code__pre .pec-line.pec-note {
+  border-left-color: #9e9e9e;
+  background: rgba(158, 158, 158, 0.06);
+}
+.blog-md .pyecharts-code__pre .pec-line.pec-muted {
+  border-left-color: rgba(255, 255, 255, 0.06);
+}
