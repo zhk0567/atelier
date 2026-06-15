@@ -77,8 +77,8 @@ $env:ATELIER_REMOTE = "/opt/atelier"
 
 ## 访问入口
 
-- 直接：`/static/nyxviz/video.html?record=1&scene=intro`
-- 壳页：`/demo/nyxviz-video`（全屏 iframe）
+- 直链（全页）：`/static/nyxviz/video.html?record=1&scene=intro`
+- 兼容跳转：`/demo/nyxviz-video` → 302 到上述直链
 - 项目页：`/project/nyxviz` → 「录屏演示」
 
 ## 11 个 scene
