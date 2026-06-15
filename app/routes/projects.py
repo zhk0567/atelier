@@ -44,14 +44,15 @@ async def project_detail(request: Request, project_id: str):
         enriched["features_html"] = render_fragment_markdown(raw)
     else:
         enriched["features_html"] = ""
+    wiki_slug = project.get("wiki_slug")
     return templates.TemplateResponse(
         request=request,
         name="project.html",
         context={
             **ctx,
             "project": enriched,
-            "wiki_pages": list_wiki_pages(project["wiki_slug"]),
-            "wiki_index_url": f"/docs/{project['wiki_slug']}/index.md",
+            "wiki_pages": list_wiki_pages(wiki_slug) if wiki_slug else [],
+            "wiki_index_url": f"/docs/{wiki_slug}/index.md" if wiki_slug else "",
         },
         headers=HTML_CACHE_HEADERS,
     )

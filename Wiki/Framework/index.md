@@ -1,5 +1,7 @@
 # https://github.com/zhk0567/Framework Wiki
 
+> **读者向教程**：系统学习各技术栈请阅读 [Framework 技术栈指南](/blog/series/framework)（124 篇官方指南体例）。本 Wiki 为仓库结构与模块索引。
+
 - 仓库: https://github.com/zhk0567/Framework
 - 生成时间: 2026-05-14 17:26:29
 

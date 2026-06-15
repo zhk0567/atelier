@@ -13,3 +13,11 @@ config/site.local.json
 .env
 validate_out.txt
 _server.pid
+
+# NyxViz static bundle (large; run scripts/sync_nyxviz_video.ps1 before deploy)
+static/nyxviz/assets/
+static/nyxviz/figures/
+
+# 大作业 Word（含个人信息，勿提交）
+作业/*.docx
+作业/*.doc

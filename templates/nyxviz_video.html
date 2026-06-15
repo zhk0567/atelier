@@ -1,0 +1,36 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}NyxViz 录屏演示 · {{ site_name }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/nyxviz-demo.css?v=1" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="/projects">{{ ui.label_all_projects_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="/project/nyxviz">NyxViz</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>录屏演示</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nyxviz-demo">
+  <header class="nyxviz-demo__bar">
+    <h1 class="nyxviz-demo__title">NyxViz 录屏三栏</h1>
+    <p class="nyxviz-demo__meta">scene={{ scene }} · 体数据来自外部 CDN</p>
+    <a class="nyxviz-demo__open" href="{{ iframe_src }}" target="_blank" rel="noopener noreferrer">新窗口打开</a>
+  </header>
+  <iframe
+    class="nyxviz-demo__frame"
+    src="{{ iframe_src }}"
+    title="NyxViz 录屏三栏"
+    loading="eager"
+    allow="fullscreen"
+  ></iframe>
+</div>
+{% endblock %}

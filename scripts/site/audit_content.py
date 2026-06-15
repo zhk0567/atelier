@@ -20,6 +20,7 @@ WIKI_DIR = ROOT / "Wiki"
 BLOG_DIR = ROOT / "Blog"
 XLSX_PATH = ROOT / "zhita_settings.xlsx"
 FRAMEWORK_MANIFEST = BLOG_DIR / "framework-guides" / "manifest.json"
+STANDALONE_MANIFEST = BLOG_DIR / "standalone" / "manifest.json"
 
 IMG_REF_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 DETAILS_RE = re.compile(r"<details>[\s\S]*?Relevant\s+source\s+files", re.I)
@@ -96,11 +97,41 @@ def audit_wiki(lines: list[str]) -> None:
                 lines.append(f"- …共 {len(issues)} 项")
 
 
+def audit_standalone_manifest(lines: list[str]) -> None:
+    lines.append("\n### Standalone manifest")
+    if not STANDALONE_MANIFEST.is_file():
+        lines.append("- **缺失**: Blog/standalone/manifest.json")
+        return
+    try:
+        manifest = json.loads(STANDALONE_MANIFEST.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        lines.append(f"- manifest JSON 错误: {exc}")
+        return
+    series_ids = {m.get("id") for m in manifest.get("series_meta", []) if m.get("id")}
+    for entry in manifest.get("posts", []):
+        slug = entry.get("slug", "")
+        folder = entry.get("folder", "")
+        series = entry.get("series", "")
+        if series and series not in series_ids:
+            lines.append(f"- {slug}: 未知 series `{series}`")
+        path = BLOG_DIR / folder / "index.md"
+        if not path.is_file():
+            lines.append(f"- **缺失**: {slug} — {folder}/index.md")
+        status = entry.get("status", "")
+        if status not in ("published", "draft"):
+            lines.append(f"- {slug}: 异常 status `{status}`")
+    published = sum(1 for p in manifest.get("posts", []) if p.get("status") == "published")
+    draft = sum(1 for p in manifest.get("posts", []) if p.get("status") == "draft")
+    lines.append(f"- 共 {len(manifest.get('posts', []))} 篇（已发布 {published}，draft {draft}）")
+
+
 def audit_blog(lines: list[str]) -> None:
     lines.append("\n## Blog")
-    standalone = BLOG_DIR / "认识简谱" / "index.md"
-    if standalone.is_file():
-        raw = standalone.read_text(encoding="utf-8", errors="replace")
+    audit_standalone_manifest(lines)
+
+    jianpu_md = BLOG_DIR / "认识简谱" / "index.md"
+    if jianpu_md.is_file():
+        raw = jianpu_md.read_text(encoding="utf-8", errors="replace")
         for m in IMG_REF_RE.finditer(raw):
             ref = m.group(1)
             if ref.startswith("images/"):
@@ -109,7 +140,9 @@ def audit_blog(lines: list[str]) -> None:
                 if not src.is_file() and not static.is_file():
                     lines.append(f"- jianpu: 缺图 {ref}")
 
+    lines.append("\n### Framework manifest")
     if not FRAMEWORK_MANIFEST.is_file():
+        lines.append("- Framework manifest 不存在")
         return
     try:
         manifest = json.loads(FRAMEWORK_MANIFEST.read_text(encoding="utf-8"))

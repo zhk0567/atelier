@@ -3,7 +3,7 @@
 {% block title %}{{ post.title }} · {{ site_name }}{% endblock %}
 
 {% block extra_head %}
-{% if post.slug == 'dataviz-ch09' %}
+{% if post.features and 'pyecharts' in post.features %}
 <link rel="stylesheet" href="/static/css/blog-pyecharts.css?v=4" />
 {% endif %}
 {% endblock %}
@@ -15,7 +15,7 @@
   <a href="/blog">博客</a>
   {% if series_url %}
   <span class="wiki-breadcrumbs__sep">/</span>
-  <a href="{{ series_url }}">{% if is_hotspot %}{{ ui.label_blog_hotspot }}{% elif is_algorithm_guide %}Algorithm{% else %}Framework{% endif %}</a>
+  <a href="{{ series_url }}">{{ series_label }}</a>
   {% endif %}
   <span class="wiki-breadcrumbs__sep">/</span>
   <span>{{ post.title }}</span>
@@ -38,12 +38,24 @@
 <div class="wiki-md blog-md{% if guide_nav %} blog-guide-md{% endif %}">
   {{ content_html | safe }}
 </div>
+{% if chapter_prev or chapter_next %}
+<nav class="blog-chapter-nav" aria-label="章节导航">
+  {% if chapter_prev %}
+  <a class="blog-chapter-nav__link blog-chapter-nav__link--prev" href="/blog/{{ chapter_prev.slug }}">← {{ chapter_prev.title }}</a>
+  {% else %}
+  <span class="blog-chapter-nav__spacer"></span>
+  {% endif %}
+  {% if chapter_next %}
+  <a class="blog-chapter-nav__link blog-chapter-nav__link--next" href="/blog/{{ chapter_next.slug }}">{{ chapter_next.title }} →</a>
+  {% endif %}
+</nav>
+{% endif %}
 {% endblock %}
 
 {% block extra_scripts %}
 <script src="/static/js/mermaid.min.js" defer></script>
 <script src="/static/js/mermaid-init.js?v=2" defer></script>
-{% if post.slug == 'dataviz-ch09' %}
+{% if post.features and 'pyecharts' in post.features %}
 <script src="/static/js/blog-pyecharts-embed.js?v=2" defer></script>
 {% endif %}
 {% endblock %}

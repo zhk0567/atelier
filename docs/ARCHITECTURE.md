@@ -6,7 +6,9 @@
 |------|------|----------|
 | `Blog/framework-guides/` | 124 篇技术栈**官方指南**（人工精写） | `/blog/series/framework`、`/blog/{slug}` |
 | `Blog/algorithm-guides/` | 82 篇 Algorithm **专题双语指南** | `/blog/series/algorithm`、`/blog/{slug}` |
-| `Blog/认识简谱/` | 独立博文 | `/blog/jianpu` |
+| `Blog/standalone/manifest.json` | 课程笔记、专题等独立博文索引 | `/blog/series/course-notes`、`/blog/series/topics`、`/blog/{slug}` |
+| `Blog/数据可视化-第九章/` 等 | 课程章节正文（manifest 注册，文件夹可位于 `Blog/` 根下） | `/blog/dataviz-ch09` 等 |
+| `Blog/hotspot/` | 热点观察 | `/blog/series/hotspot` |
 | `Wiki/{project}/` | DeepWiki 导出的**项目文档** | `/docs/{wiki_slug}/{page}` |
 | `zhita_settings.xlsx` | 证书、爱好、书籍等表格 | `/browse/{hub_id}` |
 
@@ -48,6 +50,22 @@ flowchart LR
 
 维护命令见 [Blog/framework-guides/README.md](../Blog/framework-guides/README.md)。
 
+## Standalone 博文（课程笔记 / 专题）
+
+独立博文在 [Blog/standalone/manifest.json](../Blog/standalone/manifest.json) 注册，字段含 `series`、`features`（如 `toc`、`pyecharts`）、`toc_depth`、`chapter`。新增章节只需追加 manifest 条目与对应 `Blog/{folder}/index.md`，无需改 Python 路由。
+
 ## 配置
 
 复制 `config/site.example.json` 为 `config/site.local.json`（已 gitignore），设置本机 `framework_root`。环境变量 `FRAMEWORK_ROOT` 优先级最高。
+
+## NyxViz 录屏静态 Demo
+
+NyxViz 录屏三栏页（`video.html`，11 scene）以 Vite 静态产物接入，不依赖 Node 运行时：
+
+| 资源 | 位置 | 说明 |
+|------|------|------|
+| HTML/JS/CSS | `static/nyxviz/` | `npm run build:atelier` + `scripts/sync_nyxviz_video.ps1` |
+| figures / stats | `static/nyxviz/figures/`、`stats/` | 站点 static 托管 |
+| Nyx `*.dat` | 外部 OSS/CDN | `VITE_NYX_DATA_BASE` 构建注入；CSP `connect-src` 见 `nyx_data_origin` |
+
+入口：`/demo/nyxviz-video`（iframe 壳）、`/static/nyxviz/video.html?record=1&scene=intro`（直链）。部署步骤见 [NYXVIZ_DEPLOY.md](NYXVIZ_DEPLOY.md)。

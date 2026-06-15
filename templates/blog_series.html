@@ -18,6 +18,14 @@
     <h1>{{ series_title }}</h1>
     <p class="lead">{{ series_lead }}</p>
     <p class="mp-page-note">{{ series_note }}</p>
+    {% if recommended_starts %}
+    <div class="mp-page-note">
+      <strong>推荐起点：</strong>
+      {% for p in recommended_starts %}
+      <a href="/blog/{{ p.slug }}">{{ p.title }}</a>{% if not loop.last %} · {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
     <p class="mp-page-links">
       <a href="{{ wiki_overview_url }}">{% if series_mode == 'algorithm' %}Algorithm 仓库{% else %}Framework Wiki 索引{% endif %}</a>
       ·

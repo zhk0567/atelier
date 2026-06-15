@@ -33,9 +33,16 @@
       <a class="mp-button mp-button-has-image" href="{{ project.github }}" target="_blank" rel="noopener noreferrer" style="--button-image: url('{{ project.thumb_url }}');">
         <span class="mp-button__inner">GitHub</span>
       </a>
+      {% if project.demo_url %}
+      <a class="mp-button" href="{{ project.demo_url }}">
+        <span class="mp-button__inner">{{ ui.label_nyxviz_demo | default('录屏演示') }}</span>
+      </a>
+      {% endif %}
+      {% if wiki_index_url %}
       <a class="mp-button" href="{{ wiki_index_url }}">
         <span class="mp-button__inner">Wiki 总览</span>
       </a>
+      {% endif %}
     </div>
   </section>
 

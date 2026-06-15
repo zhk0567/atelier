@@ -264,6 +264,12 @@ def wiki_inpage_toc_from_html(html: str) -> list[dict[str, str]]:
     return nav
 
 
+def filter_inpage_toc(nav: list[dict[str, str]], depth: int = 2) -> list[dict[str, str]]:
+    if depth >= 3:
+        return nav
+    return [item for item in nav if item.get("level") == "h2"]
+
+
 # Blog helpers
 _BLOG_FRONTMATTER_RE = re.compile(r"^---\s*\r?\n.*?\r?\n---\s*\r?\n", re.DOTALL)
 _BLOG_INLINE_TOC_RE = re.compile(r"^## 目录\s*\n(?:.*?\n)*?(?=^## )", re.MULTILINE)

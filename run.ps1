@@ -1,5 +1,4 @@
-# Atelier dev server — 使用当前环境里的 python（如 conda base）
-# 在仓库根目录:  .\run.ps1
+# Atelier dev server — run from repo root: .\run.ps1
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
@@ -12,9 +11,9 @@ if (-not (Test-Path $main)) {
 
 $python = Get-Command python -ErrorAction SilentlyContinue
 if (-not $python) {
-    Write-Host "未找到 python（请先激活 conda base 或把 Python 加入 PATH）" -ForegroundColor Red
+    Write-Host "python not found. Activate conda base or add Python to PATH." -ForegroundColor Red
     exit 1
 }
 
-Write-Host "Using: $($python.Source)" -ForegroundColor DarkGray
+Write-Host ("Using: " + $python.Source) -ForegroundColor DarkGray
 & python $main

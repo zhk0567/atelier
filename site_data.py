@@ -21,6 +21,7 @@ from app.config import (  # noqa: E402
     algorithm_manifest_path,
     framework_manifest_path,
     hotspot_manifest_path,
+    standalone_manifest_path,
 )
 
 FRAMEWORK_MANIFEST_PATH = framework_manifest_path()
@@ -29,25 +30,62 @@ _BLOG_FRAMEWORK_DIR = blog_framework_dir_name()
 _BLOG_ALGORITHM_DIR = blog_algorithm_dir_name()
 _BLOG_HOTSPOT_DIR = blog_hotspot_dir_name()
 
-# Standalone posts outside Framework manifest
-BLOG_STANDALONE: list[dict[str, str]] = [
-    {
-        "slug": "jianpu",
-        "folder": "认识简谱",
-        "title": "认识简谱",
-        "series": "",
-        "category": "音乐",
-        "summary": "从零读懂简谱：音高、节奏与休止，看懂数字记谱即可哼唱旋律。",
-    },
-    {
-        "slug": "dataviz-ch09",
-        "folder": "数据可视化-第九章",
-        "title": "数据可视化技术 · 第九章 pyecharts",
-        "series": "",
-        "category": "课程笔记",
-        "summary": "pyecharts 从入门到组合图、主题与 Web 整合，含教材例程、虎扑实战与课后习题全文。",
-    },
-]
+STANDALONE_MANIFEST_PATH = standalone_manifest_path()
+
+
+@lru_cache(maxsize=1)
+def load_standalone_manifest() -> dict:
+    if not STANDALONE_MANIFEST_PATH.is_file():
+        return {"series_meta": [], "posts": []}
+    return json.loads(STANDALONE_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def standalone_series_meta() -> dict[str, dict]:
+    manifest = load_standalone_manifest()
+    return {m["id"]: m for m in manifest.get("series_meta", []) if m.get("id")}
+
+
+def _coerce_features(entry: dict) -> list[str]:
+    raw = entry.get("features", [])
+    if isinstance(raw, list):
+        return [str(x) for x in raw]
+    return []
+
+
+def _manifest_entry_to_post(entry: dict, default_dir: str = "") -> dict:
+    folder = entry.get("folder") or (f"{default_dir}/{entry['slug']}" if default_dir else entry["slug"])
+    post: dict = {
+        "slug": entry["slug"],
+        "folder": folder,
+        "title": entry.get("title", entry["slug"]),
+        "series": entry.get("series", ""),
+        "category": entry.get("category", ""),
+        "stack": entry.get("stack", entry.get("topic_path", "")),
+        "topic_path": entry.get("topic_path", ""),
+        "guide_tier": entry.get("guide_tier", ""),
+        "summary": entry.get("summary", ""),
+        "features": _coerce_features(entry),
+    }
+    if entry.get("chapter") is not None:
+        post["chapter"] = entry["chapter"]
+    if entry.get("toc_depth") is not None:
+        post["toc_depth"] = entry["toc_depth"]
+    if entry.get("prev_slug"):
+        post["prev_slug"] = entry["prev_slug"]
+    if entry.get("next_slug"):
+        post["next_slug"] = entry["next_slug"]
+    return post
+
+
+def standalone_series_url(series_id: str) -> str:
+    if series_id in standalone_series_meta():
+        return f"/blog/series/{series_id}"
+    return ""
+
+
+def standalone_series_label(series_id: str) -> str:
+    meta = standalone_series_meta().get(series_id, {})
+    return meta.get("title") or series_id
 
 
 @lru_cache(maxsize=1)
@@ -72,24 +110,31 @@ def load_hotspot_manifest() -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _manifest_entry_to_post(entry: dict, default_dir: str) -> dict[str, str]:
-    folder = entry.get("folder") or f"{default_dir}/{entry['slug']}"
-    return {
-        "slug": entry["slug"],
-        "folder": folder,
-        "title": entry.get("title", entry["slug"]),
-        "series": entry.get("series", ""),
-        "category": entry.get("category", ""),
-        "stack": entry.get("stack", entry.get("topic_path", "")),
-        "topic_path": entry.get("topic_path", ""),
-        "guide_tier": entry.get("guide_tier", ""),
-        "summary": entry.get("summary", ""),
-    }
+def list_standalone_posts(*, include_draft: bool = False) -> list[dict]:
+    manifest = load_standalone_manifest()
+    out: list[dict] = []
+    for entry in manifest.get("posts", []):
+        if not include_draft and entry.get("status") != "published":
+            continue
+        out.append(_manifest_entry_to_post(entry))
+    return out
+
+
+def list_standalone_series_posts(series_id: str, *, include_draft: bool = False) -> list[dict]:
+    posts = list_standalone_posts(include_draft=include_draft)
+    filtered = [p for p in posts if p.get("series") == series_id]
+    if series_id == "course-notes":
+        return sorted(filtered, key=lambda p: (p.get("chapter") or 0, p.get("title", "")))
+    return sorted(filtered, key=lambda p: p.get("title", ""))
 
 
 @lru_cache(maxsize=1)
-def load_all_blog_posts() -> list[dict[str, str]]:
-    posts: list[dict[str, str]] = [dict(p) for p in BLOG_STANDALONE]
+def load_all_blog_posts() -> list[dict]:
+    posts: list[dict] = []
+    for entry in load_standalone_manifest().get("posts", []):
+        if entry.get("status") != "published":
+            continue
+        posts.append(_manifest_entry_to_post(entry))
     for entry in load_framework_manifest().get("posts", []):
         if entry.get("status") != "published":
             continue
@@ -125,7 +170,38 @@ def get_blog_post(slug: str) -> dict[str, str] | None:
     for entry in load_hotspot_manifest().get("posts", []):
         if entry.get("slug") == slug:
             return _manifest_entry_to_post(entry, _BLOG_HOTSPOT_DIR)
+    for entry in load_standalone_manifest().get("posts", []):
+        if entry.get("slug") == slug:
+            return _manifest_entry_to_post(entry)
     return None
+
+
+def course_notes_chapter_nav(slug: str, post: dict | None = None) -> tuple[dict | None, dict | None]:
+    """Return (prev_post, next_post) for course-notes series by chapter order."""
+    if post is None:
+        post = get_blog_post(slug) or {}
+    if post.get("series") != "course-notes":
+        return None, None
+
+    if post.get("prev_slug"):
+        prev_post = get_blog_post(str(post["prev_slug"]))
+    else:
+        prev_post = None
+    if post.get("next_slug"):
+        next_post = get_blog_post(str(post["next_slug"]))
+    else:
+        next_post = None
+    if prev_post is not None or next_post is not None:
+        return prev_post, next_post
+
+    posts = list_standalone_series_posts("course-notes", include_draft=False)
+    slugs = [p["slug"] for p in posts]
+    if slug not in slugs:
+        return None, None
+    idx = slugs.index(slug)
+    prev_out = posts[idx - 1] if idx > 0 else None
+    next_out = posts[idx + 1] if idx + 1 < len(posts) else None
+    return prev_out, next_out
 
 
 def list_framework_posts(*, include_draft: bool = False) -> list[dict]:

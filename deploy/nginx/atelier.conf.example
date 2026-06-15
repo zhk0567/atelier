@@ -35,6 +35,15 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
+    # Optional: serve NyxViz static bundle directly from disk (figures ~178MB).
+    # Uncomment and set root to atelier repo path to bypass FastAPI for /static/nyxviz/.
+    # location /static/nyxviz/ {
+    #     alias /var/www/atelier/static/nyxviz/;
+    #     limit_req zone=atelier_static burst=40 nodelay;
+    #     expires 7d;
+    #     add_header Cache-Control "public";
+    # }
+
     location /static/ {
         limit_req zone=atelier_static burst=40 nodelay;
         limit_conn atelier_conn 20;

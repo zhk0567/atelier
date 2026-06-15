@@ -32,6 +32,12 @@
 
     <p class="lead">技术笔记与专题文章。</p>
 
+    <div class="blog-search" id="blog-search">
+      <label class="blog-search__label" for="blog-search-input">搜索文章</label>
+      <input class="blog-search__input" id="blog-search-input" type="search" name="q" placeholder="标题、分类或摘要关键词…" autocomplete="off" />
+      <div class="blog-search-results" id="blog-search-results" hidden></div>
+    </div>
+
   </section>
 
 
@@ -142,13 +148,111 @@
 
 
 
-  {% if posts_other %}
+  {% if course_notes_posts %}
+
+  <section class="mp-section mp-section-full" id="blog-course-notes">
+
+    <h2 class="mp-title">{{ ui.label_blog_course_notes }}</h2>
+
+    <p class="mp-page-note">{{ ui.blog_course_notes_lead }}</p>
+
+    <ul class="mp-project-list">
+
+      {% for p in course_notes_posts %}
+
+      <li class="mp-project-card">
+
+        <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.item_book }}');" aria-hidden="true"></span>
+
+        <div class="mp-project-card__body">
+
+          <h3><a href="/blog/{{ p.slug }}">{{ p.title }}</a></h3>
+
+          {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+
+          {% if p.category %}<p class="wiki-tags"><span class="wiki-tag">{{ p.category }}</span></p>{% endif %}
+
+        </div>
+
+      </li>
+
+      {% endfor %}
+
+    </ul>
+
+    <div class="mp-button-wrapper">
+
+      <a class="mp-button mp-button-has-image" href="{{ course_notes_series_url }}" style="--button-image: url('{{ wiki_assets.item_book }}');">
+
+        <span class="mp-button__inner">{{ ui.link_course_notes_series }}</span>
+
+      </a>
+
+    </div>
+
+  </section>
+
+  {% endif %}
+
+
+
+  {% if topics_posts %}
 
   <section class="mp-section mp-section-full" id="blog-topics">
 
     <h2 class="mp-title">{{ ui.label_blog_topics }}</h2>
 
     <p class="mp-page-note">{{ ui.blog_topics_lead }}</p>
+
+    <ul class="mp-project-list">
+
+      {% for p in topics_posts %}
+
+      <li class="mp-project-card">
+
+        <span class="mp-project-card__thumb" style="background-image: url('{{ wiki_assets.item_book }}');" aria-hidden="true"></span>
+
+        <div class="mp-project-card__body">
+
+          <h3><a href="/blog/{{ p.slug }}">{{ p.title }}</a></h3>
+
+          {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+
+          {% if p.category %}<p class="wiki-tags"><span class="wiki-tag">{{ p.category }}</span></p>{% endif %}
+
+        </div>
+
+      </li>
+
+      {% endfor %}
+
+    </ul>
+
+    {% if topics_count > 1 %}
+
+    <div class="mp-button-wrapper">
+
+      <a class="mp-button mp-button-has-image" href="{{ topics_series_url }}" style="--button-image: url('{{ wiki_assets.item_book }}');">
+
+        <span class="mp-button__inner">{{ ui.label_blog_topics }}</span>
+
+      </a>
+
+    </div>
+
+    {% endif %}
+
+  </section>
+
+  {% endif %}
+
+
+
+  {% if posts_other %}
+
+  <section class="mp-section mp-section-full" id="blog-misc">
+
+    <h2 class="mp-title">其它</h2>
 
     <ul class="mp-project-list">
 
@@ -192,6 +296,10 @@
 
 </div>
 
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/blog-search.js?v=1" defer></script>
 {% endblock %}
 
 

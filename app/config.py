@@ -15,6 +15,7 @@ DEFAULT_ALGORITHM_ROOT = Path(r"F:\Study\Algorithm")
 DEFAULT_BLOG_FRAMEWORK_DIR = "framework-guides"
 DEFAULT_BLOG_ALGORITHM_DIR = "algorithm-guides"
 DEFAULT_BLOG_HOTSPOT_DIR = "hotspot"
+DEFAULT_BLOG_STANDALONE_DIR = "standalone"
 
 WIKI_DIR = ATELIER_ROOT / "Wiki"
 DEFAULT_TRUSTED_HOSTS = "zhkun.xyz,www.zhkun.xyz,127.0.0.1,localhost"
@@ -186,6 +187,20 @@ def hotspot_manifest_path() -> Path:
     return blog_hotspot_path() / "manifest.json"
 
 
+def blog_standalone_dir_name() -> str:
+    return str(
+        load_site_settings().get("blog_standalone_dir", DEFAULT_BLOG_STANDALONE_DIR)
+    ).strip() or DEFAULT_BLOG_STANDALONE_DIR
+
+
+def blog_standalone_path() -> Path:
+    return ATELIER_ROOT / "Blog" / blog_standalone_dir_name()
+
+
+def standalone_manifest_path() -> Path:
+    return blog_standalone_path() / "manifest.json"
+
+
 @lru_cache(maxsize=1)
 def load_projects_config() -> dict:
     path = CONFIG_DIR / "projects.json"
@@ -223,3 +238,17 @@ MC_VTUBER_STATIC_PREFIX = "/static/MC_Vtuber"
 
 def mc_vtuber_model_url() -> str:
     return f"{MC_VTUBER_STATIC_PREFIX}/MC_Vtuber.model3.json"
+
+
+def nyxviz_settings() -> dict:
+    raw = load_site_settings().get("nyxviz", {})
+    return raw if isinstance(raw, dict) else {}
+
+
+def nyxviz_video_path() -> str:
+    return str(nyxviz_settings().get("video_path", "/static/nyxviz/video.html")).strip()
+
+
+def nyxviz_data_origin() -> str:
+    """OSS/CDN origin for Nyx .dat fetch (no trailing slash)."""
+    return str(nyxviz_settings().get("nyx_data_origin", "")).strip().rstrip("/")

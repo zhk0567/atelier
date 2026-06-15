@@ -103,6 +103,22 @@
       ]
     },
     {
+      "id": "nyxviz",
+      "title": "NyxViz · Nyx 宇宙模拟可视化",
+      "summary": "Nyx 宇宙模拟体数据可视化：录屏三栏布局，11 个 scene，vtk.js 体渲染与统计面板。",
+      "category": "可视化 · 科学计算",
+      "year": "2025",
+      "tags": ["TypeScript", "React", "vtk.js", "Nyx"],
+      "github": "https://github.com/zhk0567/NyxViz",
+      "demo_url": "/demo/nyxviz-video",
+      "thumb": 7,
+      "highlights": [
+        "录屏三栏 11 scene 叙事",
+        "体数据外部 OSS/CDN 加载",
+        "precompute stats + figures 静态托管"
+      ]
+    },
+    {
       "id": "algorithm",
       "title": "Algorithm 算法与数据结构",
       "summary": "Python / C++ 双语言算法仓库：完整数据结构实现、LeetCode 题解、学习路线与面试高频专题。",

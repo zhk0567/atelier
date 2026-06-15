@@ -2,5 +2,9 @@
   "framework_root": "F:/Study/Framework",
   "blog_framework_dir": "framework-guides",
   "algorithm_root": "F:/Study/Algorithm",
-  "blog_algorithm_dir": "algorithm-guides"
+  "blog_algorithm_dir": "algorithm-guides",
+  "nyxviz": {
+    "video_path": "/static/nyxviz/video.html",
+    "nyx_data_origin": "https://data.zhkun.xyz"
+  }
 }
