@@ -25,7 +25,32 @@ $env:OSS_BUCKET = "oss://your-bucket/nyx"
 # 2) 构建并同步前端 + figures 到 static/
 $env:VITE_NYX_DATA_BASE = "https://data.zhkun.xyz/nyx/"
 .\scripts\sync_nyxviz_video.ps1
+
+# 3) 校验本地 bundle 完整
+.\scripts\verify_nyxviz_static.ps1
 ```
+
+### Git 与生产部署
+
+| 路径 | 是否入库 | 说明 |
+|------|----------|------|
+| `static/nyxviz/video.html` | 是 | 与 assets 哈希需同步更新 |
+| `static/nyxviz/assets/` | **是**（~1.3MB） | 缺此目录会导致 JS/CSS 404，浏览器报 MIME `application/json` |
+| `static/nyxviz/stats/` | 是 | |
+| `static/nyxviz/figures/` | **否**（~178MB） | 部署时必须单独上传到服务器 |
+
+**生产 ECS 上传（推荐）** — 在本机构建后 scp 整包：
+
+```powershell
+$env:VITE_NYX_DATA_BASE = "https://data.zhkun.xyz/nyx/"
+$env:ATELIER_SSH = "root@你的ECS公网IP"
+$env:ATELIER_REMOTE = "/opt/atelier"
+.\scripts\publish_nyxviz_to_server.ps1
+```
+
+或在服务器上手动 rsync/scp 本机 `static/nyxviz/figures/` 与 `assets/`（若 `git pull` 后仍缺 figures）。
+
+应用启动时会打印 `[atelier] WARNING: nyxviz: ...` 若 bundle 不完整。
 
 ## OSS CORS
 

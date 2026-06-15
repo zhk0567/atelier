@@ -1,0 +1,1 @@
+(function(){"use strict";self.onmessage=a=>{const{buffer:i,minDensity:c,maxDensity:r,maxPoints:I}=a.data,D=new Float32Array(i),n=[],o=I<2e4?2:1;t:for(let t=0;t<128;t+=o){const l=t*128*128;for(let s=0;s<128;s+=o){const E=l+s*128;for(let e=0;e<128;e+=o){const f=D[E+e];if(f>=c&&f<=r&&(n.push({x:t,y:s,z:e,density:f}),n.length>=I))break t}}}self.postMessage({points:n})}})();

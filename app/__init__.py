@@ -60,6 +60,10 @@ async def _lifespan(app: FastAPI):
             )
         else:
             print("[atelier] wallpapers: none", flush=True)
+        from app.nyxviz_bundle import nyxviz_bundle_warnings
+
+        for msg in nyxviz_bundle_warnings():
+            print(f"[atelier] WARNING: {msg}", flush=True)
         print("[atelier] warmed caches", flush=True)
         yield
     finally:
