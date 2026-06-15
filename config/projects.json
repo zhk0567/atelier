@@ -110,7 +110,7 @@
       "year": "2025",
       "tags": ["TypeScript", "React", "vtk.js", "Nyx"],
       "github": "https://github.com/zhk0567/NyxViz",
-      "demo_url": "/static/nyxviz/video.html?record=1&scene=intro",
+      "demo_url": "/static/nyxviz/video.html?record=1&browse=1&scene=intro",
       "thumb": 7,
       "highlights": [
         "录屏三栏 11 scene 叙事",
