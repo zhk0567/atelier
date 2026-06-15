@@ -268,7 +268,12 @@ def nyxviz_data_origin() -> str:
 def nyxviz_static_figures_only() -> bool:
     """Serve pre-rendered PNG figures only; skip Nyx .dat volume fetch."""
     settings = nyxviz_settings()
-    return bool(settings.get("static_figures_only"))
+    if "static_figures_only" in settings:
+        return bool(settings.get("static_figures_only"))
+    from app.nyxviz_bundle import nyxviz_bundle_status
+
+    status = nyxviz_bundle_status()
+    return int(status.get("nyx_dat_count", 0) or 0) == 0
 
 
 def nyxviz_data_base() -> str:
