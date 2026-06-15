@@ -1,6 +1,6 @@
 # NyxViz 录屏页静态部署（atelier）
 
-录屏三栏页 `video.html` 以静态资源托管在 atelier。Nyx 体数据（~800MB）可 **同站自托管** 或 **外部 OSS**。
+录屏三栏页 `video.html` 以静态资源托管在 atelier。**默认仅使用预渲染 PNG 配图**，不部署 Nyx `.dat` 体数据（~800MB）。
 
 ## 目录
 
@@ -9,110 +9,90 @@
 | `static/nyxviz/video.html` | Vite 构建入口 |
 | `static/nyxviz/assets/` | JS/CSS/workers |
 | `static/nyxviz/stats/` | precompute JSON |
-| `static/nyxviz/figures/` | 配图 PNG（~178MB，**不入 git**） |
-| `static/nyxviz/Nyx/` | 体数据 `.dat`（可选，同站托管时） |
-| `/static/nyxviz/runtime-config.js` | **运行时** Nyx URL（由 FastAPI 从 `site.local.json` 生成） |
+| `static/nyxviz/figures/` | 配图 PNG（~178MB，**已入库**） |
+| `/static/nyxviz/runtime-config.js` | 运行时模式（由 FastAPI 从 `site.local.json` 生成） |
+
+`.dat` 体数据目录 `static/nyxviz/Nyx/` **不入 git**，静态配图模式下也不需要。
 
 ## 构建与同步
 
 ```powershell
 Set-Location F:\commercial\atelier
 
-# 构建 + 同步 figures/assets（figures 必须上传到生产）
-.\scripts\sync_nyxviz_video.ps1
-
-# 同站托管 .dat（约 800MB，无需 OSS / 子域名）
-$env:NYXVIZ_INCLUDE_DAT = "1"
+# 构建 NyxViz 并同步 assets/stats/figures 到 static/nyxviz/
 .\scripts\sync_nyxviz_video.ps1
 
 .\scripts\verify_nyxviz_static.ps1
 ```
 
+figures 来自 NyxViz 仓库 `docs/figures/`，同步脚本会自动复制。
+
 ## 站点配置（`config/site.local.json`）
 
-`.dat` 地址由 **`nyxviz.nyx_data_base`** 控制，**无需重新构建前端**即可切换。
-
-### 方案 A：同站自托管（推荐，无需 `data.zhkun.xyz` DNS）
+默认 **静态配图模式**（无需 `.dat`、无需 OSS）：
 
 ```json
 {
   "nyxviz": {
     "video_path": "/static/nyxviz/video.html",
+    "static_figures_only": true,
+    "nyx_data_base": "",
+    "nyx_data_origin": ""
+  }
+}
+```
+
+`runtime-config.js` 会设置 `window.__NYX_STATIC_ONLY__=true`，录屏页中栏显示 `figures/task1_vol_tXXXX.png`，不再请求 `.dat`。
+
+### 可选：交互式体渲染（需 .dat）
+
+若需要实时 VTK 体渲染，关闭静态模式并配置 `.dat` 来源：
+
+```json
+{
+  "nyxviz": {
+    "static_figures_only": false,
     "nyx_data_base": "/static/nyxviz/Nyx/",
     "nyx_data_origin": ""
   }
 }
 ```
 
-服务器上需存在 `static/nyxviz/Nyx/0000.dat` … `0099.dat`（`NYXVIZ_INCLUDE_DAT=1` 同步，或 scp 上传）。
+同站托管时在本机执行 `$env:NYXVIZ_INCLUDE_DAT = "1"; .\scripts\sync_nyxviz_video.ps1`，再 scp 上传 `Nyx/`（见 `scripts/upload_nyxviz_dat.ps1`）。
 
-### 方案 B：阿里云 OSS 公网地址
+或使用 OSS 公网地址：
 
 ```json
 {
   "nyxviz": {
-    "video_path": "/static/nyxviz/video.html",
+    "static_figures_only": false,
     "nyx_data_base": "https://your-bucket.oss-cn-hangzhou.aliyuncs.com/nyx/",
     "nyx_data_origin": "https://your-bucket.oss-cn-hangzhou.aliyuncs.com"
   }
 }
 ```
 
-上传脚本：`.\scripts\upload_nyx_to_oss.ps1`（需配置 `OSS_BUCKET`）。
+## 生产部署
 
-### 方案 C：自定义 CDN 域名
-
-仅当 **DNS 已解析** 时使用，例如 `data.zhkun.xyz` CNAME 到 OSS：
-
-```json
-{
-  "nyxviz": {
-    "nyx_data_base": "https://data.zhkun.xyz/nyx/",
-    "nyx_data_origin": "https://data.zhkun.xyz"
-  }
-}
-```
-
-若浏览器报 `ERR_NAME_NOT_RESOLVED`，说明该域名未配置，请改用方案 A 或 B。
-
-## OSS CORS（仅方案 B/C）
-
-- **AllowedOrigin**: `https://zhkun.xyz`, `http://127.0.0.1:8000`
-- **AllowedMethod**: `GET`, `HEAD`
-- **AllowedHeader**: `*`
-
-同站方案 A 走 `'self'`，无需 CORS。
-
-## 生产 ECS 上传
-
-`git pull` **不会** 带上 `figures/` 与 `Nyx/`。在本机执行：
+**推荐**：`git pull` 即可拿到 `figures/` 与 `assets/`（静态配图模式）。
 
 ```powershell
-$env:NYXVIZ_INCLUDE_DAT = "1"   # 若同站托管 .dat
-$env:ATELIER_SSH = "root@39.106.117.118"
-$env:ATELIER_REMOTE = "/opt/atelier"
-.\scripts\publish_nyxviz_to_server.ps1
+# 服务器
+cd /opt/atelier
+git pull
+# 确认 config/site.local.json 中 static_figures_only: true
 ```
 
-并在服务器 `/opt/atelier/config/site.local.json` 写入正确的 `nyx_data_base`。
-
-**figures 与 Nyx 必须 scp 上传**（`git pull` 不会带上）：
-
-```powershell
-$env:ATELIER_SSH = "root@39.106.117.118"
-$env:ATELIER_REMOTE = "/opt/atelier"
-.\scripts\upload_nyxviz_figures.ps1   # ~178MB PNG
-.\scripts\upload_nyxviz_dat.ps1       # ~800MB .dat（同站托管时）
-```
+若仅更新了 NyxViz 前端 bundle（无 figures 变更），本地构建后 commit + push 即可。
 
 ## 常见错误
 
 | 现象 | 原因 | 处理 |
 |------|------|------|
-| JS/CSS MIME `application/json` | 缺 `assets/` | `git pull` + publish 脚本 |
-| `task1_evo_*.png` 404 | 缺 `figures/` | publish 脚本上传 figures |
-| `data.zhkun.xyz` ERR_NAME_NOT_RESOLVED | 子域名未解析 | 改 `nyx_data_base` 为同站或 OSS 直链 |
-| `.dat` CORS 错误 | OSS 未配 CORS 或 CSP 缺 origin | 配 CORS + `nyx_data_origin` |
+| JS/CSS MIME `application/json` | 缺 `assets/` | `git pull` 或运行 sync 脚本 |
+| `task1_evo_*.png` 404 | 缺 `figures/` | `git pull`（figures 已入库） |
+| `0000.dat` 404 | 仍为体渲染模式 | 设 `static_figures_only: true` |
+| 中栏一直「加载密度场…」 | 未加载 runtime-config | 确认 `video.html` 引用了 `/static/nyxviz/runtime-config.js` |
 
 ## 访问入口
 

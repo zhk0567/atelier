@@ -14,8 +14,7 @@ config/site.local.json
 validate_out.txt
 _server.pid
 
-# NyxViz static bundle: figures are large (~178MB) — sync before deploy (see docs/NYXVIZ_DEPLOY.md)
-static/nyxviz/figures/
+# NyxViz volume data (~800MB) — not used when static_figures_only (see docs/NYXVIZ_DEPLOY.md)
 static/nyxviz/Nyx/
 
 # 大作业 Word（含个人信息，勿提交）

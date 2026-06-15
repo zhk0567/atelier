@@ -5,7 +5,8 @@
   "blog_algorithm_dir": "algorithm-guides",
   "nyxviz": {
     "video_path": "/static/nyxviz/video.html",
-    "nyx_data_base": "/static/nyxviz/Nyx/",
+    "static_figures_only": true,
+    "nyx_data_base": "",
     "nyx_data_origin": ""
   }
 }

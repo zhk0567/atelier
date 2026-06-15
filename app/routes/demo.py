@@ -7,7 +7,7 @@ from urllib.parse import urlencode
 from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse, Response
 
-from app.config import nyxviz_data_base, nyxviz_video_path
+from app.config import nyxviz_data_base, nyxviz_static_figures_only, nyxviz_video_path
 from app.constants import HTML_CACHE_HEADERS
 
 router = APIRouter()
@@ -15,10 +15,15 @@ router = APIRouter()
 
 @router.get("/static/nyxviz/runtime-config.js", include_in_schema=False)
 async def nyxviz_runtime_config():
-    """Runtime Nyx .dat base URL (overrides Vite build-time default)."""
+    """Runtime Nyx config: static figures mode and optional .dat base URL."""
+    static_only = nyxviz_static_figures_only()
     base = nyxviz_data_base()
     safe = base.replace("\\", "\\\\").replace('"', '\\"')
-    body = f'window.__NYX_DATA_BASE__="{safe}";\n'
+    static_js = "true" if static_only else "false"
+    body = (
+        f"window.__NYX_STATIC_ONLY__={static_js};\n"
+        f'window.__NYX_DATA_BASE__="{safe}";\n'
+    )
     return Response(
         content=body,
         media_type="application/javascript",

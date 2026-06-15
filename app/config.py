@@ -265,8 +265,16 @@ def nyxviz_data_origin() -> str:
     return ""
 
 
+def nyxviz_static_figures_only() -> bool:
+    """Serve pre-rendered PNG figures only; skip Nyx .dat volume fetch."""
+    settings = nyxviz_settings()
+    return bool(settings.get("static_figures_only"))
+
+
 def nyxviz_data_base() -> str:
-    """Public URL prefix for Nyx .dat files (trailing slash)."""
+    """Public URL prefix for Nyx .dat files (trailing slash). Empty when static-only."""
+    if nyxviz_static_figures_only():
+        return ""
     settings = nyxviz_settings()
     raw = str(settings.get("nyx_data_base", "")).strip()
     if raw:

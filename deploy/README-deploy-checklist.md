@@ -81,7 +81,7 @@ sudo systemctl restart atelier
 
 ### NyxViz 录屏静态资源
 
-`git pull` **不会** 带上 `static/nyxviz/figures/`（体积大，未入库）。若录屏页 JS/CSS 404 或样式 MIME 为 `application/json`，说明服务器缺少 `assets/` 或 `figures/`。
+`git pull` 会带上 `static/nyxviz/figures/` 与 `assets/`。若录屏页 JS/CSS 404 或样式 MIME 为 `application/json`，说明服务器缺少 `assets/`；PNG 404 则确认已 pull 最新 commit。
 
 在本机 Windows 执行（需 OpenSSH）：
 

@@ -39,14 +39,16 @@ def nyxviz_bundle_warnings() -> list[str]:
     if status["figures_png_count"] == 0:
         warnings.append(
             "nyxviz: static/nyxviz/figures/ is missing — "
-            "run sync script and copy figures to the server (see docs/NYXVIZ_DEPLOY.md)"
+            "run scripts/sync_nyxviz_video.ps1 (see docs/NYXVIZ_DEPLOY.md)"
         )
-    from app.config import nyxviz_data_base
+    from app.config import nyxviz_data_base, nyxviz_static_figures_only
 
+    if nyxviz_static_figures_only():
+        return warnings
     base = nyxviz_data_base()
     if base.startswith("/") and status.get("nyx_dat_count", 0) == 0:
         warnings.append(
             "nyxviz: nyx_data_base is same-origin but static/nyxviz/Nyx/*.dat missing — "
-            "set NYXVIZ_INCLUDE_DAT=1 when running sync, or point nyx_data_base to OSS"
+            "set static_figures_only in site config, or deploy .dat / point nyx_data_base to OSS"
         )
     return warnings
