@@ -96,6 +96,15 @@ $env:ATELIER_REMOTE = "/opt/atelier"
 
 并在服务器 `/opt/atelier/config/site.local.json` 写入正确的 `nyx_data_base`。
 
+**figures 与 Nyx 必须 scp 上传**（`git pull` 不会带上）：
+
+```powershell
+$env:ATELIER_SSH = "root@39.106.117.118"
+$env:ATELIER_REMOTE = "/opt/atelier"
+.\scripts\upload_nyxviz_figures.ps1   # ~178MB PNG
+.\scripts\upload_nyxviz_dat.ps1       # ~800MB .dat（同站托管时）
+```
+
 ## 常见错误
 
 | 现象 | 原因 | 处理 |

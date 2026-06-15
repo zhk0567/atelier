@@ -33,10 +33,20 @@ $count = (Get-ChildItem $localFigures -Recurse -File).Count
 $mb = [math]::Round(((Get-ChildItem $localFigures -Recurse -File | Measure-Object Length -Sum).Sum / 1MB), 1)
 Write-Host "Uploading $count files ($mb MB) -> ${ssh}:${remoteFigures}/" -ForegroundColor Cyan
 
-ssh $ssh "mkdir -p `"$remoteFigures`""
-scp -r "$localFigures\*" "${ssh}:${remoteFigures}/"
+$archive = Join-Path $env:TEMP "nyxviz-figures.tar"
+if (Test-Path $archive) { Remove-Item $archive -Force }
+& tar.exe -cf $archive -C (Join-Path (Get-Location) "static\nyxviz") figures
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
+$remoteArchive = "/tmp/nyxviz-figures.tar"
+scp.exe $archive "${ssh}:${remoteArchive}"
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+ssh.exe $ssh "mkdir -p `"$remoteFigures`" && tar -xf `"$remoteArchive`" -C `"$remoteRoot/static/nyxviz`" && rm -f `"$remoteArchive`""
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+Remove-Item $archive -Force -ErrorAction SilentlyContinue
+
 Write-Host "Verifying on server..." -ForegroundColor Cyan
-ssh $ssh "test -f `"$remoteFigures/task4_brush_top1.png`" && echo OK || echo MISSING"
+ssh.exe $ssh "test -f `"$remoteFigures/task4_brush_top1.png`" && echo OK || echo MISSING"
 Write-Host "Done. Check: https://zhkun.xyz/static/nyxviz/figures/task4_brush_top1.png" -ForegroundColor Green
