@@ -1,0 +1,11 @@
+# Required by videoStaticFigures.ts — keep in sync with NyxViz src/config/videoStaticFigures.ts
+task4_band_bottom_t99.png
+task4_band_mid_t99.png
+task4_band_filament_t99.png
+task4_band_top_t99.png
+task4_brush_bottom_hl.png
+task4_discovery_context_t99.png
+task4_spatial_filament.png
+task4_brush_top1_viz.png
+task4_brush_top1.png
+task4_brush_bottom_proj.png

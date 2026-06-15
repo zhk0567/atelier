@@ -46,4 +46,22 @@ if ($figCount -lt 1) {
     Write-Host "Warning: figures/ empty — page may load but images will 404" -ForegroundColor Yellow
 }
 
+$reqList = Join-Path $PSScriptRoot "nyxviz_required_figures.txt"
+$reqMissing = @()
+if (Test-Path $reqList) {
+    Get-Content -LiteralPath $reqList | ForEach-Object {
+        $line = $_.Trim()
+        if (-not $line -or $line.StartsWith("#")) { return }
+        $p = Join-Path $figDir $line
+        if (-not (Test-Path $p)) {
+            $reqMissing += $line
+        }
+    }
+    Write-Host "videoStaticFigures: $($reqMissing.Count) missing of $((Get-Content $reqList | Where-Object { $_ -match '\S' -and -not $_.StartsWith('#') }).Count)" -ForegroundColor $(if ($reqMissing.Count) { "Red" } else { "Green" })
+    if ($reqMissing.Count -gt 0) {
+        $reqMissing | ForEach-Object { Write-Host "  MISSING $_" -ForegroundColor Red }
+        exit 1
+    }
+}
+
 Write-Host "NyxViz bundle OK" -ForegroundColor Green
