@@ -16,6 +16,7 @@ _server.pid
 
 # NyxViz static bundle: figures are large (~178MB) — sync before deploy (see docs/NYXVIZ_DEPLOY.md)
 static/nyxviz/figures/
+static/nyxviz/Nyx/
 
 # 大作业 Word（含个人信息，勿提交）
 作业/*.docx

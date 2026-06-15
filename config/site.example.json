@@ -5,6 +5,7 @@
   "blog_algorithm_dir": "algorithm-guides",
   "nyxviz": {
     "video_path": "/static/nyxviz/video.html",
-    "nyx_data_origin": "https://data.zhkun.xyz"
+    "nyx_data_base": "/static/nyxviz/Nyx/",
+    "nyx_data_origin": ""
   }
 }

@@ -1,7 +1,7 @@
 # Build NyxViz locally and upload static/nyxviz/ to production ECS via scp.
 #
 # Usage (from atelier root):
-#   $env:VITE_NYX_DATA_BASE = "https://data.zhkun.xyz/nyx/"
+#   $env:NYXVIZ_INCLUDE_DAT = "1"          # optional: include Nyx/*.dat (~800MB)
 #   $env:ATELIER_SSH = "root@your-ecs-ip"
 #   $env:ATELIER_REMOTE = "/opt/atelier"   # optional
 #   .\scripts\publish_nyxviz_to_server.ps1

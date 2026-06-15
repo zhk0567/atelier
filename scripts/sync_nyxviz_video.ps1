@@ -1,6 +1,13 @@
 # Sync NyxViz video.html static bundle into atelier/static/nyxviz/
+#
+# Nyx .dat URL is configured at runtime via config/site.local.json -> nyxviz.nyx_data_base
+# (served as /static/nyxviz/runtime-config.js). No VITE_NYX_DATA_BASE required for build.
+#
 # Run from atelier root:
-#   $env:VITE_NYX_DATA_BASE = "https://data.zhkun.xyz/nyx/"
+#   .\scripts\sync_nyxviz_video.ps1
+#
+# Self-host .dat on the same server (~800MB):
+#   $env:NYXVIZ_INCLUDE_DAT = "1"
 #   .\scripts\sync_nyxviz_video.ps1
 
 Set-StrictMode -Version Latest
@@ -21,9 +28,7 @@ if (-not (Test-Path $NyxVizRoot)) {
 Write-Host "Building NyxViz (atelier)..." -ForegroundColor Cyan
 Push-Location $NyxVizRoot
 try {
-    if (-not $env:VITE_NYX_DATA_BASE) {
-        Write-Host "Hint: set VITE_NYX_DATA_BASE to OSS URL, e.g. https://data.zhkun.xyz/nyx/" -ForegroundColor DarkYellow
-    }
+    Write-Host "Nyx .dat URL: set nyxviz.nyx_data_base in config/site.local.json (runtime-config.js)" -ForegroundColor DarkGray
     npm run build:atelier
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 } finally {
@@ -53,6 +58,17 @@ if (Test-Path $FiguresSrc) {
     Copy-Item -Path $FiguresSrc -Destination (Join-Path $DestRoot "figures") -Recurse
 } else {
     Write-Host "Warning: figures dir missing: $FiguresSrc" -ForegroundColor Yellow
+}
+
+$includeDat = $env:NYXVIZ_INCLUDE_DAT -eq "1"
+if ($includeDat) {
+    $NyxDatSrc = Join-Path $NyxVizRoot "Nyx"
+    if (Test-Path $NyxDatSrc) {
+        Write-Host "Copying Nyx/*.dat (~800MB)..." -ForegroundColor Cyan
+        Copy-Item -Path $NyxDatSrc -Destination (Join-Path $DestRoot "Nyx") -Recurse
+    } else {
+        Write-Host "Warning: Nyx dat dir missing: $NyxDatSrc" -ForegroundColor Yellow
+    }
 }
 
 $bytes = (Get-ChildItem $DestRoot -Recurse -File | Measure-Object -Property Length -Sum).Sum

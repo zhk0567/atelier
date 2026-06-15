@@ -250,5 +250,25 @@ def nyxviz_video_path() -> str:
 
 
 def nyxviz_data_origin() -> str:
-    """OSS/CDN origin for Nyx .dat fetch (no trailing slash)."""
-    return str(nyxviz_settings().get("nyx_data_origin", "")).strip().rstrip("/")
+    """OSS/CDN origin for Nyx .dat fetch (no trailing slash). Empty when same-origin."""
+    settings = nyxviz_settings()
+    explicit = str(settings.get("nyx_data_origin", "")).strip().rstrip("/")
+    if explicit:
+        return explicit
+    base = nyxviz_data_base()
+    if base.startswith("http://") or base.startswith("https://"):
+        from urllib.parse import urlparse
+
+        parsed = urlparse(base)
+        if parsed.scheme and parsed.netloc:
+            return f"{parsed.scheme}://{parsed.netloc}"
+    return ""
+
+
+def nyxviz_data_base() -> str:
+    """Public URL prefix for Nyx .dat files (trailing slash)."""
+    settings = nyxviz_settings()
+    raw = str(settings.get("nyx_data_base", "")).strip()
+    if raw:
+        return raw if raw.endswith("/") else f"{raw}/"
+    return "/static/nyxviz/Nyx/"

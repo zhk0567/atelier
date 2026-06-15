@@ -86,8 +86,9 @@ sudo systemctl restart atelier
 在本机 Windows 执行（需 OpenSSH）：
 
 ```powershell
-$env:VITE_NYX_DATA_BASE = "https://data.zhkun.xyz/nyx/"
-$env:ATELIER_SSH = "root@ECS公网IP"
+$env:NYXVIZ_INCLUDE_DAT = "1"
+$env:ATELIER_SSH = "root@39.106.117.118"
+$env:ATELIER_REMOTE = "/opt/atelier"
 .\scripts\publish_nyxviz_to_server.ps1
 ```
 

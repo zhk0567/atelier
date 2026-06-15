@@ -20,6 +20,7 @@ $refs = [regex]::Matches($html, '/static/nyxviz/([^"''>\s]+)') |
 
 $missing = @()
 foreach ($rel in $refs) {
+    if ($rel -eq "runtime-config.js") { continue }
     $path = Join-Path $Root ($rel -replace '^/', '' -replace '/', '\')
     if (-not (Test-Path $path)) {
         $missing += $rel

@@ -16,10 +16,12 @@ def nyxviz_bundle_status() -> dict[str, bool | int]:
     """Return which parts of the NyxViz bundle exist on disk."""
     assets_js = list(NYXVIZ_ASSETS.glob("*.js")) if NYXVIZ_ASSETS.is_dir() else []
     figures = list(NYXVIZ_FIGURES.rglob("*.png")) if NYXVIZ_FIGURES.is_dir() else []
+    nyx_dat = list((NYXVIZ_DIR / "Nyx").glob("*.dat")) if (NYXVIZ_DIR / "Nyx").is_dir() else []
     return {
         "video_html": NYXVIZ_VIDEO.is_file(),
         "assets_js_count": len(assets_js),
         "figures_png_count": len(figures),
+        "nyx_dat_count": len(nyx_dat),
     }
 
 
@@ -38,5 +40,13 @@ def nyxviz_bundle_warnings() -> list[str]:
         warnings.append(
             "nyxviz: static/nyxviz/figures/ is missing — "
             "run sync script and copy figures to the server (see docs/NYXVIZ_DEPLOY.md)"
+        )
+    from app.config import nyxviz_data_base
+
+    base = nyxviz_data_base()
+    if base.startswith("/") and status.get("nyx_dat_count", 0) == 0:
+        warnings.append(
+            "nyxviz: nyx_data_base is same-origin but static/nyxviz/Nyx/*.dat missing — "
+            "set NYXVIZ_INCLUDE_DAT=1 when running sync, or point nyx_data_base to OSS"
         )
     return warnings

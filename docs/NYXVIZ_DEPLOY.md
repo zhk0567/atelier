@@ -1,6 +1,6 @@
 # NyxViz 录屏页静态部署（atelier）
 
-录屏三栏页 `video.html` 以静态资源托管在 atelier，Nyx 体数据（~800MB）放在外部 OSS/CDN。
+录屏三栏页 `video.html` 以静态资源托管在 atelier。Nyx 体数据（~800MB）可 **同站自托管** 或 **外部 OSS**。
 
 ## 目录
 
@@ -9,80 +9,108 @@
 | `static/nyxviz/video.html` | Vite 构建入口 |
 | `static/nyxviz/assets/` | JS/CSS/workers |
 | `static/nyxviz/stats/` | precompute JSON |
-| `static/nyxviz/figures/` | 配图 PNG |
-| OSS `nyx/*.dat` | 100 步体数据 |
+| `static/nyxviz/figures/` | 配图 PNG（~178MB，**不入 git**） |
+| `static/nyxviz/Nyx/` | 体数据 `.dat`（可选，同站托管时） |
+| `/static/nyxviz/runtime-config.js` | **运行时** Nyx URL（由 FastAPI 从 `site.local.json` 生成） |
 
 ## 构建与同步
 
 ```powershell
 Set-Location F:\commercial\atelier
 
-# 1) 上传体数据到 OSS（首次）
-$env:NYXVIZ_ROOT = "F:\commercial\NyxViz"
-$env:OSS_BUCKET = "oss://your-bucket/nyx"
-.\scripts\upload_nyx_to_oss.ps1
-
-# 2) 构建并同步前端 + figures 到 static/
-$env:VITE_NYX_DATA_BASE = "https://data.zhkun.xyz/nyx/"
+# 构建 + 同步 figures/assets（figures 必须上传到生产）
 .\scripts\sync_nyxviz_video.ps1
 
-# 3) 校验本地 bundle 完整
+# 同站托管 .dat（约 800MB，无需 OSS / 子域名）
+$env:NYXVIZ_INCLUDE_DAT = "1"
+.\scripts\sync_nyxviz_video.ps1
+
 .\scripts\verify_nyxviz_static.ps1
 ```
 
-### Git 与生产部署
+## 站点配置（`config/site.local.json`）
 
-| 路径 | 是否入库 | 说明 |
-|------|----------|------|
-| `static/nyxviz/video.html` | 是 | 与 assets 哈希需同步更新 |
-| `static/nyxviz/assets/` | **是**（~1.3MB） | 缺此目录会导致 JS/CSS 404，浏览器报 MIME `application/json` |
-| `static/nyxviz/stats/` | 是 | |
-| `static/nyxviz/figures/` | **否**（~178MB） | 部署时必须单独上传到服务器 |
+`.dat` 地址由 **`nyxviz.nyx_data_base`** 控制，**无需重新构建前端**即可切换。
 
-**生产 ECS 上传（推荐）** — 在本机构建后 scp 整包：
-
-```powershell
-$env:VITE_NYX_DATA_BASE = "https://data.zhkun.xyz/nyx/"
-$env:ATELIER_SSH = "root@你的ECS公网IP"
-$env:ATELIER_REMOTE = "/opt/atelier"
-.\scripts\publish_nyxviz_to_server.ps1
-```
-
-或在服务器上手动 rsync/scp 本机 `static/nyxviz/figures/` 与 `assets/`（若 `git pull` 后仍缺 figures）。
-
-应用启动时会打印 `[atelier] WARNING: nyxviz: ...` 若 bundle 不完整。
-
-## OSS CORS
-
-在阿里云 OSS 控制台为 bucket 配置跨域：
-
-- **AllowedOrigin**: `https://zhkun.xyz`, `http://127.0.0.1:8000`
-- **AllowedMethod**: `GET`, `HEAD`
-- **AllowedHeader**: `*`
-
-## 站点配置
-
-`config/site.local.json`:
+### 方案 A：同站自托管（推荐，无需 `data.zhkun.xyz` DNS）
 
 ```json
 {
   "nyxviz": {
     "video_path": "/static/nyxviz/video.html",
+    "nyx_data_base": "/static/nyxviz/Nyx/",
+    "nyx_data_origin": ""
+  }
+}
+```
+
+服务器上需存在 `static/nyxviz/Nyx/0000.dat` … `0099.dat`（`NYXVIZ_INCLUDE_DAT=1` 同步，或 scp 上传）。
+
+### 方案 B：阿里云 OSS 公网地址
+
+```json
+{
+  "nyxviz": {
+    "video_path": "/static/nyxviz/video.html",
+    "nyx_data_base": "https://your-bucket.oss-cn-hangzhou.aliyuncs.com/nyx/",
+    "nyx_data_origin": "https://your-bucket.oss-cn-hangzhou.aliyuncs.com"
+  }
+}
+```
+
+上传脚本：`.\scripts\upload_nyx_to_oss.ps1`（需配置 `OSS_BUCKET`）。
+
+### 方案 C：自定义 CDN 域名
+
+仅当 **DNS 已解析** 时使用，例如 `data.zhkun.xyz` CNAME 到 OSS：
+
+```json
+{
+  "nyxviz": {
+    "nyx_data_base": "https://data.zhkun.xyz/nyx/",
     "nyx_data_origin": "https://data.zhkun.xyz"
   }
 }
 ```
 
-`nyx_data_origin` 会写入 CSP `connect-src`，允许录屏页 fetch `.dat`。
+若浏览器报 `ERR_NAME_NOT_RESOLVED`，说明该域名未配置，请改用方案 A 或 B。
+
+## OSS CORS（仅方案 B/C）
+
+- **AllowedOrigin**: `https://zhkun.xyz`, `http://127.0.0.1:8000`
+- **AllowedMethod**: `GET`, `HEAD`
+- **AllowedHeader**: `*`
+
+同站方案 A 走 `'self'`，无需 CORS。
+
+## 生产 ECS 上传
+
+`git pull` **不会** 带上 `figures/` 与 `Nyx/`。在本机执行：
+
+```powershell
+$env:NYXVIZ_INCLUDE_DAT = "1"   # 若同站托管 .dat
+$env:ATELIER_SSH = "root@39.106.117.118"
+$env:ATELIER_REMOTE = "/opt/atelier"
+.\scripts\publish_nyxviz_to_server.ps1
+```
+
+并在服务器 `/opt/atelier/config/site.local.json` 写入正确的 `nyx_data_base`。
+
+## 常见错误
+
+| 现象 | 原因 | 处理 |
+|------|------|------|
+| JS/CSS MIME `application/json` | 缺 `assets/` | `git pull` + publish 脚本 |
+| `task1_evo_*.png` 404 | 缺 `figures/` | publish 脚本上传 figures |
+| `data.zhkun.xyz` ERR_NAME_NOT_RESOLVED | 子域名未解析 | 改 `nyx_data_base` 为同站或 OSS 直链 |
+| `.dat` CORS 错误 | OSS 未配 CORS 或 CSP 缺 origin | 配 CORS + `nyx_data_origin` |
 
 ## 访问入口
 
-- 直链（全页）：`/static/nyxviz/video.html?record=1&scene=intro`
-- 兼容跳转：`/demo/nyxviz-video` → 302 到上述直链
-- 项目页：`/project/nyxviz` → 「录屏演示」
+- 直接：`/static/nyxviz/video.html?record=1&scene=intro`
+- 跳转：`/demo/nyxviz-video`
+- 项目页：`/project/nyxviz`
 
 ## 11 个 scene
 
 `intro`, `task1-tf`, `task1-morph`, `task2-evolution`, `task2-void`, `task2-cases`, `task2-spatial`, `task3-hist`, `task4-brush`, `task4-validate`, `findings`
-
-示例：`?record=1&scene=task4-brush`
