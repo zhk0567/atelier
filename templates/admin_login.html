@@ -1,0 +1,26 @@
+{% extends "admin_base.html" %}
+
+{% block title %}管理员登录{% endblock %}
+
+{% block content %}
+<main class="na-login">
+  <section class="na-login__card">
+    <p class="na-eyebrow">PRIVATE CONSOLE</p>
+    <h1>答题记录</h1>
+    <p class="na-muted">该入口不在站点导航中显示，需要管理员账号登录。</p>
+    <form method="post" action="{{ admin_path }}/login" class="na-form" autocomplete="off">
+      <input type="hidden" name="csrf" value="{{ csrf_token }}" />
+      <label class="na-field">
+        <span>账号</span>
+        <input type="text" name="username" maxlength="40" autocomplete="username" required autofocus />
+      </label>
+      <label class="na-field">
+        <span>密码</span>
+        <input type="password" name="password" maxlength="120" autocomplete="current-password" required />
+      </label>
+      {% if error %}<p class="na-error" role="alert">{{ error }}</p>{% endif %}
+      <button type="submit" class="na-primary">进入控制台</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

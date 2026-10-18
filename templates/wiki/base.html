@@ -23,7 +23,7 @@
   {% endif %}
   {% block extra_head %}{% endblock %}
 </head>
-<body class="wiki-site{% if wallpapers %} has-wallpaper{% endif %}{% if page_home %} page-home{% endif %}">
+<body class="wiki-site{% if wallpapers %} has-wallpaper{% endif %}{% if page_home %} page-home{% endif %}{% if page_quiz %} page-quiz{% endif %}">
   {% if wallpapers %}
   <div class="wiki-wallpaper" id="wiki-wallpaper" aria-hidden="true">
     <img
@@ -163,7 +163,7 @@
     <p class="wiki-lightbox__counter" id="wiki-lightbox-counter" hidden aria-live="polite"></p>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  {% if live2d_mc_vtuber.enabled %}
+  {% if live2d_mc_vtuber.enabled and not page_quiz %}
   <div
     id="live2d-mc-vtuber"
     data-enabled="1"

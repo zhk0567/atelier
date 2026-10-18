@@ -1,0 +1,107 @@
+{% extends "admin_base.html" %}
+
+{% block title %}答题记录{% endblock %}
+
+{% block content %}
+<header class="na-topbar">
+  <div>
+    <p class="na-eyebrow">NEUROSIS / ATTEMPTS</p>
+    <h1>答题记录</h1>
+  </div>
+  <div class="na-topbar__actions">
+    <a class="na-secondary" href="{{ admin_path }}/export.csv">导出 CSV</a>
+    <form method="post" action="{{ admin_path }}/logout">
+      <input type="hidden" name="csrf" value="{{ csrf_token }}" />
+      <button type="submit" class="na-secondary">退出</button>
+    </form>
+  </div>
+</header>
+
+<main class="na-main">
+  <section class="na-stats">
+    <article><span>总记录</span><strong>{{ stats.total }}</strong></article>
+    <article><span>今日提交</span><strong>{{ stats.today }}</strong></article>
+    <article><span>平均分</span><strong>{{ stats.average }}</strong></article>
+    <article><span>最高分</span><strong>{{ stats.highest }}</strong></article>
+  </section>
+
+  {% if stats.distribution %}
+  <section class="na-distribution">
+    {% for item in stats.distribution %}
+    <span>{{ item.band_title }} <strong>{{ item.count }}</strong></span>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="na-table-panel">
+    <div class="na-table-toolbar">
+      <form method="get" action="{{ admin_path }}" class="na-search">
+        <input type="search" name="q" value="{{ query }}" placeholder="搜索昵称、学号或结果…" />
+        <button type="submit" class="na-primary">搜索</button>
+        {% if query %}<a class="na-secondary" href="{{ admin_path }}">清除</a>{% endif %}
+      </form>
+      <span class="na-muted">共 {{ total }} 条{% if query %}匹配记录{% endif %}</span>
+    </div>
+
+    {% if records %}
+    <div class="na-table-wrap">
+      <table class="na-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>提交时间</th>
+            <th>昵称 / 学号</th>
+            <th>得分</th>
+            <th>结果</th>
+            <th>主导维度</th>
+            <th>注意力</th>
+            <th>用时</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in records %}
+          <tr>
+            <td class="na-mono">{{ record.id }}</td>
+            <td class="na-nowrap">{{ record.created_at[:19] | replace('T', ' ') }}</td>
+            <td>
+              <strong>{{ record.name }}</strong>
+              {% if record.identifier %}<span class="na-sub">{{ record.identifier }}</span>{% endif %}
+            </td>
+            <td><strong>{{ record.score }}</strong><span class="na-sub">/ {{ record.max_score }}</span></td>
+            <td><span class="na-band">{{ record.band_title }}</span></td>
+            <td>
+              {% if record.top_dimensions %}
+                {% for group_id in record.top_dimensions %}
+                <span class="na-chip">{{ group_names.get(group_id, group_id) }}</span>
+                {% endfor %}
+              {% else %}
+                <span class="na-muted">—</span>
+              {% endif %}
+            </td>
+            <td class="na-mono">{{ record.attention_choice or '—' }}</td>
+            <td class="na-mono">{{ record.duration_seconds // 60 }}:{{ "%02d"|format(record.duration_seconds % 60) }}</td>
+            <td><a class="na-link" href="{{ admin_path }}/attempt/{{ record.id }}">详情</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="na-empty">还没有{% if query %}匹配的{% endif %}答题记录。</p>
+    {% endif %}
+
+    {% if pages > 1 %}
+    <nav class="na-pagination" aria-label="分页">
+      {% if page > 1 %}
+      <a class="na-secondary" href="{{ admin_path }}?q={{ query | urlencode }}&page={{ page - 1 }}">上一页</a>
+      {% endif %}
+      <span>第 {{ page }} / {{ pages }} 页</span>
+      {% if page < pages %}
+      <a class="na-secondary" href="{{ admin_path }}?q={{ query | urlencode }}&page={{ page + 1 }}">下一页</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

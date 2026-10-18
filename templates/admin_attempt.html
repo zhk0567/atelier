@@ -1,0 +1,65 @@
+{% extends "admin_base.html" %}
+
+{% block title %}记录 #{{ record.id }}{% endblock %}
+
+{% block content %}
+<header class="na-topbar">
+  <div>
+    <p class="na-eyebrow">ATTEMPT #{{ record.id }}</p>
+    <h1>{{ record.name }} 的答题记录</h1>
+  </div>
+  <div class="na-topbar__actions">
+    <a class="na-secondary" href="{{ admin_path }}">返回列表</a>
+    <form method="post" action="{{ admin_path }}/logout">
+      <input type="hidden" name="csrf" value="{{ csrf_token }}" />
+      <button type="submit" class="na-secondary">退出</button>
+    </form>
+  </div>
+</header>
+
+<main class="na-main">
+  <section class="na-detail-summary">
+    <div><span>提交时间</span><strong>{{ record.created_at[:19] | replace('T', ' ') }}</strong></div>
+    <div><span>昵称 / 学号</span><strong>{{ record.name }}{% if record.identifier %} · {{ record.identifier }}{% endif %}</strong></div>
+    <div><span>得分</span><strong>{{ record.score }} / {{ record.max_score }}</strong></div>
+    <div><span>结果</span><strong>{{ record.band_title }}</strong></div>
+    <div><span>答题用时</span><strong>{{ record.duration_seconds // 60 }}:{{ "%02d"|format(record.duration_seconds % 60) }}</strong></div>
+    <div><span>注意力检测</span><strong>{{ result.attention_result.title if result.attention_result else '—' }}（{{ record.attention_choice or '—' }}）</strong></div>
+  </section>
+
+  <section class="na-dimension-panel">
+    {% for dimension in dimensions %}
+    <div class="na-dimension">
+      <div><strong>{{ dimension.id }} · {{ dimension.name }}</strong><span>{{ dimension.score }} / {{ dimension.max }}</span></div>
+      <div class="na-dimension__track"><span style="width: {{ dimension.percent }}%"></span></div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="na-table-panel">
+    <h2 class="na-section-title">逐题答案</h2>
+    <div class="na-table-wrap">
+      <table class="na-table na-answers">
+        <thead>
+          <tr><th>题号</th><th>维度</th><th>权重</th><th>题目</th><th>选择</th><th>得分</th></tr>
+        </thead>
+        <tbody>
+          {% for row in answer_rows %}
+          <tr>
+            <td class="na-mono">{{ row.number }}</td>
+            <td class="na-nowrap">{{ row.group_name }}</td>
+            <td class="na-mono">×{{ row.weight }}</td>
+            <td>
+              <strong>{{ row.title }}</strong>
+              <span class="na-sub">{{ row.prompt }}</span>
+            </td>
+            <td><span class="na-chip">{{ row.choice or '—' }}</span><span class="na-sub">{{ row.choice_text }}</span></td>
+            <td class="na-mono">{{ row.points }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+{% endblock %}

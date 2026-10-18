@@ -1,0 +1,137 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ quiz_title }} · {{ site_name }}{% endblock %}
+
+{% block meta %}
+<meta name="description" content="一份不严肃的灵魂拷问测试，仅供娱乐。" />
+{% endblock %}
+
+{% block extra_head %}
+<script>document.documentElement.classList.add("nq-js");</script>
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=1" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>趣味测试</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nq-shell" data-quiz-root>
+  <header class="nq-hero">
+    <p class="nq-kicker">灵魂拷问 · 多维度加权版</p>
+    <h1>{{ quiz_title }}</h1>
+    <p class="nq-hero__lead">37 道题。别想太久，第一反应通常最诚实。</p>
+    <div class="nq-meta">
+      <span>约 6–10 分钟</span>
+      <span>凭第一反应作答</span>
+      <span>结果仅供娱乐</span>
+    </div>
+  </header>
+
+  <form id="nq-form" class="nq-form" method="post" action="{{ quiz_path }}/submit" novalidate>
+    <input type="hidden" name="order" value="{{ question_order }}" />
+    <section class="nq-intro" data-nq-intro>
+      <div class="nq-intro__copy">
+        {% for line in quiz_intro %}
+        <p{% if loop.first %} class="nq-intro__first"{% endif %}>{{ line }}</p>
+        {% endfor %}
+      </div>
+      <div class="nq-fields">
+        <label class="nq-field">
+          <span>昵称或代号 <em>必填</em></span>
+          <input
+            type="text"
+            name="name"
+            maxlength="40"
+            autocomplete="nickname"
+            placeholder="例如：凌晨三点还在线的人"
+            value="{{ student_name }}"
+            required
+          />
+        </label>
+        <label class="nq-field">
+          <span>班级 / 学号 <em>选填</em></span>
+          <input
+            type="text"
+            name="identifier"
+            maxlength="60"
+            autocomplete="off"
+            placeholder="方便区分同名记录"
+            value="{{ student_identifier }}"
+          />
+        </label>
+      </div>
+      <p class="nq-error" data-nq-intro-error role="alert"{% if not error %} hidden{% endif %}>{{ error }}</p>
+      <div class="nq-intro__actions">
+        <button type="button" class="nq-primary" data-nq-start>开始答题</button>
+        <span class="nq-intro__hint">每题四选一，选完自动进入下一题。</span>
+      </div>
+      <p class="nq-privacy">{{ quiz_note }}</p>
+    </section>
+
+    <section class="nq-quiz nq-quiz--waiting" data-nq-quiz>
+      <div class="nq-progress" aria-live="polite">
+        <div class="nq-progress__top">
+          <span class="nq-progress__label">答题进度</span>
+          <span><strong data-nq-count>1</strong> / {{ questions|length }}</span>
+        </div>
+        <div class="nq-progress__track"><span data-nq-progress-bar></span></div>
+      </div>
+      <p class="nq-choice-hint">没有完全想选的也没关系，选相对最接近的一项即可。</p>
+
+      <div class="nq-slides">
+        {% for q in questions %}
+        <fieldset
+          class="nq-slide{% if loop.first %} is-active{% endif %}"
+          data-nq-slide
+        >
+          <legend class="nq-sr-only">第 {{ loop.index }} 题：{{ q.title }}</legend>
+          <div class="nq-question-head">
+            <span class="nq-index">{{ "%02d"|format(loop.index) }}</span>
+            <div>
+              <h2>{{ q.title }}</h2>
+            </div>
+          </div>
+          <p class="nq-prompt">{{ q.prompt }}</p>
+          <div class="nq-options">
+            {% for option in q.options %}
+            <label class="nq-option">
+              <input
+                type="radio"
+                name="{{ q.key }}"
+                value="{{ option.letter }}"
+                {% if answers.get(q.key) == option.letter %}checked{% endif %}
+              />
+              <span class="nq-option__letter">{{ option.letter }}</span>
+              <span class="nq-option__text">{{ option.text }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+        {% endfor %}
+      </div>
+
+      <div class="nq-controls">
+        <button type="button" class="nq-secondary" data-nq-back>上一题</button>
+        <button type="button" class="nq-secondary" data-nq-next>下一题</button>
+        <button type="submit" class="nq-primary" data-nq-submit>提交并查看结果</button>
+      </div>
+      <p class="nq-form-error" data-nq-error role="alert"></p>
+      <noscript>
+        <p class="nq-noscript-note">JavaScript 未启用：你可以直接向下滚动完成全部题目，再提交。</p>
+        <button type="submit" class="nq-primary">提交并查看结果</button>
+      </noscript>
+    </section>
+
+    <input type="hidden" name="duration_seconds" value="0" data-nq-duration />
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/neurosis-quiz.js?v=1" defer></script>
+{% endblock %}

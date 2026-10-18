@@ -57,15 +57,3 @@ flowchart LR
 ## 配置
 
 复制 `config/site.example.json` 为 `config/site.local.json`（已 gitignore），设置本机 `framework_root`。环境变量 `FRAMEWORK_ROOT` 优先级最高。
-
-## NyxViz 录屏静态 Demo
-
-NyxViz 录屏三栏页（`video.html`，11 scene）以 Vite 静态产物接入，不依赖 Node 运行时：
-
-| 资源 | 位置 | 说明 |
-|------|------|------|
-| HTML/JS/CSS | `static/nyxviz/` | `npm run build:atelier` + `scripts/sync_nyxviz_video.ps1`；`assets/`、`figures/` 入库 |
-| figures / stats | `static/nyxviz/figures/`、`stats/` | 站点 static 托管；默认 `static_figures_only`，无需 `.dat` |
-| Nyx `*.dat` | 外部 OSS/CDN | `VITE_NYX_DATA_BASE` 构建注入；CSP `connect-src` 见 `nyx_data_origin` |
-
-入口：`/static/nyxviz/video.html?record=1&scene=intro`（全页直链）；`/demo/nyxviz-video` 302 跳转。部署步骤见 [NYXVIZ_DEPLOY.md](NYXVIZ_DEPLOY.md)。

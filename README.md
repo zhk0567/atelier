@@ -58,6 +58,20 @@ Set-Location -LiteralPath 'F:\commercial\atelier'
 
 依赖见 [`requirements.txt`](requirements.txt)（需 **Python 3.9+**，推荐 3.11）。
 
+## 趣味测试与管理员入口
+
+本地运行时可访问：
+
+- 趣味测试：`http://127.0.0.1:8000/quiz/neurosis`
+- 管理员后台：`http://127.0.0.1:8000/ops/neurosis-7f3c9a2e`
+
+部署到 `zhkun.xyz` 后对应：
+
+- 趣味测试：`https://zhkun.xyz/quiz/neurosis`
+- 管理员后台：`https://zhkun.xyz/ops/neurosis-7f3c9a2e`
+
+管理员入口不在站点导航、首页或搜索索引中，只能通过上述地址直接访问。答题记录保存在 `instance/neurosis.sqlite3`，该目录不挂载到 `/static`，无法通过网页直接访问；后台账号密码为固定配置，入口 URL 本身不是访问凭证。
+
 ## 服务器部署（阿里云 ECS + Nginx + HTTPS）
 
 环境示例：Alibaba Cloud Linux 3、域名 `zhkun.xyz` 解析到 ECS 公网 IP、安全组放行 `22` / `80` / `443`。

@@ -2,11 +2,5 @@
   "framework_root": "F:/Study/Framework",
   "blog_framework_dir": "framework-guides",
   "algorithm_root": "F:/Study/Algorithm",
-  "blog_algorithm_dir": "algorithm-guides",
-  "nyxviz": {
-    "video_path": "/static/nyxviz/video.html",
-    "static_figures_only": true,
-    "nyx_data_base": "",
-    "nyx_data_origin": ""
-  }
+  "blog_algorithm_dir": "algorithm-guides"
 }

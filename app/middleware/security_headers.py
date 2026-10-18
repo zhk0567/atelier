@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import re
 
-from app.config import nyxviz_data_origin
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
@@ -14,21 +13,12 @@ _BLOG_CHART_HTML = re.compile(
     r"^/static/blog/dataviz-ch09/[a-z0-9_.-]+\.html$",
     re.I,
 )
-_NYXVIZ_STATIC = re.compile(
-    r"^/static/nyxviz/",
-    re.I,
-)
-
-
 def _is_blog_chart_embed(path: str) -> bool:
     return bool(_BLOG_CHART_HTML.match(path))
 
 
 def _content_security_policy(*, frame_ancestors: str = "'none'") -> str:
     connect_src = "'self'"
-    origin = nyxviz_data_origin()
-    if origin:
-        connect_src = f"'self' {origin}"
     worker_src = "'self' blob:"
     return (
         "default-src 'self'; "
@@ -51,11 +41,10 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response = await call_next(request)
         path = request.url.path
         embeddable_chart = _is_blog_chart_embed(path)
-        nyxviz_static = bool(_NYXVIZ_STATIC.match(path))
 
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
-        if embeddable_chart or nyxviz_static:
-            # Same-origin iframe/embed for blog charts and NyxViz demo shell.
+        if embeddable_chart:
+            # Same-origin iframe/embed for blog charts.
             response.headers["X-Frame-Options"] = "SAMEORIGIN"
             response.headers["Content-Security-Policy"] = _content_security_policy(
                 frame_ancestors="'self'"

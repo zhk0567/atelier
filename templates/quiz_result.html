@@ -1,0 +1,147 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ result.band.title }} · {{ quiz_title }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=1" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="{{ quiz_path }}">趣味测试</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>结果</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nq-result">
+  <header class="nq-result__hero">
+    <p class="nq-kicker">你的灵魂拷问结果</p>
+    <h1>{{ result.band.title }}</h1>
+    <div class="nq-result__top">
+      <span>主导维度</span>
+      {% if result.top_dimensions %}
+        {% for group_id in result.top_dimensions %}
+        <strong>{{ groups[group_id].name }}</strong>{% if not loop.last %} · {% endif %}
+        {% endfor %}
+      {% else %}
+        <strong>各维度均低</strong>
+      {% endif %}
+    </div>
+    <p class="nq-result__byline">
+      {{ record.name }}{% if record.identifier %} · {{ record.identifier }}{% endif %}
+      · {{ record.created_at[:19] | replace('T', ' ') }}
+    </p>
+    <div class="nq-result__actions">
+      <button type="button" class="nq-primary" data-nq-copy>复制结果文案</button>
+      <a class="nq-secondary nq-button-link" href="{{ quiz_path }}">再测一次</a>
+    </div>
+  </header>
+
+  <section class="nq-band-panel">
+    <div class="nq-band-panel__head">
+      <p class="nq-kicker">画像</p>
+      <p>{{ result.band.profile }}</p>
+    </div>
+    <div class="nq-band-panel__grid">
+      <div>
+        <p class="nq-section-label">典型症状</p>
+        <p>{{ result.band.symptoms }}</p>
+      </div>
+      <div>
+        <p class="nq-section-label">内心 OS</p>
+        <p>{{ result.band.inner_os }}</p>
+      </div>
+      <div>
+        <p class="nq-section-label">毒舌点评</p>
+        <p>{{ result.band.roast }}</p>
+      </div>
+      <div>
+        <p class="nq-section-label">处方</p>
+        <p>{{ result.band.prescription }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="nq-dimension-panel">
+    <div class="nq-section-head">
+      <div>
+        <p class="nq-kicker">维度分解</p>
+        <h2>你在哪一层内耗</h2>
+      </div>
+      <p>两种特征接近时，会同时显示为并存。</p>
+    </div>
+    <div class="nq-dimension-list">
+      {% for dimension in dimensions %}
+      <div class="nq-dimension{% if dimension.is_top %} is-top{% endif %}">
+        <div class="nq-dimension__head">
+          <span class="nq-dimension__id">{{ dimension.id }}</span>
+          <div>
+            <strong>{{ dimension.name }}</strong>
+            <span>{{ dimension.short }}</span>
+          </div>
+        </div>
+        <div class="nq-dimension__track"><span style="width: {{ dimension.percent }}%"></span></div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% if result.attention_result %}
+  <section class="nq-attention">
+    <p class="nq-kicker">注意力检测 · 你选了 {{ result.attention_choice }}</p>
+    <h2>{{ result.attention_result.title }}</h2>
+    <p>{{ result.attention_result.body }}</p>
+  </section>
+  {% endif %}
+
+  <details class="nq-notes">
+    <summary>展开五组维度的高/低分解读</summary>
+    <div class="nq-notes__grid">
+      {% for dimension in dimensions %}
+      <article>
+        <h3>{{ dimension.id }}组 · {{ dimension.name }}</h3>
+        <p><strong>高：</strong>{{ dimension.high }}</p>
+        <p><strong>低：</strong>{{ dimension.low }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </details>
+
+  <p class="nq-disclaimer">{{ quiz_note }}</p>
+  <p class="nq-saved">本次结果已保存；保留当前链接即可再次查看。</p>
+  <script id="nq-share-text" type="application/json">{{ share_text | tojson }}</script>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+(function () {
+  var button = document.querySelector("[data-nq-copy]");
+  var data = document.getElementById("nq-share-text");
+  if (!button || !data) return;
+  button.addEventListener("click", function () {
+    var text = "";
+    try { text = JSON.parse(data.textContent || '""'); } catch (e) { return; }
+    var done = function () {
+      button.textContent = "已复制";
+      window.setTimeout(function () { button.textContent = "复制结果文案"; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () {});
+    } else {
+      var area = document.createElement("textarea");
+      area.value = text;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+      done();
+    }
+  });
+})();
+</script>
+{% endblock %}

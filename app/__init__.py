@@ -12,7 +12,7 @@ from app.config import ATELIER_ROOT, MC_VTUBER_DIR, mc_vtuber_live2d_ready
 from app.static_files import CachedStaticFiles
 from app.constants import MC_VTUBER_CACHE_HEADERS, SITE_NAME, SITE_TITLE
 from app.middleware import register_security_middleware
-from app.routes import assets, blog, browse, demo, home, projects, travel, wiki
+from app.routes import admin, assets, blog, browse, home, projects, quiz, travel, wiki
 
 
 def _win_asyncio_exception_handler(loop: asyncio.AbstractEventLoop, context: dict) -> None:
@@ -60,10 +60,6 @@ async def _lifespan(app: FastAPI):
             )
         else:
             print("[atelier] wallpapers: none", flush=True)
-        from app.nyxviz_bundle import nyxviz_bundle_warnings
-
-        for msg in nyxviz_bundle_warnings():
-            print(f"[atelier] WARNING: {msg}", flush=True)
         print("[atelier] warmed caches", flush=True)
         yield
     finally:
@@ -85,7 +81,8 @@ def create_app() -> FastAPI:
     app.include_router(projects.router)
     app.include_router(blog.router)
     app.include_router(travel.router)
-    app.include_router(demo.router)
+    app.include_router(quiz.router)
+    app.include_router(admin.router)
     app.include_router(wiki.router)
     static_dir = ATELIER_ROOT / "static"
     if mc_vtuber_live2d_ready():

@@ -35,7 +35,7 @@
       </a>
       {% if project.demo_url %}
       <a class="mp-button" href="{{ project.demo_url }}">
-        <span class="mp-button__inner">{{ ui.label_nyxviz_demo | default('录屏演示') }}</span>
+        <span class="mp-button__inner">{{ ui.label_demo | default('在线演示') }}</span>
       </a>
       {% endif %}
       {% if wiki_index_url %}

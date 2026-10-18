@@ -79,21 +79,6 @@ source .venv/bin/activate && pip install -r requirements.txt
 sudo systemctl restart atelier
 ```
 
-### NyxViz 录屏静态资源
-
-`git pull` 会带上 `static/nyxviz/figures/` 与 `assets/`。若录屏页 JS/CSS 404 或样式 MIME 为 `application/json`，说明服务器缺少 `assets/`；PNG 404 则确认已 pull 最新 commit。
-
-在本机 Windows 执行（需 OpenSSH）：
-
-```powershell
-$env:NYXVIZ_INCLUDE_DAT = "1"
-$env:ATELIER_SSH = "root@39.106.117.118"
-$env:ATELIER_REMOTE = "/opt/atelier"
-.\scripts\publish_nyxviz_to_server.ps1
-```
-
-详见 [docs/NYXVIZ_DEPLOY.md](../docs/NYXVIZ_DEPLOY.md)。
-
 ## 9. 截图存档（大作业）
 
 按 `作业/截图/README-截图说明.md` 将控制台与终端截图保存到 `作业/截图/`，文件名与报告图号一致。

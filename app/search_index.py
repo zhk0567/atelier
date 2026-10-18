@@ -102,11 +102,11 @@ def build_site_search_index() -> tuple[dict, ...]:
         demo_url = project.get("demo_url")
         if demo_url:
             add(
-                title=f"{project.get('title', project.get('id', ''))} · 录屏演示",
+                title=f"{project.get('title', project.get('id', ''))} · 在线演示",
                 url=demo_url,
                 group="演示",
                 subtitle=project.get("summary", ""),
-                keywords=f"nyxviz demo {tags}",
+                keywords=f"demo {tags}",
             )
         wiki_slug = project.get("wiki_slug")
         if not wiki_slug:

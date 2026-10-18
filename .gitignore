@@ -13,9 +13,7 @@ config/site.local.json
 .env
 validate_out.txt
 _server.pid
-
-# NyxViz volume data (~800MB) — not used when static_figures_only (see docs/NYXVIZ_DEPLOY.md)
-static/nyxviz/Nyx/
+instance/
 
 # 大作业 Word（含个人信息，勿提交）
 作业/*.docx

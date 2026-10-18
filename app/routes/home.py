@@ -35,6 +35,7 @@ async def index(request: Request):
             "algorithm_published_count": algorithm_published,
             "hotspot_series_url": "/blog/series/hotspot",
             "hotspot_count": len(hotspot_posts),
+            "quiz_url": "/quiz/neurosis",
         },
         headers=HTML_CACHE_HEADERS,
     )

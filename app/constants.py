@@ -90,7 +90,7 @@ UI = {
     "label_blog_projects": "项目",
     "label_blog_hotspot": "热点",
     "link_hotspot_series": "热点专题",
-    "label_nyxviz_demo": "录屏演示",
+    "label_demo": "在线演示",
     "blog_hotspot_lead": "追踪 AI、神经科技与人机交互等领域的前沿观察与思辨。",
     "label_blog_course_notes": "课程笔记",
     "link_course_notes_series": "课程笔记",
