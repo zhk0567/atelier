@@ -166,8 +166,8 @@ async def admin_home(
 @router.post(ADMIN_PATH + "/login")
 async def admin_login(
     request: Request,
-    username: str = Form(""),
-    password: str = Form(""),
+    account: str = Form(""),
+    passphrase: str = Form(""),
     csrf: str = Form(""),
 ):
     ip = client_ip(request)
@@ -183,7 +183,7 @@ async def admin_login(
             error="登录页面已过期，请重新打开入口。",
             status_code=400,
         )
-    if not verify_credentials(username.strip(), password):
+    if not verify_credentials(account.strip(), passphrase):
         record_login_failure(ip)
         return _login_response(
             request,

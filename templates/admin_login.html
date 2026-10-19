@@ -8,19 +8,81 @@
     <p class="na-eyebrow">PRIVATE CONSOLE</p>
     <h1>答题记录</h1>
     <p class="na-muted">该入口不在站点导航中显示，需要管理员账号登录。</p>
-    <form method="post" action="{{ admin_path }}/login" class="na-form" autocomplete="off">
+    <form
+      method="post"
+      action="{{ admin_path }}/login"
+      class="na-form"
+      autocomplete="off"
+      data-login-form
+    >
       <input type="hidden" name="csrf" value="{{ csrf_token }}" />
       <label class="na-field">
         <span>账号</span>
-        <input type="text" name="username" maxlength="40" autocomplete="username" required autofocus />
+        <input
+          type="text"
+          name="account"
+          maxlength="40"
+          autocomplete="off"
+          autocapitalize="none"
+          spellcheck="false"
+          data-lpignore="true"
+          data-1p-ignore="true"
+          data-bwignore="true"
+          data-login-credential
+          required
+        />
       </label>
       <label class="na-field">
         <span>密码</span>
-        <input type="password" name="password" maxlength="120" autocomplete="current-password" required />
+        <input
+          type="password"
+          name="passphrase"
+          maxlength="120"
+          autocomplete="new-password"
+          autocapitalize="none"
+          spellcheck="false"
+          data-lpignore="true"
+          data-1p-ignore="true"
+          data-bwignore="true"
+          data-login-credential
+          required
+        />
       </label>
       {% if error %}<p class="na-error" role="alert">{{ error }}</p>{% endif %}
       <button type="submit" class="na-primary">进入控制台</button>
     </form>
   </section>
 </main>
+<script>
+(function () {
+  var form = document.querySelector("[data-login-form]");
+  if (!form) return;
+  var inputs = Array.prototype.slice.call(
+    form.querySelectorAll("[data-login-credential]")
+  );
+
+  inputs.forEach(function (input) {
+    input.addEventListener("input", function () {
+      input.dataset.userEdited = "1";
+    });
+    input.addEventListener("pointerdown", function () {
+      input.dataset.userEdited = "1";
+    });
+    input.addEventListener("keydown", function () {
+      input.dataset.userEdited = "1";
+    });
+  });
+
+  function clearAutofill() {
+    inputs.forEach(function (input) {
+      if (!input.dataset.userEdited) input.value = "";
+    });
+  }
+
+  clearAutofill();
+  window.setTimeout(clearAutofill, 120);
+  window.setTimeout(clearAutofill, 450);
+  window.setTimeout(clearAutofill, 1200);
+})();
+</script>
 {% endblock %}

@@ -128,6 +128,26 @@ def main() -> None:
             assert "查看结果" in lookup.text
             assert "/delete" not in lookup.text
 
+            login_page = client.get("/ops/neurosis-7f3c9a2e")
+            assert login_page.status_code == 200
+            assert 'name="account"' in login_page.text
+            assert 'name="passphrase"' in login_page.text
+            assert 'autocomplete="new-password"' in login_page.text
+            assert "data-login-credential" in login_page.text
+            assert 'name="username"' not in login_page.text
+            assert 'name="password"' not in login_page.text
+
+            login_csrf = client.cookies.get("atelier_admin_csrf")
+            rejected_login = client.post(
+                "/ops/neurosis-7f3c9a2e/login",
+                data={
+                    "account": "wrong-account",
+                    "passphrase": "wrong-passphrase",
+                    "csrf": login_csrf,
+                },
+            )
+            assert rejected_login.status_code == 401
+
             csrf = admin_csrf_token()
             client.cookies.set("atelier_admin_session", create_session_token())
             client.cookies.set("atelier_admin_csrf", csrf)
