@@ -3,12 +3,12 @@
 {% block title %}{{ quiz_title }} · {{ site_name }}{% endblock %}
 
 {% block meta %}
-<meta name="description" content="一份不严肃的灵魂拷问测试，仅供娱乐。" />
+<meta name="description" content="一份关于当代人精神状态的不严肃自测，仅供娱乐与自我观察。" />
 {% endblock %}
 
 {% block extra_head %}
 <script>document.documentElement.classList.add("nq-js");</script>
-<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=1" />
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=4" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -22,19 +22,36 @@
 {% block content %}
 <div class="nq-shell" data-quiz-root>
   <header class="nq-hero">
-    <p class="nq-kicker">灵魂拷问 · 多维度加权版</p>
-    <h1>{{ quiz_title }}</h1>
-    <p class="nq-hero__lead">37 道题。别想太久，第一反应通常最诚实。</p>
-    <div class="nq-meta">
-      <span>约 6–10 分钟</span>
-      <span>凭第一反应作答</span>
-      <span>结果仅供娱乐</span>
+    <div class="nq-hero__copy">
+      <p class="nq-kicker">当代人精神状态观察室</p>
+      <h1>{{ quiz_title }}</h1>
+      <p class="nq-hero__lead">不是给你贴一个标签，而是把你最近那些“说不清哪里不对”的瞬间摊开看看。别想太久，第一反应通常最诚实。</p>
+      <div class="nq-meta">
+        <span>120 道情境题库</span>
+        <span>每次随机 30 道</span>
+        <span>含 1 道注意力检测</span>
+        <span>约 5–8 分钟</span>
+      </div>
+    </div>
+    <div class="nq-hero__visual" aria-hidden="true">
+      <span class="nq-hero__orb">?</span>
+      <span class="nq-hero__stamp">NO DIAGNOSIS<br />JUST VIBES</span>
+      <span class="nq-hero__float nq-hero__float--one">内耗</span>
+      <span class="nq-hero__float nq-hero__float--two">已读不回</span>
+      <span class="nq-hero__float nq-hero__float--three">凌晨三点</span>
     </div>
   </header>
 
   <form id="nq-form" class="nq-form" method="post" action="{{ quiz_path }}/submit" novalidate>
     <input type="hidden" name="order" value="{{ question_order }}" />
     <section class="nq-intro" data-nq-intro>
+      <div class="nq-intro__head">
+        <div>
+          <p class="nq-kicker">入场登记</p>
+          <h2>先留一个只有你认识的名字</h2>
+        </div>
+        <span class="nq-intro__time">匿名感 × 安全感</span>
+      </div>
       <div class="nq-intro__copy">
         {% for line in quiz_intro %}
         <p{% if loop.first %} class="nq-intro__first"{% endif %}>{{ line }}</p>
@@ -54,32 +71,51 @@
           />
         </label>
         <label class="nq-field">
-          <span>班级 / 学号 <em>选填</em></span>
+          <span>班级 / 学号或查询码 <em>必填</em></span>
           <input
             type="text"
             name="identifier"
             maxlength="60"
             autocomplete="off"
-            placeholder="方便区分同名记录"
+            placeholder="用于之后查看记录，可自设代号"
             value="{{ student_identifier }}"
+            required
           />
         </label>
+      </div>
+      <p class="nq-fields-note">昵称和学号/查询码必须同时填写；之后查看记录时，两项也必须同时匹配。</p>
+      <div class="nq-consent-card" data-nq-consent-card>
+        <label class="nq-consent">
+          <input type="checkbox" name="consent" value="yes"{% if consent %} checked{% endif %} required />
+          <span class="nq-consent__box" aria-hidden="true"></span>
+          <span>我已阅读并同意 <a href="{{ privacy_path }}" target="_blank" rel="noopener noreferrer">《数据收集与隐私保护协议》</a>，理解昵称、学号/查询码、答案与结果会被保存，用来生成和找回记录。</span>
+        </label>
+        <div class="nq-consent-points" aria-label="数据使用说明">
+          <span>仅用于生成结果</span>
+          <span>凭昵称 + 学号查看</span>
+          <span>管理员可删除</span>
+        </div>
       </div>
       <p class="nq-error" data-nq-intro-error role="alert"{% if not error %} hidden{% endif %}>{{ error }}</p>
       <div class="nq-intro__actions">
         <button type="button" class="nq-primary" data-nq-start>开始答题</button>
-        <span class="nq-intro__hint">每题四选一，选完自动进入下一题。</span>
+        <span class="nq-intro__hint">两项信息和协议都完成后才能开始。每题四选一，选完自动进入下一题。</span>
       </div>
+      <p class="nq-lookup-link">已经做过？<a href="{{ quiz_path }}/records">用昵称 + 学号/查询码查看自己的记录</a></p>
       <p class="nq-privacy">{{ quiz_note }}</p>
     </section>
 
     <section class="nq-quiz nq-quiz--waiting" data-nq-quiz>
       <div class="nq-progress" aria-live="polite">
         <div class="nq-progress__top">
-          <span class="nq-progress__label">答题进度</span>
-          <span><strong data-nq-count>1</strong> / {{ questions|length }}</span>
+          <span class="nq-progress__label">精神状态扫描中</span>
+          <span>已答 <strong data-nq-answered>0</strong> · 还剩 <strong data-nq-remaining>{{ questions|length }}</strong></span>
         </div>
         <div class="nq-progress__track"><span data-nq-progress-bar></span></div>
+        <div class="nq-progress__foot">
+          <span>第 <strong data-nq-count>1</strong> / {{ questions|length }} 题</span>
+          <span>没有标准答案，只有你的第一反应</span>
+        </div>
       </div>
       <p class="nq-choice-hint">没有完全想选的也没关系，选相对最接近的一项即可。</p>
 
@@ -93,6 +129,7 @@
           <div class="nq-question-head">
             <span class="nq-index">{{ "%02d"|format(loop.index) }}</span>
             <div>
+              <span class="nq-question-group">{{ q.group_name }}</span>
               <h2>{{ q.title }}</h2>
             </div>
           </div>
@@ -117,6 +154,7 @@
 
       <div class="nq-controls">
         <button type="button" class="nq-secondary" data-nq-back>上一题</button>
+        <span class="nq-controls__hint" data-nq-control-hint>选一个最接近的答案</span>
         <button type="button" class="nq-secondary" data-nq-next>下一题</button>
         <button type="submit" class="nq-primary" data-nq-submit>提交并查看结果</button>
       </div>
@@ -133,5 +171,5 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="/static/js/neurosis-quiz.js?v=1" defer></script>
+<script src="/static/js/neurosis-quiz.js?v=3" defer></script>
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}旧版测试记录 · {{ quiz_title }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=4" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="{{ quiz_path }}">趣味测试</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>旧版记录</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nq-result">
+  <header class="nq-result__hero">
+    <div class="nq-result__badge" aria-hidden="true">🕰️</div>
+    <p class="nq-kicker">旧版测试记录</p>
+    <h1>{{ record.band_title }}</h1>
+    <p class="nq-result__tagline">这是旧版测试留下的结果。当前题库已经更新，建议重新完成一次，查看新的六维状态切片。</p>
+    <div class="nq-result__top">
+      <span>旧版主导维度</span>
+      <strong>{{ legacy_top }}</strong>
+    </div>
+    <p class="nq-result__byline">
+      {{ record.name }}{% if record.identifier %} · {{ record.identifier }}{% endif %}
+      · {{ record.created_at[:19] | replace('T', ' ') }}
+    </p>
+    <div class="nq-result__actions">
+      <a class="nq-primary nq-button-link" href="{{ quiz_path }}">用新版再测一次</a>
+      <a class="nq-secondary nq-button-link" href="{{ quiz_path }}/records">查看我的记录</a>
+    </div>
+  </header>
+  <section class="nq-band-panel">
+    <div class="nq-band-panel__head">
+      <p class="nq-kicker">历史记录</p>
+      <p>旧版结果仅作历史保留。当前版本已经调整题目和评分方式，建议重新完成一次测试，获得新的六维状态切片。</p>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -7,6 +7,7 @@
   <div>
     <p class="na-eyebrow">NEUROSIS / ATTEMPTS</p>
     <h1>答题记录</h1>
+    <p class="na-muted">用户端仅有查看权限；删除后不可恢复。</p>
   </div>
   <div class="na-topbar__actions">
     <a class="na-secondary" href="{{ admin_path }}/export.csv">导出 CSV</a>
@@ -18,6 +19,10 @@
 </header>
 
 <main class="na-main">
+  {% if notice %}
+  <p class="na-notice">{{ notice }}</p>
+  {% endif %}
+
   <section class="na-stats">
     <article><span>总记录</span><strong>{{ stats.total }}</strong></article>
     <article><span>今日提交</span><strong>{{ stats.today }}</strong></article>
@@ -54,9 +59,10 @@
             <th>得分</th>
             <th>结果</th>
             <th>主导维度</th>
+            <th>题库</th>
             <th>注意力</th>
             <th>用时</th>
-            <th></th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>
@@ -71,17 +77,30 @@
             <td><strong>{{ record.score }}</strong><span class="na-sub">/ {{ record.max_score }}</span></td>
             <td><span class="na-band">{{ record.band_title }}</span></td>
             <td>
-              {% if record.top_dimensions %}
-                {% for group_id in record.top_dimensions %}
-                <span class="na-chip">{{ group_names.get(group_id, group_id) }}</span>
+              {% if record.dimension_names %}
+                {% for name in record.dimension_names %}
+                <span class="na-chip">{{ name }}</span>
                 {% endfor %}
               {% else %}
                 <span class="na-muted">—</span>
               {% endif %}
             </td>
+            <td>
+              {% if record.is_legacy %}
+              <span class="na-chip">旧版</span>
+              {% else %}
+              <span class="na-muted">当前版</span>
+              {% endif %}
+            </td>
             <td class="na-mono">{{ record.attention_choice or '—' }}</td>
             <td class="na-mono">{{ record.duration_seconds // 60 }}:{{ "%02d"|format(record.duration_seconds % 60) }}</td>
-            <td><a class="na-link" href="{{ admin_path }}/attempt/{{ record.id }}">详情</a></td>
+            <td class="na-actions">
+              <a class="na-link" href="{{ admin_path }}/attempt/{{ record.id }}">详情</a>
+              <form method="post" action="{{ admin_path }}/attempt/{{ record.id }}/delete" onsubmit="return confirm('删除后，用户端的结果链接和查询记录会同步消失，且无法恢复。确定删除吗？')">
+                <input type="hidden" name="csrf" value="{{ csrf_token }}" />
+                <button type="submit" class="na-danger-link">删除</button>
+              </form>
+            </td>
           </tr>
           {% endfor %}
         </tbody>

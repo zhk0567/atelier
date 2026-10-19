@@ -197,6 +197,17 @@ a {
   margin: 0 auto;
 }
 
+.na-notice {
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(49, 91, 214, 0.25);
+  border-radius: 9px;
+  background: var(--na-accent-soft);
+  color: var(--na-accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .na-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -352,6 +363,44 @@ a {
   font-weight: 800;
   text-decoration: none;
   white-space: nowrap;
+}
+
+.na-actions {
+  white-space: nowrap;
+}
+
+.na-actions form {
+  display: inline;
+  margin-left: 0.45rem;
+}
+
+.na-danger-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--na-danger);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.na-danger-link:hover {
+  text-decoration: underline;
+}
+
+.na-raw-answers {
+  margin: 0;
+  padding: 0.8rem;
+  overflow-x: auto;
+  border: 1px solid var(--na-border);
+  border-radius: 8px;
+  background: var(--na-panel-soft);
+  color: var(--na-text);
+  font-family: var(--na-mono);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
 }
 
 .na-empty {

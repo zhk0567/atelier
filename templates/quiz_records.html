@@ -1,0 +1,91 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}我的答题记录 · {{ site_name }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=4" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="{{ quiz_path }}">趣味测试</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>我的记录</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nq-shell nq-records">
+  <header class="nq-records__hero">
+    <p class="nq-kicker">PRIVATE HISTORY</p>
+    <h1>我的答题记录</h1>
+    <p>输入提交时使用的昵称和学号/查询码。记录只对你和管理员可见；你拥有查看权限，不能修改或删除。</p>
+    <div class="nq-records__meta">
+      <span>昵称 + 学号精确匹配</span>
+      <span>不公开结果链接</span>
+    </div>
+  </header>
+
+  <section class="nq-records__panel">
+    <form method="post" action="{{ quiz_path }}/records" class="nq-records__form">
+      <label class="nq-field">
+        <span>昵称或代号</span>
+        <input type="text" name="name" maxlength="40" value="{{ lookup_name }}" required />
+      </label>
+      <label class="nq-field">
+        <span>学号或查询码</span>
+        <input type="text" name="identifier" maxlength="60" value="{{ lookup_identifier }}" required />
+      </label>
+      <button type="submit" class="nq-primary">查看我的记录</button>
+    </form>
+    <p class="nq-records__hint">两项必须与提交时完全一致。昵称或学号/查询码任意一项缺失、错误，都无法查看记录。</p>
+    {% if error %}<p class="nq-error">{{ error }}</p>{% endif %}
+
+    {% if records %}
+    <div class="nq-records__summary">
+      <strong>{{ records|length }}</strong>
+      <span>次匹配记录</span>
+      <span class="nq-records__verified">昵称与学号/查询码均匹配</span>
+      <small>最近一次：{{ records[0].created_at[:19] | replace('T', ' ') }}</small>
+    </div>
+    <div class="nq-record-list">
+      {% for record in records %}
+      <article class="nq-record-card" style="--nq-record-score: {{ record.score_percent }};">
+        <div class="nq-record-card__head">
+          <span class="nq-record-card__date">{{ record.created_at[:19] | replace('T', ' ') }}</span>
+          {% if record.is_legacy %}<span class="nq-record-card__legacy">旧版</span>{% endif %}
+        </div>
+        <div class="nq-record-card__body">
+          <div class="nq-record-card__score">
+            <strong>{{ record.score }}</strong>
+            <span>/ {{ record.max_score }}</span>
+          </div>
+          <div>
+            <h2>{{ record.band_title }}</h2>
+            <p class="nq-record-card__dimensions">
+              主导维度：
+              {% if record.dimension_names %}
+                {{ record.dimension_names | join(' · ') }}
+              {% else %}
+                —
+              {% endif %}
+            </p>
+          </div>
+        </div>
+        <div class="nq-record-card__foot">
+          <span>用时 {{ record.duration_seconds // 60 }}:{{ "%02d"|format(record.duration_seconds % 60) }}</span>
+          <a class="nq-secondary nq-button-link" href="{{ quiz_path }}/result/{{ record.token }}">查看结果</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% elif lookup_name and lookup_identifier and not error %}
+    <p class="nq-records__empty">没有找到匹配记录。请确认昵称和学号/查询码是否与提交时完全一致。</p>
+    {% endif %}
+  </section>
+
+  <p class="nq-saved">用户仅拥有查看权限。如记录涉及隐私或需要删除，请联系管理员处理。</p>
+</div>
+{% endblock %}

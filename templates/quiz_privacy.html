@@ -1,0 +1,29 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}数据收集与隐私保护协议 · {{ site_name }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=4" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="{{ quiz_path }}">趣味测试</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>数据说明</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nq-shell nq-privacy-doc">
+  <div class="nq-privacy-toolbar">
+    <p class="nq-kicker">版本 {{ privacy_version }}</p>
+    <a class="nq-secondary nq-button-link" href="{{ quiz_path }}">返回答题页</a>
+  </div>
+  <article class="nq-privacy-body wiki-md">
+    {{ privacy_html | safe }}
+  </article>
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@ import os
 import secrets
 import sqlite3
 from contextlib import contextmanager
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from threading import Lock
 from typing import Any
@@ -23,6 +23,7 @@ DB_PATH = Path(
 
 _LOCK = Lock()
 _READY = False
+RETENTION_DAYS = 365
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS quiz_attempts (
@@ -40,6 +41,9 @@ CREATE TABLE IF NOT EXISTS quiz_attempts (
     duration_seconds INTEGER NOT NULL DEFAULT 0,
     answers_json TEXT NOT NULL,
     group_scores_json TEXT NOT NULL,
+    quiz_version TEXT NOT NULL DEFAULT 'legacy-37',
+    consent_version TEXT NOT NULL DEFAULT '',
+    consent_at TEXT NOT NULL DEFAULT '',
     user_agent TEXT NOT NULL DEFAULT ''
 );
 CREATE INDEX IF NOT EXISTS idx_quiz_attempts_created
@@ -80,6 +84,28 @@ def ensure_db() -> None:
             return
         with _db() as connection:
             connection.executescript(_SCHEMA)
+            columns = {
+                row[1] for row in connection.execute("PRAGMA table_info(quiz_attempts)")
+            }
+            if "consent_version" not in columns:
+                connection.execute(
+                    "ALTER TABLE quiz_attempts ADD COLUMN consent_version TEXT NOT NULL DEFAULT ''"
+                )
+            if "consent_at" not in columns:
+                connection.execute(
+                    "ALTER TABLE quiz_attempts ADD COLUMN consent_at TEXT NOT NULL DEFAULT ''"
+                )
+            if "quiz_version" not in columns:
+                connection.execute(
+                    "ALTER TABLE quiz_attempts ADD COLUMN quiz_version TEXT NOT NULL DEFAULT 'legacy-37'"
+                )
+            cutoff = (
+                datetime.now().astimezone() - timedelta(days=RETENTION_DAYS)
+            ).isoformat(timespec="seconds")
+            connection.execute(
+                "DELETE FROM quiz_attempts WHERE created_at < ?",
+                (cutoff,),
+            )
         try:
             DB_PATH.parent.chmod(0o700)
             DB_PATH.chmod(0o600)
@@ -100,6 +126,9 @@ def save_attempt(
     result: dict[str, Any],
     duration_seconds: int,
     user_agent: str,
+    quiz_version: str = "",
+    consent_version: str = "",
+    consent_at: str = "",
 ) -> str:
     ensure_db()
     band = result["band"]
@@ -114,8 +143,8 @@ def save_attempt(
                         token, created_at, name, identifier, score, max_score,
                         band_title, band_range, top_dimensions_json,
                         attention_choice, duration_seconds, answers_json,
-                        group_scores_json, user_agent
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        group_scores_json, quiz_version, consent_version, consent_at, user_agent
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         token,
@@ -131,6 +160,9 @@ def save_attempt(
                         max(0, min(int(duration_seconds), 86400)),
                         json.dumps(answers, ensure_ascii=False, sort_keys=True),
                         json.dumps(result["group_scores"], ensure_ascii=False, sort_keys=True),
+                        quiz_version,
+                        consent_version,
+                        consent_at,
                         user_agent[:300],
                     ),
                 )
@@ -216,6 +248,40 @@ def all_attempts() -> list[dict[str, Any]]:
             "SELECT * FROM quiz_attempts ORDER BY id DESC"
         ).fetchall()
     return [_row_to_dict(row) for row in rows]
+
+
+def list_user_attempts(
+    name: str,
+    identifier: str,
+    *,
+    limit: int = 50,
+) -> list[dict[str, Any]]:
+    ensure_db()
+    name = name.strip()
+    identifier = identifier.strip()
+    if not name or not identifier:
+        return []
+    with _db() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM quiz_attempts
+            WHERE name = ? AND identifier = ?
+            ORDER BY id DESC
+            LIMIT ?
+            """,
+            (name, identifier, max(1, min(int(limit), 100))),
+        ).fetchall()
+    return [_row_to_dict(row) for row in rows]
+
+
+def delete_attempt(attempt_id: int) -> bool:
+    ensure_db()
+    with _db() as connection:
+        cursor = connection.execute(
+            "DELETE FROM quiz_attempts WHERE id = ?",
+            (int(attempt_id),),
+        )
+        return cursor.rowcount > 0
 
 
 def dashboard_stats() -> dict[str, Any]:

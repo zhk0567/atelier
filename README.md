@@ -62,15 +62,21 @@ Set-Location -LiteralPath 'F:\commercial\atelier'
 
 本地运行时可访问：
 
-- 趣味测试：`http://127.0.0.1:8000/quiz/neurosis`
+- 精神状态深度自测（120 道题库，每次随机 30 题）：`http://127.0.0.1:8000/quiz/neurosis`
+- 我的答题记录：`http://127.0.0.1:8000/quiz/neurosis/records`
+- 数据收集与隐私保护协议：`http://127.0.0.1:8000/quiz/neurosis/privacy`
 - 管理员后台：`http://127.0.0.1:8000/ops/neurosis-7f3c9a2e`
 
 部署到 `zhkun.xyz` 后对应：
 
 - 趣味测试：`https://zhkun.xyz/quiz/neurosis`
+- 我的答题记录：`https://zhkun.xyz/quiz/neurosis/records`
+- 数据收集与隐私保护协议：`https://zhkun.xyz/quiz/neurosis/privacy`
 - 管理员后台：`https://zhkun.xyz/ops/neurosis-7f3c9a2e`
 
-管理员入口不在站点导航、首页或搜索索引中，只能通过上述地址直接访问。答题记录保存在 `instance/neurosis.sqlite3`，该目录不挂载到 `/static`，无法通过网页直接访问；后台账号密码为固定配置，入口 URL 本身不是访问凭证。
+管理员入口不在站点导航、首页或搜索索引中，只能通过上述地址直接访问。答题记录保存在 `instance/neurosis.sqlite3`，该目录不挂载到 `/static`，无法通过网页直接访问；后台账号密码为固定配置，入口 URL 本身不是访问凭证。答题前必须勾选同意数据说明，当前默认保留记录 365 天。用户查询和结果访问都要求昵称 + 学号/查询码两项精确匹配，只有查看权限；结果页提供七天回血清单与分享文案，管理员可在后台删除记录。
+
+测试题库位于 `app/quiz_bank.json`，共 120 道核心题，六个维度各 20 道。每次测试随机抽取 29 道计分题（六个维度覆盖，抽到 4—5 道）+ 1 道注意力检测题，共 30 题，单次满分 87 分。
 
 ## 服务器部署（阿里云 ECS + Nginx + HTTPS）
 

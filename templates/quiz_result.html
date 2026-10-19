@@ -3,7 +3,7 @@
 {% block title %}{{ result.band.title }} · {{ quiz_title }}{% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=1" />
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=4" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -17,29 +17,124 @@
 {% endblock %}
 
 {% block content %}
-<div class="nq-result">
-  <header class="nq-result__hero">
-    <p class="nq-kicker">你的灵魂拷问结果</p>
-    <h1>{{ result.band.title }}</h1>
-    <div class="nq-result__top">
-      <span>主导维度</span>
-      {% if result.top_dimensions %}
-        {% for group_id in result.top_dimensions %}
-        <strong>{{ groups[group_id].name }}</strong>{% if not loop.last %} · {% endif %}
-        {% endfor %}
-      {% else %}
-        <strong>各维度均低</strong>
-      {% endif %}
+<div class="nq-result nq-result--{{ result.severity_key }}">
+  <header class="nq-result__hero" style="--nq-gauge: {{ result.energy }};">
+    <div class="nq-result__hero-main">
+      <div class="nq-result__badge" aria-hidden="true">{{ result.band.emoji }}</div>
+      <p class="nq-kicker">你的精神状态切片 · 非诊断</p>
+      <h1>{{ result.band.title }}</h1>
+      <p class="nq-result__tagline">{{ result.band.tagline }}</p>
+      <p class="nq-result__persona">人格切片：{{ result.persona }}</p>
+      <div class="nq-result__top">
+        <span>主导维度</span>
+        {% if result.top_dimensions %}
+          {% for group_id in result.top_dimensions %}
+          <strong>{{ groups[group_id].name }}</strong>{% if not loop.last %} · {% endif %}
+          {% endfor %}
+        {% else %}
+          <strong>各维度均低</strong>
+        {% endif %}
+      </div>
+      <div class="nq-result__keywords">
+        {% for keyword in result.keywords %}<span>{{ keyword }}</span>{% endfor %}
+      </div>
+      <p class="nq-result__byline">
+        {{ record.name }}{% if record.identifier %} · {{ record.identifier }}{% endif %}
+        · {{ record.created_at[:19] | replace('T', ' ') }}
+      </p>
     </div>
-    <p class="nq-result__byline">
-      {{ record.name }}{% if record.identifier %} · {{ record.identifier }}{% endif %}
-      · {{ record.created_at[:19] | replace('T', ' ') }}
-    </p>
+    <div class="nq-gauge" aria-label="精神电量 {{ result.energy }}%">
+      <div class="nq-gauge__inner">
+        <span>精神电量</span>
+        <strong>{{ result.energy }}</strong>
+        <small>%</small>
+      </div>
+      <span class="nq-gauge__score">{{ result.total }} / {{ result.max_score }} 分 · 内耗浓度 {{ result.score_percent }}%</span>
+    </div>
     <div class="nq-result__actions">
       <button type="button" class="nq-primary" data-nq-copy>复制结果文案</button>
+      <a class="nq-secondary nq-button-link" href="{{ quiz_path }}/records">查看我的记录</a>
       <a class="nq-secondary nq-button-link" href="{{ quiz_path }}">再测一次</a>
     </div>
   </header>
+
+  <section class="nq-weather">
+    <div>
+      <p class="nq-kicker">今日精神状态天气</p>
+      <h2>{{ result.weather_headline }}</h2>
+      <p>{{ result.weather_detail }}</p>
+    </div>
+    <div class="nq-weather__badge">
+      <span>{{ result.band.emoji }}</span>
+      <strong>{{ result.severity_label }}</strong>
+      <small>{{ result.band_range }} 分</small>
+    </div>
+  </section>
+
+  {% if result.hidden_results %}
+  <section class="nq-hidden">
+    <p class="nq-kicker">隐藏标签 · 你触发了 {{ result.hidden_results|length }} 个</p>
+    <div class="nq-hidden-grid">
+      {% for hidden in result.hidden_results %}
+      <article class="nq-hidden-card">
+        <span aria-hidden="true">{{ hidden.emoji }}</span>
+        <h2>{{ hidden.title }}</h2>
+        <p>{{ hidden.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="nq-manual">
+    <div class="nq-section-head">
+      <div>
+        <p class="nq-kicker">状态说明书</p>
+        <h2>你的电量，通常漏在哪里</h2>
+      </div>
+      <p>根据最高维度生成，不是给你定型，只是指出最近最费力的地方。</p>
+    </div>
+    <div class="nq-manual__grid">
+      <article>
+        <span>最常出现的场景</span>
+        <p>{{ result.primary_guide.scene }}</p>
+      </article>
+      <article>
+        <span>最容易触发你的</span>
+        <p>{{ result.primary_guide.trigger }}</p>
+      </article>
+      <article>
+        <span>回血开关</span>
+        <p>{{ result.primary_guide.recovery }}</p>
+      </article>
+      <article>
+        <span>请记得</span>
+        <p>{{ result.primary_guide.mantra }}</p>
+      </article>
+    </div>
+    <div class="nq-manual__strip">
+      <div>
+        <span>先提醒你</span>
+        <p>不是懒，不是矫情，也不是“太敏感”。你只是正在用有限的电量处理很多同时在响的警报。</p>
+      </div>
+      <div>
+        <span>恢复的第一原则</span>
+        <p>先把负荷降下来，再要求自己表现得好。恢复不是奖励，是继续生活的前提。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="nq-combo">
+    <div>
+      <p class="nq-kicker">内耗组合技</p>
+      <h2>{{ result.combo_title }}</h2>
+      <p>{{ result.combo_note }}</p>
+    </div>
+    <div class="nq-combo__os">
+      <span>此刻内心 OS</span>
+      <strong>{{ result.band.inner_os }}</strong>
+    </div>
+  </section>
 
   <section class="nq-band-panel">
     <div class="nq-band-panel__head">
@@ -49,22 +144,43 @@
     <div class="nq-band-panel__grid">
       <div>
         <p class="nq-section-label">典型症状</p>
-        <p>{{ result.band.symptoms }}</p>
+        <ul class="nq-mini-list">
+          {% for item in result.band.symptoms %}<li>{{ item }}</li>{% endfor %}
+        </ul>
       </div>
       <div>
-        <p class="nq-section-label">内心 OS</p>
-        <p>{{ result.band.inner_os }}</p>
+        <p class="nq-section-label">你此刻最需要听到的</p>
+        <p>{{ result.reframe }}</p>
       </div>
       <div>
-        <p class="nq-section-label">毒舌点评</p>
-        <p>{{ result.band.roast }}</p>
+        <p class="nq-section-label">怎样更容易被接住</p>
+        <p>{{ result.support_need }}</p>
       </div>
+      <div>
+        <p class="nq-section-label">你不需要成为</p>
+        <p>一个永远稳定、永远懂事、永远能自己消化一切的人。</p>
+      </div>
+    </div>
+    <div class="nq-band-extra">
       <div>
         <p class="nq-section-label">处方</p>
-        <p>{{ result.band.prescription }}</p>
+        <ul class="nq-mini-list">
+          {% for item in result.band.prescription %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      <div class="nq-challenge">
+        <p class="nq-section-label">今天的小挑战</p>
+        <p>{{ result.band.challenge }}</p>
       </div>
     </div>
   </section>
+
+  {% if result.support_note %}
+  <section class="nq-support">
+    <p class="nq-kicker">先照顾好自己</p>
+    <p>{{ result.support_note }}</p>
+  </section>
+  {% endif %}
 
   <section class="nq-dimension-panel">
     <div class="nq-section-head">
@@ -72,17 +188,18 @@
         <p class="nq-kicker">维度分解</p>
         <h2>你在哪一层内耗</h2>
       </div>
-      <p>两种特征接近时，会同时显示为并存。</p>
+      <p>百分比是该维度得分占满分的比例。两种特征接近时，会同时显示为并存。</p>
     </div>
     <div class="nq-dimension-list">
       {% for dimension in dimensions %}
-      <div class="nq-dimension{% if dimension.is_top %} is-top{% endif %}">
+      <div class="nq-dimension nq-dimension--{{ dimension.level }}{% if dimension.is_top %} is-top{% endif %}">
         <div class="nq-dimension__head">
-          <span class="nq-dimension__id">{{ dimension.id }}</span>
+          <span class="nq-dimension__id">{{ loop.index }}</span>
           <div>
             <strong>{{ dimension.name }}</strong>
             <span>{{ dimension.short }}</span>
           </div>
+          <span class="nq-dimension__level">{{ dimension.level_label }} · {{ dimension.percent }}%</span>
         </div>
         <div class="nq-dimension__track"><span style="width: {{ dimension.percent }}%"></span></div>
       </div>
@@ -90,20 +207,58 @@
     </div>
   </section>
 
-  {% if result.attention_result %}
+  <section class="nq-plan" data-nq-plan-root data-nq-plan-token="{{ record.token }}">
+    <div class="nq-section-head">
+      <div>
+        <p class="nq-kicker">7 DAY RESET</p>
+        <h2>给精神电量的一周小修</h2>
+      </div>
+      <p>不用全部做到。勾选你完成的那一项，本机浏览器会记住进度。</p>
+    </div>
+    <div class="nq-plan__list">
+      {% for item in result.micro_plan %}
+      <label class="nq-plan__item">
+        <input type="checkbox" data-nq-plan-day="{{ loop.index }}" />
+        <span class="nq-plan__mark" aria-hidden="true"></span>
+        <span class="nq-plan__day">{{ item.day }}</span>
+        <span class="nq-plan__copy">
+          <strong>{{ item.title }}</strong>
+          <small>{{ item.detail }}</small>
+        </span>
+      </label>
+      {% endfor %}
+    </div>
+    <div class="nq-plan__foot">
+      <span>本周已完成 <strong data-nq-plan-progress>0 / 7</strong></span>
+      <button type="button" class="nq-text-button" data-nq-plan-reset>重置进度</button>
+    </div>
+  </section>
+
+  {% if result.attention_note %}
   <section class="nq-attention">
     <p class="nq-kicker">注意力检测 · 你选了 {{ result.attention_choice }}</p>
-    <h2>{{ result.attention_result.title }}</h2>
-    <p>{{ result.attention_result.body }}</p>
+    <p>{{ result.attention_note }}</p>
   </section>
   {% endif %}
 
+  <section class="nq-share">
+    <div>
+      <p class="nq-kicker">把状态摊开，也是一种放松</p>
+      <h2>发给那个懂你梗的人</h2>
+      <p>复制一段带分数的结果文案，或直接调用系统分享。真实姓名不会出现在分享内容里。</p>
+    </div>
+    <div class="nq-share__actions">
+      <button type="button" class="nq-primary" data-nq-copy>复制结果文案</button>
+      <button type="button" class="nq-secondary" data-nq-share>系统分享</button>
+    </div>
+  </section>
+
   <details class="nq-notes">
-    <summary>展开五组维度的高/低分解读</summary>
+    <summary>展开六组维度的高/低分解读</summary>
     <div class="nq-notes__grid">
       {% for dimension in dimensions %}
       <article>
-        <h3>{{ dimension.id }}组 · {{ dimension.name }}</h3>
+        <h3>{{ dimension.name }}</h3>
         <p><strong>高：</strong>{{ dimension.high }}</p>
         <p><strong>低：</strong>{{ dimension.low }}</p>
       </article>
@@ -112,7 +267,7 @@
   </details>
 
   <p class="nq-disclaimer">{{ quiz_note }}</p>
-  <p class="nq-saved">本次结果已保存；保留当前链接即可再次查看。</p>
+  <p class="nq-saved">本次结果已保存。之后需用昵称 + 学号/查询码在“我的记录”里重新验证，才能再次打开结果。</p>
   <script id="nq-share-text" type="application/json">{{ share_text | tojson }}</script>
 </div>
 {% endblock %}
@@ -120,28 +275,98 @@
 {% block extra_scripts %}
 <script>
 (function () {
-  var button = document.querySelector("[data-nq-copy]");
+  var copyButtons = document.querySelectorAll("[data-nq-copy]");
+  var shareButton = document.querySelector("[data-nq-share]");
   var data = document.getElementById("nq-share-text");
-  if (!button || !data) return;
-  button.addEventListener("click", function () {
-    var text = "";
-    try { text = JSON.parse(data.textContent || '""'); } catch (e) { return; }
-    var done = function () {
-      button.textContent = "已复制";
-      window.setTimeout(function () { button.textContent = "复制结果文案"; }, 1600);
-    };
+  if (!data) return;
+
+  var shareText = "";
+  try { shareText = JSON.parse(data.textContent || '""'); } catch (error) { return; }
+
+  function markCopied(button) {
+    var original = button.textContent;
+    button.textContent = "已复制";
+    button.classList.add("is-done");
+    window.setTimeout(function () {
+      button.textContent = original;
+      button.classList.remove("is-done");
+    }, 1600);
+  }
+
+  function copyText(button) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, function () {});
-    } else {
-      var area = document.createElement("textarea");
-      area.value = text;
-      document.body.appendChild(area);
-      area.select();
-      document.execCommand("copy");
-      area.remove();
-      done();
+      navigator.clipboard.writeText(shareText).then(function () {
+        markCopied(button);
+      }, function () {});
+      return;
     }
+    var area = document.createElement("textarea");
+    area.value = shareText;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+    markCopied(button);
+  }
+
+  copyButtons.forEach(function (button) {
+    button.addEventListener("click", function () { copyText(button); });
   });
+
+  if (shareButton) {
+    shareButton.addEventListener("click", function () {
+      if (navigator.share) {
+        navigator.share({ title: document.title, text: shareText }).catch(function () {});
+      } else {
+        copyText(shareButton);
+      }
+    });
+  }
+
+  var planRoot = document.querySelector("[data-nq-plan-root]");
+  if (!planRoot) return;
+  var token = planRoot.getAttribute("data-nq-plan-token") || "result";
+  var storageKey = "nq-plan:" + token;
+  var boxes = Array.prototype.slice.call(planRoot.querySelectorAll("[data-nq-plan-day]"));
+  var progress = planRoot.querySelector("[data-nq-plan-progress]");
+  var reset = planRoot.querySelector("[data-nq-plan-reset]");
+
+  function paintPlan() {
+    var completed = boxes.filter(function (box) { return box.checked; }).length;
+    if (progress) progress.textContent = completed + " / " + boxes.length;
+    planRoot.classList.toggle("is-complete", completed === boxes.length);
+  }
+
+  function savePlan() {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(boxes.map(function (box) {
+        return box.checked;
+      })));
+    } catch (error) {}
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    boxes.forEach(function (box, index) {
+      box.checked = Boolean(saved[index]);
+    });
+  } catch (error) {}
+  paintPlan();
+
+  boxes.forEach(function (box) {
+    box.addEventListener("change", function () {
+      paintPlan();
+      savePlan();
+    });
+  });
+
+  if (reset) {
+    reset.addEventListener("click", function () {
+      boxes.forEach(function (box) { box.checked = false; });
+      paintPlan();
+      savePlan();
+    });
+  }
 })();
 </script>
 {% endblock %}

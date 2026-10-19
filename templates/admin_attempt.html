@@ -10,6 +10,10 @@
   </div>
   <div class="na-topbar__actions">
     <a class="na-secondary" href="{{ admin_path }}">返回列表</a>
+    <form method="post" action="{{ admin_path }}/attempt/{{ record.id }}/delete" onsubmit="return confirm('删除后，用户端的结果链接和查询记录会同步消失，且无法恢复。确定删除吗？')">
+      <input type="hidden" name="csrf" value="{{ csrf_token }}" />
+      <button type="submit" class="na-danger-link">删除记录</button>
+    </form>
     <form method="post" action="{{ admin_path }}/logout">
       <input type="hidden" name="csrf" value="{{ csrf_token }}" />
       <button type="submit" class="na-secondary">退出</button>
@@ -18,15 +22,23 @@
 </header>
 
 <main class="na-main">
+  {% if is_legacy %}
+  <p class="na-notice">该记录来自旧版题库，逐题答案按原版本保存；当前随机题库不再重新计算该记录的维度。</p>
+  {% endif %}
+
   <section class="na-detail-summary">
     <div><span>提交时间</span><strong>{{ record.created_at[:19] | replace('T', ' ') }}</strong></div>
     <div><span>昵称 / 学号</span><strong>{{ record.name }}{% if record.identifier %} · {{ record.identifier }}{% endif %}</strong></div>
     <div><span>得分</span><strong>{{ record.score }} / {{ record.max_score }}</strong></div>
     <div><span>结果</span><strong>{{ record.band_title }}</strong></div>
     <div><span>答题用时</span><strong>{{ record.duration_seconds // 60 }}:{{ "%02d"|format(record.duration_seconds % 60) }}</strong></div>
-    <div><span>注意力检测</span><strong>{{ result.attention_result.title if result.attention_result else '—' }}（{{ record.attention_choice or '—' }}）</strong></div>
+    <div><span>题库版本</span><strong>{{ record.quiz_version or '—' }}</strong></div>
+    <div><span>注意力检测</span><strong>{% if result and result.attention_note %}{{ result.attention_note }}{% else %}—{% endif %}（{{ record.attention_choice or '—' }}）</strong></div>
+    <div><span>同意版本</span><strong>{{ record.consent_version or '—' }}</strong></div>
+    <div><span>同意时间</span><strong>{{ record.consent_at[:19] | replace('T', ' ') if record.consent_at else '—' }}</strong></div>
   </section>
 
+  {% if dimensions %}
   <section class="na-dimension-panel">
     {% for dimension in dimensions %}
     <div class="na-dimension">
@@ -35,7 +47,14 @@
     </div>
     {% endfor %}
   </section>
+  {% endif %}
 
+  {% if is_legacy %}
+  <section class="na-table-panel">
+    <h2 class="na-section-title">旧版答案原始记录</h2>
+    <pre class="na-raw-answers">{{ legacy_answers_text }}</pre>
+  </section>
+  {% else %}
   <section class="na-table-panel">
     <h2 class="na-section-title">逐题答案</h2>
     <div class="na-table-wrap">
@@ -61,5 +80,6 @@
       </table>
     </div>
   </section>
+  {% endif %}
 </main>
 {% endblock %}

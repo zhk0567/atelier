@@ -6,6 +6,7 @@ import csv
 import io
 import math
 from datetime import datetime
+from typing import Any
 
 from fastapi import APIRouter, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
@@ -28,6 +29,8 @@ from app.constants import SITE_NAME
 from app.context import templates
 from app.quiz_data import (
     GROUPS,
+    LEGACY_GROUP_NAMES,
+    QUIZ_VERSION,
     answer_rows,
     dimension_details,
     score_answers,
@@ -35,6 +38,7 @@ from app.quiz_data import (
 from app.quiz_store import (
     all_attempts,
     dashboard_stats,
+    delete_attempt,
     get_attempt_by_id,
     list_attempts,
 )
@@ -83,6 +87,7 @@ def _dashboard_response(
     *,
     query: str = "",
     page: int = 1,
+    notice: str = "",
     status_code: int = 200,
 ) -> HTMLResponse:
     query = query.strip()[:80]
@@ -102,6 +107,21 @@ def _dashboard_response(
             limit=_PAGE_SIZE,
             offset=offset,
         )
+    group_names = {key: value["name"] for key, value in GROUPS.items()}
+    enriched: list[dict[str, Any]] = []
+    for record in records:
+        is_legacy = record.get("quiz_version") != QUIZ_VERSION
+        names = LEGACY_GROUP_NAMES if is_legacy else group_names
+        enriched.append(
+            {
+                **record,
+                "is_legacy": is_legacy,
+                "dimension_names": [
+                    names.get(group_id, group_id)
+                    for group_id in record.get("top_dimensions", [])
+                ],
+            }
+        )
     response = templates.TemplateResponse(
         request=request,
         name="admin_dashboard.html",
@@ -109,14 +129,15 @@ def _dashboard_response(
             "site_name": SITE_NAME,
             "admin_path": ADMIN_PATH,
             "csrf_token": admin_csrf_token(),
-            "records": records,
+            "records": enriched,
             "stats": dashboard_stats(),
             "query": query,
             "page": page,
             "pages": pages,
             "total": total,
             "page_size": _PAGE_SIZE,
-            "group_names": {key: value["name"] for key, value in GROUPS.items()},
+            "group_names": group_names,
+            "notice": notice,
         },
         status_code=status_code,
         headers=_ADMIN_HEADERS,
@@ -130,10 +151,16 @@ async def admin_home(
     request: Request,
     q: str = "",
     page: int = 1,
+    deleted: int = 0,
 ):
     if not admin_session_ok(request):
         return _login_response(request)
-    return _dashboard_response(request, query=q, page=page)
+    return _dashboard_response(
+        request,
+        query=q,
+        page=page,
+        notice="记录已删除。用户的结果链接和查询入口将不再显示该记录。" if deleted else "",
+    )
 
 
 @router.post(ADMIN_PATH + "/login")
@@ -187,12 +214,23 @@ async def admin_attempt(request: Request, attempt_id: int):
     record = get_attempt_by_id(attempt_id)
     if not record:
         raise HTTPException(status_code=404)
-    result = score_answers(record["answers"])
-    dimensions = dimension_details(
-        result["group_scores"],
-        result["group_max_scores"],
-        result["top_dimensions"],
-    )
+    is_legacy = record.get("quiz_version") != QUIZ_VERSION
+    if is_legacy:
+        result = None
+        dimensions = []
+        rows = []
+        legacy_answers_text = "\n".join(
+            f"{key}: {value}" for key, value in sorted(record.get("answers", {}).items())
+        )
+    else:
+        result = score_answers(record["answers"])
+        dimensions = dimension_details(
+            result["group_scores"],
+            result["group_max_scores"],
+            result["top_dimensions"],
+        )
+        rows = answer_rows(record["answers"])
+        legacy_answers_text = ""
     response = templates.TemplateResponse(
         request=request,
         name="admin_attempt.html",
@@ -203,12 +241,26 @@ async def admin_attempt(request: Request, attempt_id: int):
             "record": record,
             "result": result,
             "dimensions": dimensions,
-            "answer_rows": answer_rows(record["answers"]),
+            "answer_rows": rows,
+            "is_legacy": is_legacy,
+            "legacy_group_names": LEGACY_GROUP_NAMES,
+            "legacy_answers_text": legacy_answers_text,
         },
         headers=_ADMIN_HEADERS,
     )
     set_csrf_cookie(response)
     return response
+
+
+@router.post(ADMIN_PATH + "/attempt/{attempt_id}/delete")
+async def admin_delete(request: Request, attempt_id: int, csrf: str = Form("")):
+    if not admin_session_ok(request):
+        return RedirectResponse(url=ADMIN_PATH, status_code=303)
+    if not csrf_valid(request, csrf):
+        raise HTTPException(status_code=400)
+    if not delete_attempt(attempt_id):
+        raise HTTPException(status_code=404)
+    return RedirectResponse(url=f"{ADMIN_PATH}?deleted=1", status_code=303)
 
 
 @router.get(ADMIN_PATH + "/export.csv")
@@ -232,6 +284,9 @@ async def admin_export(request: Request):
             "主导维度",
             "注意力检测",
             "答题用时(秒)",
+            "题库版本",
+            "同意版本",
+            "同意时间",
             "逐题答案",
         ]
     )
@@ -248,16 +303,29 @@ async def admin_export(request: Request):
                 record["band_range"],
                 _csv_safe(
                     "/".join(
-                        GROUPS[group_id]["name"]
+                        (
+                            LEGACY_GROUP_NAMES
+                            if record.get("quiz_version") != QUIZ_VERSION
+                            else {key: value["name"] for key, value in GROUPS.items()}
+                        ).get(group_id, group_id)
                         for group_id in record["top_dimensions"]
-                        if group_id in GROUPS
                     )
                 ),
                 record["attention_choice"],
                 record["duration_seconds"],
-                " ".join(
-                    f"{row['number']}:{row['choice'] or '-'}"
-                    for row in answer_rows(record["answers"])
+                record.get("quiz_version", ""),
+                record["consent_version"],
+                record["consent_at"],
+                (
+                    " ".join(
+                        f"{key}:{value}"
+                        for key, value in sorted(record["answers"].items())
+                    )
+                    if record.get("quiz_version") != QUIZ_VERSION
+                    else " ".join(
+                        f"{row['number']}:{row['choice'] or '-'}"
+                        for row in answer_rows(record["answers"])
+                    )
                 ),
             ]
         )
