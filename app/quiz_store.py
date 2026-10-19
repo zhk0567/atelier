@@ -44,12 +44,28 @@ CREATE TABLE IF NOT EXISTS quiz_attempts (
     quiz_version TEXT NOT NULL DEFAULT 'legacy-37',
     consent_version TEXT NOT NULL DEFAULT '',
     consent_at TEXT NOT NULL DEFAULT '',
+    admin_note TEXT NOT NULL DEFAULT '',
     user_agent TEXT NOT NULL DEFAULT ''
 );
 CREATE INDEX IF NOT EXISTS idx_quiz_attempts_created
     ON quiz_attempts(created_at DESC, id DESC);
 CREATE INDEX IF NOT EXISTS idx_quiz_attempts_name
     ON quiz_attempts(name);
+CREATE TABLE IF NOT EXISTS quiz_feedback (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_at TEXT NOT NULL,
+    name TEXT NOT NULL DEFAULT '',
+    identifier TEXT NOT NULL DEFAULT '',
+    category TEXT NOT NULL DEFAULT '其他',
+    message TEXT NOT NULL,
+    source TEXT NOT NULL DEFAULT '',
+    status TEXT NOT NULL DEFAULT 'new',
+    user_agent TEXT NOT NULL DEFAULT ''
+);
+CREATE INDEX IF NOT EXISTS idx_quiz_feedback_created
+    ON quiz_feedback(created_at DESC, id DESC);
+CREATE INDEX IF NOT EXISTS idx_quiz_feedback_status
+    ON quiz_feedback(status, created_at DESC);
 """
 
 
@@ -99,11 +115,19 @@ def ensure_db() -> None:
                 connection.execute(
                     "ALTER TABLE quiz_attempts ADD COLUMN quiz_version TEXT NOT NULL DEFAULT 'legacy-37'"
                 )
+            if "admin_note" not in columns:
+                connection.execute(
+                    "ALTER TABLE quiz_attempts ADD COLUMN admin_note TEXT NOT NULL DEFAULT ''"
+                )
             cutoff = (
                 datetime.now().astimezone() - timedelta(days=RETENTION_DAYS)
             ).isoformat(timespec="seconds")
             connection.execute(
                 "DELETE FROM quiz_attempts WHERE created_at < ?",
+                (cutoff,),
+            )
+            connection.execute(
+                "DELETE FROM quiz_feedback WHERE created_at < ?",
                 (cutoff,),
             )
         try:
@@ -220,8 +244,11 @@ def list_attempts(
     params: list[Any] = []
     if query.strip():
         needle = f"%{query.strip()}%"
-        where = "WHERE name LIKE ? OR identifier LIKE ? OR band_title LIKE ?"
-        params = [needle, needle, needle]
+        where = (
+            "WHERE name LIKE ? OR identifier LIKE ? OR band_title LIKE ? "
+            "OR admin_note LIKE ?"
+        )
+        params = [needle, needle, needle, needle]
     with _db() as connection:
         total = int(
             connection.execute(
@@ -280,6 +307,131 @@ def delete_attempt(attempt_id: int) -> bool:
         cursor = connection.execute(
             "DELETE FROM quiz_attempts WHERE id = ?",
             (int(attempt_id),),
+        )
+        return cursor.rowcount > 0
+
+
+def update_attempt_note(attempt_id: int, note: str) -> bool:
+    ensure_db()
+    with _db() as connection:
+        cursor = connection.execute(
+            "UPDATE quiz_attempts SET admin_note = ? WHERE id = ?",
+            (note.strip()[:200], int(attempt_id)),
+        )
+        return cursor.rowcount > 0
+
+
+def save_feedback(
+    *,
+    name: str,
+    identifier: str,
+    category: str,
+    message: str,
+    source: str,
+    user_agent: str,
+) -> int:
+    ensure_db()
+    created_at = datetime.now().astimezone().isoformat(timespec="seconds")
+    with _db() as connection:
+        cursor = connection.execute(
+            """
+            INSERT INTO quiz_feedback (
+                created_at, name, identifier, category, message, source, user_agent
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                created_at,
+                name.strip()[:40],
+                identifier.strip()[:60],
+                category.strip()[:20],
+                message.strip()[:1000],
+                source.strip()[:300],
+                user_agent[:300],
+            ),
+        )
+        return int(cursor.lastrowid)
+
+
+def list_feedback(
+    *,
+    query: str = "",
+    status: str = "",
+    limit: int = 50,
+    offset: int = 0,
+) -> tuple[list[dict[str, Any]], int]:
+    ensure_db()
+    limit = max(1, min(int(limit), 200))
+    offset = max(0, int(offset))
+    conditions: list[str] = []
+    params: list[Any] = []
+    if query.strip():
+        needle = f"%{query.strip()}%"
+        conditions.append(
+            "(name LIKE ? OR identifier LIKE ? OR message LIKE ? OR category LIKE ?)"
+        )
+        params.extend([needle, needle, needle, needle])
+    if status in {"new", "read", "resolved"}:
+        conditions.append("status = ?")
+        params.append(status)
+    where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    with _db() as connection:
+        total = int(
+            connection.execute(
+                f"SELECT COUNT(*) FROM quiz_feedback {where}",
+                params,
+            ).fetchone()[0]
+        )
+        rows = connection.execute(
+            f"""
+            SELECT * FROM quiz_feedback
+            {where}
+            ORDER BY id DESC
+            LIMIT ? OFFSET ?
+            """,
+            [*params, limit, offset],
+        ).fetchall()
+    return [dict(row) for row in rows], total
+
+
+def feedback_stats() -> dict[str, int]:
+    ensure_db()
+    today = datetime.now().astimezone().date().isoformat()
+    with _db() as connection:
+        row = connection.execute(
+            """
+            SELECT
+                COUNT(*) AS total,
+                COALESCE(SUM(CASE WHEN status = 'new' THEN 1 ELSE 0 END), 0) AS new,
+                COALESCE(SUM(CASE WHEN created_at LIKE ? THEN 1 ELSE 0 END), 0) AS today
+            FROM quiz_feedback
+            """,
+            (f"{today}%",),
+        ).fetchone()
+    return {
+        "total": int(row["total"]),
+        "new": int(row["new"]),
+        "today": int(row["today"]),
+    }
+
+
+def update_feedback_status(feedback_id: int, status: str) -> bool:
+    if status not in {"new", "read", "resolved"}:
+        return False
+    ensure_db()
+    with _db() as connection:
+        cursor = connection.execute(
+            "UPDATE quiz_feedback SET status = ? WHERE id = ?",
+            (status, int(feedback_id)),
+        )
+        return cursor.rowcount > 0
+
+
+def delete_feedback(feedback_id: int) -> bool:
+    ensure_db()
+    with _db() as connection:
+        cursor = connection.execute(
+            "DELETE FROM quiz_feedback WHERE id = ?",
+            (int(feedback_id),),
         )
         return cursor.rowcount > 0
 

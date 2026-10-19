@@ -18,6 +18,14 @@
   </div>
 </header>
 
+<nav class="na-tabbar" aria-label="管理员导航">
+  <a class="na-tab is-active" href="{{ admin_path }}">答题记录</a>
+  <a class="na-tab" href="{{ admin_path }}/feedback">
+    用户反馈
+    {% if feedback_stats.new %}<span class="na-badge">{{ feedback_stats.new }}</span>{% endif %}
+  </a>
+</nav>
+
 <main class="na-main">
   {% if notice %}
   <p class="na-notice">{{ notice }}</p>
@@ -41,7 +49,7 @@
   <section class="na-table-panel">
     <div class="na-table-toolbar">
       <form method="get" action="{{ admin_path }}" class="na-search">
-        <input type="search" name="q" value="{{ query }}" placeholder="搜索昵称、学号或结果…" />
+        <input type="search" name="q" value="{{ query }}" placeholder="搜索昵称、学号、结果或备注…" />
         <button type="submit" class="na-primary">搜索</button>
         {% if query %}<a class="na-secondary" href="{{ admin_path }}">清除</a>{% endif %}
       </form>
@@ -56,6 +64,7 @@
             <th>ID</th>
             <th>提交时间</th>
             <th>昵称 / 学号</th>
+            <th>备注</th>
             <th>得分</th>
             <th>结果</th>
             <th>主导维度</th>
@@ -73,6 +82,20 @@
             <td>
               <strong>{{ record.name }}</strong>
               {% if record.identifier %}<span class="na-sub">{{ record.identifier }}</span>{% endif %}
+            </td>
+            <td class="na-note-cell">
+              <form method="post" action="{{ admin_path }}/attempt/{{ record.id }}/note" class="na-note-form">
+                <input type="hidden" name="csrf" value="{{ csrf_token }}" />
+                <input
+                  type="text"
+                  name="note"
+                  maxlength="200"
+                  value="{{ record.admin_note or '' }}"
+                  placeholder="写个小记号"
+                  aria-label="记录 {{ record.id }} 的管理员备注"
+                />
+                <button type="submit">保存</button>
+              </form>
             </td>
             <td><strong>{{ record.score }}</strong><span class="na-sub">/ {{ record.max_score }}</span></td>
             <td><span class="na-band">{{ record.band_title }}</span></td>

@@ -3,7 +3,7 @@
 {% block title %}{{ result.band.title }} · {{ quiz_title }}{% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=4" />
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=5" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -268,6 +268,7 @@
 
   <p class="nq-disclaimer">{{ quiz_note }}</p>
   <p class="nq-saved">本次结果已保存。之后需用昵称 + 学号/查询码在“我的记录”里重新验证，才能再次打开结果。</p>
+  <p class="nq-feedback-link nq-feedback-link--center">发现题目或页面问题？<a href="{{ feedback_path }}">提交反馈</a></p>
   <script id="nq-share-text" type="application/json">{{ share_text | tojson }}</script>
 </div>
 {% endblock %}

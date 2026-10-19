@@ -1,0 +1,110 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}问题反馈 · {{ quiz_title }}{% endblock %}
+
+{% block meta %}
+<meta name="robots" content="noindex, nofollow" />
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=5" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="{{ quiz_path }}">趣味测试</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>问题反馈</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nq-feedback">
+  <header class="nq-feedback__hero">
+    <p class="nq-kicker">FEEDBACK</p>
+    <h1>告诉我们哪里不对劲</h1>
+    <p>题目错误、页面问题、体验建议，或者单纯想吐槽，都可以写在这里。反馈会直接保存到管理员后台。</p>
+    <div class="nq-feedback__chips">
+      <span>支持匿名</span>
+      <span>管理员可见</span>
+      <span>请勿填写敏感信息</span>
+    </div>
+  </header>
+
+  {% if sent %}
+  <section class="nq-feedback__success">
+    <strong>反馈已收到。</strong>
+    <p>谢谢你帮忙把这个测试变得更好。管理员会在后台看到这条内容。</p>
+    <div>
+      <a class="nq-primary nq-button-link" href="{{ quiz_path }}">返回测试</a>
+      <a class="nq-secondary nq-button-link" href="{{ feedback_path }}">再写一条</a>
+    </div>
+  </section>
+  {% else %}
+  <section class="nq-feedback__card">
+    <form method="post" action="{{ feedback_path }}" class="nq-feedback__form">
+      <div class="nq-feedback__field">
+        <label for="feedback-category">反馈类型</label>
+        <select id="feedback-category" name="category">
+          {% for item in categories %}
+          <option value="{{ item }}"{% if feedback_category == item %} selected{% endif %}>{{ item }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="nq-feedback__grid">
+        <div class="nq-feedback__field">
+          <label for="feedback-name">昵称或代号 <span>选填</span></label>
+          <input
+            id="feedback-name"
+            type="text"
+            name="name"
+            maxlength="40"
+            value="{{ feedback_name }}"
+            placeholder="方便管理员对应到你"
+            autocomplete="off"
+          />
+        </div>
+        <div class="nq-feedback__field">
+          <label for="feedback-identifier">学号或查询码 <span>选填</span></label>
+          <input
+            id="feedback-identifier"
+            type="text"
+            name="identifier"
+            maxlength="60"
+            value="{{ feedback_identifier }}"
+            placeholder="可留空"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="nq-feedback__field">
+        <label for="feedback-message">具体内容</label>
+        <textarea
+          id="feedback-message"
+          name="message"
+          maxlength="1000"
+          rows="7"
+          placeholder="例如：第几题选项显示不完整、提交后没有出现结果、希望增加什么功能…"
+          required
+        >{{ feedback_message }}</textarea>
+        <small>5—1000 字。请不要填写手机号、身份证号等敏感信息。</small>
+      </div>
+
+      <div class="nq-honeypot" aria-hidden="true">
+        <label>网站<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      {% if error %}<p class="nq-error" role="alert">{{ error }}</p>{% endif %}
+      <div class="nq-feedback__actions">
+        <button type="submit" class="nq-primary">提交反馈</button>
+        <a class="nq-secondary nq-button-link" href="{{ quiz_path }}">返回测试</a>
+      </div>
+    </form>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

@@ -47,7 +47,7 @@ def main() -> None:
             assert sum(key in ATTENTION_BY_KEY for key in selected_keys) == 1
             privacy = client.get("/quiz/neurosis/privacy")
             assert privacy.status_code == 200
-            assert "2026-10-19-v4" in privacy.text
+            assert "2026-10-20-v5" in privacy.text
 
             form = {
                 "name": "自动化测试",
@@ -128,6 +128,26 @@ def main() -> None:
             assert "查看结果" in lookup.text
             assert "/delete" not in lookup.text
 
+            feedback_page = client.get("/quiz/neurosis/feedback")
+            assert feedback_page.status_code == 200
+            assert 'name="category"' in feedback_page.text
+            assert 'name="message"' in feedback_page.text
+            feedback_message = "自动化反馈：提交结果页排版有一点问题。"
+            feedback_submit = client.post(
+                "/quiz/neurosis/feedback",
+                data={
+                    "category": "问题反馈",
+                    "name": "反馈测试用户",
+                    "identifier": "FB-2026",
+                    "message": feedback_message,
+                    "website": "",
+                },
+                follow_redirects=False,
+            )
+            assert feedback_submit.status_code == 303
+            feedback_sent = client.get("/quiz/neurosis/feedback?sent=1")
+            assert "反馈已收到" in feedback_sent.text
+
             login_page = client.get("/ops/neurosis-7f3c9a2e")
             assert login_page.status_code == 200
             assert 'name="account"' in login_page.text
@@ -154,13 +174,59 @@ def main() -> None:
             dashboard = client.get("/ops/neurosis-7f3c9a2e")
             assert dashboard.status_code == 200
             assert "自动化测试" in dashboard.text
+            assert "用户反馈" in dashboard.text
 
             match = re.search(r'/attempt/(\d+)"', dashboard.text)
             assert match is not None
             attempt_id = int(match.group(1))
+            admin_note = "自动化备注：高中同学"
+            note_saved = client.post(
+                f"/ops/neurosis-7f3c9a2e/attempt/{attempt_id}/note",
+                data={"csrf": csrf, "note": admin_note, "return_to": "dashboard"},
+                follow_redirects=False,
+            )
+            assert note_saved.status_code == 303
+            note_search = client.get(
+                "/ops/neurosis-7f3c9a2e",
+                params={"q": admin_note},
+            )
+            assert admin_note in note_search.text
+            assert admin_note not in client.get(result_url).text
+            exported = client.get("/ops/neurosis-7f3c9a2e/export.csv")
+            assert exported.status_code == 200
+            assert admin_note in exported.text
+
+            feedback_admin = client.get("/ops/neurosis-7f3c9a2e/feedback")
+            assert feedback_admin.status_code == 200
+            assert feedback_message in feedback_admin.text
+            assert "待处理" in feedback_admin.text
+            feedback_match = re.search(r'/feedback/(\d+)/status"', feedback_admin.text)
+            assert feedback_match is not None
+            feedback_id = int(feedback_match.group(1))
+            feedback_status = client.post(
+                f"/ops/neurosis-7f3c9a2e/feedback/{feedback_id}/status",
+                data={"csrf": csrf, "status": "resolved"},
+                follow_redirects=False,
+            )
+            assert feedback_status.status_code == 303
+            resolved_feedback = client.get(
+                "/ops/neurosis-7f3c9a2e/feedback",
+                params={"status": "resolved"},
+            )
+            assert feedback_message in resolved_feedback.text
+            feedback_delete = client.post(
+                f"/ops/neurosis-7f3c9a2e/feedback/{feedback_id}/delete",
+                data={"csrf": csrf},
+                follow_redirects=False,
+            )
+            assert feedback_delete.status_code == 303
+            deleted_feedback = client.get("/ops/neurosis-7f3c9a2e/feedback")
+            assert feedback_message not in deleted_feedback.text
+
             detail = client.get(f"/ops/neurosis-7f3c9a2e/attempt/{attempt_id}")
             assert detail.status_code == 200
             assert "删除记录" in detail.text
+            assert admin_note in detail.text
             deleted = client.post(
                 f"/ops/neurosis-7f3c9a2e/attempt/{attempt_id}/delete",
                 data={"csrf": csrf},

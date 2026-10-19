@@ -39,8 +39,13 @@ from app.quiz_store import (
     all_attempts,
     dashboard_stats,
     delete_attempt,
+    delete_feedback,
+    feedback_stats,
     get_attempt_by_id,
     list_attempts,
+    list_feedback,
+    update_attempt_note,
+    update_feedback_status,
 )
 
 router = APIRouter(include_in_schema=False)
@@ -138,6 +143,7 @@ def _dashboard_response(
             "page_size": _PAGE_SIZE,
             "group_names": group_names,
             "notice": notice,
+            "feedback_stats": feedback_stats(),
         },
         status_code=status_code,
         headers=_ADMIN_HEADERS,
@@ -152,6 +158,7 @@ async def admin_home(
     q: str = "",
     page: int = 1,
     deleted: int = 0,
+    note_saved: int = 0,
 ):
     if not admin_session_ok(request):
         return _login_response(request)
@@ -159,7 +166,11 @@ async def admin_home(
         request,
         query=q,
         page=page,
-        notice="记录已删除。用户的结果链接和查询入口将不再显示该记录。" if deleted else "",
+        notice=(
+            "记录已删除。用户的结果链接和查询入口将不再显示该记录。"
+            if deleted
+            else "备注已保存。" if note_saved else ""
+        ),
     )
 
 
@@ -208,7 +219,11 @@ async def admin_logout(request: Request, csrf: str = Form("")):
 
 
 @router.get(ADMIN_PATH + "/attempt/{attempt_id}", response_class=HTMLResponse)
-async def admin_attempt(request: Request, attempt_id: int):
+async def admin_attempt(
+    request: Request,
+    attempt_id: int,
+    note_saved: int = 0,
+):
     if not admin_session_ok(request):
         return RedirectResponse(url=ADMIN_PATH, status_code=303)
     record = get_attempt_by_id(attempt_id)
@@ -245,11 +260,33 @@ async def admin_attempt(request: Request, attempt_id: int):
             "is_legacy": is_legacy,
             "legacy_group_names": LEGACY_GROUP_NAMES,
             "legacy_answers_text": legacy_answers_text,
+            "notice": "备注已保存。" if note_saved else "",
         },
         headers=_ADMIN_HEADERS,
     )
     set_csrf_cookie(response)
     return response
+
+
+@router.post(ADMIN_PATH + "/attempt/{attempt_id}/note")
+async def admin_attempt_note(
+    request: Request,
+    attempt_id: int,
+    note: str = Form(""),
+    return_to: str = Form("dashboard"),
+    csrf: str = Form(""),
+):
+    if not admin_session_ok(request):
+        return RedirectResponse(url=ADMIN_PATH, status_code=303)
+    if not csrf_valid(request, csrf):
+        raise HTTPException(status_code=400)
+    if not update_attempt_note(attempt_id, " ".join(note.split())[:200]):
+        raise HTTPException(status_code=404)
+    if return_to == "detail":
+        url = f"{ADMIN_PATH}/attempt/{attempt_id}?note_saved=1"
+    else:
+        url = f"{ADMIN_PATH}?note_saved=1"
+    return RedirectResponse(url=url, status_code=303)
 
 
 @router.post(ADMIN_PATH + "/attempt/{attempt_id}/delete")
@@ -261,6 +298,117 @@ async def admin_delete(request: Request, attempt_id: int, csrf: str = Form("")):
     if not delete_attempt(attempt_id):
         raise HTTPException(status_code=404)
     return RedirectResponse(url=f"{ADMIN_PATH}?deleted=1", status_code=303)
+
+
+def _feedback_response(
+    request: Request,
+    *,
+    query: str = "",
+    status: str = "",
+    page: int = 1,
+    notice: str = "",
+    status_code: int = 200,
+) -> HTMLResponse:
+    query = query.strip()[:80]
+    if status not in {"new", "read", "resolved"}:
+        status = ""
+    page = max(1, int(page))
+    offset = (page - 1) * _PAGE_SIZE
+    items, total = list_feedback(
+        query=query,
+        status=status,
+        limit=_PAGE_SIZE,
+        offset=offset,
+    )
+    pages = max(1, math.ceil(total / _PAGE_SIZE))
+    if page > pages and total:
+        page = pages
+        offset = (page - 1) * _PAGE_SIZE
+        items, total = list_feedback(
+            query=query,
+            status=status,
+            limit=_PAGE_SIZE,
+            offset=offset,
+        )
+    response = templates.TemplateResponse(
+        request=request,
+        name="admin_feedback.html",
+        context={
+            "site_name": SITE_NAME,
+            "admin_path": ADMIN_PATH,
+            "csrf_token": admin_csrf_token(),
+            "feedback_items": items,
+            "stats": feedback_stats(),
+            "query": query,
+            "status_filter": status,
+            "page": page,
+            "pages": pages,
+            "total": total,
+            "notice": notice,
+        },
+        status_code=status_code,
+        headers=_ADMIN_HEADERS,
+    )
+    set_csrf_cookie(response)
+    return response
+
+
+@router.get(ADMIN_PATH + "/feedback", response_class=HTMLResponse)
+async def admin_feedback(
+    request: Request,
+    q: str = "",
+    status: str = "",
+    page: int = 1,
+    updated: int = 0,
+    deleted: int = 0,
+):
+    if not admin_session_ok(request):
+        return _login_response(request)
+    notice = "反馈状态已更新。" if updated else "反馈已删除。" if deleted else ""
+    return _feedback_response(
+        request,
+        query=q,
+        status=status,
+        page=page,
+        notice=notice,
+    )
+
+
+@router.post(ADMIN_PATH + "/feedback/{feedback_id}/status")
+async def admin_feedback_status(
+    request: Request,
+    feedback_id: int,
+    status: str = Form(""),
+    csrf: str = Form(""),
+):
+    if not admin_session_ok(request):
+        return RedirectResponse(url=ADMIN_PATH, status_code=303)
+    if not csrf_valid(request, csrf):
+        raise HTTPException(status_code=400)
+    if not update_feedback_status(feedback_id, status):
+        raise HTTPException(status_code=404)
+    return RedirectResponse(
+        url=f"{ADMIN_PATH}/feedback?updated=1",
+        status_code=303,
+    )
+
+
+@router.post(ADMIN_PATH + "/feedback/{feedback_id}/delete")
+async def admin_feedback_delete(
+    request: Request,
+    feedback_id: int,
+    csrf: str = Form(""),
+):
+    if not admin_session_ok(request):
+        return RedirectResponse(url=ADMIN_PATH, status_code=303)
+    if not csrf_valid(request, csrf):
+        raise HTTPException(status_code=400)
+    if not delete_feedback(feedback_id):
+        raise HTTPException(status_code=404)
+    return RedirectResponse(
+        url=f"{ADMIN_PATH}/feedback?deleted=1",
+        status_code=303,
+    )
 
 
 @router.get(ADMIN_PATH + "/export.csv")
@@ -277,6 +425,7 @@ async def admin_export(request: Request):
             "提交时间",
             "昵称/代号",
             "班级/学号",
+            "管理员备注",
             "得分",
             "满分",
             "结果",
@@ -297,6 +446,7 @@ async def admin_export(request: Request):
                 record["created_at"],
                 _csv_safe(record["name"]),
                 _csv_safe(record["identifier"]),
+                _csv_safe(record.get("admin_note", "")),
                 record["score"],
                 record["max_score"],
                 _csv_safe(record["band_title"]),

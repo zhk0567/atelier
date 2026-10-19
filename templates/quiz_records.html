@@ -3,7 +3,7 @@
 {% block title %}我的答题记录 · {{ site_name }}{% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=4" />
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=5" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -87,5 +87,6 @@
   </section>
 
   <p class="nq-saved">用户仅拥有查看权限。如记录涉及隐私或需要删除，请联系管理员处理。</p>
+  <p class="nq-feedback-link nq-feedback-link--center">遇到问题或有建议？<a href="{{ feedback_path }}">提交反馈</a></p>
 </div>
 {% endblock %}

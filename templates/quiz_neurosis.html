@@ -8,7 +8,7 @@
 
 {% block extra_head %}
 <script>document.documentElement.classList.add("nq-js");</script>
-<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=4" />
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=5" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -102,6 +102,7 @@
         <span class="nq-intro__hint">两项信息和协议都完成后才能开始。每题四选一，选完自动进入下一题。</span>
       </div>
       <p class="nq-lookup-link">已经做过？<a href="{{ quiz_path }}/records">用昵称 + 学号/查询码查看自己的记录</a></p>
+      <p class="nq-feedback-link">遇到问题或有建议？<a href="{{ feedback_path }}">给管理员反馈</a></p>
       <p class="nq-privacy">{{ quiz_note }}</p>
     </section>
 

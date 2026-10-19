@@ -29,7 +29,12 @@ from app.quiz_data import (
     selection_from_order,
     score_answers,
 )
-from app.quiz_store import get_attempt_by_token, list_user_attempts, save_attempt
+from app.quiz_store import (
+    get_attempt_by_token,
+    list_user_attempts,
+    save_attempt,
+    save_feedback,
+)
 
 router = APIRouter()
 
@@ -39,6 +44,8 @@ _NO_STORE_HEADERS = {
     "X-Robots-Tag": "noindex, nofollow, noarchive",
     "Referrer-Policy": "no-referrer",
 }
+
+_FEEDBACK_CATEGORIES = ("问题反馈", "内容纠错", "体验建议", "其他")
 
 
 def _form_text(form: Any, key: str) -> str:
@@ -76,6 +83,7 @@ def _render_quiz(
             "quiz_title": QUIZ_TITLE,
             "quiz_path": QUIZ_PATH,
             "privacy_path": f"{QUIZ_PATH}/privacy",
+            "feedback_path": f"{QUIZ_PATH}/feedback",
             "privacy_version": PRIVACY_VERSION,
             "quiz_intro": QUIZ_INTRO,
             "quiz_note": QUIZ_NOTE,
@@ -158,6 +166,7 @@ def _render_records(
             "quiz_title": QUIZ_TITLE,
             "quiz_path": QUIZ_PATH,
             "privacy_path": f"{QUIZ_PATH}/privacy",
+            "feedback_path": f"{QUIZ_PATH}/feedback",
             "lookup_name": name,
             "lookup_identifier": identifier,
             "records": enriched,
@@ -201,6 +210,84 @@ async def quiz_records_lookup(request: Request):
         [record["token"] for record in records],
     )
     return response
+
+
+def _render_feedback(
+    request: Request,
+    *,
+    name: str = "",
+    identifier: str = "",
+    category: str = "",
+    message: str = "",
+    sent: bool = False,
+    error: str = "",
+    status_code: int = 200,
+) -> HTMLResponse:
+    return templates.TemplateResponse(
+        request=request,
+        name="quiz_feedback.html",
+        context={
+            **site_context(),
+            "page_quiz": True,
+            "quiz_title": QUIZ_TITLE,
+            "quiz_path": QUIZ_PATH,
+            "feedback_path": f"{QUIZ_PATH}/feedback",
+            "categories": _FEEDBACK_CATEGORIES,
+            "feedback_name": name,
+            "feedback_identifier": identifier,
+            "feedback_category": category or _FEEDBACK_CATEGORIES[0],
+            "feedback_message": message,
+            "sent": sent,
+            "error": error,
+        },
+        status_code=status_code,
+        headers=_NO_STORE_HEADERS,
+    )
+
+
+@router.get(QUIZ_PATH + "/feedback", response_class=HTMLResponse)
+async def quiz_feedback_page(request: Request, sent: int = 0):
+    return _render_feedback(request, sent=bool(sent))
+
+
+@router.post(QUIZ_PATH + "/feedback", response_class=HTMLResponse)
+async def quiz_feedback_submit(request: Request):
+    form = await request.form()
+    name = _clean_text(_form_text(form, "name"), 40)
+    identifier = _clean_text(_form_text(form, "identifier"), 60)
+    category = _clean_text(_form_text(form, "category"), 20)
+    message = _form_text(form, "message").replace("\r\n", "\n").strip()[:1000]
+
+    if _form_text(form, "website").strip():
+        return RedirectResponse(
+            url=f"{QUIZ_PATH}/feedback?sent=1",
+            status_code=303,
+        )
+    if category not in _FEEDBACK_CATEGORIES:
+        category = _FEEDBACK_CATEGORIES[0]
+    if len(message) < 5:
+        return _render_feedback(
+            request,
+            name=name,
+            identifier=identifier,
+            category=category,
+            message=message,
+            error="请至少写 5 个字，方便我们理解你遇到的问题。",
+            status_code=422,
+        )
+
+    save_feedback(
+        name=name,
+        identifier=identifier,
+        category=category,
+        message=message,
+        source=request.headers.get("referer", "")[:300],
+        user_agent=request.headers.get("user-agent", ""),
+    )
+    return RedirectResponse(
+        url=f"{QUIZ_PATH}/feedback?sent=1",
+        status_code=303,
+    )
 
 
 @router.post(QUIZ_PATH + "/submit")
@@ -349,6 +436,7 @@ async def quiz_result(request: Request, token: str):
             **site_context(),
             "quiz_title": QUIZ_TITLE,
             "quiz_path": QUIZ_PATH,
+            "feedback_path": f"{QUIZ_PATH}/feedback",
             "quiz_note": QUIZ_NOTE,
             "record": record,
             "result": result,
