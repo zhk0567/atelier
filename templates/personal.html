@@ -1,0 +1,134 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}{{ ui.label_personal }}与未来任务 · {{ site_name }}{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="十条写给自己的规矩，二十二项六十年内的未来任务。素材来自日记与群聊，人名已按拼音首字母化名。" />
+{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="/static/css/personal.css?v=1" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>{{ ui.label_personal }}</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="mp-wrapper mp-wrapper--page personal-page">
+  <header class="mp-section mp-section-full personal-hero">
+    <div class="personal-hero__lead">
+      <p class="personal-kicker">{{ ui.personal_kicker }}<span class="personal-kicker__dot" aria-hidden="true"></span>更新于 {{ personal.updated }}</p>
+      <h1 class="personal-hero__title">{{ ui.label_personal }}与未来任务</h1>
+      <p class="lead personal-hero__subtitle">{{ ui.personal_index_lead }}</p>
+      <p class="personal-hero__note">要求是给自己的；任务，是朋友们给的。</p>
+    </div>
+    <dl class="personal-hero__stats">
+      <div>
+        <dt>要求</dt>
+        <dd>{{ personal_stats.requirement_count }}<span>条</span></dd>
+      </div>
+      <div>
+        <dt>任务</dt>
+        <dd>{{ personal_stats.task_count }}<span>项</span></dd>
+      </div>
+      <div class="personal-countdown" data-personal-countdown data-deadline="{{ personal.deadline }}">
+        <dt>{{ personal.countdown_label }}</dt>
+        <dd><strong data-personal-countdown-days>{% if personal_stats.days_left is not none %}{{ personal_stats.days_left }}{% else %}—{% endif %}</strong><span>天</span></dd>
+      </div>
+    </dl>
+  </header>
+
+  <section class="mp-section mp-section-full personal-block" id="requirements" aria-labelledby="personal-requirements-title">
+    <div class="personal-block__head">
+      <h2 class="mp-title" id="personal-requirements-title"><span class="personal-block__no" aria-hidden="true">01</span>对自己的要求</h2>
+      <p class="personal-block__lead">{{ personal.requirements_intro }}</p>
+    </div>
+    <ol class="personal-rules">
+      {% for rule in personal.requirements %}
+      <li class="personal-rule" id="rule-{{ rule.id }}">
+        <span class="personal-rule__index" aria-hidden="true">{{ "%02d"|format(rule.index) }}</span>
+        <div class="personal-rule__body">
+          <h3 class="personal-rule__title">{{ rule.title }}{% if rule.subtitle %}<span class="personal-rule__subtitle">{{ rule.subtitle }}</span>{% endif %}</h3>
+          {% if rule.why %}<p class="personal-rule__why">{{ rule.why }}</p>{% endif %}
+          {% if rule.quote %}
+          <blockquote class="personal-quote">
+            <p>「{{ rule.quote }}」</p>
+            <cite>{{ rule.quote_date }}{% if rule.quote_date %} · {% endif %}日记</cite>
+          </blockquote>
+          {% endif %}
+          {% if rule.note %}<p class="personal-rule__note">{{ rule.note }}</p>{% endif %}
+        </div>
+        <span class="personal-rule__status" aria-label="状态：执行中">执行中</span>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="personal-source">{{ personal.requirements_source }}</p>
+  </section>
+
+  <section class="mp-section mp-section-full personal-block" id="tasks" aria-labelledby="personal-tasks-title">
+    <div class="personal-block__head">
+      <h2 class="mp-title" id="personal-tasks-title"><span class="personal-block__no" aria-hidden="true">02</span>未来任务</h2>
+      <p class="personal-block__lead">{{ personal.tasks_intro }}</p>
+    </div>
+
+    <div class="personal-taskbar">
+      <div class="personal-progress">
+        <div class="personal-progress__meta">
+          <span>兑现进度</span>
+          <strong><span data-personal-progress>0</span> / {{ personal_stats.task_count }}</strong>
+        </div>
+        <div class="personal-progress__track" role="progressbar" aria-label="任务兑现进度" aria-valuemin="0" aria-valuemax="{{ personal_stats.task_count }}" aria-valuenow="0" data-personal-progressbar>
+          <span class="personal-progress__fill" data-personal-progress-fill style="width: 0%"></span>
+        </div>
+        <p class="personal-progress__hint">勾选只记在这台设备的浏览器里。</p>
+      </div>
+      <div class="personal-filters" data-personal-filters hidden>
+        <button type="button" class="personal-chip is-active" data-filter="all" aria-pressed="true">全部 <span>{{ personal_stats.task_count }}</span></button>
+        {% for category in personal.task_categories %}
+        <button type="button" class="personal-chip" data-filter="{{ category.id }}" aria-pressed="false">{{ category.label }} <span>{{ personal.category_counts[category.id] }}</span></button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <ul class="personal-tasks" data-personal-tasks>
+      {% for task in personal.tasks %}
+      <li class="personal-task" data-category="{{ task.category }}" data-task-id="{{ task.id }}">
+        <label class="personal-task__label">
+          <input type="checkbox" class="personal-task__input" data-task-check />
+          <span class="personal-task__box" aria-hidden="true"></span>
+          <span class="personal-task__text">{{ task.text }}{% if task.note %}<span class="personal-task__note">{{ task.note }}</span>{% endif %}</span>
+        </label>
+        <p class="personal-task__meta">
+          <span class="personal-task__tag">{{ task.category_label }}</span>
+          <span>提议人 {{ task.proposer }}</span>
+          <span>{{ task.deadline or personal.deadline_label }}</span>
+        </p>
+      </li>
+      {% endfor %}
+      <li class="personal-tasks__empty" data-personal-empty hidden>这个分类下暂时没有任务。</li>
+    </ul>
+    <p class="personal-source">{{ personal.tasks_source }}</p>
+  </section>
+
+  <section class="mp-section mp-section-full personal-block personal-about" aria-labelledby="personal-about-title">
+    <div class="personal-block__head">
+      <h2 class="mp-title" id="personal-about-title">关于这个模块</h2>
+    </div>
+    <ul class="personal-about__list">
+      {% for note in personal.notes %}<li>{{ note }}</li>{% endfor %}
+    </ul>
+    <div class="mp-button-wrapper mp-footer-actions">
+      <a class="mp-button" href="/"><span class="mp-button__inner">{{ ui.back_home }}</span></a>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/personal.js?v=1" defer></script>
+{% endblock %}

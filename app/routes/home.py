@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 
 from app.constants import HTML_CACHE_HEADERS
 from app.context import projects_with_thumbs, site_context, templates
+from app.personal import load_personal, personal_stats
 from app.projects import get_all_projects, get_pinned_projects
 from site_data import list_algorithm_posts, list_framework_posts, list_hotspot_posts
 
@@ -36,6 +37,8 @@ async def index(request: Request):
             "hotspot_series_url": "/blog/series/hotspot",
             "hotspot_count": len(hotspot_posts),
             "quiz_url": "/quiz/neurosis",
+            "personal_url": "/personal",
+            "personal_stats": personal_stats(load_personal()),
         },
         headers=HTML_CACHE_HEADERS,
     )

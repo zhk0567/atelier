@@ -1,0 +1,264 @@
+{
+  "version": 1,
+  "updated": "2026-11-04",
+  "deadline": "2086-11-04",
+  "task_deadline_label": "十年内",
+  "requirements_intro": "这些规矩没有写成口号贴在墙上，它们是从日记里一次次自我讨价还价之后留下来的。每一条后面，都记着当时的理由。",
+  "requirements_source": "前六条来自「对自己的要求」清单，其余散落在日记各处；理由与引文摘自 2024.10—2026.11 的日记。",
+  "requirements": [
+    {
+      "id": "no-swearing",
+      "title": "不在任何人面前说脏话",
+      "why": "素质是最低成本的体面。真要发泄，就留到独处的时候。",
+      "quote": "在我记忆中，那是唯一一次。这是我给自己最严格的要求，自那以后，从来没有违反。不管对方是什么人，自身都不能没有素质，要始终保持最基本的礼仪",
+      "quote_date": "2026.03.23",
+      "note": "唯一一次破例，是初中在同学家打游戏时说的两个脏字。独处时偶尔还是会骂人——这一点不打算掩饰。"
+    },
+    {
+      "id": "no-short-video",
+      "title": "不在手机上刷短视频",
+      "why": "它把「获得快乐」和「获得成果」都变得太容易，代价是思考被悄悄拿走。",
+      "quote": "获取快乐的方式变得简单，我们在此获取成果的方式也变得简单，于是放弃思考，无意识地滑动屏幕，被迫获取转瞬即逝的快乐",
+      "quote_date": "2026.01.12"
+    },
+    {
+      "id": "no-early-disclosure",
+      "title": "除非获得阶段性成果，否则不向外透露",
+      "why": "没做完的事经不起围观。藏拙不是心虚，是给结果留出惊喜的余地。",
+      "quote": "我总有一种心理——在成功之前，不要告诉任何人。所以我会有意地「藏拙」，把自己的一些东西藏起来，不去示人",
+      "quote_date": "2026.08.10"
+    },
+    {
+      "id": "no-crying-over-spilt-milk",
+      "title": "不为打翻的牛奶哭泣",
+      "why": "情绪稳定是一种自我保护，也会传染给身边的人。事情变糟时，先对自己说一句「事情变得有趣起来了」。",
+      "quote": "语言会带动情绪，情绪会反馈到语言上。所以，在遇到出乎意料或者不愿看到的变动时，对自己说「事情变得有趣起来了」",
+      "quote_date": "2026.01.31"
+    },
+    {
+      "id": "weak-spots",
+      "title": "对于一件自己不会的事",
+      "subtitle": "如果他人也不会，就尽量不要谈论；如果他人会，就放低姿态。",
+      "why": "弱化弱项，强化强项。示弱不是认输，是把力气留在没人看见的地方。",
+      "quote": "对于好人来说，他们知道你在这方面不行，自然就不会在这些事情上难为你。……你故意示弱，但给自己留下后手，私下里完全可以偷偷去学、去补强",
+      "quote_date": "2026.08.14"
+    },
+    {
+      "id": "daily-care",
+      "title": "多喝水，多锻炼，多看书，多思考",
+      "subtitle": "少摸脸，少抱怨，少站队。",
+      "why": "前三件是长期资产，后三件是长期内耗。身体和情绪，都经不起反复透支。",
+      "quote": "抱怨就是暴露自己弱点，展示自己的脆弱",
+      "quote_date": "2026.01.31",
+      "note": "「少摸脸」来自一段长达五年的祛痘史：挤痘、摸脸、喝水少，坏习惯一旦开了头，就有无数次。"
+    },
+    {
+      "id": "no-gossip",
+      "title": "不在背后说人坏话",
+      "why": "当面说，是意见；背后说，是另一回事。忍不住的时候，至少别点名。",
+      "quote": "这其实有违背我的原则——不在背后说人坏话，所以后面的对话中，我有意将具体的名字改成了类似一个人这样的模糊说法",
+      "quote_date": "2026.06.09",
+      "note": "有一次没忍住，点了名；意识到以后，立刻把名字换成了模糊的说法。"
+    },
+    {
+      "id": "no-omniscience",
+      "title": "不说自己什么都会",
+      "why": "没有人什么都会。先把「不会」说出口，才有机会学会。",
+      "quote": "我爸从小就教导我，说千万不要说自己什么都会，我们不可能什么都会，所以我从小就养成了这么一个好习惯",
+      "quote_date": "2026.04.29"
+    },
+    {
+      "id": "middle-difficulty",
+      "title": "不做太难的事，也不做太简单的事",
+      "why": "太难的事等不到结果，太简单的事挤满了人。选中间那段。",
+      "quote": "不做明显很难的事情，因为实现起来遥遥无期，也不要做太简单的事情，因为那里早已人满为患",
+      "quote_date": "2026.06.13"
+    },
+    {
+      "id": "weekly-review",
+      "title": "每周做一次总结回顾",
+      "why": "七天为一个循环。跑完一周，回头看一眼：哪些做成了，哪些只是忙。",
+      "quote": "今天是第七天，要进行每周的总结回顾",
+      "quote_date": "2026.01.07"
+    }
+  ],
+  "tasks_intro": "2026 年 11 月 4 日下午，WYJ 在群里丢来一句「请你给设置一个未来任务」，然后事情就失控了。下面按群聊里的顺序整理，名字统一换成了首字母。",
+  "tasks_source": "共 22 项，全部由 WYJ 提出；LYH 只补充了一句「五套」。手机是十年之约，其余按「六十年」算。",
+  "tasks": [
+    {
+      "id": "phone",
+      "category": "life",
+      "proposer": "WYJ",
+      "text": "给 WYJ 和 LYH 各买一部手机"
+    },
+    {
+      "id": "ceo",
+      "category": "career",
+      "proposer": "WYJ",
+      "text": "招 WYJ 和 LYH 进公司当总裁",
+      "deadline": "六十年"
+    },
+    {
+      "id": "range-rover",
+      "category": "life",
+      "proposer": "WYJ",
+      "text": "一辆红标 V8 路虎揽胜",
+      "deadline": "六十年"
+    },
+    {
+      "id": "antarctica",
+      "category": "life",
+      "proposer": "WYJ",
+      "text": "坐私人飞机去南极，和企鹅踢一场足球",
+      "deadline": "六十年"
+    },
+    {
+      "id": "riverside-villa",
+      "category": "estate",
+      "proposer": "WYJ",
+      "text": "WYJ 和 LYH 一人一套江景小别墅",
+      "deadline": "六十年"
+    },
+    {
+      "id": "courtyard",
+      "category": "estate",
+      "proposer": "WYJ",
+      "text": "北京四合院，一人一套",
+      "note": "LYH 补充：五套",
+      "deadline": "六十年"
+    },
+    {
+      "id": "potala",
+      "category": "estate",
+      "proposer": "WYJ",
+      "text": "在布达拉宫旁有房子",
+      "deadline": "六十年"
+    },
+    {
+      "id": "tiger",
+      "category": "life",
+      "proposer": "WYJ",
+      "text": "WYJ 和 LYH 一人一只东北虎当贴身保镖",
+      "deadline": "六十年"
+    },
+    {
+      "id": "island",
+      "category": "estate",
+      "proposer": "WYJ",
+      "text": "一座以 WYJ 和 LYH 命名的小岛",
+      "deadline": "六十年"
+    },
+    {
+      "id": "manor",
+      "category": "estate",
+      "proposer": "WYJ",
+      "text": "私人庄园",
+      "deadline": "六十年"
+    },
+    {
+      "id": "yacht",
+      "category": "life",
+      "proposer": "WYJ",
+      "text": "私人游艇",
+      "deadline": "六十年"
+    },
+    {
+      "id": "platinum",
+      "category": "life",
+      "proposer": "WYJ",
+      "text": "航司终身白金卡",
+      "deadline": "六十年"
+    },
+    {
+      "id": "golf",
+      "category": "estate",
+      "proposer": "WYJ",
+      "text": "一人一个高尔夫球场",
+      "deadline": "六十年"
+    },
+    {
+      "id": "satellite",
+      "category": "life",
+      "proposer": "WYJ",
+      "text": "私人卫星通信",
+      "deadline": "六十年"
+    },
+    {
+      "id": "dock",
+      "category": "estate",
+      "proposer": "WYJ",
+      "text": "一人一个码头",
+      "deadline": "六十年"
+    },
+    {
+      "id": "winery",
+      "category": "career",
+      "proposer": "WYJ",
+      "text": "一人一个酒厂茶厂",
+      "deadline": "六十年"
+    },
+    {
+      "id": "power-plant",
+      "category": "career",
+      "proposer": "WYJ",
+      "text": "一人一个新能源电站",
+      "deadline": "六十年"
+    },
+    {
+      "id": "mine",
+      "category": "career",
+      "proposer": "WYJ",
+      "text": "一人一个矿场",
+      "deadline": "六十年"
+    },
+    {
+      "id": "oil",
+      "category": "career",
+      "proposer": "WYJ",
+      "text": "石油开发特许经营权",
+      "deadline": "六十年"
+    },
+    {
+      "id": "cinema",
+      "category": "career",
+      "proposer": "WYJ",
+      "text": "一人一个大型影院",
+      "deadline": "六十年"
+    },
+    {
+      "id": "fortune-500",
+      "category": "career",
+      "proposer": "WYJ",
+      "text": "世界五百强股份",
+      "deadline": "六十年"
+    },
+    {
+      "id": "one-and-only",
+      "category": "life",
+      "proposer": "WYJ",
+      "text": "朋友可以有无数个，但是 WYJ 和 LYH 只有一个",
+      "deadline": "永久"
+    }
+  ],
+  "task_categories": [
+    {
+      "id": "life",
+      "label": "生活"
+    },
+    {
+      "id": "estate",
+      "label": "不动产"
+    },
+    {
+      "id": "career",
+      "label": "事业"
+    }
+  ],
+  "notes": [
+    "内容参考 2024.10—2026.11 的日记，以及 2026-11-04 的三人群聊记录。",
+    "人名统一用拼音首字母替代（WYJ、LYH 等），不出现学校、学号、地址等可定位信息。",
+    "原始日记与群聊记录不随仓库发布，这里只保留整理后的条目。",
+    "这是活页：以后每多一条要求，或兑现一项任务，这里都会更新。"
+  ],
+  "countdown_label": "六十年之约"
+}

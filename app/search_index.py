@@ -52,6 +52,23 @@ def build_site_search_index() -> tuple[dict, ...]:
         hubs = []
         nav = build_wiki_nav([])
 
+    try:
+        from app.personal import load_personal
+
+        personal = load_personal()
+        rule_titles = " ".join(rule.get("title", "") for rule in personal.get("requirements") or [])
+        task_text = " ".join(task.get("text", "") for task in personal.get("tasks") or [])
+        if rule_titles or task_text:
+            add(
+                title="个人要求与未来任务",
+                url="/personal",
+                group="站点",
+                subtitle="十条自我要求 · 六十年未来任务",
+                keywords=f"个人要求 未来任务 规矩 {rule_titles} {task_text}",
+            )
+    except Exception:
+        pass
+
     for group in nav:
         g_label = group.get("label", "导航")
         for link in group.get("children") or []:

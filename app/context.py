@@ -276,6 +276,7 @@ def build_wiki_nav(hubs: list[dict]) -> list[dict]:
                 {"label": "项目", "url": "/projects", "external": False},
                 {"label": UI["label_blog"], "url": "/blog", "external": False},
                 {"label": UI["label_travel"], "url": "/travel", "external": False},
+                {"label": UI["label_personal"], "url": "/personal", "external": False},
             ],
         },
         {"label": "数据分类", "children": portal_children},
@@ -287,6 +288,12 @@ def clear_context_cache() -> None:
     load_wiki_assets.cache_clear()
     clear_search_index_cache()
     _site_context_core.cache_clear()
+    try:
+        from app.personal import clear_personal_cache
+
+        clear_personal_cache()
+    except ImportError:
+        pass
     try:
         from app.travel_catalog import clear_travel_cache
 

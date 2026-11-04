@@ -11,6 +11,7 @@
 | `Blog/hotspot/` | 热点观察 | `/blog/series/hotspot` |
 | `Wiki/{project}/` | DeepWiki 导出的**项目文档** | `/docs/{wiki_slug}/{page}` |
 | `zhita_settings.xlsx` | 证书、爱好、书籍等表格 | `/browse/{hub_id}` |
+| `data/personal.json` | 个人要求与未来任务（人工整理、姓名首拼化） | `/personal` |
 
 **易混点**：`Wiki/Framework/` 与 `Blog/framework-guides/` 都关于 GitHub `zhk0567/Framework`，但前者是 Wiki 分页导出，后者是读者向教程；URL 与目录均已分离。Algorithm 专题教程在 `Blog/algorithm-guides/`，源码在 GitHub `zhk0567/Algorithm`；单题 LeetCode 题解不在 atelier 展开。
 
@@ -26,6 +27,7 @@ app/
   routes/            → FastAPI 路由
   markdown/          → 博客 / Wiki 渲染
 site_data.py         → xlsx 解析、manifest 聚合
+data/personal.json   → 个人要求 / 未来任务（人工维护）
 config/
   site.example.json
   projects.json

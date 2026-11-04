@@ -12,7 +12,7 @@ from app.config import ATELIER_ROOT, MC_VTUBER_DIR, mc_vtuber_live2d_ready
 from app.static_files import CachedStaticFiles
 from app.constants import MC_VTUBER_CACHE_HEADERS, SITE_NAME, SITE_TITLE
 from app.middleware import register_security_middleware
-from app.routes import admin, assets, blog, browse, home, projects, quiz, travel, wiki
+from app.routes import admin, assets, blog, browse, home, personal, projects, quiz, travel, wiki
 
 
 def _win_asyncio_exception_handler(loop: asyncio.AbstractEventLoop, context: dict) -> None:
@@ -81,6 +81,7 @@ def create_app() -> FastAPI:
     app.include_router(projects.router)
     app.include_router(blog.router)
     app.include_router(travel.router)
+    app.include_router(personal.router)
     app.include_router(quiz.router)
     app.include_router(admin.router)
     app.include_router(wiki.router)

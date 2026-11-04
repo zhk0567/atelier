@@ -24,7 +24,7 @@ atelier/
 ├── docs/ARCHITECTURE.md    # Wiki vs Blog 分工说明
 ├── scripts/                # 指南校验与站点工具
 ├── static/
-├── data/                   # 动态壁纸（wallpaper-NN-slug.ext + wallpapers.json）
+├── data/                   # 动态壁纸（wallpaper-NN-slug.ext + wallpapers.json）、personal.json
 └── templates/
 ```
 
@@ -54,6 +54,9 @@ Set-Location -LiteralPath 'F:\commercial\atelier'
 .\run.ps1
 ```
 
+> 在 **cmd.exe** 里直接输入 `.\run.ps1` 会弹出「选择打开方式」——cmd 不执行 PowerShell 脚本。请改用
+> `powershell -ExecutionPolicy Bypass -File .\run.ps1`，或直接 `python main.py`。
+
 浏览器打开 `http://127.0.0.1:8000`。
 
 依赖见 [`requirements.txt`](requirements.txt)（需 **Python 3.9+**，推荐 3.11）。
@@ -81,6 +84,15 @@ Set-Location -LiteralPath 'F:\commercial\atelier'
 测试题库位于 `app/quiz_bank.json`，共 120 道核心题，六个维度各 20 道。每次测试随机抽取 29 道计分题（六个维度覆盖，抽到 4—5 道）+ 1 道注意力检测题，共 30 题，单次满分 87 分。
 
 管理员可以在答题记录列表或详情页为记录保存备注，并可按备注搜索。用户反馈保存在同一 SQLite 数据库的 `quiz_feedback` 表中，可在管理员后台“用户反馈”页面查看、筛选、更新状态和删除。
+
+## 个人要求与未来任务
+
+`/personal` 是一个独立模块，汇总十条写给自己的要求和一份六十年内的任务清单。内容参考私人日记与群聊整理，**人名一律按拼音首字母化名**（如 `WYJ`、`LYH`），原始日记与聊天记录不进入仓库。
+
+- 本地：`http://127.0.0.1:8000/personal`
+- 线上：`https://zhkun.xyz/personal`
+- 内容维护：编辑 `data/personal.json`（`requirements` / `tasks`），重启服务或触发一次缓存清理后生效
+- 任务勾选状态只保存在访问者本机浏览器（`localStorage`），不会上传
 
 ## 服务器部署（阿里云 ECS + Nginx + HTTPS）
 

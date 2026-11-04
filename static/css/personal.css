@@ -1,0 +1,657 @@
+/* Personal requirements & future tasks (/personal) — scoped to .personal-page */
+
+.personal-page {
+  --personal-accent: var(--color-progressive, #2851a3);
+  --personal-accent-soft: var(--background-color-progressive-subtle, #e3edff);
+  --personal-line: var(--border-color-subtle, #b8bcc4);
+  --personal-surface: var(--inner-surface, var(--panel-bg));
+  --personal-surface-muted: var(--background-color-neutral-subtle, #f4f5f7);
+  --personal-text: var(--color-base, #1a1c1e);
+  --personal-muted: var(--color-subtle, #3d4248);
+  --personal-strong: var(--color-emphasized, #0a0c0e);
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.personal-page .personal-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px 28px;
+  padding: 22px 22px 18px;
+  background:
+    linear-gradient(135deg, var(--personal-accent-soft), transparent 62%),
+    var(--panel-bg);
+}
+
+.personal-page .personal-hero__lead {
+  flex: 1 1 22rem;
+  min-width: 0;
+}
+
+.personal-page .personal-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-kicker__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--personal-accent);
+}
+
+.personal-page .personal-hero__title {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--personal-strong);
+  border: none;
+  padding: 0;
+}
+
+.personal-page .personal-hero__subtitle {
+  margin: 0 0 0.4rem;
+  max-width: 36rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-hero__note {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin: 0;
+}
+
+.personal-page .personal-hero__stats > div {
+  min-width: 4.25rem;
+}
+
+.personal-page .personal-hero__stats dt {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-hero__stats dd {
+  margin: 0.1rem 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  line-height: 1.1;
+  color: var(--personal-strong);
+}
+
+.personal-page .personal-hero__stats dd span {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-countdown dd strong {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.personal-page .personal-countdown.is-due dd strong {
+  color: var(--personal-accent);
+}
+
+/* ── Section shell ────────────────────────────────────────────────────── */
+.personal-page .personal-block {
+  padding: 18px 20px 20px;
+}
+
+.personal-page .personal-block__head {
+  margin-bottom: 14px;
+}
+
+.personal-page .mp-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 0.4rem;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.personal-page .personal-block__no {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--personal-accent);
+  transform: translateY(-2px);
+}
+
+.personal-page .personal-block__lead {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-source {
+  margin: 12px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--personal-muted);
+  padding-top: 10px;
+  border-top: 1px dashed var(--personal-line);
+}
+
+/* ── Requirements ─────────────────────────────────────────────────────── */
+.personal-page .personal-rules {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  counter-reset: personal-rule;
+}
+
+.personal-page .personal-rule {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  gap: 6px 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--personal-line);
+  border-radius: var(--inner-radius, 6px);
+  background: var(--personal-surface);
+  box-shadow: var(--inner-shadow, var(--box-shadow-subtle));
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.personal-page .personal-rule:hover {
+  border-color: var(--border-color-base, #8b9199);
+  box-shadow: var(--shadow-lift, var(--box-shadow-subtle));
+}
+
+.personal-page .personal-rule__index {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--personal-accent);
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+
+.personal-page .personal-rule__index::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 100%;
+  margin: 6px auto 0;
+  background: linear-gradient(var(--personal-line), transparent);
+}
+
+.personal-page .personal-rule__body {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.personal-page .personal-rule__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--personal-strong);
+}
+
+.personal-page .personal-rule__subtitle {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-rule__why {
+  margin: 0.4rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--personal-text);
+}
+
+.personal-page .personal-quote {
+  margin: 0.6rem 0 0;
+  padding: 7px 12px;
+  border-left: 3px solid var(--personal-accent);
+  border-radius: 0 4px 4px 0;
+  background: var(--personal-accent-soft);
+}
+
+.personal-page .personal-quote p {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  color: var(--personal-text);
+}
+
+.personal-page .personal-quote cite {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.6875rem;
+  font-style: normal;
+  color: var(--personal-muted);
+  text-align: right;
+}
+
+.personal-page .personal-rule__note {
+  margin: 0.45rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-rule__status {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 8px;
+  border: 1px solid var(--personal-line);
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  color: var(--personal-muted);
+  background: var(--panel-bg);
+}
+
+.personal-page .personal-rule__status::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--personal-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .personal-page .personal-rule__status::before {
+    animation: personal-pulse 2.6s ease-in-out infinite;
+  }
+}
+
+@keyframes personal-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ── Task toolbar ─────────────────────────────────────────────────────── */
+.personal-page .personal-taskbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--personal-line);
+  border-radius: var(--inner-radius, 6px);
+  background: var(--personal-surface-muted);
+}
+
+.personal-page .personal-progress {
+  flex: 1 1 15rem;
+  min-width: 0;
+  max-width: 22rem;
+}
+
+.personal-page .personal-progress__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-progress__meta strong {
+  font-size: 0.8125rem;
+  color: var(--personal-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.personal-page .personal-progress__track {
+  position: relative;
+  height: 7px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--background-color-neutral, #e4e6ea);
+  overflow: hidden;
+}
+
+.personal-page .personal-progress__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--personal-accent), var(--color-progressive-hover, #1f4085));
+  transition: width 320ms var(--ease-out, ease);
+}
+
+.personal-page .personal-progress__hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.6875rem;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.personal-page .personal-filters[hidden] {
+  display: none;
+}
+
+.personal-page .personal-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 2rem;
+  padding: 3px 11px;
+  border: 1px solid var(--personal-line);
+  border-radius: 999px;
+  background: var(--panel-bg);
+  font: inherit;
+  font-size: 0.75rem;
+  color: var(--personal-text);
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.personal-page .personal-chip span {
+  font-size: 0.6875rem;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-chip:hover {
+  border-color: var(--personal-accent);
+}
+
+.personal-page .personal-chip.is-active {
+  border-color: var(--personal-accent);
+  background: var(--personal-accent);
+  color: #fff;
+}
+
+.personal-page .personal-chip.is-active span {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* Dark theme: the accent is light, so active chips and ticks need dark ink. */
+html[data-theme="dark"] .personal-page .personal-chip.is-active {
+  color: #0d1b2a;
+}
+
+html[data-theme="dark"] .personal-page .personal-chip.is-active span {
+  color: rgba(13, 27, 42, 0.72);
+}
+
+html[data-theme="dark"] .personal-page .personal-task__input:checked + .personal-task__box::after {
+  border-color: #0d1b2a;
+}
+
+.personal-page .personal-chip:focus-visible,
+.personal-page .personal-task__input:focus-visible + .personal-task__box {
+  outline: 2px solid var(--personal-accent);
+  outline-offset: 2px;
+}
+
+/* ── Tasks ────────────────────────────────────────────────────────────── */
+.personal-page .personal-tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 9px;
+}
+
+.personal-page .personal-task {
+  display: flex;
+  flex-direction: column;
+  padding: 11px 13px;
+  border: 1px solid var(--personal-line);
+  border-radius: var(--inner-radius, 6px);
+  background: var(--personal-surface);
+  transition: border-color 140ms ease, opacity 140ms ease;
+}
+
+.personal-page .personal-task:hover {
+  border-color: var(--personal-accent);
+}
+
+.personal-page .personal-task.is-filtered {
+  display: none;
+}
+
+.personal-page .personal-task__label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  cursor: pointer;
+}
+
+.personal-page .personal-task__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.personal-page .personal-task__box {
+  flex: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border: 1.5px solid var(--personal-line);
+  border-radius: 3px;
+  background: var(--panel-bg);
+  transition: background 140ms ease, border-color 140ms ease;
+}
+
+.personal-page .personal-task__box::after {
+  content: "";
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0.5);
+  opacity: 0;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.personal-page .personal-task__input:checked + .personal-task__box {
+  border-color: var(--personal-accent);
+  background: var(--personal-accent);
+}
+
+.personal-page .personal-task__input:checked + .personal-task__box::after {
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+
+.personal-page .personal-task__text {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--personal-text);
+}
+
+.personal-page .personal-task__note {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 0 5px;
+  border-radius: 3px;
+  background: var(--personal-surface-muted);
+  font-size: 0.6875rem;
+  color: var(--personal-muted);
+  white-space: nowrap;
+}
+
+.personal-page .personal-task__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 7px 0 0 25px;
+  font-size: 0.6875rem;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-task__tag {
+  padding: 0 5px;
+  border-radius: 3px;
+  color: var(--personal-accent);
+  background: var(--personal-accent-soft);
+}
+
+.personal-page .personal-task.is-done {
+  opacity: 0.6;
+}
+
+.personal-page .personal-task.is-done .personal-task__text {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.personal-page .personal-tasks__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 18px;
+  border: 1px dashed var(--personal-line);
+  border-radius: var(--inner-radius, 6px);
+  font-size: 0.8125rem;
+  color: var(--personal-muted);
+  text-align: center;
+}
+
+/* ── About ────────────────────────────────────────────────────────────── */
+.personal-page .personal-about__list {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.8125rem;
+  line-height: 1.85;
+  color: var(--personal-muted);
+}
+
+.personal-page .mp-footer-actions {
+  margin-top: 16px;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media screen and (max-width: 720px) {
+  .personal-page .personal-hero {
+    padding: 18px 16px 16px;
+  }
+
+  .personal-page .personal-hero__title {
+    font-size: 1.55rem;
+  }
+
+  .personal-page .personal-hero__stats {
+    gap: 10px 20px;
+  }
+
+  .personal-page .personal-hero__stats dd {
+    font-size: 1.35rem;
+  }
+
+  .personal-page .personal-block {
+    padding: 16px 14px 16px;
+  }
+
+  .personal-page .personal-rule {
+    grid-template-columns: 1fr;
+    padding: 13px 13px 14px;
+  }
+
+  .personal-page .personal-rule__index {
+    grid-column: 1;
+    grid-row: auto;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+  }
+
+  .personal-page .personal-rule__index::after {
+    display: none;
+  }
+
+  .personal-page .personal-rule__body {
+    grid-column: 1;
+  }
+
+  .personal-page .personal-rule__status {
+    position: static;
+    justify-self: start;
+    margin-top: 8px;
+  }
+
+  .personal-page .personal-taskbar {
+    align-items: stretch;
+  }
+
+  .personal-page .personal-progress {
+    max-width: none;
+  }
+
+  .personal-page .personal-filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .personal-page .personal-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .personal-page .personal-chip {
+    flex: 0 0 auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .personal-page .personal-hero__stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .personal-page .personal-task__meta {
+    margin-left: 0;
+  }
+}
