@@ -746,22 +746,32 @@ html[data-theme="dark"] .personal-page .personal-task__input:checked + .personal
   transition: transform 140ms ease, box-shadow 140ms ease;
 }
 
-.personal-page .personal-wish-fab:hover {
+body.wiki-site .personal-page a.personal-wish-fab,
+body.wiki-site .personal-page a.personal-wish-fab:link,
+body.wiki-site .personal-page a.personal-wish-fab:visited,
+body.wiki-site .personal-page a.personal-wish-fab:hover {
+  color: #fff;
+}
+
+body.wiki-site .personal-page .personal-wish-fab:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(16, 34, 64, 0.28);
 }
 
-.personal-page .personal-wish-fab:focus-visible {
+body.wiki-site .personal-page .personal-wish-fab:focus-visible {
   outline: 2px solid var(--personal-accent);
   outline-offset: 3px;
 }
 
-.personal-page .personal-wish-fab__icon {
+body.wiki-site .personal-page .personal-wish-fab__icon {
   width: 18px;
   height: 18px;
 }
 
-html[data-theme="dark"] .personal-page .personal-wish-fab {
+html[data-theme="dark"] body.wiki-site .personal-page a.personal-wish-fab,
+html[data-theme="dark"] body.wiki-site .personal-page a.personal-wish-fab:link,
+html[data-theme="dark"] body.wiki-site .personal-page a.personal-wish-fab:visited,
+html[data-theme="dark"] body.wiki-site .personal-page a.personal-wish-fab:hover {
   color: #0d1b2a;
 }
 
