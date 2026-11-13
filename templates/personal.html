@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="/static/css/personal.css?v=1" />
+  <link rel="stylesheet" href="/static/css/personal.css?v=5" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -115,6 +115,32 @@
     <p class="personal-source">{{ personal.tasks_source }}</p>
   </section>
 
+  <section class="mp-section mp-section-full personal-block" id="wishes" aria-labelledby="personal-wishes-title">
+    <div class="personal-block__head">
+      <h2 class="mp-title" id="personal-wishes-title"><span class="personal-block__no" aria-hidden="true">03</span>新收到的愿望</h2>
+      <p class="personal-block__lead">这一栏是开着的。右下角按钮写下的愿望会先到管理员那里，审核通过后才会出现在这里。</p>
+    </div>
+    {% if wish_sent %}
+    <p class="personal-wish-notice" role="status">愿望已收到，审核通过后会出现在这一栏。</p>
+    {% endif %}
+    {% if personal_wishes %}
+    <ul class="personal-wishes">
+      {% for wish in personal_wishes %}
+      <li class="personal-wish">
+        <p class="personal-wish__text">「{{ wish.wish }}」</p>
+        <p class="personal-wish__meta">
+          <span>{{ wish.display_name }}</span>
+          <time datetime="{{ wish.published_at or wish.created_at }}">{{ wish.published_date }}</time>
+        </p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="personal-wishes__empty">还没有公开的愿望。右下角的按钮一直开着，第一条可以是你。</p>
+    {% endif %}
+    <p class="personal-source">愿望由访客提交，管理员审核后公开；它们不会自动并入上面的任务清单。</p>
+  </section>
+
   <section class="mp-section mp-section-full personal-block personal-about" aria-labelledby="personal-about-title">
     <div class="personal-block__head">
       <h2 class="mp-title" id="personal-about-title">关于这个模块</h2>
@@ -129,6 +155,47 @@
 </div>
 {% endblock %}
 
+{% block overlays %}
+<div class="personal-page personal-wish-layer">
+  <a class="personal-wish-fab" href="{{ wish_path }}" data-wish-open aria-haspopup="dialog">
+    <svg class="personal-wish-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5h-8.2l-4.3 3.3a.6.6 0 0 1-1-.48V17H4a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 4 5.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+      <path d="M7.5 10.5h9M7.5 13.5h5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+    <span>反馈</span>
+  </a>
+
+  <div class="personal-wish-modal" data-wish-modal hidden>
+    <div class="personal-wish-modal__backdrop" data-wish-close></div>
+    <div class="personal-wish-modal__panel" role="dialog" aria-modal="true" aria-labelledby="wish-modal-title">
+      <button type="button" class="personal-wish-modal__close" data-wish-close aria-label="关闭">×</button>
+      <p class="personal-kicker">OPEN WISH<span class="personal-kicker__dot" aria-hidden="true"></span>审核后公开</p>
+      <h2 class="personal-wish-modal__title" id="wish-modal-title">写一条愿望或要求</h2>
+      <p class="personal-wish-modal__lead">可以是想让我做的事，也可以是一条要求。审核通过后，它会出现在页面最下面。</p>
+      <form class="personal-wish-form" method="post" action="{{ wish_path }}" data-wish-form>
+        <div class="personal-wish-form__field">
+          <label for="wish-modal-name">署名 <span>选填</span></label>
+          <input id="wish-modal-name" type="text" name="name" maxlength="20" placeholder="留空就显示「匿名」" autocomplete="nickname" />
+        </div>
+        <div class="personal-wish-form__field">
+          <label for="wish-modal-text">愿望或要求</label>
+          <textarea id="wish-modal-text" name="wish" maxlength="280" rows="4" required placeholder="例如：六十年内，一起去看一次极光。"></textarea>
+          <small>2—280 字。会公开显示，请不要写手机号、住址等私人信息。</small>
+        </div>
+        <div class="personal-wish-form__trap" aria-hidden="true">
+          <label>网站<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <p class="personal-wish-form__status" data-wish-status role="status" hidden></p>
+        <div class="personal-wish-form__actions">
+          <button type="submit" class="mp-button" data-wish-submit><span class="mp-button__inner">提交，等审核</span></button>
+          <button type="button" class="personal-wish-form__back" data-wish-close>先不写</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
 {% block extra_scripts %}
-<script src="/static/js/personal.js?v=1" defer></script>
+<script src="/static/js/personal.js?v=4" defer></script>
 {% endblock %}

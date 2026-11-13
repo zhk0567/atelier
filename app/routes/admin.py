@@ -47,6 +47,13 @@ from app.quiz_store import (
     update_attempt_note,
     update_feedback_status,
 )
+from app.wishes_store import (
+    delete_wish,
+    list_wishes,
+    set_wish_status,
+    update_wish,
+    wish_stats,
+)
 
 router = APIRouter(include_in_schema=False)
 
@@ -144,6 +151,7 @@ def _dashboard_response(
             "group_names": group_names,
             "notice": notice,
             "feedback_stats": feedback_stats(),
+            "wish_stats": wish_stats(),
         },
         status_code=status_code,
         headers=_ADMIN_HEADERS,
@@ -345,6 +353,8 @@ def _feedback_response(
             "pages": pages,
             "total": total,
             "notice": notice,
+            "feedback_stats": feedback_stats(),
+            "wish_stats": wish_stats(),
         },
         status_code=status_code,
         headers=_ADMIN_HEADERS,
@@ -407,6 +417,179 @@ async def admin_feedback_delete(
         raise HTTPException(status_code=404)
     return RedirectResponse(
         url=f"{ADMIN_PATH}/feedback?deleted=1",
+        status_code=303,
+    )
+
+
+_WISH_PAGE_SIZE = 30
+_WISH_STATUSES = {"pending", "approved", "rejected"}
+
+
+def _wishes_response(
+    request: Request,
+    *,
+    query: str = "",
+    status: str = "",
+    page: int = 1,
+    notice: str = "",
+    status_code: int = 200,
+) -> HTMLResponse:
+    query = query.strip()[:80]
+    if status not in _WISH_STATUSES:
+        status = ""
+    page = max(1, int(page))
+    offset = (page - 1) * _WISH_PAGE_SIZE
+    items, total = list_wishes(
+        query=query,
+        status=status,
+        limit=_WISH_PAGE_SIZE,
+        offset=offset,
+    )
+    pages = max(1, math.ceil(total / _WISH_PAGE_SIZE))
+    if page > pages and total:
+        page = pages
+        offset = (page - 1) * _WISH_PAGE_SIZE
+        items, total = list_wishes(
+            query=query,
+            status=status,
+            limit=_WISH_PAGE_SIZE,
+            offset=offset,
+        )
+    stats = wish_stats()
+    response = templates.TemplateResponse(
+        request=request,
+        name="admin_wishes.html",
+        context={
+            "site_name": SITE_NAME,
+            "admin_path": ADMIN_PATH,
+            "csrf_token": admin_csrf_token(),
+            "wish_items": items,
+            "stats": stats,
+            "feedback_stats": feedback_stats(),
+            "wish_stats": stats,
+            "query": query,
+            "status_filter": status,
+            "page": page,
+            "pages": pages,
+            "total": total,
+            "notice": notice,
+        },
+        status_code=status_code,
+        headers=_ADMIN_HEADERS,
+    )
+    set_csrf_cookie(response)
+    return response
+
+
+@router.get(ADMIN_PATH + "/wishes", response_class=HTMLResponse)
+async def admin_wishes(
+    request: Request,
+    q: str = "",
+    status: str = "",
+    page: int = 1,
+    updated: int = 0,
+    deleted: int = 0,
+    invalid: int = 0,
+):
+    if not admin_session_ok(request):
+        return _login_response(request)
+    notice = (
+        "愿望已更新。"
+        if updated
+        else "愿望已删除。"
+        if deleted
+        else "愿望内容不完整（至少 2 个字），未保存。" if invalid else ""
+    )
+    return _wishes_response(
+        request,
+        query=q,
+        status=status,
+        page=page,
+        notice=notice,
+    )
+
+
+def _clean_admin_text(value: str, limit: int) -> str:
+    return " ".join((value or "").replace("\r\n", "\n").split())[:limit]
+
+
+def _clean_admin_wish(value: str, limit: int) -> str:
+    text = (value or "").replace("\r\n", "\n").replace("\r", "\n")
+    lines = [" ".join(line.split()) for line in text.split("\n")]
+    return "\n".join(line for line in lines if line)[:limit]
+
+
+@router.post(ADMIN_PATH + "/wishes/{wish_id}/update")
+async def admin_wish_update(
+    request: Request,
+    wish_id: int,
+    name: str = Form(""),
+    wish: str = Form(""),
+    note: str = Form(""),
+    status: str = Form("pending"),
+    csrf: str = Form(""),
+):
+    if not admin_session_ok(request):
+        return RedirectResponse(url=ADMIN_PATH, status_code=303)
+    if not csrf_valid(request, csrf):
+        raise HTTPException(status_code=400)
+    if status not in _WISH_STATUSES:
+        raise HTTPException(status_code=400)
+    clean_wish = _clean_admin_wish(wish, 280)
+    if len(clean_wish) < 2:
+        return RedirectResponse(
+            url=f"{ADMIN_PATH}/wishes?invalid=1",
+            status_code=303,
+        )
+    if not update_wish(
+        wish_id,
+        name=_clean_admin_text(name, 20),
+        wish=clean_wish,
+        note=_clean_admin_wish(note, 300),
+        status=status,
+    ):
+        raise HTTPException(status_code=404)
+    return RedirectResponse(
+        url=f"{ADMIN_PATH}/wishes?updated=1",
+        status_code=303,
+    )
+
+
+@router.post(ADMIN_PATH + "/wishes/{wish_id}/status")
+async def admin_wish_status(
+    request: Request,
+    wish_id: int,
+    status: str = Form(""),
+    csrf: str = Form(""),
+):
+    if not admin_session_ok(request):
+        return RedirectResponse(url=ADMIN_PATH, status_code=303)
+    if not csrf_valid(request, csrf):
+        raise HTTPException(status_code=400)
+    if status not in _WISH_STATUSES:
+        raise HTTPException(status_code=400)
+    if not set_wish_status(wish_id, status):
+        raise HTTPException(status_code=404)
+    return RedirectResponse(
+        url=f"{ADMIN_PATH}/wishes?updated=1",
+        status_code=303,
+    )
+
+
+@router.post(ADMIN_PATH + "/wishes/{wish_id}/delete")
+async def admin_wish_delete(
+    request: Request,
+    wish_id: int,
+    csrf: str = Form(""),
+):
+    if not admin_session_ok(request):
+        return RedirectResponse(url=ADMIN_PATH, status_code=303)
+    if not csrf_valid(request, csrf):
+        raise HTTPException(status_code=400)
+    if not delete_wish(wish_id):
+        raise HTTPException(status_code=404)
+    return RedirectResponse(
+        url=f"{ADMIN_PATH}/wishes?deleted=1",
         status_code=303,
     )
 

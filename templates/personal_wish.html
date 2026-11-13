@@ -1,0 +1,61 @@
+{% extends "wiki/base.html" %}
+
+{% block title %}写一条愿望 · {{ site_name }}{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="给这个页面留一条愿望或要求。提交后会先进入审核，通过后显示在个人要求页。" />
+{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="/static/css/personal.css?v=5" />
+  <noscript>
+    <style>
+      body.wiki-site .wiki-main { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="wiki-breadcrumbs" aria-label="breadcrumb">
+  <a href="/">{{ ui.label_main_page }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <a href="/personal">{{ ui.label_personal }}</a>
+  <span class="wiki-breadcrumbs__sep">/</span>
+  <span>写一条愿望</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="mp-wrapper mp-wrapper--page personal-page">
+  <section class="mp-section mp-section-full personal-block personal-wish-page">
+    <div class="personal-block__head">
+      <p class="personal-kicker">OPEN WISH<span class="personal-kicker__dot" aria-hidden="true"></span>审核后公开</p>
+      <h1 class="personal-hero__title">写一条愿望或要求</h1>
+      <p class="personal-block__lead">可以是想让我做的事，也可以是一条要求。提交后会先到管理员的待审列表，通过之后才会出现在个人要求页的最下面。</p>
+    </div>
+
+    {% if error %}
+    <p class="personal-wish-form__error" role="alert">{{ error }}</p>
+    {% endif %}
+
+    <form class="personal-wish-form" method="post" action="{{ wish_path }}">
+      <div class="personal-wish-form__field">
+        <label for="wish-name">署名 <span>选填</span></label>
+        <input id="wish-name" type="text" name="name" maxlength="{{ name_max }}" value="{{ wish_name }}" placeholder="留空就显示「匿名」" autocomplete="nickname" />
+      </div>
+      <div class="personal-wish-form__field">
+        <label for="wish-text">愿望或要求</label>
+        <textarea id="wish-text" name="wish" maxlength="{{ wish_max }}" rows="5" required placeholder="例如：六十年内，一起去看一次极光。">{{ wish_text }}</textarea>
+        <small>{{ wish_min }}—{{ wish_max }} 字。会公开显示，请不要写手机号、住址等私人信息。</small>
+      </div>
+      <div class="personal-wish-form__trap" aria-hidden="true">
+        <label>网站<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      <div class="personal-wish-form__actions">
+        <button type="submit" class="mp-button"><span class="mp-button__inner">提交，等审核</span></button>
+        <a class="personal-wish-form__back" href="/personal">返回个人要求</a>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

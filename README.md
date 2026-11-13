@@ -94,6 +94,15 @@ Set-Location -LiteralPath 'F:\commercial\atelier'
 - 内容维护：编辑 `data/personal.json`（`requirements` / `tasks`），重启服务或触发一次缓存清理后生效
 - 任务勾选状态只保存在访问者本机浏览器（`localStorage`），不会上传
 
+### 访客愿望 / 要求
+
+页面右下角的「反馈」按钮会把访客送到 `/personal/wish`（无 JS 时的独立表单），也可以直接弹窗填写。提交内容先进入待审队列，不会立即公开。
+
+- 存储：`instance/personal_wishes.sqlite3`（可用环境变量 `ATELIER_WISHES_DB` 指向别处），表 `personal_wishes`，状态 `pending` / `approved` / `rejected`
+- 审核：管理员登录 `/ops/<后台路径>` →「愿望审核」。可以修改署名、正文和内部备注，通过、驳回、收回或删除；「通过并公开」后立即出现在 `/personal` 的「03 新收到的愿望」
+- 防滥用：隐藏蜜罐字段 + 同一 IP 十分钟最多 5 次；正文 2–280 字，署名 ≤20 字
+- 审核后的愿望只展示在页面里，**不会**自动写入 `data/personal.json` 的任务清单
+
 ## 服务器部署（阿里云 ECS + Nginx + HTTPS）
 
 环境示例：Alibaba Cloud Linux 3、域名 `zhkun.xyz` 解析到 ECS 公网 IP、安全组放行 `22` / `80` / `443`。

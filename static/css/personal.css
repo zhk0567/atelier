@@ -655,3 +655,370 @@ html[data-theme="dark"] .personal-page .personal-task__input:checked + .personal
     margin-left: 0;
   }
 }
+
+/* ── Visitor wishes (#wishes) ─────────────────────────────────────────── */
+.personal-page {
+  padding-bottom: 3.5rem;
+}
+
+.personal-page .personal-wish-notice {
+  margin: 0 0 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--personal-accent);
+  border-radius: var(--inner-radius, 6px);
+  background: var(--personal-accent-soft);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--personal-text);
+}
+
+.personal-page .personal-wishes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.personal-page .personal-wish {
+  padding: 13px 15px;
+  border: 1px solid var(--personal-line);
+  border-left: 3px solid var(--personal-accent);
+  border-radius: var(--inner-radius, 6px);
+  background: var(--personal-surface);
+}
+
+.personal-page .personal-wish__text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: var(--personal-text);
+  white-space: pre-line;
+}
+
+.personal-page .personal-wish__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 10px;
+  margin: 0.55rem 0 0;
+  font-size: 0.6875rem;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-wish__meta span {
+  font-weight: 600;
+  color: var(--personal-accent);
+}
+
+.personal-page .personal-wishes__empty {
+  margin: 0;
+  padding: 18px;
+  border: 1px dashed var(--personal-line);
+  border-radius: var(--inner-radius, 6px);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--personal-muted);
+  text-align: center;
+}
+
+/* ── Floating feedback button ─────────────────────────────────────────── */
+.personal-page .personal-wish-fab {
+  position: fixed;
+  right: max(1.1rem, env(safe-area-inset-right));
+  bottom: max(1.1rem, env(safe-area-inset-bottom));
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border: 1px solid var(--personal-accent);
+  border-radius: 999px;
+  background: var(--personal-accent);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(16, 34, 64, 0.24);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.personal-page .personal-wish-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(16, 34, 64, 0.28);
+}
+
+.personal-page .personal-wish-fab:focus-visible {
+  outline: 2px solid var(--personal-accent);
+  outline-offset: 3px;
+}
+
+.personal-page .personal-wish-fab__icon {
+  width: 18px;
+  height: 18px;
+}
+
+html[data-theme="dark"] .personal-page .personal-wish-fab {
+  color: #0d1b2a;
+}
+
+/* ── Wish modal + form ────────────────────────────────────────────────── */
+html:has(.personal-wish-modal:not([hidden])),
+body.personal-wish-open {
+  overflow: hidden;
+}
+
+.personal-wish-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.personal-wish-modal[hidden] {
+  display: none;
+}
+
+.personal-wish-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 12, 18, 0.56);
+}
+
+.personal-wish-modal__panel {
+  position: relative;
+  width: min(33rem, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  padding: 22px 22px 20px;
+  border: 1px solid var(--border-color-base, #8b9199);
+  border-radius: 10px;
+  background: var(--panel-bg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.personal-wish-modal__close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--personal-muted);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.personal-wish-modal__close:hover {
+  background: var(--personal-surface-muted);
+  color: var(--personal-strong);
+}
+
+.personal-wish-modal__title {
+  margin: 0.35rem 0 0.4rem;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--personal-strong);
+}
+
+.personal-wish-modal__lead {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-wish-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.personal-wish-page .personal-wish-form {
+  max-width: 38rem;
+}
+
+.personal-page .personal-wish-form__field {
+  display: grid;
+  gap: 6px;
+}
+
+.personal-page .personal-wish-form__field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--personal-text);
+}
+
+.personal-page .personal-wish-form__field label span {
+  font-weight: 400;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-wish-form__field input,
+.personal-page .personal-wish-form__field textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--personal-line);
+  border-radius: 6px;
+  background: var(--panel-bg);
+  color: var(--personal-text);
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.personal-page .personal-wish-form__field textarea {
+  min-height: 6.5rem;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.personal-page .personal-wish-form__field input:focus,
+.personal-page .personal-wish-form__field textarea:focus {
+  border-color: var(--personal-accent);
+  outline: 2px solid var(--personal-accent);
+  outline-offset: 1px;
+}
+
+.personal-page .personal-wish-form__field small {
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  color: var(--personal-muted);
+}
+
+.personal-page .personal-wish-form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.personal-page .personal-wish-form__status {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--personal-accent-soft);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--personal-text);
+}
+
+.personal-page .personal-wish-form__status.is-error {
+  background: #fbe9e9;
+  color: #8f1d1d;
+}
+
+html[data-theme="dark"] .personal-page .personal-wish-form__status.is-error {
+  background: #3a1c1c;
+  color: #f3b4b4;
+}
+
+.personal-page .personal-wish-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 2px;
+}
+
+.personal-page .personal-wish-form__back {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--personal-muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.personal-page .personal-wish-form__back:hover {
+  color: var(--personal-accent);
+}
+
+.personal-page .personal-wish-form__error {
+  margin: 0 0 12px;
+  padding: 9px 12px;
+  border: 1px solid #d89a9a;
+  border-radius: 6px;
+  background: #fbe9e9;
+  color: #8f1d1d;
+  font-size: 0.8125rem;
+}
+
+html[data-theme="dark"] .personal-page .personal-wish-form__error {
+  border-color: #7a3a3a;
+  background: #3a1c1c;
+  color: #f3b4b4;
+}
+
+.personal-wish-form.is-sent .personal-wish-form__field,
+.personal-wish-form.is-sent .personal-wish-form__trap {
+  display: none;
+}
+
+.personal-wish-form.is-sent .personal-wish-form__actions {
+  justify-content: flex-end;
+}
+
+.personal-wish-form.is-sent .personal-wish-form__actions [data-wish-submit] {
+  display: none;
+}
+
+@media screen and (max-width: 640px) {
+  .personal-page .personal-wishes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .personal-page .personal-wish-fab {
+    right: max(0.9rem, env(safe-area-inset-right));
+    bottom: max(0.9rem, env(safe-area-inset-bottom));
+    padding: 9px 13px;
+  }
+
+  .personal-wish-modal__panel {
+    padding: 20px 16px 16px;
+    max-height: calc(100dvh - 1.2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .personal-page .personal-wish-fab {
+    transition: none;
+  }
+}
+
+/* The wallpaper layout gives every direct child of .wiki-main z-index: 1,
+   so the footer paints above the article and swallows clicks on the fixed
+   feedback button. Lift the article itself one step. */
+body.wiki-site.has-wallpaper .wiki-main > .wiki-content {
+  z-index: 2;
+}
+
+/* The FAB and modal live in a body-level layer: a transformed/backdrop-filtered
+   ancestor would otherwise turn position:fixed into an article-relative box. */
+.personal-page.personal-wish-layer {
+  padding: 0;
+  --button-color: #ebebeb;
+  --button-color-progressive: #3a971e;
+  --button-text-color: var(--personal-text);
+  --button-border-color: rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .personal-page.personal-wish-layer {
+  --button-color: #48494a;
+  --button-text-color: #fff;
+  --button-border-color: #242424;
+}

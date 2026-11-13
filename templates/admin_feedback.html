@@ -24,6 +24,10 @@
     用户反馈
     {% if stats.new %}<span class="na-badge">{{ stats.new }}</span>{% endif %}
   </a>
+  <a class="na-tab" href="{{ admin_path }}/wishes">
+    愿望审核
+    {% if wish_stats.pending %}<span class="na-badge">{{ wish_stats.pending }}</span>{% endif %}
+  </a>
 </nav>
 
 <main class="na-main">
