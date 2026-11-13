@@ -1582,6 +1582,16 @@ body.wiki-site.has-wallpaper .wiki-footer__attr {
   color: var(--color-progressive-hover);
 }
 
+.wiki-footer__filing-sep {
+  opacity: 0.55;
+}
+
+@media (max-width: 560px) {
+  .wiki-footer__filing-sep {
+    display: none;
+  }
+}
+
 /* ── Toast ────────────────────────────────────────────────────────────────── */
 .toast {
   position: fixed;
