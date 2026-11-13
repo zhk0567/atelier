@@ -1562,6 +1562,26 @@ body.wiki-site.has-wallpaper .wiki-footer__attr {
   opacity: 0.85;
 }
 
+.wiki-footer__filing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  margin: 0.35rem 0 0;
+  font-size: 0.72rem;
+}
+
+.wiki-footer__filing a:link,
+.wiki-footer__filing a:visited {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.wiki-footer__filing a:hover {
+  color: var(--color-progressive-hover);
+}
+
 /* ── Toast ────────────────────────────────────────────────────────────────── */
 .toast {
   position: fixed;

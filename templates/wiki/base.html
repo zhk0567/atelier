@@ -14,7 +14,7 @@
   {% block meta %}{% endblock %}
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/static/css/wiki.css?v=47" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=48" />
   <link rel="stylesheet" href="/static/css/mp-portal.css?v=14" />
   {% if wallpapers %}
   {% set default_wp = wallpapers | selectattr('default') | first | default(wallpapers[0]) %}
@@ -148,6 +148,10 @@
       </article>
       <footer class="wiki-footer">
         <p>{{ ui.copyright_prefix }} {{ year }} {{ site_name }}. {{ ui.wiki_footer_note }}</p>
+        <p class="wiki-footer__filing">
+          <span>创作者手记</span>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">豫ICP备2025152796号-2</a>
+        </p>
         <p class="wiki-footer__attr">{{ ui.wiki_attribution }}</p>
       </footer>
     </main>
