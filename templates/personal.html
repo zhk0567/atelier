@@ -1,4 +1,4 @@
-{% extends "wiki/base.html" %}
+﻿{% extends "wiki/base.html" %}
 
 {% block title %}{{ ui.label_personal }}与未来任务 · {{ site_name }}{% endblock %}
 
@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="/static/css/personal.css?v=6" />
+  <link rel="stylesheet" href="/static/css/personal.css?v=7" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -157,6 +157,17 @@
 
 {% block overlays %}
 <div class="personal-page personal-wish-layer">
+  <div class="personal-wish-hint" data-wish-hint aria-hidden="true">
+    <span class="personal-wish-hint__text">戳我试试</span>
+    <svg class="personal-wish-hint__arrow" viewBox="0 0 84 52" fill="none">
+      <defs>
+        <marker id="wishHintArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10Z" fill="currentColor" />
+        </marker>
+      </defs>
+      <path d="M5 7C28 2 60 14 75 43" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" marker-end="url(#wishHintArrow)" />
+    </svg>
+  </div>
   <a class="personal-wish-fab" href="{{ wish_path }}" data-wish-open aria-haspopup="dialog">
     <svg class="personal-wish-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5h-8.2l-4.3 3.3a.6.6 0 0 1-1-.48V17H4a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 4 5.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
@@ -197,5 +208,5 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="/static/js/personal.js?v=4" defer></script>
+<script src="/static/js/personal.js?v=5" defer></script>
 {% endblock %}

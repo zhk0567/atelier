@@ -725,6 +725,70 @@ html[data-theme="dark"] .personal-page .personal-task__input:checked + .personal
 }
 
 /* ── Floating feedback button ─────────────────────────────────────────── */
+.personal-page .personal-wish-hint {
+  position: fixed;
+  right: max(1.1rem, env(safe-area-inset-right));
+  bottom: calc(max(1.1rem, env(safe-area-inset-bottom)) + 2.7rem);
+  z-index: 79;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+  color: var(--personal-accent);
+  transition: opacity 160ms ease, visibility 160ms ease;
+}
+
+.personal-page .personal-wish-hint[hidden] {
+  display: none;
+}
+
+body.personal-wish-open .personal-page .personal-wish-hint {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.personal-page .personal-wish-hint__text {
+  margin-right: 27px;
+  margin-bottom: 2px;
+  padding: 3px 10px;
+  border: 1px dashed currentColor;
+  border-radius: 999px;
+  background: var(--personal-surface);
+  box-shadow: 0 2px 10px rgba(16, 34, 64, 0.14);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.personal-page .personal-wish-hint__arrow {
+  width: 84px;
+  height: 52px;
+  margin-right: 9px;
+  animation: personal-wish-nudge 2.4s ease-in-out infinite;
+}
+
+@keyframes personal-wish-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .personal-page .personal-wish-hint__arrow {
+    animation: none;
+  }
+}
+
+html[data-theme="dark"] .personal-page .personal-wish-hint__text {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.42);
+}
+
 .personal-page .personal-wish-fab {
   position: fixed;
   right: max(1.1rem, env(safe-area-inset-right));
@@ -996,6 +1060,23 @@ html[data-theme="dark"] .personal-page .personal-wish-form__error {
     right: max(0.9rem, env(safe-area-inset-right));
     bottom: max(0.9rem, env(safe-area-inset-bottom));
     padding: 9px 13px;
+  }
+
+  .personal-page .personal-wish-hint {
+    right: max(0.9rem, env(safe-area-inset-right));
+    bottom: calc(max(0.9rem, env(safe-area-inset-bottom)) + 2.8rem);
+  }
+
+  .personal-page .personal-wish-hint__text {
+    margin-right: 24px;
+    padding: 2px 9px;
+    font-size: 0.75rem;
+  }
+
+  .personal-page .personal-wish-hint__arrow {
+    width: 68px;
+    height: 42px;
+    margin-right: 7px;
   }
 
   .personal-wish-modal__panel {

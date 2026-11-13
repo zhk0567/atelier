@@ -149,9 +149,19 @@
     var form = modal.querySelector("[data-wish-form]");
     var status = modal.querySelector("[data-wish-status]");
     var submit = modal.querySelector("[data-wish-submit]");
+    var hint = document.querySelector("[data-wish-hint]");
+    var hintKey = "atelier-wish-hint-seen";
     var closeButtons = Array.prototype.slice.call(modal.querySelectorAll("[data-wish-close]"));
     var lastFocus = null;
     var sending = false;
+
+    try {
+      if (hint && window.localStorage.getItem(hintKey) === "1") {
+        hint.hidden = true;
+      }
+    } catch (error) {
+      /* storage can be unavailable in private mode; the hint is decorative */
+    }
 
     function setStatus(message, isError) {
       if (!status) {
@@ -181,6 +191,14 @@
       lastFocus = document.activeElement;
       modal.hidden = false;
       document.body.classList.add("personal-wish-open");
+      if (hint) {
+        hint.hidden = true;
+      }
+      try {
+        window.localStorage.setItem(hintKey, "1");
+      } catch (error) {
+        /* ignore storage failures */
+      }
       var first = modal.querySelector("#wish-modal-name") || modal.querySelector("textarea");
       if (first) {
         window.setTimeout(function () {
