@@ -183,6 +183,7 @@
       var elapsed = startedAt ? Math.round((Date.now() - startedAt) / 1000) : 0;
       durationInput.value = String(Math.max(0, elapsed));
     }
+    form.classList.add("is-submitting");
     if (submitButton) {
       submitButton.disabled = true;
       submitButton.textContent = "正在计算…";

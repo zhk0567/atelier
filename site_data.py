@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -13,6 +14,9 @@ BASE_DIR = Path(__file__).resolve().parent
 XLSX_PATH = BASE_DIR / "zhita_settings.xlsx"
 IDENTITY_PATH = BASE_DIR / "site_identity.json"
 BLOG_DIR = BASE_DIR / "Blog"
+MEDIA_META_DIR = BASE_DIR / "data" / "media_meta"
+MEDIA_IMG_DIR = BASE_DIR / "static" / "img" / "media"
+MEDIA_PLACEHOLDER = "/static/img/wiki/bookshelf.png"
 
 from app.config import (  # noqa: E402
     blog_algorithm_dir_name,
@@ -378,13 +382,122 @@ def _parse_books() -> list[dict]:
         if not row or not row[0]:
             continue
         title = _cell_str(row[0])
-        if title:
-            books.append({
-                "title": title,
-                "author": _cell_str(row[1]) if len(row) > 1 else "",
-                "category": _cell_str(row[2]) if len(row) > 2 else "",
-            })
+        if not title or title in {"书名", "名称"}:
+            continue
+        books.append({
+            "title": title,
+            "author": _cell_str(row[1]) if len(row) > 1 else "",
+            "category": _cell_str(row[2]) if len(row) > 2 else "",
+        })
     return books
+
+
+@lru_cache(maxsize=32)
+def _load_media_meta_cached(kind: str, mtime_ns: int) -> dict[str, dict]:
+    del mtime_ns  # cache key only
+    path = MEDIA_META_DIR / f"{kind}.json"
+    if not path.is_file():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError, json.JSONDecodeError, TypeError):
+        return {}
+    items = payload.get("items") if isinstance(payload, dict) else None
+    if not isinstance(items, dict):
+        return {}
+    return {str(k): v for k, v in items.items() if isinstance(v, dict)}
+
+
+def _load_media_meta(kind: str) -> dict[str, dict]:
+    path = MEDIA_META_DIR / f"{kind}.json"
+    try:
+        mtime_ns = path.stat().st_mtime_ns if path.is_file() else 0
+    except OSError:
+        mtime_ns = 0
+    return _load_media_meta_cached(kind, mtime_ns)
+
+
+def clear_media_meta_cache() -> None:
+    _load_media_meta_cached.cache_clear()
+
+
+def _media_cover_slug(title: str) -> str:
+    digest = hashlib.md5(title.encode("utf-8")).hexdigest()[:10]
+    safe = re.sub(r"[^\w\-]+", "_", title, flags=re.UNICODE).strip("_")
+    safe = (safe[:48] or "item").strip("_")
+    return f"{safe}_{digest}"
+
+
+def _resolve_local_media_cover(kind: str, title: str) -> str:
+    """Fallback when meta is missing/wiped but the image file still exists."""
+    folder = MEDIA_IMG_DIR / kind
+    if not folder.is_dir():
+        return ""
+    slug = _media_cover_slug(title)
+    for path in sorted(folder.glob(f"{slug}.*")):
+        if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"} and path.stat().st_size >= 800:
+            rel = path.relative_to(BASE_DIR / "static").as_posix()
+            return f"/static/{rel}"
+    return ""
+
+
+def _media_card_item(
+    *,
+    kind: str,
+    title: str,
+    subtitle: str = "",
+    series: str = "",
+    tags: list[str] | None = None,
+    facet: str = "",
+) -> dict:
+    meta = _load_media_meta(kind).get(title) or {}
+    cover = (meta.get("cover_path") or "").strip()
+    if cover and not cover.startswith("/"):
+        cover = f"/{cover}"
+    if cover:
+        local = BASE_DIR / cover.lstrip("/")
+        if not local.is_file():
+            cover = ""
+    if not cover:
+        cover = _resolve_local_media_cover(kind, title)
+    score = meta.get("score")
+    episodes = meta.get("episodes")
+    year = meta.get("year")
+    date = meta.get("date") or ""
+    meta_tags = meta.get("tags") if isinstance(meta.get("tags"), list) else []
+    merged_tags = [t for t in (tags or []) if t]
+    for tag in meta_tags:
+        text = str(tag).strip()
+        if text and text not in merged_tags:
+            merged_tags.append(text)
+    merged_tags = merged_tags[:6]
+    search_bits = [
+        title,
+        subtitle or meta.get("subtitle") or "",
+        series,
+        facet,
+        " ".join(merged_tags),
+        str(year or ""),
+        date,
+    ]
+    return {
+        "title": title,
+        "subtitle": (meta.get("subtitle") or subtitle or series or "").strip(),
+        "series": series,
+        "facet": facet,
+        "image_url": cover or MEDIA_PLACEHOLDER,
+        "has_cover": bool(cover),
+        "score": score,
+        "episodes": episodes,
+        "year": year,
+        "date": date,
+        "tags": merged_tags,
+        "source": meta.get("source") or "",
+        "search_text": " ".join(search_bits).lower(),
+        "meta": "",
+        "excerpt": "",
+        "cells": [],
+    }
 
 
 def _parse_media_list(sheet: str) -> list[dict]:
@@ -649,87 +762,89 @@ def get_browse_page(hub_id: str) -> dict | None:
             "hub_id": hub_id,
             "page_title": "书籍",
             "sheet_name": "书籍",
-            "layout": "table",
-            "table_columns": ["书名", "作者", "分类"],
+            "layout": "media-cards",
+            "facet_label": "分类",
+            "facets": sorted({(b.get("category") or "").strip() for b in books if b.get("category")}),
             "items": [
-                {
-                    "title": b.get("title", ""),
-                    "cells": [
-                        b.get("title", ""),
-                        b.get("author", "") or "—",
-                        b.get("category", "") or "—",
-                    ],
-                    "meta": "",
-                    "image_url": "",
-                    "excerpt": "",
-                }
+                _media_card_item(
+                    kind="books",
+                    title=b.get("title", ""),
+                    subtitle=b.get("author", "") or "",
+                    facet=b.get("category", "") or "",
+                    tags=[t for t in [b.get("author", ""), b.get("category", "")] if t],
+                )
                 for b in books
                 if b.get("title")
             ],
         }
     if hub_id == "anime":
         rows = sorted(data.get("anime", []), key=lambda r: (r.get("name") or "").lower())
+        items = [
+            _media_card_item(
+                kind="anime",
+                title=r.get("name", ""),
+                series=r.get("series", "") or "",
+                facet=r.get("series", "") or "",
+                tags=[r.get("series", "")] if r.get("series") else [],
+            )
+            for r in rows
+            if r.get("name")
+        ]
+        facets = sorted({i["facet"] for i in items if i.get("facet")})
         return {
             "hub_id": hub_id,
             "page_title": "番剧",
             "sheet_name": "番剧",
-            "layout": "table",
-            "table_columns": ["名称", "系列"],
-            "items": [
-                {
-                    "title": r.get("name", ""),
-                    "cells": [r.get("name", ""), r.get("series", "") or "—"],
-                    "meta": "",
-                    "image_url": "",
-                    "excerpt": "",
-                }
-                for r in rows
-                if r.get("name")
-            ],
+            "layout": "media-cards",
+            "facet_label": "系列",
+            "facets": facets,
+            "items": items,
         }
     if hub_id == "movies":
         rows = sorted(data.get("movies", []), key=lambda r: (r.get("name") or "").lower())
+        items = [
+            _media_card_item(
+                kind="movies",
+                title=r.get("name", ""),
+                series=r.get("series", "") or "",
+                facet=r.get("series", "") or "",
+                tags=[r.get("series", "")] if r.get("series") else [],
+            )
+            for r in rows
+            if r.get("name")
+        ]
+        facets = sorted({i["facet"] for i in items if i.get("facet")})
         return {
             "hub_id": hub_id,
             "page_title": "电影",
             "sheet_name": "电影",
-            "layout": "table",
-            "table_columns": ["名称", "系列"],
-            "items": [
-                {
-                    "title": r.get("name", ""),
-                    "cells": [r.get("name", ""), r.get("series", "") or "—"],
-                    "meta": "",
-                    "image_url": "",
-                    "excerpt": "",
-                }
-                for r in rows
-                if r.get("name")
-            ],
+            "layout": "media-cards",
+            "facet_label": "系列",
+            "facets": facets,
+            "items": items,
         }
     if hub_id == "games":
         rows = sorted(data.get("games", []), key=lambda r: (r.get("name") or "").lower())
+        items = [
+            _media_card_item(
+                kind="games",
+                title=r.get("name", ""),
+                series=r.get("series", "") or "",
+                facet=r.get("platform", "") or r.get("series", "") or "",
+                tags=[t for t in [r.get("series", ""), r.get("platform", "")] if t],
+            )
+            for r in rows
+            if r.get("name")
+        ]
+        facets = sorted({i["facet"] for i in items if i.get("facet")})
         return {
             "hub_id": hub_id,
             "page_title": "游戏",
             "sheet_name": "游戏",
-            "layout": "table",
-            "table_columns": ["名称", "系列", "平台"],
-            "items": [
-                {
-                    "title": r.get("name", ""),
-                    "cells": [
-                        r.get("name", ""),
-                        r.get("series", "") or "—",
-                        r.get("platform", "") or "—",
-                    ],
-                    "meta": "",
-                    "image_url": "",
-                    "excerpt": "",
-                }
-                for r in rows
-                if r.get("name")
-            ],
+            "layout": "media-cards",
+            "facet_label": "平台 / 系列",
+            "facets": facets,
+            "items": items,
         }
     if hub_id == "school":
         timeline = data.get("school_timeline", [])

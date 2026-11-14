@@ -81,8 +81,17 @@ body.wiki-site .mp-inline-sections {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: "site" "left" "right";
-  gap: 6px;
+  gap: 10px;
   width: 100%;
+}
+
+body.page-home .mp-wrapper {
+  gap: 12px;
+}
+
+body.page-home .mp-left,
+body.page-home .mp-right {
+  gap: 10px;
 }
 
 body.wiki-site #mp-section-site {
@@ -191,22 +200,44 @@ body.wiki-site .mp-banner__lead {
 
 body.wiki-site .mp-banner__lead .mp-banner__title {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
-  font-weight: 400;
-  margin: 0 0 0.35rem;
+  font-size: clamp(1.85rem, 3.2vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.45rem;
   color: var(--color-emphasized);
+  line-height: 1.15;
 }
 
 body.wiki-site .mp-banner__lead .lead {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.45rem;
+  max-width: 36rem;
+  font-size: 1.02rem;
+  line-height: 1.55;
   color: var(--color-subtle);
 }
 
 body.wiki-site .mp-banner__status {
   font-size: 0.8125rem;
   color: var(--color-subtle);
-  padding-top: 0.25rem;
+  padding-top: 0.4rem;
   border-top: 1px solid var(--border-color-subtle, #c8ccd1);
+}
+
+body.page-home .mp-banner {
+  padding: 1.15rem 1.2rem 1.05rem;
+  background:
+    linear-gradient(135deg, var(--background-color-progressive-subtle) 0%, transparent 55%),
+    var(--panel-bg);
+}
+
+body.page-home.has-wallpaper .mp-banner {
+  background:
+    linear-gradient(135deg, rgba(40, 81, 163, 0.12) 0%, transparent 58%),
+    var(--inner-surface, var(--surface-solid));
+}
+
+body.page-home .mp-wrapper > .mp-banner .mp-banner__title {
+  text-wrap: balance;
 }
 
 body.wiki-site .mp-profile-bio {
@@ -356,6 +387,24 @@ body.wiki-site .mp-button {
 body.wiki-site .mp-button.mp-button-progressive {
   background-color: var(--button-color-progressive);
   --button-text-color: #fff;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset;
+}
+
+body.wiki-site .mp-button.mp-button-progressive:hover:not(:active) {
+  filter: brightness(1.08);
+}
+
+body.wiki-site .mp-button:focus-visible {
+  outline: 2px solid var(--color-progressive);
+  outline-offset: 3px;
+}
+
+body.page-home .mp-button-wrapper--primary .mp-button,
+body.page-home #mp-featured .mp-button-progressive,
+body.page-home #mp-quiz .mp-button-progressive,
+body.page-home #mp-personal .mp-button-progressive {
+  font-size: 1.02em;
+  letter-spacing: 0.01em;
 }
 
 body.wiki-site .mp-button__inner {
@@ -735,14 +784,26 @@ body.wiki-site .mp-wrapper.mp-wrapper--page {
 body.wiki-site .mp-wrapper .mp-page-header {
   width: 100%;
   margin-bottom: 0;
+  padding-top: 1.15rem;
+  padding-bottom: 1.05rem;
 }
 
 body.wiki-site .mp-wrapper .mp-page-header h1 {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
-  margin: 0 0 0.35rem;
+  font-size: clamp(1.55rem, 2.8vw, 1.95rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin: 0 0 0.4rem;
   border: none;
   padding: 0;
+}
+
+body.wiki-site .mp-wrapper .mp-page-header .lead {
+  max-width: 40rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
 }
 
 body.wiki-site .mp-gallery-grid {

@@ -29,34 +29,23 @@
   min-width: 0;
 }
 
-.personal-page .personal-kicker {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 0.5rem;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--personal-muted);
-}
-
-.personal-page .personal-kicker__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--personal-accent);
-}
-
 .personal-page .personal-hero__title {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.35rem;
   font-family: var(--font-serif);
-  font-size: 1.9rem;
+  font-size: clamp(1.65rem, 3vw, 2rem);
   font-weight: 600;
   line-height: 1.2;
+  letter-spacing: -0.015em;
   color: var(--personal-strong);
   border: none;
   padding: 0;
+  text-wrap: balance;
+}
+
+.personal-page .personal-hero__updated {
+  margin: 0 0 0.55rem;
+  font-size: 0.8125rem;
+  color: var(--personal-muted);
 }
 
 .personal-page .personal-hero__subtitle {

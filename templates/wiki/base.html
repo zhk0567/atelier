@@ -14,8 +14,8 @@
   {% block meta %}{% endblock %}
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/static/css/wiki.css?v=50" />
-  <link rel="stylesheet" href="/static/css/mp-portal.css?v=14" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=51" />
+  <link rel="stylesheet" href="/static/css/mp-portal.css?v=15" />
   {% if wallpapers %}
   {% set default_wp = wallpapers | selectattr('default') | first | default(wallpapers[0]) %}
   {% set default_wp_src = default_wp.preview_url | default(default_wp.url) %}
@@ -24,6 +24,7 @@
   {% block extra_head %}{% endblock %}
 </head>
 <body class="wiki-site{% if wallpapers %} has-wallpaper{% endif %}{% if page_home %} page-home{% endif %}{% if page_quiz %} page-quiz{% endif %}">
+  <a class="wiki-skip-link" href="#main">跳到正文</a>
   {% if wallpapers %}
   <div class="wiki-wallpaper" id="wiki-wallpaper" aria-hidden="true">
     <img
@@ -41,7 +42,7 @@
     <div class="wiki-header__start">
       <button type="button" class="wiki-nav-toggle" aria-label="{{ ui.label_nav }}" aria-expanded="false">☰</button>
       <a href="/" class="wiki-logo">
-        <span class="wiki-logo__mark" aria-hidden="true"></span>
+        <span class="wiki-logo__mark" data-mark="{{ brand_mark }}" aria-hidden="true"></span>
         <span class="wiki-logo__text">{{ site_name }}</span>
       </a>
     </div>
@@ -184,7 +185,7 @@
   <script src="/static/vendor/live2d/cubism4.min.js" defer></script>
   <script src="/static/js/live2d-mc-vtuber.js?v=26" defer></script>
   {% endif %}
-  <script src="/static/js/main.js?v=45" defer></script>
+  <script src="/static/js/main.js?v=46" defer></script>
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>

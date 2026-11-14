@@ -12,6 +12,7 @@ from app.config import ATELIER_ROOT, MC_VTUBER_DIR, mc_vtuber_live2d_ready
 from app.static_files import CachedStaticFiles
 from app.constants import MC_VTUBER_CACHE_HEADERS, SITE_NAME, SITE_TITLE
 from app.middleware import register_security_middleware
+from app.echo_sync import router as echo_sync_router
 from app.routes import admin, assets, blog, browse, home, personal, projects, quiz, travel, wiki
 
 
@@ -85,6 +86,7 @@ def create_app() -> FastAPI:
     app.include_router(quiz.router)
     app.include_router(admin.router)
     app.include_router(wiki.router)
+    app.include_router(echo_sync_router)
     static_dir = ATELIER_ROOT / "static"
     if mc_vtuber_live2d_ready():
         app.mount(

@@ -2,6 +2,12 @@
 
 {% block title %}{{ page_title }} · {{ site_name }}{% endblock %}
 
+{% block extra_head %}
+{% if layout == 'media-cards' %}
+<link rel="stylesheet" href="/static/css/media-cards.css?v=7" />
+{% endif %}
+{% endblock %}
+
 {% block breadcrumbs %}
 <nav class="wiki-breadcrumbs" aria-label="breadcrumb">
   <a href="/">{{ ui.label_main_page }}</a>
@@ -11,13 +17,87 @@
 {% endblock %}
 
 {% block content %}
-<div class="mp-wrapper mp-wrapper--page">
+<div class="mp-wrapper mp-wrapper--page{% if layout == 'media-cards' %} mp-wrapper--media{% endif %}">
   <section class="mp-section mp-page-header mp-section-full">
     <h1>{{ page_title }}</h1>
     {% if ui.browse_lead %}<p class="lead">{{ ui.browse_lead }}</p>{% endif %}
   </section>
 
-  {% if sections %}
+  {% if layout == 'media-cards' %}
+  <section class="mp-section mp-section-full media-browse" data-media-browse data-hub="{{ hub_id }}">
+    <div class="browse-toolbar media-browse__toolbar">
+      <label class="browse-toolbar__filter">
+        <span class="browse-toolbar__label">筛选</span>
+        <input type="search" class="browse-toolbar__input" data-media-filter placeholder="搜索标题、标签…" autocomplete="off" />
+      </label>
+      <div class="media-browse__sort">
+        <label>
+          <span class="visually-hidden">排序</span>
+          <select data-media-sort aria-label="排序">
+            <option value="title-asc">标题 A→Z</option>
+            <option value="title-desc">标题 Z→A</option>
+            <option value="score-desc">评分高→低</option>
+            <option value="year-desc">年份新→旧</option>
+          </select>
+        </label>
+      </div>
+      <span class="browse-toolbar__count">显示 <strong data-media-count>{{ item_count }}</strong> 条</span>
+    </div>
+    {% if facets %}
+    <div class="media-browse__facets" role="group" aria-label="{{ facet_label or '分类' }}">
+      <button type="button" class="media-facet is-active" data-media-facet="" aria-pressed="true">全部</button>
+      {% for facet in facets %}
+      <button type="button" class="media-facet" data-media-facet="{{ facet }}" aria-pressed="false">{{ facet }}</button>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="media-card-grid" data-media-grid>
+      {% for item in items %}
+      <article
+        class="media-card{% if not item.has_cover %} media-card--placeholder{% endif %}"
+        data-media-card
+        data-title="{{ item.title }}"
+        data-facet="{{ item.facet or '' }}"
+        data-score="{{ item.score if item.score is not none else '' }}"
+        data-year="{{ item.year if item.year is not none else '' }}"
+        data-search="{{ item.search_text }}"
+      >
+        <div class="media-card__cover">
+          <img
+            src="{{ item.image_url }}"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            width="225"
+            height="300"
+            data-fallback="/static/img/wiki/bookshelf.png"
+            onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;this.closest('.media-card')&&this.closest('.media-card').classList.add('media-card--placeholder');}"
+          />
+          {% if item.year %}
+          <span class="media-card__badge">{{ item.year }}</span>
+          {% endif %}
+        </div>
+        <div class="media-card__body">
+          <h2 class="media-card__title" title="{{ item.title }}">{{ item.title }}</h2>
+          {% if item.episodes %}
+          <p class="media-card__status">全 {{ item.episodes }} 话{% if item.year %} · {{ item.year }}{% endif %}</p>
+          {% elif item.year %}
+          <p class="media-card__status">{{ item.year }}{% if item.facet %} · {{ item.facet }}{% endif %}</p>
+          {% elif item.facet %}
+          <p class="media-card__status">{{ item.facet }}</p>
+          {% elif item.subtitle %}
+          <p class="media-card__status" title="{{ item.subtitle }}">{{ item.subtitle }}</p>
+          {% else %}
+          <p class="media-card__status">收藏</p>
+          {% endif %}
+        </div>
+      </article>
+      {% else %}
+      <p class="mp-empty-note">暂无记录。</p>
+      {% endfor %}
+    </div>
+  </section>
+  {% elif sections %}
     {% for section in sections %}
     <section class="mp-section mp-section-full{% if layout == 'cards' %} mp-section--gallery{% endif %}">
       <h2 class="mp-title">{{ section["title"] }} ({{ section["items"]|length }})</h2>

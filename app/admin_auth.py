@@ -150,9 +150,14 @@ def csrf_valid(request: Request, submitted: str) -> bool:
 
 def client_ip(request: Request) -> str:
     if is_production():
+        # Nginx sets X-Real-IP from $remote_addr; X-Forwarded-For can contain a
+        # client-supplied first hop, so prefer the proxy-written values.
+        real_ip = request.headers.get("x-real-ip", "").strip()
+        if real_ip:
+            return real_ip
         forwarded = request.headers.get("x-forwarded-for", "")
         if forwarded:
-            return forwarded.split(",")[0].strip() or "unknown"
+            return forwarded.split(",")[-1].strip() or "unknown"
     if request.client and request.client.host:
         return request.client.host
     return "unknown"

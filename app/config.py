@@ -18,7 +18,7 @@ DEFAULT_BLOG_HOTSPOT_DIR = "hotspot"
 DEFAULT_BLOG_STANDALONE_DIR = "standalone"
 
 WIKI_DIR = ATELIER_ROOT / "Wiki"
-DEFAULT_TRUSTED_HOSTS = "zhkun.xyz,www.zhkun.xyz,127.0.0.1,localhost"
+DEFAULT_TRUSTED_HOSTS = "zhkun.xyz,www.zhkun.xyz,39.106.117.118,127.0.0.1,localhost"
 DEFAULT_RATE_LIMIT = "120/minute"
 DEFAULT_RATE_LIMIT_WALLPAPER = "30/minute"
 

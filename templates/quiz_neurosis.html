@@ -8,7 +8,7 @@
 
 {% block extra_head %}
 <script>document.documentElement.classList.add("nq-js");</script>
-<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=5" />
+<link rel="stylesheet" href="/static/css/neurosis-quiz.css?v=6" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -23,7 +23,6 @@
 <div class="nq-shell" data-quiz-root>
   <header class="nq-hero">
     <div class="nq-hero__copy">
-      <p class="nq-kicker">当代人精神状态观察室</p>
       <h1>{{ quiz_title }}</h1>
       <p class="nq-hero__lead">不是给你贴一个标签，而是把你最近那些“说不清哪里不对”的瞬间摊开看看。别想太久，第一反应通常最诚实。</p>
       <div class="nq-meta">
@@ -47,7 +46,6 @@
     <section class="nq-intro" data-nq-intro>
       <div class="nq-intro__head">
         <div>
-          <p class="nq-kicker">入场登记</p>
           <h2>先留一个只有你认识的名字</h2>
         </div>
         <span class="nq-intro__time">匿名感 × 安全感</span>
@@ -172,5 +170,5 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="/static/js/neurosis-quiz.js?v=3" defer></script>
+<script src="/static/js/neurosis-quiz.js?v=4" defer></script>
 {% endblock %}

@@ -600,6 +600,80 @@
 
   initBrowseTables();
 
+  function initMediaBrowse() {
+    document.querySelectorAll("[data-media-browse]").forEach((root) => {
+      const input = root.querySelector("[data-media-filter]");
+      const sortEl = root.querySelector("[data-media-sort]");
+      const countEl = root.querySelector("[data-media-count]");
+      const grid = root.querySelector("[data-media-grid]");
+      const cards = Array.from(root.querySelectorAll("[data-media-card]"));
+      const facets = Array.from(root.querySelectorAll("[data-media-facet]"));
+      if (!grid || !cards.length) return;
+
+      let activeFacet = "";
+
+      const apply = () => {
+        const q = (input?.value || "").trim().toLowerCase();
+        const sort = sortEl?.value || "title-asc";
+        let visible = 0;
+        const shown = [];
+
+        cards.forEach((card) => {
+          const hay = (card.dataset.search || card.dataset.title || "").toLowerCase();
+          const facet = card.dataset.facet || "";
+          const matchQ = !q || hay.includes(q);
+          const matchF = !activeFacet || facet === activeFacet;
+          const show = matchQ && matchF;
+          card.hidden = !show;
+          if (show) {
+            visible += 1;
+            shown.push(card);
+          }
+        });
+
+        shown.sort((a, b) => {
+          const titleA = (a.dataset.title || "").toLowerCase();
+          const titleB = (b.dataset.title || "").toLowerCase();
+          const scoreA = parseFloat(a.dataset.score || "");
+          const scoreB = parseFloat(b.dataset.score || "");
+          const yearA = parseInt(a.dataset.year || "0", 10) || 0;
+          const yearB = parseInt(b.dataset.year || "0", 10) || 0;
+          if (sort === "title-desc") return titleB.localeCompare(titleA, "zh-CN");
+          if (sort === "score-desc") {
+            const sa = Number.isFinite(scoreA) ? scoreA : -1;
+            const sb = Number.isFinite(scoreB) ? scoreB : -1;
+            if (sb !== sa) return sb - sa;
+            return titleA.localeCompare(titleB, "zh-CN");
+          }
+          if (sort === "year-desc") {
+            if (yearB !== yearA) return yearB - yearA;
+            return titleA.localeCompare(titleB, "zh-CN");
+          }
+          return titleA.localeCompare(titleB, "zh-CN");
+        });
+
+        shown.forEach((card) => grid.appendChild(card));
+        if (countEl) countEl.textContent = String(visible);
+      };
+
+      if (input) input.addEventListener("input", apply);
+      if (sortEl) sortEl.addEventListener("change", apply);
+      facets.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          activeFacet = btn.dataset.mediaFacet || "";
+          facets.forEach((f) => {
+            const on = f === btn;
+            f.classList.toggle("is-active", on);
+            f.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+          apply();
+        });
+      });
+      apply();
+    });
+  }
+  initMediaBrowse();
+
   function initSiteSearch() {
     const wrap = document.getElementById("wiki-search-wrap");
     const input = document.getElementById("wiki-search");

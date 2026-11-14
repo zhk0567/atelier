@@ -9,7 +9,7 @@ Group=atelier
 WorkingDirectory=/opt/atelier
 Environment=PATH=/opt/atelier/.venv/bin
 Environment=ATELIER_ENV=production
-Environment=TRUSTED_HOSTS=zhkun.xyz,www.zhkun.xyz,127.0.0.1,localhost
+Environment=TRUSTED_HOSTS=zhkun.xyz,www.zhkun.xyz,39.106.117.118,127.0.0.1,localhost
 Environment=BLOCK_PROBE_PATHS=1
 Environment=RATE_LIMIT_DEFAULT=120/minute
 Environment=RATE_LIMIT_WALLPAPER=30/minute

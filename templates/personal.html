@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="/static/css/personal.css?v=7" />
+  <link rel="stylesheet" href="/static/css/personal.css?v=8" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -22,8 +22,8 @@
 <div class="mp-wrapper mp-wrapper--page personal-page">
   <header class="mp-section mp-section-full personal-hero">
     <div class="personal-hero__lead">
-      <p class="personal-kicker">{{ ui.personal_kicker }}<span class="personal-kicker__dot" aria-hidden="true"></span>更新于 {{ personal.updated }}</p>
       <h1 class="personal-hero__title">{{ ui.label_personal }}与未来任务</h1>
+      <p class="personal-hero__updated">更新于 {{ personal.updated }}</p>
       <p class="lead personal-hero__subtitle">{{ ui.personal_index_lead }}</p>
       <p class="personal-hero__note">要求是给自己的；任务，是朋友们给的。</p>
     </div>
@@ -45,7 +45,7 @@
 
   <section class="mp-section mp-section-full personal-block" id="requirements" aria-labelledby="personal-requirements-title">
     <div class="personal-block__head">
-      <h2 class="mp-title" id="personal-requirements-title"><span class="personal-block__no" aria-hidden="true">01</span>对自己的要求</h2>
+      <h2 class="mp-title" id="personal-requirements-title">对自己的要求</h2>
       <p class="personal-block__lead">{{ personal.requirements_intro }}</p>
     </div>
     <ol class="personal-rules">
@@ -72,7 +72,7 @@
 
   <section class="mp-section mp-section-full personal-block" id="tasks" aria-labelledby="personal-tasks-title">
     <div class="personal-block__head">
-      <h2 class="mp-title" id="personal-tasks-title"><span class="personal-block__no" aria-hidden="true">02</span>未来任务</h2>
+      <h2 class="mp-title" id="personal-tasks-title">未来任务</h2>
       <p class="personal-block__lead">{{ personal.tasks_intro }}</p>
     </div>
 
@@ -117,7 +117,7 @@
 
   <section class="mp-section mp-section-full personal-block" id="wishes" aria-labelledby="personal-wishes-title">
     <div class="personal-block__head">
-      <h2 class="mp-title" id="personal-wishes-title"><span class="personal-block__no" aria-hidden="true">03</span>新收到的愿望</h2>
+      <h2 class="mp-title" id="personal-wishes-title">新收到的愿望</h2>
       <p class="personal-block__lead">这一栏是开着的。右下角按钮写下的愿望会先到管理员那里，审核通过后才会出现在这里。</p>
     </div>
     {% if wish_sent %}
@@ -180,8 +180,8 @@
     <div class="personal-wish-modal__backdrop" data-wish-close></div>
     <div class="personal-wish-modal__panel" role="dialog" aria-modal="true" aria-labelledby="wish-modal-title">
       <button type="button" class="personal-wish-modal__close" data-wish-close aria-label="关闭">×</button>
-      <p class="personal-kicker">OPEN WISH<span class="personal-kicker__dot" aria-hidden="true"></span>审核后公开</p>
       <h2 class="personal-wish-modal__title" id="wish-modal-title">写一条愿望或要求</h2>
+      <p class="personal-hero__updated">提交后需审核，通过才会公开</p>
       <p class="personal-wish-modal__lead">可以是想让我做的事，也可以是一条要求。审核通过后，它会出现在页面最下面。</p>
       <form class="personal-wish-form" method="post" action="{{ wish_path }}" data-wish-form>
         <div class="personal-wish-form__field">

@@ -81,32 +81,33 @@ body.page-quiz .wiki-main {
   border: 1px solid var(--border-color-subtle);
   border-radius: 1.1rem;
   background:
-    radial-gradient(circle at 88% 10%, rgba(88, 120, 255, 0.2), transparent 34%),
-    radial-gradient(circle at 4% 92%, rgba(255, 132, 184, 0.16), transparent 38%),
+    radial-gradient(circle at 88% 10%, rgba(40, 81, 163, 0.16), transparent 36%),
+    radial-gradient(circle at 4% 92%, rgba(58, 151, 30, 0.1), transparent 40%),
     var(--surface-elevated);
   box-shadow: var(--box-shadow-elevated);
 }
 
 .nq-hero::after {
-  content: "☾";
+  content: "?";
   position: absolute;
   right: clamp(1rem, 5vw, 3rem);
-  top: 0.2rem;
+  top: 0.35rem;
   font-size: clamp(5rem, 16vw, 10rem);
   line-height: 1;
-  color: rgba(120, 140, 255, 0.08);
-  transform: rotate(-12deg);
+  font-weight: 700;
+  color: rgba(40, 81, 163, 0.08);
+  transform: rotate(-8deg);
   pointer-events: none;
 }
 
 .nq-kicker,
 .nq-section-label {
-  margin: 0 0 0.45rem;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-progressive);
+  margin: 0 0 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--color-subtle);
 }
 
 .nq-hero h1,
@@ -387,7 +388,7 @@ body.page-quiz .wiki-main {
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #5878ff, #e16ba9);
+  background: linear-gradient(90deg, #5878ff, #3a971e);
   transition: width 220ms ease;
 }
 
@@ -532,6 +533,14 @@ body.page-quiz .wiki-main {
   display: none;
 }
 
+.nq-form.is-submitting [data-nq-submit],
+.nq-form.is-submitting [data-nq-next],
+.nq-form.is-submitting [data-nq-prev] {
+  opacity: 0.65;
+  pointer-events: none;
+  cursor: wait;
+}
+
 .nq-quiz.is-last .nq-controls [data-nq-submit] {
   display: inline-flex;
 }
@@ -557,7 +566,7 @@ body.page-quiz .wiki-main {
   border: 1px solid var(--border-color-subtle);
   border-radius: 1.05rem;
   background:
-    radial-gradient(circle at 90% 0%, rgba(88, 120, 255, 0.2), transparent 35%),
+    radial-gradient(circle at 90% 0%, rgba(40, 81, 163, 0.2), transparent 35%),
     var(--surface-elevated);
   box-shadow: var(--box-shadow-elevated);
 }
@@ -670,9 +679,9 @@ body.page-quiz .wiki-main {
 
 .nq-challenge {
   padding: 0.8rem;
-  border: 1px solid rgba(225, 107, 169, 0.35);
+  border: 1px solid rgba(40, 81, 163, 0.35);
   border-radius: 0.65rem;
-  background: rgba(225, 107, 169, 0.08);
+  background: rgba(40, 81, 163, 0.08);
 }
 
 .nq-challenge p:last-child {
@@ -685,10 +694,10 @@ body.page-quiz .wiki-main {
   display: grid;
   gap: 0.65rem;
   padding: clamp(1rem, 3vw, 1.4rem);
-  border: 1px solid rgba(225, 107, 169, 0.35);
+  border: 1px solid rgba(40, 81, 163, 0.35);
   border-radius: 0.9rem;
   background:
-    radial-gradient(circle at 100% 0%, rgba(225, 107, 169, 0.14), transparent 40%),
+    radial-gradient(circle at 100% 0%, rgba(40, 81, 163, 0.14), transparent 40%),
     var(--surface-elevated);
 }
 
@@ -700,7 +709,7 @@ body.page-quiz .wiki-main {
 
 .nq-hidden-card {
   padding: 0.85rem;
-  border: 1px solid rgba(225, 107, 169, 0.28);
+  border: 1px solid rgba(40, 81, 163, 0.28);
   border-radius: 0.65rem;
   background: var(--background-color-base);
 }
@@ -731,7 +740,7 @@ body.page-quiz .wiki-main {
   border: 1px solid var(--border-color-subtle);
   border-radius: 1rem;
   background:
-    radial-gradient(circle at 92% 8%, rgba(88, 120, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 92% 8%, rgba(40, 81, 163, 0.16), transparent 34%),
     var(--surface-elevated);
   box-shadow: var(--box-shadow-elevated);
 }
@@ -908,13 +917,13 @@ body.page-quiz .wiki-main {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #6e8dff, #e16ba9);
+  background: linear-gradient(90deg, #2851a3, #3a971e);
 }
 
 .nq-attention {
-  border-color: rgba(225, 107, 169, 0.45);
+  border-color: rgba(40, 81, 163, 0.45);
   background:
-    linear-gradient(135deg, rgba(225, 107, 169, 0.1), transparent 55%),
+    linear-gradient(135deg, rgba(40, 81, 163, 0.1), transparent 55%),
     var(--surface-elevated);
 }
 
@@ -1033,7 +1042,7 @@ body.page-quiz .wiki-main {
   min-height: 20rem;
   background:
     linear-gradient(135deg, rgba(109, 139, 255, 0.13), transparent 42%),
-    radial-gradient(circle at 92% 12%, rgba(225, 107, 169, 0.2), transparent 30%),
+    radial-gradient(circle at 92% 12%, rgba(40, 81, 163, 0.2), transparent 30%),
     radial-gradient(circle at 10% 92%, rgba(86, 205, 170, 0.12), transparent 34%),
     var(--surface-elevated);
 }
@@ -1043,11 +1052,11 @@ body.page-quiz .wiki-main {
   inset: auto -6rem -8rem auto;
   width: 20rem;
   height: 20rem;
-  border: 1px solid rgba(120, 140, 255, 0.16);
+  border: 1px solid rgba(40, 81, 163, 0.16);
   border-radius: 50%;
   box-shadow:
-    0 0 0 2.5rem rgba(120, 140, 255, 0.035),
-    0 0 0 5rem rgba(225, 107, 169, 0.025);
+    0 0 0 2.5rem rgba(40, 81, 163, 0.035),
+    0 0 0 5rem rgba(40, 81, 163, 0.025);
   transform: none;
 }
 
@@ -1069,15 +1078,15 @@ body.page-quiz .wiki-main {
   place-items: center;
   width: clamp(8.5rem, 17vw, 11rem);
   aspect-ratio: 1;
-  border: 1px solid rgba(120, 140, 255, 0.28);
+  border: 1px solid rgba(40, 81, 163, 0.28);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.8), transparent 22%),
-    linear-gradient(145deg, rgba(111, 137, 255, 0.32), rgba(225, 107, 169, 0.22));
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.82), transparent 22%),
+    linear-gradient(145deg, rgba(40, 81, 163, 0.28), rgba(58, 151, 30, 0.18));
   box-shadow:
-    0 1.2rem 3rem rgba(53, 71, 142, 0.18),
+    0 1.2rem 3rem rgba(40, 81, 163, 0.16),
     inset 0 0 2.5rem rgba(255, 255, 255, 0.18);
-  color: rgba(51, 67, 133, 0.72);
+  color: rgba(40, 81, 163, 0.72);
   font-family: var(--font-serif);
   font-size: 4rem;
   transform: translate(-50%, -50%) rotate(-8deg);
@@ -1089,11 +1098,11 @@ body.page-quiz .wiki-main {
   right: 2%;
   top: 2%;
   padding: 0.45rem 0.65rem;
-  border: 1px solid rgba(77, 94, 165, 0.38);
-  color: rgba(60, 78, 150, 0.78);
+  border: 1px solid rgba(40, 81, 163, 0.32);
+  color: rgba(40, 81, 163, 0.78);
   font-size: 0.58rem;
-  font-weight: 900;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   line-height: 1.45;
   text-align: center;
   transform: rotate(7deg);
@@ -1139,8 +1148,8 @@ body.page-quiz .wiki-main {
   content: "";
   position: absolute;
   inset: 0 0 auto;
-  height: 0.25rem;
-  background: linear-gradient(90deg, #6e8dff, #d16bd4, #f0a25e);
+  height: 0.2rem;
+  background: linear-gradient(90deg, #2851a3, #3a971e);
 }
 
 .nq-intro__head {
@@ -1174,7 +1183,7 @@ body.page-quiz .wiki-main {
 
 .nq-field input:focus {
   border-color: var(--color-progressive);
-  box-shadow: 0 0 0 4px rgba(88, 120, 255, 0.11);
+  box-shadow: 0 0 0 4px rgba(40, 81, 163, 0.11);
   outline: 0;
   transform: translateY(-1px);
 }
@@ -1182,7 +1191,7 @@ body.page-quiz .wiki-main {
 .nq-fields-note {
   margin: -0.25rem 0 0;
   padding-left: 0.7rem;
-  border-left: 2px solid rgba(88, 120, 255, 0.45);
+  border-left: 1px solid rgba(40, 81, 163, 0.45);
   color: var(--color-subtle);
   font-size: 0.76rem;
   line-height: 1.65;
@@ -1193,7 +1202,7 @@ body.page-quiz .wiki-main {
   border: 1px dashed var(--border-color-base);
   border-radius: 0.75rem;
   background:
-    linear-gradient(135deg, rgba(88, 120, 255, 0.055), transparent 55%),
+    linear-gradient(135deg, rgba(40, 81, 163, 0.055), transparent 55%),
     var(--background-color-neutral-subtle);
   transition: border-color 160ms ease, background 160ms ease;
 }
@@ -1307,7 +1316,7 @@ body.page-quiz .wiki-main {
   position: absolute;
   inset: auto 0 0;
   height: 2px;
-  background: linear-gradient(90deg, #6e8dff, #e16ba9);
+  background: linear-gradient(90deg, #2851a3, #3a971e);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 180ms ease;
@@ -1361,7 +1370,7 @@ body.page-quiz .wiki-main {
   overflow: hidden;
   background:
     radial-gradient(circle at 86% 4%, var(--nq-accent-soft), transparent 31%),
-    radial-gradient(circle at 4% 96%, rgba(88, 120, 255, 0.12), transparent 35%),
+    radial-gradient(circle at 4% 96%, rgba(40, 81, 163, 0.12), transparent 35%),
     var(--surface-elevated);
 }
 
@@ -1499,7 +1508,7 @@ body.page-quiz .wiki-main {
   border: 1px solid var(--border-color-subtle);
   border-radius: 1rem;
   background:
-    linear-gradient(135deg, rgba(88, 120, 255, 0.075), transparent 55%),
+    linear-gradient(135deg, rgba(40, 81, 163, 0.075), transparent 55%),
     var(--surface-elevated);
   box-shadow: var(--box-shadow-subtle);
 }
@@ -1610,7 +1619,7 @@ body.page-quiz .wiki-main {
 
 .nq-combo {
   background:
-    linear-gradient(120deg, rgba(225, 107, 169, 0.09), transparent 54%),
+    linear-gradient(120deg, rgba(40, 81, 163, 0.09), transparent 54%),
     var(--surface-elevated);
 }
 
@@ -1674,15 +1683,15 @@ body.page-quiz .wiki-main {
 }
 
 .nq-dimension--high .nq-dimension__track span {
-  background: linear-gradient(90deg, #e16ba9, #c54d63);
+  background: linear-gradient(90deg, #3a971e, #c54d63);
 }
 
 .nq-dimension--mid .nq-dimension__track span {
-  background: linear-gradient(90deg, #8c9eff, #d08b5c);
+  background: linear-gradient(90deg, #2851a3, #3a971e);
 }
 
 .nq-dimension--low .nq-dimension__track span {
-  background: linear-gradient(90deg, #75c9b1, #8c9eff);
+  background: linear-gradient(90deg, #3a971e, #2851a3);
 }
 
 .nq-plan {
@@ -1880,7 +1889,7 @@ body.page-quiz .wiki-main {
   position: absolute;
   inset: 0 auto 0 0;
   width: 0.22rem;
-  background: linear-gradient(180deg, #6e8dff, #e16ba9);
+  background: linear-gradient(180deg, #2851a3, #3a971e);
 }
 
 .nq-record-card__body {
@@ -2020,8 +2029,8 @@ body.page-quiz .wiki-main {
   border: 1px solid var(--border-color-subtle);
   border-radius: 1rem;
   background:
-    radial-gradient(circle at 92% 6%, rgba(225, 107, 169, 0.16), transparent 34%),
-    radial-gradient(circle at 4% 96%, rgba(88, 120, 255, 0.13), transparent 38%),
+    radial-gradient(circle at 92% 6%, rgba(40, 81, 163, 0.16), transparent 34%),
+    radial-gradient(circle at 4% 96%, rgba(40, 81, 163, 0.13), transparent 38%),
     var(--surface-elevated);
   box-shadow: var(--box-shadow-elevated);
 }
@@ -2114,7 +2123,7 @@ body.page-quiz .wiki-main {
 .nq-feedback__field textarea:focus {
   border-color: var(--color-progressive);
   outline: 0;
-  box-shadow: 0 0 0 4px rgba(88, 120, 255, 0.11);
+  box-shadow: 0 0 0 4px rgba(40, 81, 163, 0.11);
 }
 
 .nq-feedback__field small {

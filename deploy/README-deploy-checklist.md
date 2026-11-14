@@ -71,13 +71,39 @@ sudo certbot --nginx -d zhkun.xyz -d www.zhkun.xyz
 
 详见 [docs/SECURITY.md](../docs/SECURITY.md)。
 
-## 8. 日常更新
+## 8. Echo 日记云同步（可选 · 双副本手动）
+
+私有 API：`/api/echo/*`，需 Bearer Token。数据存 `instance/echo_diary.sqlite3`，按 `desktop` / `android` **各存一份副本**，**不会**出现在公开网页。
+
+备案期间客户端默认直连公网 IP（例：`http://39.106.117.118`），勿依赖域名。`TRUSTED_HOSTS` 须包含该 IP。
+
+```bash
+cd /opt/atelier
+source .venv/bin/activate
+python scripts/generate_echo_sync_token.py
+# 把打印出的 token 配到 Echo 桌面端 / 安卓端设置里
+sudo systemctl restart atelier
+```
+
+验证：
+
+```bash
+curl -H "Authorization: Bearer <token>" http://39.106.117.118/api/echo/health
+# 或本机：curl -H "Authorization: Bearer <token>" http://127.0.0.1:8000/api/echo/health
+```
+
+手动流程：`PUT /api/echo/replica/{desktop|android}` 上传本端；`POST /api/echo/diff/{self}` 检查对端变更说明；客户端确认后再把 peer 快照写入本地。无自动合并。
+
+若上传大批量失败，可在 Nginx `server` 中把 `client_max_body_size` 调到 `4m`。
+
+## 9. 日常更新
 
 ```bash
 cd /opt/atelier && git pull
 source .venv/bin/activate && pip install -r requirements.txt
 sudo systemctl restart atelier
 ```
+
 
 ## 9. 截图存档（大作业）
 
