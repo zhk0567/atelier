@@ -112,6 +112,7 @@ STEAM_TITLE_ALIASES: dict[str, str] = {
     "绣湖：根源": "Rusty Lake Roots",
     "诡计穿越僵尸末日": "Scheming Through Zombie Apocalypse",
     "彩虹小马格斗": "Fighting is Magic",
+    "刺客信条：奥德赛": "Assassin's Creed Odyssey",
 }
 
 # Hard AppIDs when storesearch scoring flaps on ® / punctuation.
@@ -161,6 +162,7 @@ STEAM_APP_IDS: dict[str, int] = {
     "诡计穿越僵尸末日": 813540,
     "我是僵尸": 307230,
     "海浪物语": 1823930,
+    "刺客信条：奥德赛": 812140,
 }
 
 # Manual CN → Anilist/Kitsu search strings — free MT is often unusable.
@@ -257,8 +259,43 @@ ANIME_TITLE_ALIASES: dict[str, str] = {
     "未确认进行式": "Engaged to the Unidentified",
     "林家的天使同学": "The Angel Next Door Spoils Me Rotten",
     "邻家的天使同学": "The Angel Next Door Spoils Me Rotten",
+    "邻家的天使同学 第一季": "The Angel Next Door Spoils Me Rotten",
+    "邻家的天使同学 第二季": "The Angel Next Door Spoils Me Rotten Season 2",
     "欢迎来到实力之上主义的教室 第四季": "ようこそ実力至上主義の教室へ 4th Season",
     "正相反的你与我": "You and I Are Polar Opposites",
+    "正相反的你与我 第一季": "You and I Are Polar Opposites",
+    "正相反的你与我 第二季": "You and I Are Polar Opposites Season 2",
+    "Re：从零开始的异世界生活 第三季": "Re:Zero Starting Life in Another World Season 3",
+    "一周的朋友": "One Week Friends",
+    "剧场版 妄想学生会": "Seitokai Yakuindomo Movie",
+    "剧场版 妄想学生会2": "Seitokai Yakuindomo Movie 2",
+    "在超市后门吸烟的二人": "スーパの裏でヤニ吸うふたり",
+    "花织同学转生之后还是想干架": "花織さんは転生しても喧嘩がしたい",
+    "堀与宫村 第一季": "Horimiya",
+    "堀与宫村 第二季": "Horimiya: The Missing Pieces",
+    "妄想学生会 OVA": "Seitokai Yakuindomo OVA",
+    "妄想学生会 S2OVA": "Seitokai Yakuindomo Season 2 OVA",
+    "妄想学生会 第一季": "Seitokai Yakuindomo",
+    "妄想学生会 第二季": "Seitokai Yakuindomo Season 2",
+    "尼古喵喵": "Nyanko Days",
+    "幸运星": "Lucky Star",
+    "水果篮子 (2019)": "Fruits Basket 2019",
+    "水果篮子 最终季": "Fruits Basket The Final",
+    "水果篮子 第二季": "Fruits Basket 2nd Season",
+    "电器街的漫画店": "Denki-gai no Honya-san",
+    "碧蓝之海 第三季": "Grand Blue Dreaming Season 3",
+    "花织同学转生之后还是想干架": "Even After Reincarnation, Hanaori-san Still Wants to Fight",
+    "荒川爆笑团": "Arakawa Under the Bridge",
+    "荒川爆笑团2": "Arakawa Under the Bridge x Bridge",
+    "魔女之旅": "Wandering Witch The Journey of Elaina",
+    "魔法少女什么的已经够了啦。第一季": "Mahou Shoujo nante Mou Ii Desu yo",
+    "魔法少女什么的已经够了啦。第二季": "Mahou Shoujo nante Mou Ii Desu yo Second Season",
+    "齐木楠雄的灾难 始动篇": "The Disastrous Life of Saiki K Starting Arc",
+    "齐木楠雄的灾难 完结篇": "The Disastrous Life of Saiki K Final Arc",
+    "齐木楠雄的灾难 第二季": "The Disastrous Life of Saiki K Season 2",
+    "齐木楠雄的灾难（日播&精选版）": "The Disastrous Life of Saiki K",
+    "Ｄｒ．ＳＴＯＮＥ 石纪元 (第五季)": "Dr. Stone Season 5",
+
     "武装少女": "Armed Girl's Machiavellism",
     "死神少爷与黑女仆": "The Duke of Death and His Maid",
     "测不准的阿波连同学": "Aharen-san wa Hakarenai",
@@ -282,6 +319,8 @@ ANIME_TITLE_ALIASES: dict[str, str] = {
 }
 
 BOOK_TITLE_ALIASES: dict[str, str] = {
+    "启示录": "Inspired Marty Cagan",
+    "金阁寺": "The Temple of the Golden Pavilion",
     "下一站,天国": "Wandering in the Garden Wandering Clouds Wandering Life",
     "不要挑战人性": "不要挑战人性",
     "世界上最神奇的60个经典定律": "世界上最神奇的60个经典定律",
@@ -1774,6 +1813,15 @@ MOVIE_TITLE_ALIASES: dict[str, str] = {
     "神奇动物在哪里": "Fantastic Beasts and Where to Find Them",
     "遗愿清单": "The Bucket List",
     "钢琴家": "The Pianist",
+    "乱世佳人": "Gone with the Wind",
+    "后室": "The Backrooms",
+    "奥德赛": "The Odyssey",
+    "布达佩斯大饭店": "The Grand Budapest Hotel",
+    "海上钢琴师": "The Legend of 1900",
+    "海边的曼彻斯特": "Manchester by the Sea",
+    "爱丽丝梦游仙境": "Alice in Wonderland",
+    "爱丽丝梦游仙境2：镜中奇遇记": "Alice Through the Looking Glass",
+    "八仙": "The Eight Immortals",
 }
 
 # Exact en/zh Wikipedia page titles (REST summary) when free search is noisy.

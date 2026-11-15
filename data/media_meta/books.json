@@ -7,7 +7,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/HMI专业催眠师教程_d0b8e40c43.jpg",
       "subtitle": "Professional hypnotism manual",
       "score": null,
@@ -16,7 +15,8 @@
       "date": "",
       "tags": [],
       "source": "openlibrary",
-      "source_id": "715619"
+      "source_id": "715619",
+      "checked": true
     },
     "一个陌生女人的来信": {
       "title": "一个陌生女人的来信",
@@ -25,7 +25,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/一个陌生女人的来信_b1957cd107.jpg",
       "subtitle": "斯蒂芬·茨威格",
       "score": null,
@@ -38,6 +37,7 @@
       ],
       "source": "itunes",
       "source_id": 1031948692,
+      "checked": true,
       "format": "ebook"
     },
     "三体": {
@@ -47,7 +47,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/三体_9cedc2a0aa.jpg",
       "subtitle": "刘慈欣",
       "score": null,
@@ -59,6 +58,7 @@
       ],
       "source": "itunes",
       "source_id": 1276897813,
+      "checked": true,
       "format": "ebook"
     },
     "三重门": {
@@ -68,7 +68,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/三重门_e949e4bfee.jpg",
       "subtitle": "韩寒",
       "score": null,
@@ -80,6 +79,7 @@
       ],
       "source": "itunes",
       "source_id": 1289757979,
+      "checked": true,
       "format": "ebook"
     },
     "下一站,天国": {
@@ -89,7 +89,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/下一站_天国_25c8e0254b.jpg",
       "subtitle": "ワンダフルライフ",
       "score": null,
@@ -102,6 +101,7 @@
       ],
       "source": "wikipedia",
       "source_id": "After Life",
+      "checked": true,
       "format": "ebook"
     },
     "不正常人类症候群": {
@@ -111,7 +111,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/不正常人类症候群_5e7d01f43b.jpg",
       "subtitle": "",
       "score": null,
@@ -120,7 +119,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "26861583"
+      "source_id": "26861583",
+      "checked": true
     },
     "不要挑战人性": {
       "title": "不要挑战人性",
@@ -129,7 +129,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/不要挑战人性_9e5a6c6204.jpg",
       "subtitle": "",
       "score": null,
@@ -138,7 +137,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "35637963"
+      "source_id": "35637963",
+      "checked": true
     },
     "世界上最神奇的60个经典定律": {
       "title": "世界上最神奇的60个经典定律",
@@ -147,7 +147,6 @@
       "category": "网文",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/世界上最神奇的60个经典定律_3f29a1099f.jpg",
       "subtitle": "",
       "score": null,
@@ -156,7 +155,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "6058891"
+      "source_id": "6058891",
+      "checked": true
     },
     "云边有个小卖部": {
       "title": "云边有个小卖部",
@@ -165,7 +165,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/云边有个小卖部_44e8a4f02b.jpg",
       "subtitle": "",
       "score": null,
@@ -177,6 +176,7 @@
       ],
       "source": "douban",
       "source_id": "30254298",
+      "checked": true,
       "format": "book"
     },
     "人间失格": {
@@ -186,7 +186,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/人间失格_c4a302422f.jpg",
       "subtitle": "Osamu Dazai",
       "score": null,
@@ -198,6 +197,7 @@
       ],
       "source": "itunes",
       "source_id": 1304804033,
+      "checked": true,
       "format": "ebook"
     },
     "伊豆的舞女": {
@@ -207,7 +207,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/伊豆的舞女_5d1c919cf3.jpg",
       "subtitle": "川端康成",
       "score": null,
@@ -220,6 +219,7 @@
       ],
       "source": "itunes",
       "source_id": 6749937170,
+      "checked": true,
       "format": "ebook"
     },
     "倾城之恋": {
@@ -229,7 +229,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/倾城之恋_c1493a5ba5.jpg",
       "subtitle": "",
       "score": null,
@@ -242,6 +241,7 @@
       ],
       "source": "douban",
       "source_id": "1090043",
+      "checked": true,
       "format": "ebook"
     },
     "克苏鲁神话Ⅰ 克苏鲁的呼唤": {
@@ -251,7 +251,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/克苏鲁神话Ⅰ_克苏鲁的呼唤_43a4a2a032.jpg",
       "subtitle": "H.P.洛夫克拉夫特",
       "score": null,
@@ -264,6 +263,7 @@
       ],
       "source": "itunes",
       "source_id": 1564889427,
+      "checked": true,
       "format": "ebook"
     },
     "克苏鲁神话Ⅱ 疯狂山脉": {
@@ -273,7 +273,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/克苏鲁神话Ⅱ_疯狂山脉_6e090c8b95.jpg",
       "subtitle": "H. P. Lovecraft",
       "score": null,
@@ -287,6 +286,7 @@
       ],
       "source": "itunes",
       "source_id": 1538328606,
+      "checked": true,
       "format": "ebook"
     },
     "全球高考": {
@@ -296,7 +296,6 @@
       "category": "实体书与网文",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/全球高考_a40a1cf120.jpg",
       "subtitle": "全球高考",
       "score": 8.1,
@@ -310,6 +309,7 @@
       ],
       "source": "anilist_manga",
       "source_id": 128791,
+      "checked": true,
       "format": "MANGA"
     },
     "区块链": {
@@ -319,7 +319,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/区块链_75d8fafb07.jpg",
       "subtitle": "董学文",
       "score": null,
@@ -332,6 +331,7 @@
       ],
       "source": "itunes",
       "source_id": 1623106858,
+      "checked": true,
       "format": "ebook"
     },
     "古都": {
@@ -341,7 +341,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/古都_4e5038c7fe.jpg",
       "subtitle": "川端康成",
       "score": null,
@@ -354,6 +353,7 @@
       ],
       "source": "itunes",
       "source_id": 6749582856,
+      "checked": true,
       "format": "ebook"
     },
     "呼啸山庄": {
@@ -363,7 +363,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/呼啸山庄_dd63810ac7.jpg",
       "subtitle": "艾米莉·勃朗特",
       "score": null,
@@ -375,6 +374,7 @@
       ],
       "source": "itunes",
       "source_id": 1024208918,
+      "checked": true,
       "format": "ebook"
     },
     "哈佛家训": {
@@ -384,7 +384,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/哈佛家训_afaa5d5691.jpg",
       "subtitle": "威廉.贝纳德",
       "score": null,
@@ -396,6 +395,7 @@
       ],
       "source": "itunes",
       "source_id": 1330555596,
+      "checked": true,
       "format": "ebook"
     },
     "地下室手记": {
@@ -405,7 +405,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/地下室手记_dee505551b.jpg",
       "subtitle": "ドストエフスキー",
       "score": null,
@@ -417,6 +416,7 @@
       ],
       "source": "itunes",
       "source_id": 1020930101,
+      "checked": true,
       "format": "ebook"
     },
     "地球无应答": {
@@ -426,7 +426,6 @@
       "category": "网文",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/地球无应答_6019d710c5.jpg",
       "subtitle": "王诺诺",
       "score": null,
@@ -435,7 +434,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "33391690"
+      "source_id": "33391690",
+      "checked": true
     },
     "坍缩": {
       "title": "坍缩",
@@ -444,7 +444,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/坍缩_f6d734c60d.jpg",
       "subtitle": "刘慈欣",
       "score": null,
@@ -456,6 +455,7 @@
       ],
       "source": "itunes",
       "source_id": 1453400748,
+      "checked": true,
       "format": "ebook"
     },
     "夏天、烟火和我的尸体": {
@@ -465,7 +465,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/夏天_烟火和我的尸体_c49132b4af.jpg",
       "subtitle": "Summer, fireworks, and my corpse",
       "score": null,
@@ -474,7 +473,8 @@
       "date": "",
       "tags": [],
       "source": "openlibrary",
-      "source_id": "7114115"
+      "source_id": "7114115",
+      "checked": true
     },
     "天官赐福": {
       "title": "天官赐福",
@@ -483,7 +483,6 @@
       "category": "实体书与网文",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/天官赐福_5ff1c128b6.jpg",
       "subtitle": "墨香銅臭, 鄭穎馨 & 日出的小太陽",
       "score": null,
@@ -497,6 +496,7 @@
       ],
       "source": "itunes",
       "source_id": 6789398841,
+      "checked": true,
       "format": "ebook"
     },
     "天才在左疯子在右：心理疾病漫谈": {
@@ -506,7 +506,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/天才在左疯子在右_心理疾病漫谈_a87944d557.jpg",
       "subtitle": "",
       "score": null,
@@ -515,7 +514,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "4242172"
+      "source_id": "4242172",
+      "checked": true
     },
     "天气之子": {
       "title": "天气之子",
@@ -524,7 +524,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/天气之子_7fd81ca514.jpg",
       "subtitle": "Makoto Shinkai",
       "score": null,
@@ -536,6 +535,7 @@
       ],
       "source": "itunes",
       "source_id": 1480486054,
+      "checked": true,
       "format": "ebook"
     },
     "女儿红": {
@@ -545,7 +545,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/女儿红_dc93f42184.jpg",
       "subtitle": "",
       "score": null,
@@ -555,6 +554,7 @@
       "tags": [],
       "source": "douban",
       "source_id": "4169342",
+      "checked": true,
       "format": "book"
     },
     "嫌疑人X的献身": {
@@ -564,7 +564,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/嫌疑人X的献身_b5e0032f6b.jpg",
       "subtitle": "东野圭吾",
       "score": null,
@@ -576,6 +575,7 @@
       ],
       "source": "itunes",
       "source_id": 1290222026,
+      "checked": true,
       "format": "ebook"
     },
     "完美人设": {
@@ -585,7 +585,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/完美人设_03ac31fbd3.jpg",
       "subtitle": "和田秀树",
       "score": null,
@@ -598,6 +597,7 @@
       ],
       "source": "douban",
       "source_id": "34933959",
+      "checked": true,
       "format": "ebook"
     },
     "小王子": {
@@ -607,7 +607,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/小王子_0d97de501d.jpg",
       "subtitle": "[法]安托万·德·圣埃克苏佩里 & 姚想",
       "score": null,
@@ -620,6 +619,7 @@
       ],
       "source": "itunes",
       "source_id": 6445653124,
+      "checked": true,
       "format": "ebook"
     },
     "局外人": {
@@ -629,7 +629,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/局外人_8db8a47d86.jpg",
       "subtitle": "阿尔贝·加缪",
       "score": null,
@@ -641,6 +640,7 @@
       ],
       "source": "itunes",
       "source_id": 1029384270,
+      "checked": true,
       "format": "ebook"
     },
     "异草奇花": {
@@ -650,7 +650,6 @@
       "category": "网文",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/异草奇花_4e0692f377.jpg",
       "subtitle": "",
       "score": null,
@@ -659,7 +658,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "26315054"
+      "source_id": "26315054",
+      "checked": true
     },
     "很杂很杂的杂学知识": {
       "title": "很杂很杂的杂学知识",
@@ -668,7 +668,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/很杂很杂的杂学知识_32350ece73.jpg",
       "subtitle": "王悦",
       "score": null,
@@ -681,6 +680,7 @@
       ],
       "source": "itunes",
       "source_id": 6769045319,
+      "checked": true,
       "format": "ebook"
     },
     "悟空传": {
@@ -690,7 +690,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/悟空传_479d63c84f.jpg",
       "subtitle": "",
       "score": null,
@@ -703,6 +702,7 @@
       ],
       "source": "douban",
       "source_id": "1003000",
+      "checked": true,
       "format": "ebook"
     },
     "我是猫": {
@@ -712,7 +712,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/我是猫_1b7e428bde.jpg",
       "subtitle": "(日)夏目漱石",
       "score": null,
@@ -725,6 +724,7 @@
       ],
       "source": "itunes",
       "source_id": 6739583006,
+      "checked": true,
       "format": "ebook"
     },
     "挪威的森林": {
@@ -734,7 +734,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/挪威的森林_4e83196be6.jpg",
       "subtitle": "村上春树",
       "score": null,
@@ -746,6 +745,7 @@
       ],
       "source": "itunes",
       "source_id": 1261248171,
+      "checked": true,
       "format": "ebook"
     },
     "文城": {
@@ -755,7 +755,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/文城_16424ac9e4.jpg",
       "subtitle": "余華 & 飯塚容",
       "score": null,
@@ -769,6 +768,7 @@
       ],
       "source": "itunes",
       "source_id": 6443907369,
+      "checked": true,
       "format": "ebook"
     },
     "斯坦福高效睡眠法": {
@@ -778,7 +778,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/斯坦福高效睡眠法_dd2405901a.jpg",
       "subtitle": "",
       "score": null,
@@ -787,7 +786,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "30351542"
+      "source_id": "30351542",
+      "checked": true
     },
     "月亮与六便士": {
       "title": "月亮与六便士",
@@ -796,7 +796,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/月亮与六便士_4c1fd9dd74.jpg",
       "subtitle": "毛姆",
       "score": null,
@@ -808,6 +807,7 @@
       ],
       "source": "itunes",
       "source_id": 6444472221,
+      "checked": true,
       "format": "ebook"
     },
     "某某": {
@@ -817,7 +817,6 @@
       "category": "实体书与网文",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/某某_0008b20f03.jpg",
       "subtitle": "",
       "score": null,
@@ -831,6 +830,7 @@
       ],
       "source": "douban",
       "source_id": "35160284",
+      "checked": true,
       "format": "ebook"
     },
     "水问": {
@@ -840,7 +840,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/水问_d3cebcf9fd.jpg",
       "subtitle": "郑明武 & 陈慧",
       "score": null,
@@ -853,6 +852,7 @@
       ],
       "source": "itunes",
       "source_id": 966110334,
+      "checked": true,
       "format": "ebook"
     },
     "海底两万里": {
@@ -862,7 +862,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/海底两万里_17800323ff.jpg",
       "subtitle": "儒勒·凡尔纳",
       "score": null,
@@ -874,6 +873,7 @@
       ],
       "source": "itunes",
       "source_id": 1512894889,
+      "checked": true,
       "format": "ebook"
     },
     "海边的卡夫卡": {
@@ -883,7 +883,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/海边的卡夫卡_17bf3dfa9b.jpg",
       "subtitle": "村上春树",
       "score": null,
@@ -895,6 +894,7 @@
       ],
       "source": "itunes",
       "source_id": 1407307461,
+      "checked": true,
       "format": "ebook"
     },
     "痴人之爱": {
@@ -904,7 +904,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/痴人之爱_dd69d2e4c1.jpg",
       "subtitle": "谷崎润一郎",
       "score": null,
@@ -917,6 +916,7 @@
       ],
       "source": "itunes",
       "source_id": 1489680593,
+      "checked": true,
       "format": "ebook"
     },
     "白夜": {
@@ -926,7 +926,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/白夜_f4d858df4c.jpg",
       "subtitle": "フョードル・ドストエフスキー",
       "score": null,
@@ -938,6 +937,7 @@
       ],
       "source": "itunes",
       "source_id": 1213700470,
+      "checked": true,
       "format": "ebook"
     },
     "白夜行": {
@@ -947,7 +947,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/白夜行_afbaae8bcf.jpg",
       "subtitle": "东野圭吾",
       "score": null,
@@ -959,6 +958,7 @@
       ],
       "source": "itunes",
       "source_id": 1290049646,
+      "checked": true,
       "format": "ebook"
     },
     "白金数据": {
@@ -968,7 +968,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/白金数据_a8cb92a5f4.jpg",
       "subtitle": "東野圭吾",
       "score": null,
@@ -982,6 +981,7 @@
       ],
       "source": "itunes",
       "source_id": 1507890607,
+      "checked": true,
       "format": "ebook"
     },
     "百年孤独": {
@@ -991,7 +991,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/百年孤独_b66a3475dc.jpg",
       "subtitle": "马尔克斯",
       "score": null,
@@ -1003,6 +1002,7 @@
       ],
       "source": "itunes",
       "source_id": 1235635756,
+      "checked": true,
       "format": "ebook"
     },
     "睡美人": {
@@ -1012,7 +1012,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/睡美人_fab70a59f3.jpg",
       "subtitle": "【日】川端康成",
       "score": null,
@@ -1025,6 +1024,7 @@
       ],
       "source": "itunes",
       "source_id": 6759084862,
+      "checked": true,
       "format": "ebook"
     },
     "窄门": {
@@ -1034,7 +1034,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/窄门_f3ec9a28ec.jpg",
       "subtitle": "André Gide",
       "score": null,
@@ -1048,6 +1047,7 @@
       ],
       "source": "itunes",
       "source_id": 6736407873,
+      "checked": true,
       "format": "ebook"
     },
     "简爱": {
@@ -1057,7 +1057,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/简爱_9402ba95fb.jpg",
       "subtitle": "夏洛蒂·勃朗特 & 祝庆英",
       "score": null,
@@ -1069,6 +1068,7 @@
       ],
       "source": "itunes",
       "source_id": 1030711052,
+      "checked": true,
       "format": "ebook"
     },
     "红与黑": {
@@ -1078,7 +1078,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/红与黑_ad939e5a8e.jpg",
       "subtitle": "司汤达",
       "score": null,
@@ -1090,6 +1089,7 @@
       ],
       "source": "itunes",
       "source_id": 670525683,
+      "checked": true,
       "format": "ebook"
     },
     "罗生门": {
@@ -1099,7 +1099,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/罗生门_b25484c2c3.jpg",
       "subtitle": "芥川龙之介",
       "score": null,
@@ -1111,6 +1110,7 @@
       ],
       "source": "itunes",
       "source_id": 1480645637,
+      "checked": true,
       "format": "ebook"
     },
     "罪与罚": {
@@ -1120,7 +1120,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/罪与罚_b5b13e79e7.jpg",
       "subtitle": "陀思妥耶夫斯基",
       "score": null,
@@ -1132,6 +1131,7 @@
       ],
       "source": "itunes",
       "source_id": 1441271767,
+      "checked": true,
       "format": "ebook"
     },
     "老人与海": {
@@ -1141,7 +1141,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/老人与海_e3da33a790.jpg",
       "subtitle": "欧内斯特·海明威",
       "score": null,
@@ -1154,6 +1153,7 @@
       ],
       "source": "itunes",
       "source_id": 1080207704,
+      "checked": true,
       "format": "ebook"
     },
     "胭脂盆地": {
@@ -1163,7 +1163,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/胭脂盆地_f3e7e4570f.jpg",
       "subtitle": "",
       "score": null,
@@ -1172,7 +1171,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "5411007"
+      "source_id": "5411007",
+      "checked": true
     },
     "自学大全": {
       "title": "自学大全",
@@ -1181,7 +1181,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/自学大全_a6d0a81ce4.jpg",
       "subtitle": "",
       "score": null,
@@ -1190,7 +1189,8 @@
       "date": "",
       "tags": [],
       "source": "douban",
-      "source_id": "36048997"
+      "source_id": "36048997",
+      "checked": true
     },
     "解忧杂货店": {
       "title": "解忧杂货店",
@@ -1199,7 +1199,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/解忧杂货店_00473ab28e.jpg",
       "subtitle": "东野圭吾",
       "score": null,
@@ -1211,6 +1210,7 @@
       ],
       "source": "itunes",
       "source_id": 1268679053,
+      "checked": true,
       "format": "ebook"
     },
     "诡秘之主": {
@@ -1220,7 +1220,6 @@
       "category": "实体书与网文",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/诡秘之主_37108a1023.jpg",
       "subtitle": "",
       "score": null,
@@ -1234,6 +1233,7 @@
       ],
       "source": "douban",
       "source_id": "33424453",
+      "checked": true,
       "format": "ebook"
     },
     "边城": {
@@ -1243,7 +1243,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/边城_78db8f772b.jpg",
       "subtitle": "沈从文",
       "score": null,
@@ -1255,6 +1254,7 @@
       ],
       "source": "itunes",
       "source_id": 1248667228,
+      "checked": true,
       "format": "ebook"
     },
     "道诡异仙": {
@@ -1264,7 +1264,6 @@
       "category": "网文",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/道诡异仙_9d2a5f4981.jpg",
       "subtitle": "西小洛",
       "score": null,
@@ -1276,6 +1275,7 @@
       ],
       "source": "itunes",
       "source_id": 6778032188,
+      "checked": true,
       "format": "ebook"
     },
     "雪国": {
@@ -1285,7 +1285,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/雪国_6213a664ea.jpg",
       "subtitle": "川端康成",
       "score": null,
@@ -1297,6 +1296,7 @@
       ],
       "source": "itunes",
       "source_id": 1305524456,
+      "checked": true,
       "format": "ebook"
     },
     "霍乱时期的爱情": {
@@ -1306,7 +1306,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/霍乱时期的爱情_5d6a1b11df.jpg",
       "subtitle": "Gabriel García Márquez",
       "score": null,
@@ -1320,6 +1319,7 @@
       ],
       "source": "itunes",
       "source_id": 921744638,
+      "checked": true,
       "format": "ebook"
     },
     "飘": {
@@ -1329,7 +1329,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/飘_c64a98d6a3.jpg",
       "subtitle": "玛格丽特·米切尔",
       "score": null,
@@ -1343,6 +1342,7 @@
       ],
       "source": "itunes",
       "source_id": 1443993346,
+      "checked": true,
       "format": "ebook"
     },
     "骆驼祥子": {
@@ -1352,7 +1352,6 @@
       "category": "实体书",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/books/骆驼祥子_67445e9bcd.jpg",
       "subtitle": "老舍",
       "score": null,
@@ -1365,8 +1364,585 @@
       ],
       "source": "itunes",
       "source_id": 6769045505,
+      "checked": true,
       "format": "ebook"
+    },
+    "他悄悄地亲吻过": {
+      "title": "他悄悄地亲吻过",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "全球通缉：疯了！你管这个叫逃亡": {
+      "title": "全球通缉：疯了！你管这个叫逃亡",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "向来凉薄，何言情深": {
+      "title": "向来凉薄，何言情深",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "启示录": {
+      "title": "启示录",
+      "series": "",
+      "author": "Marty Cagan",
+      "category": "实体书",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/books/启示录_22bfae3aa7.jpg",
+      "subtitle": "Inspired",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "itunes",
+      "source_id": "1400567600",
+      "checked": true
+    },
+    "天降系女友是可爱富婆": {
+      "title": "天降系女友是可爱富婆",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "女朋友患有渴肤症是种什么体验": {
+      "title": "女朋友患有渴肤症是种什么体验",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "好烦啊，高冷校花天天倒追我": {
+      "title": "好烦啊，高冷校花天天倒追我",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "开局被校花表白？": {
+      "title": "开局被校花表白？",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "急！合租女友太可爱了怎么办？！": {
+      "title": "急！合租女友太可爱了怎么办？！",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "恋爱养成：我家老婆太可爱了！": {
+      "title": "恋爱养成：我家老婆太可爱了！",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "憨憨同桌傻白甜，把她聊成小女友": {
+      "title": "憨憨同桌傻白甜，把她聊成小女友",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "我的老婆怎么能这么可爱？": {
+      "title": "我的老婆怎么能这么可爱？",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "摔了一跤后，我决定不矜持了": {
+      "title": "摔了一跤后，我决定不矜持了",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "沈少，夫人重生后哭着要以身相许": {
+      "title": "沈少，夫人重生后哭着要以身相许",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "玫瑰冠冕": {
+      "title": "玫瑰冠冕",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "私房书": {
+      "title": "私房书",
+      "series": "",
+      "author": "简媜",
+      "category": "实体书",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "等你抬起头时": {
+      "title": "等你抬起头时",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "红婴仔": {
+      "title": "红婴仔",
+      "series": "",
+      "author": "简媜",
+      "category": "实体书",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "纯欲青梅花式白给后，我们恋爱了": {
+      "title": "纯欲青梅花式白给后，我们恋爱了",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "考恋爱不如考第一": {
+      "title": "考恋爱不如考第一",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "裴教授上网课，娇妻意外出镜": {
+      "title": "裴教授上网课，娇妻意外出镜",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "规则怪谈：我能完美利用规则": {
+      "title": "规则怪谈：我能完美利用规则",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "趁同桌好乖，赶紧忽悠做老婆": {
+      "title": "趁同桌好乖，赶紧忽悠做老婆",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "超甜：甜美总裁姐姐对我图谋不轨": {
+      "title": "超甜：甜美总裁姐姐对我图谋不轨",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "超级学霸：从低调控分开始！": {
+      "title": "超级学霸：从低调控分开始！",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "过来亲一下": {
+      "title": "过来亲一下",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "这个竹马有点甜": {
+      "title": "这个竹马有点甜",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "重生八百年后，我被女友抢先表白": {
+      "title": "重生八百年后，我被女友抢先表白",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "重生：学霸和软萌校花的完美人生": {
+      "title": "重生：学霸和软萌校花的完美人生",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "金阁寺": {
+      "title": "金阁寺",
+      "series": "",
+      "author": "三岛由纪夫",
+      "category": "实体书",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "震惊！女帝是我老婆！": {
+      "title": "震惊！女帝是我老婆！",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
+    },
+    "高糖倒追：重生女友又凶又萌": {
+      "title": "高糖倒追：重生女友又凶又萌",
+      "series": "",
+      "author": "网文作者",
+      "category": "网文",
+      "platform": "",
+      "matched": false,
+      "cover_path": "",
+      "subtitle": "",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "",
+      "source_id": "",
+      "checked": true
     }
   },
-  "updated": "2026-11-14T18:40:27"
+  "updated": "2026-11-15T00:04:24"
 }

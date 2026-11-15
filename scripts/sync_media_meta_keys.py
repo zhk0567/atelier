@@ -14,7 +14,13 @@ IMG_ROOT = ROOT / "static" / "img" / "media"
 import sys
 
 sys.path.insert(0, str(ROOT / "scripts"))
-from fetch_media_covers import _slug, load_anime, load_books, load_games  # noqa: E402
+from fetch_media_covers import (  # noqa: E402
+    _slug,
+    load_anime,
+    load_books,
+    load_games,
+    load_movies,
+)
 
 
 def _load(kind: str) -> dict:
@@ -95,9 +101,11 @@ def main() -> int:
     a_n, a_c = sync_kind("anime", load_anime())
     g_n, g_c = sync_kind("games", load_games())
     b_n, b_c = sync_kind("books", load_books())
+    m_n, m_c = sync_kind("movies", load_movies())
     print(f"anime keys={a_n} covers={a_c}")
     print(f"games keys={g_n} covers={g_c}")
     print(f"books keys={b_n} covers={b_c}")
+    print(f"movies keys={m_n} covers={m_c}")
     return 0
 
 

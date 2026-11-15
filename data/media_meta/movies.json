@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T18:40:27",
+  "updated": "2026-11-15T00:02:40",
   "items": {
     "企鹅公路": {
       "title": "企鹅公路",
@@ -8,7 +8,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/企鹅公路_00130db644.jpg",
       "subtitle": "ペンギン・ハイウェイ",
       "score": null,
@@ -18,6 +17,7 @@
       "tags": [],
       "source": "douban",
       "source_id": "30158971",
+      "checked": true,
       "format": "movie"
     },
     "声之形": {
@@ -27,7 +27,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/声之形_c039c8e85f.jpg",
       "subtitle": "聲の形",
       "score": 8.8,
@@ -41,6 +40,7 @@
       ],
       "source": "anilist",
       "source_id": 20954,
+      "checked": true,
       "format": "MOVIE"
     },
     "大鱼海棠": {
@@ -50,7 +50,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/大鱼海棠_8ab93052c2.jpg",
       "subtitle": "大鱼海棠",
       "score": 7.2,
@@ -65,6 +64,7 @@
       ],
       "source": "anilist",
       "source_id": 10259,
+      "checked": true,
       "format": "MOVIE"
     },
     "天气之子": {
@@ -74,7 +74,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/天气之子_7fd81ca514.png",
       "subtitle": "天気の子",
       "score": 8.1,
@@ -89,6 +88,7 @@
       ],
       "source": "anilist",
       "source_id": 106286,
+      "checked": true,
       "format": "MOVIE"
     },
     "姜子牙": {
@@ -98,7 +98,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/姜子牙_5a831fcb15.jpg",
       "subtitle": "姜子牙",
       "score": 7.1,
@@ -112,6 +111,7 @@
       ],
       "source": "anilist",
       "source_id": 114120,
+      "checked": true,
       "format": "MOVIE"
     },
     "新神榜：哪吒重生": {
@@ -121,7 +121,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/新神榜_哪吒重生_809a0395a8.png",
       "subtitle": "新神榜：哪吒重生",
       "score": 7.1,
@@ -135,6 +134,7 @@
       ],
       "source": "anilist",
       "source_id": 116982,
+      "checked": true,
       "format": "MOVIE"
     },
     "浪浪山小妖怪": {
@@ -144,7 +144,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/浪浪山小妖怪_66fca4eca1.png",
       "subtitle": "浪浪山小妖怪",
       "score": 7.2,
@@ -158,6 +157,7 @@
       ],
       "source": "anilist",
       "source_id": 199356,
+      "checked": true,
       "format": "MOVIE"
     },
     "海兽之子": {
@@ -167,7 +167,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/海兽之子_6ee811e2ad.png",
       "subtitle": "海獣の子供",
       "score": 7.2,
@@ -181,6 +180,7 @@
       ],
       "source": "anilist",
       "source_id": 103221,
+      "checked": true,
       "format": "MOVIE"
     },
     "深海": {
@@ -190,7 +190,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/深海_e28542e646.jpg",
       "subtitle": "深海",
       "score": 7.1,
@@ -203,6 +202,7 @@
       ],
       "source": "anilist",
       "source_id": 126289,
+      "checked": true,
       "format": "MOVIE"
     },
     "烟花": {
@@ -212,7 +212,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/烟花_a7bc7b83db.jpg",
       "subtitle": "打ち上げ花火、下から見るか？横から見るか？",
       "score": 5.9,
@@ -226,6 +225,7 @@
       ],
       "source": "anilist",
       "source_id": 97908,
+      "checked": true,
       "format": "MOVIE"
     },
     "疯狂动物城": {
@@ -235,7 +235,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/疯狂动物城_b3742d9732.jpg",
       "subtitle": "Zootopia",
       "score": null,
@@ -247,6 +246,7 @@
       ],
       "source": "wikipedia",
       "source_id": 42089078,
+      "checked": true,
       "format": "movie"
     },
     "白蛇2：青蛇劫起": {
@@ -256,7 +256,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/白蛇2_青蛇劫起_4ec0637716.jpg",
       "subtitle": "白蛇2：青蛇劫起",
       "score": 7.3,
@@ -269,6 +268,7 @@
       ],
       "source": "anilist",
       "source_id": 130190,
+      "checked": true,
       "format": "MOVIE"
     },
     "秒速五厘米": {
@@ -278,7 +278,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/秒速五厘米_1102d14276.jpg",
       "subtitle": "秒速５センチメートル",
       "score": 7.1,
@@ -292,16 +291,16 @@
       ],
       "source": "anilist",
       "source_id": 1689,
+      "checked": true,
       "format": "MOVIE"
     },
     "罗小黑战记": {
       "title": "罗小黑战记",
-      "series": "",
+      "series": "罗小黑战记",
       "author": "",
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/罗小黑战记_1602c610a5.png",
       "subtitle": "罗小黑战记",
       "score": 7.5,
@@ -317,16 +316,16 @@
       ],
       "source": "anilist",
       "source_id": 102663,
+      "checked": true,
       "format": "ONA"
     },
     "罗小黑战记2": {
       "title": "罗小黑战记2",
-      "series": "",
+      "series": "罗小黑战记",
       "author": "",
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/罗小黑战记2_44cf4f601b.jpg",
       "subtitle": "罗小黑战记 2",
       "score": 8.6,
@@ -340,6 +339,7 @@
       ],
       "source": "anilist",
       "source_id": 166475,
+      "checked": true,
       "format": "MOVIE"
     },
     "言语如苏打般涌现": {
@@ -349,7 +349,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/言语如苏打般涌现_6fec94cd75.jpg",
       "subtitle": "サイダーのように言葉が湧き上がる",
       "score": 7.3,
@@ -362,6 +361,7 @@
       ],
       "source": "anilist",
       "source_id": 107625,
+      "checked": true,
       "format": "MOVIE"
     },
     "通往夏天的隧道": {
@@ -371,7 +371,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/通往夏天的隧道_1d416d9b43.jpg",
       "subtitle": "夏へのトンネル、さよならの出口",
       "score": 8.0,
@@ -385,6 +384,7 @@
       ],
       "source": "anilist",
       "source_id": 142769,
+      "checked": true,
       "format": "MOVIE"
     },
     "间谍过家家 代号：白": {
@@ -394,7 +394,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/间谍过家家_代号_白_707f0b9b0d.jpg",
       "subtitle": "SPY×FAMILY",
       "score": 8.3,
@@ -409,6 +408,7 @@
       ],
       "source": "anilist",
       "source_id": 140960,
+      "checked": true,
       "format": "TV"
     },
     "飞屋环游记": {
@@ -418,7 +418,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/飞屋环游记_e36dd76e54.jpg",
       "subtitle": "Up (2009 film)",
       "score": null,
@@ -430,6 +429,7 @@
       ],
       "source": "wikipedia",
       "source_id": 11659396,
+      "checked": true,
       "format": "movie"
     },
     "一直游到海水变蓝": {
@@ -439,7 +439,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/一直游到海水变蓝_3c848f4b7f.jpg",
       "subtitle": "Swimming Out Till the Sea Turns Blue",
       "score": null,
@@ -451,6 +450,7 @@
       ],
       "source": "wikipedia",
       "source_id": 66890224,
+      "checked": true,
       "format": "movie"
     },
     "上升：我们一起飞上3万米高空": {
@@ -460,7 +460,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/上升_我们一起飞上3万米高空_b76da5dd0b.jpg",
       "subtitle": "Ascending",
       "score": null,
@@ -472,6 +471,7 @@
       ],
       "source": "wikipedia",
       "source_id": 8312173,
+      "checked": true,
       "format": "movie"
     },
     "与玛格丽特的午后": {
@@ -481,7 +481,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/与玛格丽特的午后_54032723db.jpg",
       "subtitle": "La tête en friche",
       "score": null,
@@ -491,6 +490,7 @@
       "tags": [],
       "source": "douban",
       "source_id": "3796613",
+      "checked": true,
       "format": "movie"
     },
     "了不起的盖兹比": {
@@ -500,7 +500,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/了不起的盖兹比_385cbd2933.jpg",
       "subtitle": "The Great Gatsby (2013 film)",
       "score": null,
@@ -512,6 +511,7 @@
       ],
       "source": "wikipedia",
       "source_id": 30951080,
+      "checked": true,
       "format": "movie"
     },
     "哈利·波特与死亡圣器(上)": {
@@ -521,7 +521,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/哈利_波特与死亡圣器_上_6c9fb5e1a3.jpg",
       "subtitle": "Harry Potter and the Deathly Hallows – Part 1",
       "score": null,
@@ -533,6 +532,7 @@
       ],
       "source": "wikipedia",
       "source_id": 9834441,
+      "checked": true,
       "format": "movie"
     },
     "哈利·波特与死亡圣器(下)": {
@@ -542,7 +542,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/哈利_波特与死亡圣器_下_3feb5a9275.jpg",
       "subtitle": "Harry Potter and the Deathly Hallows – Part 2",
       "score": null,
@@ -554,6 +553,7 @@
       ],
       "source": "wikipedia",
       "source_id": 31941988,
+      "checked": true,
       "format": "movie"
     },
     "机器人总动员": {
@@ -563,7 +563,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/机器人总动员_fd9e71938a.jpg",
       "subtitle": "WALL-E",
       "score": null,
@@ -575,6 +574,7 @@
       ],
       "source": "wikipedia",
       "source_id": 8980330,
+      "checked": true,
       "format": "movie"
     },
     "疯狂动物城2": {
@@ -584,7 +584,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/疯狂动物城2_46f7017338.jpg",
       "subtitle": "Zootopia 2",
       "score": null,
@@ -596,6 +595,7 @@
       ],
       "source": "wikipedia",
       "source_id": 72982443,
+      "checked": true,
       "format": "movie"
     },
     "疯狂原始人": {
@@ -605,7 +605,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/疯狂原始人_37fc305ee3.png",
       "subtitle": "The Croods",
       "score": null,
@@ -617,6 +616,7 @@
       ],
       "source": "wikipedia",
       "source_id": 26508404,
+      "checked": true,
       "format": "movie"
     },
     "疯狂原始人2": {
@@ -626,7 +626,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/疯狂原始人2_a6a64ed621.png",
       "subtitle": "The Croods: A New Age",
       "score": null,
@@ -638,6 +637,7 @@
       ],
       "source": "wikipedia",
       "source_id": 39417686,
+      "checked": true,
       "format": "movie"
     },
     "一个叫欧维的男人决定去死": {
@@ -647,7 +647,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/一个叫欧维的男人决定去死_5c47cf309f.png",
       "subtitle": "A Man Called Ove (film)",
       "score": null,
@@ -659,6 +658,7 @@
       ],
       "source": "wikipedia",
       "source_id": 49081716,
+      "checked": true,
       "format": "movie"
     },
     "哈利·波特与凤凰社": {
@@ -668,7 +668,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/哈利_波特与凤凰社_53ff3e9780.jpg",
       "subtitle": "Harry Potter and the Order of the Phoenix (film)",
       "score": null,
@@ -680,6 +679,7 @@
       ],
       "source": "wikipedia",
       "source_id": 670407,
+      "checked": true,
       "format": "movie"
     },
     "哈利·波特与密室": {
@@ -689,7 +689,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/哈利_波特与密室_6bb64ecc4e.jpg",
       "subtitle": "Harry Potter and the Chamber of Secrets (film)",
       "score": null,
@@ -701,6 +700,7 @@
       ],
       "source": "wikipedia",
       "source_id": 667368,
+      "checked": true,
       "format": "movie"
     },
     "哈利·波特与混血王子": {
@@ -710,7 +710,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/哈利_波特与混血王子_9ce24d31ce.jpg",
       "subtitle": "Harry Potter and the Half-Blood Prince (film)",
       "score": null,
@@ -722,6 +721,7 @@
       ],
       "source": "wikipedia",
       "source_id": 858575,
+      "checked": true,
       "format": "movie"
     },
     "哈利·波特与火焰杯": {
@@ -731,7 +731,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/哈利_波特与火焰杯_361ce6ef42.jpg",
       "subtitle": "Harry Potter and the Goblet of Fire (film)",
       "score": null,
@@ -743,6 +742,7 @@
       ],
       "source": "wikipedia",
       "source_id": 667372,
+      "checked": true,
       "format": "movie"
     },
     "哈利·波特与阿兹卡班的囚徒": {
@@ -752,7 +752,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/哈利_波特与阿兹卡班的囚徒_bce3a22a05.jpg",
       "subtitle": "Harry Potter and the Prisoner of Azkaban (film)",
       "score": null,
@@ -764,6 +763,7 @@
       ],
       "source": "wikipedia",
       "source_id": 667371,
+      "checked": true,
       "format": "movie"
     },
     "哈利·波特与魔法石": {
@@ -773,7 +773,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/哈利_波特与魔法石_bb4f95b65e.jpg",
       "subtitle": "Harry Potter and the Philosopher's Stone (film)",
       "score": null,
@@ -785,6 +784,7 @@
       ],
       "source": "wikipedia",
       "source_id": 667361,
+      "checked": true,
       "format": "movie"
     },
     "奥本海默": {
@@ -794,7 +794,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/奥本海默_da220ae7fc.jpg",
       "subtitle": "Oppenheimer (film)",
       "score": null,
@@ -806,6 +805,7 @@
       ],
       "source": "wikipedia",
       "source_id": 66850554,
+      "checked": true,
       "format": "movie"
     },
     "少年派的奇幻漂流": {
@@ -815,7 +815,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/少年派的奇幻漂流_a987dc133b.jpg",
       "subtitle": "Life of Pi (film)",
       "score": null,
@@ -827,6 +826,7 @@
       ],
       "source": "wikipedia",
       "source_id": 30952655,
+      "checked": true,
       "format": "movie"
     },
     "当幸福来敲门": {
@@ -836,7 +836,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/当幸福来敲门_96a6586910.jpg",
       "subtitle": "The Pursuit of Happyness",
       "score": null,
@@ -848,6 +847,7 @@
       ],
       "source": "wikipedia",
       "source_id": 2162986,
+      "checked": true,
       "format": "movie"
     },
     "心灵捕手": {
@@ -857,7 +857,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/心灵捕手_f19e73b5d7.png",
       "subtitle": "Good Will Hunting",
       "score": null,
@@ -869,6 +868,7 @@
       ],
       "source": "wikipedia",
       "source_id": 142456,
+      "checked": true,
       "format": "movie"
     },
     "怦然心动": {
@@ -878,7 +878,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/怦然心动_e38552d0be.jpg",
       "subtitle": "Flipped (2010 film)",
       "score": null,
@@ -890,6 +889,7 @@
       ],
       "source": "wikipedia",
       "source_id": 25225244,
+      "checked": true,
       "format": "movie"
     },
     "情书": {
@@ -899,7 +899,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/情书_df5733d751.png",
       "subtitle": "ラブレター",
       "score": 6.9,
@@ -909,6 +908,7 @@
       "tags": [],
       "source": "anilist",
       "source_id": 138609,
+      "checked": true,
       "format": "MUSIC"
     },
     "我是谁": {
@@ -918,7 +918,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/我是谁_0bb5fa2e7b.jpg",
       "subtitle": "Who Am I? (1998 film)",
       "score": null,
@@ -930,6 +929,7 @@
       ],
       "source": "wikipedia",
       "source_id": 190053,
+      "checked": true,
       "format": "movie"
     },
     "摔跤吧！爸爸": {
@@ -939,7 +939,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/摔跤吧_爸爸_b5db4b6662.jpg",
       "subtitle": "我和我的冠軍女兒",
       "score": null,
@@ -951,6 +950,7 @@
       ],
       "source": "wikipedia",
       "source_id": 5602204,
+      "checked": true,
       "format": "movie"
     },
     "教父": {
@@ -960,7 +960,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/教父_d22975d4ba.jpg",
       "subtitle": "The Godfather",
       "score": null,
@@ -972,6 +971,7 @@
       ],
       "source": "wikipedia",
       "source_id": 2466773,
+      "checked": true,
       "format": "movie"
     },
     "教父2": {
@@ -981,7 +981,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/教父2_dd4ee3705c.jpg",
       "subtitle": "The Godfather Part II",
       "score": null,
@@ -993,6 +992,7 @@
       ],
       "source": "wikipedia",
       "source_id": 73875,
+      "checked": true,
       "format": "movie"
     },
     "教父3": {
@@ -1002,7 +1002,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/教父3_e9aaad44ed.jpg",
       "subtitle": "The Godfather Part III",
       "score": null,
@@ -1014,6 +1013,7 @@
       ],
       "source": "wikipedia",
       "source_id": 129644,
+      "checked": true,
       "format": "movie"
     },
     "星际穿越": {
@@ -1023,7 +1023,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/星际穿越_810e134941.jpg",
       "subtitle": "Interstellar (film)",
       "score": null,
@@ -1035,6 +1034,7 @@
       ],
       "source": "wikipedia",
       "source_id": 6009939,
+      "checked": true,
       "format": "movie"
     },
     "楚门的世界": {
@@ -1044,7 +1044,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/楚门的世界_59fde8b043.jpg",
       "subtitle": "The Truman Show",
       "score": null,
@@ -1056,6 +1055,7 @@
       ],
       "source": "wikipedia",
       "source_id": 232711,
+      "checked": true,
       "format": "movie"
     },
     "波西米亚狂想曲": {
@@ -1065,7 +1065,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/波西米亚狂想曲_1dd6a9ff94.png",
       "subtitle": "Bohemian Rhapsody (film)",
       "score": null,
@@ -1077,6 +1076,7 @@
       ],
       "source": "wikipedia",
       "source_id": 54978069,
+      "checked": true,
       "format": "movie"
     },
     "泰坦尼克号": {
@@ -1086,7 +1086,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/泰坦尼克号_a8928aa135.png",
       "subtitle": "Titanic (1997 film)",
       "score": null,
@@ -1098,6 +1097,7 @@
       ],
       "source": "wikipedia",
       "source_id": 52371,
+      "checked": true,
       "format": "movie"
     },
     "流浪地球": {
@@ -1107,7 +1107,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/流浪地球_aa6002fe33.jpg",
       "subtitle": "The Wandering Earth",
       "score": null,
@@ -1119,6 +1118,7 @@
       ],
       "source": "wikipedia",
       "source_id": 58935753,
+      "checked": true,
       "format": "movie"
     },
     "海蒂和爷爷": {
@@ -1128,7 +1128,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/海蒂和爷爷_c5becded42.jpg",
       "subtitle": "Heidi (2015 film)",
       "score": null,
@@ -1140,6 +1139,7 @@
       ],
       "source": "wikipedia",
       "source_id": 48640164,
+      "checked": true,
       "format": "movie"
     },
     "猫鼠游戏": {
@@ -1149,7 +1149,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/猫鼠游戏_4f1a842580.jpg",
       "subtitle": "Catch Me If You Can",
       "score": null,
@@ -1161,6 +1160,7 @@
       ],
       "source": "wikipedia",
       "source_id": 215873,
+      "checked": true,
       "format": "movie"
     },
     "白日梦想家": {
@@ -1170,7 +1170,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/白日梦想家_e9a0955e4f.jpg",
       "subtitle": "The Secret Life of Walter Mitty (2013 film)",
       "score": null,
@@ -1182,16 +1181,16 @@
       ],
       "source": "wikipedia",
       "source_id": 39246316,
+      "checked": true,
       "format": "movie"
     },
     "神奇动物在哪里": {
       "title": "神奇动物在哪里",
-      "series": "",
+      "series": "哈利·波特",
       "author": "",
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/神奇动物在哪里_d9d36d82af.jpg",
       "subtitle": "Fantastic Beasts and Where to Find Them (film)",
       "score": null,
@@ -1203,6 +1202,7 @@
       ],
       "source": "wikipedia",
       "source_id": 47569084,
+      "checked": true,
       "format": "movie"
     },
     "神探夏洛克：可恶的新娘": {
@@ -1212,7 +1212,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/神探夏洛克_可恶的新娘_1e4820babe.jpg",
       "subtitle": "The Abominable Bride",
       "score": null,
@@ -1224,6 +1223,7 @@
       ],
       "source": "wikipedia",
       "source_id": 48348862,
+      "checked": true,
       "format": "movie"
     },
     "绿皮书": {
@@ -1233,7 +1233,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/绿皮书_64b274e136.png",
       "subtitle": "Green Book (film)",
       "score": null,
@@ -1245,6 +1244,7 @@
       ],
       "source": "wikipedia",
       "source_id": 55935200,
+      "checked": true,
       "format": "movie"
     },
     "罗马假日": {
@@ -1254,7 +1254,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/罗马假日_012505db9a.jpg",
       "subtitle": "Roman Holiday",
       "score": null,
@@ -1266,6 +1265,7 @@
       ],
       "source": "wikipedia",
       "source_id": 76310,
+      "checked": true,
       "format": "movie"
     },
     "肖申克的救赎": {
@@ -1275,7 +1275,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/肖申克的救赎_9d4a5ba9fc.jpg",
       "subtitle": "The Shawshank Redemption",
       "score": null,
@@ -1287,6 +1286,7 @@
       ],
       "source": "wikipedia",
       "source_id": 30625,
+      "checked": true,
       "format": "movie"
     },
     "让子弹飞": {
@@ -1296,7 +1296,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/让子弹飞_82ccadae7c.jpg",
       "subtitle": "Let the Bullets Fly",
       "score": null,
@@ -1308,6 +1307,7 @@
       ],
       "source": "wikipedia",
       "source_id": 29378763,
+      "checked": true,
       "format": "movie"
     },
     "超脱": {
@@ -1317,7 +1317,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/超脱_b87ef21b68.jpg",
       "subtitle": "Detachment (film)",
       "score": null,
@@ -1329,6 +1328,7 @@
       ],
       "source": "wikipedia",
       "source_id": 30261876,
+      "checked": true,
       "format": "movie"
     },
     "遗愿清单": {
@@ -1338,7 +1338,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/遗愿清单_e28b463f3f.jpg",
       "subtitle": "The Bucket List",
       "score": null,
@@ -1350,6 +1349,7 @@
       ],
       "source": "wikipedia",
       "source_id": 7404698,
+      "checked": true,
       "format": "movie"
     },
     "钢琴家": {
@@ -1359,7 +1359,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/钢琴家_9f01b3ac6e.jpg",
       "subtitle": "The Pianist (2002 film)",
       "score": null,
@@ -1371,6 +1370,7 @@
       ],
       "source": "wikipedia",
       "source_id": 1897341,
+      "checked": true,
       "format": "movie"
     },
     "阿甘正传": {
@@ -1380,7 +1380,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/阿甘正传_5e7de64407.jpg",
       "subtitle": "Forrest Gump",
       "score": null,
@@ -1392,6 +1391,7 @@
       ],
       "source": "wikipedia",
       "source_id": 41528,
+      "checked": true,
       "format": "movie"
     },
     "飞驰人生": {
@@ -1401,7 +1401,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/飞驰人生_44f16e8da6.png",
       "subtitle": "飞驰人生",
       "score": null,
@@ -1413,6 +1412,7 @@
       ],
       "source": "wikipedia",
       "source_id": 6464387,
+      "checked": true,
       "format": "movie"
     },
     "魂断蓝桥": {
@@ -1422,7 +1422,6 @@
       "category": "",
       "platform": "",
       "matched": true,
-      "checked": true,
       "cover_path": "/static/img/media/movies/魂断蓝桥_39014fe3ad.jpg",
       "subtitle": "Waterloo Bridge (1940 film)",
       "score": null,
@@ -1434,7 +1433,175 @@
       ],
       "source": "wikipedia",
       "source_id": 2728423,
+      "checked": true,
       "format": "movie"
+    },
+    "八仙": {
+      "title": "八仙",
+      "series": "",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/八仙_97527bfa94.png",
+      "subtitle": "八仙",
+      "score": null,
+      "episodes": 1,
+      "year": 2018,
+      "date": "2018-11-03",
+      "tags": [
+        "Fantasy"
+      ],
+      "source": "anilist",
+      "source_id": 129653,
+      "checked": true,
+      "format": "MOVIE"
+    },
+    "乱世佳人": {
+      "title": "乱世佳人",
+      "series": "",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/乱世佳人_ecf8dc4b32.jpg",
+      "subtitle": "Gone with the Wind",
+      "score": null,
+      "episodes": null,
+      "year": null,
+      "date": "",
+      "tags": [],
+      "source": "douban",
+      "source_id": "1300267",
+      "checked": true,
+      "format": "movie"
+    },
+    "后室": {
+      "title": "后室",
+      "series": "",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/后室_afbabdaee3.png",
+      "subtitle": "インザバックルーム",
+      "score": 6.9,
+      "episodes": 1,
+      "year": 2022,
+      "date": "2022-11-09",
+      "tags": [],
+      "source": "anilist",
+      "source_id": 157173,
+      "checked": true,
+      "format": "MUSIC"
+    },
+    "奥德赛": {
+      "title": "奥德赛",
+      "series": "",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/奥德赛_f0d11a4109.jpg",
+      "subtitle": "奥德赛",
+      "score": null,
+      "episodes": null,
+      "year": "2026",
+      "date": "",
+      "tags": [],
+      "source": "douban",
+      "source_id": "36808876",
+      "checked": true
+    },
+    "布达佩斯大饭店": {
+      "title": "布达佩斯大饭店",
+      "series": "",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/布达佩斯大饭店_832d276f69.jpg",
+      "subtitle": "布达佩斯大饭店",
+      "score": null,
+      "episodes": null,
+      "year": "2014",
+      "date": "",
+      "tags": [],
+      "source": "douban",
+      "source_id": "11525673",
+      "checked": true
+    },
+    "海上钢琴师": {
+      "title": "海上钢琴师",
+      "series": "",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/海上钢琴师_a210e7f3c0.jpg",
+      "subtitle": "海上钢琴师",
+      "score": null,
+      "episodes": null,
+      "year": "1998",
+      "date": "",
+      "tags": [],
+      "source": "douban",
+      "source_id": "1292001",
+      "checked": true
+    },
+    "海边的曼彻斯特": {
+      "title": "海边的曼彻斯特",
+      "series": "",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/海边的曼彻斯特_343e0a8d14.jpg",
+      "subtitle": "海边的曼彻斯特",
+      "score": null,
+      "episodes": null,
+      "year": "2016",
+      "date": "",
+      "tags": [],
+      "source": "douban",
+      "source_id": "25980443",
+      "checked": true
+    },
+    "爱丽丝梦游仙境": {
+      "title": "爱丽丝梦游仙境",
+      "series": "爱丽丝梦游仙境",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/爱丽丝梦游仙境_e7093969a5.jpg",
+      "subtitle": "爱丽丝梦游仙境",
+      "score": null,
+      "episodes": null,
+      "year": "2010",
+      "date": "",
+      "tags": [],
+      "source": "douban",
+      "source_id": "2336785",
+      "checked": true
+    },
+    "爱丽丝梦游仙境2：镜中奇遇记": {
+      "title": "爱丽丝梦游仙境2：镜中奇遇记",
+      "series": "爱丽丝梦游仙境",
+      "author": "",
+      "category": "",
+      "platform": "",
+      "matched": true,
+      "cover_path": "/static/img/media/movies/爱丽丝梦游仙境2：镜中奇遇记_0a1be92e4a.jpg",
+      "subtitle": "爱丽丝梦游仙境2：镜中奇遇记",
+      "score": null,
+      "episodes": null,
+      "year": "2016",
+      "date": "",
+      "tags": [],
+      "source": "douban",
+      "source_id": "",
+      "checked": true
     }
   }
 }
