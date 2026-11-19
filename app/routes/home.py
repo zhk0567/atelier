@@ -5,6 +5,7 @@ from app.constants import HTML_CACHE_HEADERS
 from app.context import projects_with_thumbs, site_context, templates
 from app.personal import load_personal, personal_stats
 from app.projects import get_all_projects, get_pinned_projects
+from app.travel_catalog import load_travel_trips
 from site_data import list_algorithm_posts, list_framework_posts, list_hotspot_posts
 
 router = APIRouter()
@@ -37,8 +38,11 @@ async def index(request: Request):
             "hotspot_series_url": "/blog/series/hotspot",
             "hotspot_count": len(hotspot_posts),
             "quiz_url": "/quiz/neurosis",
+            "fortune_url": "/fortune",
             "personal_url": "/personal",
             "personal_stats": personal_stats(load_personal()),
+            "travel_url": "/travel",
+            "trip_count": len(load_travel_trips()),
         },
         headers=HTML_CACHE_HEADERS,
     )

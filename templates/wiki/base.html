@@ -15,7 +15,7 @@
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/static/css/wiki.css?v=51" />
-  <link rel="stylesheet" href="/static/css/mp-portal.css?v=15" />
+  <link rel="stylesheet" href="/static/css/mp-portal.css?v=19" />
   {% if wallpapers %}
   {% set default_wp = wallpapers | selectattr('default') | first | default(wallpapers[0]) %}
   {% set default_wp_src = default_wp.preview_url | default(default_wp.url) %}
@@ -171,7 +171,7 @@
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   {% block overlays %}{% endblock %}
-  {% if live2d_mc_vtuber.enabled and not page_quiz and not page_personal %}
+  {% if live2d_mc_vtuber.enabled and not page_quiz and not page_personal and not page_fortune %}
   <div
     id="live2d-mc-vtuber"
     data-enabled="1"

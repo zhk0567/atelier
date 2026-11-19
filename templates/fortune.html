@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="摇一支随缘好运签。仅供娱乐，开心最重要。" />
+  <title>{{ fortune_title }} · {{ site_name }}</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&family=ZCOOL+XiaoWei&display=swap"
+    rel="stylesheet"
+  />
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      document.documentElement.setAttribute("data-theme", t === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="stylesheet" href="/static/css/fortune.css?v=15" />
+</head>
+<body class="ft-page">
+  <a class="ft-skip" href="#ft-stage">跳到求签</a>
+
+  <div
+    class="ft-world"
+    id="ft-root"
+    data-ft-root
+    style="--ft-planks: url('{{ fortune_icons.planks }}');"
+  >
+    <div class="ft-atmos" aria-hidden="true">
+      <span class="ft-atmos__curtain"></span>
+      <span class="ft-atmos__breath"></span>
+      <svg class="ft-atmos__veins" viewBox="0 0 1200 800" preserveAspectRatio="none">
+        <g class="ft-veins-drift">
+          <path class="ft-vein ft-vein-a" d="M40 120 C220 80, 360 220, 520 180 S820 60, 1160 140" fill="none" />
+          <path class="ft-vein ft-vein-b" d="M80 420 C260 380, 400 520, 600 470 S900 360, 1140 440" fill="none" />
+          <path class="ft-vein ft-vein-c" d="M20 680 C280 620, 480 740, 720 690 S1000 600, 1180 700" fill="none" />
+          <path class="ft-vein ft-vein-d" d="M200 40 C340 200, 280 400, 460 560 S780 720, 980 760" fill="none" />
+        </g>
+      </svg>
+      <span class="ft-atmos__vignette"></span>
+    </div>
+
+    <header class="ft-top">
+      <a class="ft-home" href="/" title="返回主页">
+        <img src="{{ fortune_icons.compass }}" alt="" width="18" height="18" decoding="async" />
+        <span>{{ site_name }}</span>
+      </a>
+      <div class="ft-brand-block">
+        <p class="ft-brand">{{ fortune_title }}</p>
+        <p class="ft-brand-sub">{{ fortune_disclaimer }}</p>
+      </div>
+      <button type="button" class="ft-theme-toggle" id="ft-theme-toggle" aria-label="{{ ui.toggle_theme }}">
+        <span class="ft-theme-toggle__glyph" aria-hidden="true">界</span>
+      </button>
+    </header>
+
+    <main class="ft-main" id="ft-main">
+      <section class="ft-stage" id="ft-stage" aria-labelledby="ft-rite-title">
+        <h2 id="ft-rite-title" class="ft-visually-hidden">求签</h2>
+
+        <div class="ft-altar orn-corners">
+          <span class="ft-altar__totem" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="28" height="28">
+              <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M24 8c4 6 8 10 0 28c-8-18-4-22 0-28z" fill="currentColor" opacity="0.35"/>
+              <circle cx="24" cy="24" r="4" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="ft-altar__rail ft-altar__rail--left" aria-hidden="true"></span>
+          <span class="ft-altar__rail ft-altar__rail--right" aria-hidden="true"></span>
+          <span class="ft-altar__corner ft-altar__corner--bl" aria-hidden="true"></span>
+          <span class="ft-altar__corner ft-altar__corner--br" aria-hidden="true"></span>
+
+          <div class="ft-slot" id="ft-slot">
+            <div class="ft-tube-wrap" id="ft-tube-wrap" data-ft-tube-wrap>
+              <div class="ft-tube" id="ft-tube" data-ft-tube aria-hidden="true">
+                <div class="ft-tube__base"></div>
+                <div class="ft-tube__body">
+                  <span class="ft-tube__crest" aria-hidden="true">签</span>
+                  <span class="ft-tube__band" aria-hidden="true"></span>
+                </div>
+                <div class="ft-tube__sticks" aria-hidden="true">
+                  <span class="ft-tube__stick" style="--i:0"></span>
+                  <span class="ft-tube__stick" style="--i:1"></span>
+                  <span class="ft-tube__stick" style="--i:2"></span>
+                  <span class="ft-tube__stick" style="--i:3"></span>
+                  <span class="ft-tube__stick" style="--i:4"></span>
+                  <span class="ft-tube__stick" style="--i:5"></span>
+                  <span class="ft-tube__stick" style="--i:6"></span>
+                  <span class="ft-tube__stick" style="--i:7"></span>
+                </div>
+                <div class="ft-tube__mouth"></div>
+                <div class="ft-tube__rim"></div>
+              </div>
+              <div class="ft-rising" id="ft-rising" hidden aria-hidden="true">
+                <div class="ft-rising__stick" id="ft-rising-stick">
+                  <span class="ft-rising__tip"></span>
+                </div>
+              </div>
+            </div>
+
+            <article class="ft-result is-sealed" id="ft-result" hidden aria-live="polite">
+              <div class="ft-card" id="ft-card" data-ft-card>
+                <div class="ft-card__face ft-card__face--seal" aria-hidden="true">
+                  <span class="ft-card__seal">封</span>
+                  <p class="ft-card__seal-title">{{ fortune_title }}</p>
+                  <p class="ft-card__seal-hint">启封见签</p>
+                </div>
+                <div class="ft-card__face ft-card__face--front">
+                  <header class="ft-card__meta">
+                    <p class="ft-card__seed" id="ft-seed"></p>
+                    <p class="ft-card__joy" id="ft-daily-joy"></p>
+                  </header>
+                  <div class="ft-card__level-row">
+                    <p class="ft-card__level" id="ft-level"></p>
+                    <span class="ft-card__stamp" aria-hidden="true">签</span>
+                  </div>
+                  <p class="ft-card__blurb" id="ft-blurb"></p>
+                  <h3 class="ft-card__title" id="ft-title"></h3>
+                  <p class="ft-card__verse" id="ft-verse"></p>
+                  <ul class="ft-card__keys" id="ft-keys"></ul>
+                  <div class="ft-card__dims" id="ft-dims" aria-label="运势维度"></div>
+                  <div class="ft-card__tools">
+                    <button type="button" class="ft-mini" id="ft-copy">复制签文</button>
+                    <button type="button" class="ft-mini" id="ft-fav">收藏本机</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <p class="ft-status" id="ft-status" role="status" aria-live="polite">静心一念，摇一支随缘签。</p>
+          <p class="ft-hint" id="ft-hint"></p>
+        </div>
+      </section>
+
+      <div class="ft-cta">
+        <button type="button" class="ft-btn ft-btn--primary" id="ft-draw">
+          <img src="{{ fortune_icons.book }}" alt="" width="20" height="20" decoding="async" aria-hidden="true" />
+          <span id="ft-draw-label">求一支</span>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <script id="ft-boot" type="application/json">{{ fortune_boot | tojson }}</script>
+  <script src="/static/js/fortune-liquid.js?v=16" defer></script>
+  <script src="/static/js/fortune.js?v=16" defer></script>
+</body>
+</html>

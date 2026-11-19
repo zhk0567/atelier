@@ -102,25 +102,47 @@
         {% endif %}
       </section>
 
-      <section class="mp-section" id="mp-quiz">
-        <h2 class="mp-title">精神状态自测</h2>
-        <p>一场关于精神状态的第一反应测试，六个维度看看你的电量通常漏在哪。做完可保存结果，凭昵称和学号/查询码找回。</p>
-        <div class="mp-button-wrapper">
-          <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ quiz_url }}" style="--button-image: url('{{ wiki_assets.item_compass }}');">
-            <span class="mp-button__inner">开始测试</span>
-          </a>
-        </div>
-      </section>
+      <div class="mp-home-cards">
+        <section class="mp-section mp-home-card" id="mp-fortune">
+          <h2 class="mp-title">好运签</h2>
+          <p class="mp-home-card__desc">摇一支随缘签，摇到什么是什么。</p>
+          <div class="mp-button-wrapper">
+            <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ fortune_url }}" style="--button-image: url('{{ wiki_assets.item_book }}');">
+              <span class="mp-button__inner">去求一支</span>
+            </a>
+          </div>
+        </section>
 
-      <section class="mp-section" id="mp-personal">
-        <h2 class="mp-title">个人要求与未来任务</h2>
-        <p>十条写给自己的规矩，和二十二项六十年内的任务。素材来自日记，也来自朋友们在群里许下的愿。</p>
-        <div class="mp-button-wrapper">
-          <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ personal_url }}" style="--button-image: url('{{ wiki_assets.item_book }}');">
-            <span class="mp-button__inner">去看看（{{ personal_stats.requirement_count }} 条要求 + {{ personal_stats.task_count }} 项任务）</span>
-          </a>
-        </div>
-      </section>
+        <section class="mp-section mp-home-card" id="mp-quiz">
+          <h2 class="mp-title">精神状态自测</h2>
+          <p class="mp-home-card__desc">六维第一反应测试，看看电量漏在哪。</p>
+          <div class="mp-button-wrapper">
+            <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ quiz_url }}" style="--button-image: url('{{ wiki_assets.item_compass }}');">
+              <span class="mp-button__inner">开始测试</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="mp-section mp-home-card" id="mp-personal">
+          <h2 class="mp-title">个人要求与未来任务</h2>
+          <p class="mp-home-card__desc">{{ personal_stats.requirement_count }} 条要求 · {{ personal_stats.task_count }} 项未来任务。</p>
+          <div class="mp-button-wrapper">
+            <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ personal_url }}" style="--button-image: url('{{ wiki_assets.item_book }}');">
+              <span class="mp-button__inner">去看看</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="mp-section mp-home-card" id="mp-travel">
+          <h2 class="mp-title">{{ ui.label_travel }}</h2>
+          <p class="mp-home-card__desc">{% if trip_count %}徒步与风景记录，已记 {{ trip_count }} 次旅途。{% else %}{{ ui.travel_index_lead }}{% endif %}</p>
+          <div class="mp-button-wrapper">
+            <a class="mp-button mp-button-progressive mp-button-has-image" href="{{ travel_url }}" style="--button-image: url('{{ wiki_assets.item_map }}');">
+              <span class="mp-button__inner">去看看</span>
+            </a>
+          </div>
+        </section>
+      </div>
     </div>
 
     <div class="mp-right mp-sticky">

@@ -275,8 +275,6 @@ def build_wiki_nav(hubs: list[dict]) -> list[dict]:
                 {"label": "主页面", "url": "/", "external": False},
                 {"label": "项目", "url": "/projects", "external": False},
                 {"label": UI["label_blog"], "url": "/blog", "external": False},
-                {"label": UI["label_travel"], "url": "/travel", "external": False},
-                {"label": UI["label_personal"], "url": "/personal", "external": False},
             ],
         },
         {"label": "数据分类", "children": portal_children},
