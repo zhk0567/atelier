@@ -277,9 +277,10 @@ html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-labe
   independently — that was the original horizontal squeeze.
 */
 @media (max-width: 640px) {
+  /* Exact half of 360×460 — same aspect, no stretch */
   #live2d-mc-vtuber {
-    width: 168px;
-    height: 214px;
+    width: 180px;
+    height: 230px;
   }
 
   #live2d-mc-vtuber .live2d-mc-vtuber__hit {
@@ -290,8 +291,9 @@ html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-labe
   }
 
   .live2d-mc-vtuber__bubble {
-    right: 10px;
-    bottom: 96px;
+    right: 12px;
+    /* 205px @ 460 → half */
+    bottom: 102px;
     max-width: min(180px, 58vw);
     font-size: 12px;
     padding: 8px 10px 8px 14px;
