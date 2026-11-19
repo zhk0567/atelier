@@ -11,7 +11,7 @@
   box-sizing: border-box;
   overflow: visible;
   pointer-events: none;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.2));
+  /* filter on this root clips the bubble that hangs outside the box */
 }
 
 #live2d-mc-vtuber canvas,
@@ -21,6 +21,7 @@
   height: 100% !important;
   pointer-events: none;
   cursor: default;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.2));
 }
 
 /* Tight chip over the character only */
@@ -54,11 +55,15 @@
   --mc-accent: #80ff20;
   --mc-accent-dark: #1e7a12;
   position: absolute;
-  /* Sit just above the head; tail (::after) aims at the face */
-  right: 48px;
-  bottom: 158px;
+  /*
+    Character head sits ~75px from the stage's right edge.
+    Keep the bubble over the character; put the diamond under the face.
+  */
+  right: 8px;
+  bottom: 168px;
   z-index: 5;
-  max-width: min(240px, 70vw);
+  width: max-content;
+  max-width: min(220px, 62vw);
   padding: 10px 12px 10px 16px;
   font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
   font-size: 14px;
@@ -100,8 +105,9 @@
 .live2d-mc-vtuber__bubble::after {
   content: "";
   position: absolute;
-  right: 36px;
-  bottom: -10px;
+  /* ~75px from stage right → 8px bubble inset + ~58px inside bubble */
+  right: 58px;
+  bottom: -9px;
   width: 10px;
   height: 10px;
   background: var(--mc-gui);
@@ -292,16 +298,15 @@ html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-labe
   }
 
   .live2d-mc-vtuber__bubble {
-    right: 22px;
-    /* 158px @ 460 → half */
-    bottom: 79px;
-    max-width: min(180px, 58vw);
+    right: 4px;
+    bottom: 84px;
+    max-width: min(160px, 52vw);
     font-size: 12px;
     padding: 8px 10px 8px 14px;
   }
 
   .live2d-mc-vtuber__bubble::after {
-    right: 18px;
+    right: 28px;
   }
 }
 
