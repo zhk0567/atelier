@@ -54,8 +54,9 @@
   --mc-accent: #80ff20;
   --mc-accent-dark: #1e7a12;
   position: absolute;
-  right: 28px;
-  bottom: 205px;
+  /* Sit just above the head; tail (::after) aims at the face */
+  right: 48px;
+  bottom: 158px;
   z-index: 5;
   max-width: min(240px, 70vw);
   padding: 10px 12px 10px 16px;
@@ -99,8 +100,8 @@
 .live2d-mc-vtuber__bubble::after {
   content: "";
   position: absolute;
-  right: 22px;
-  bottom: -12px;
+  right: 36px;
+  bottom: -10px;
   width: 10px;
   height: 10px;
   background: var(--mc-gui);
@@ -291,16 +292,16 @@ html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-labe
   }
 
   .live2d-mc-vtuber__bubble {
-    right: 12px;
-    /* 205px @ 460 → half */
-    bottom: 102px;
+    right: 22px;
+    /* 158px @ 460 → half */
+    bottom: 79px;
     max-width: min(180px, 58vw);
     font-size: 12px;
     padding: 8px 10px 8px 14px;
   }
 
   .live2d-mc-vtuber__bubble::after {
-    right: 16px;
+    right: 18px;
   }
 }
 
