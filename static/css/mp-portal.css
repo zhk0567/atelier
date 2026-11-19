@@ -756,25 +756,31 @@
 }
 
 :is(body, .wiki-liquid-shell).wiki-site .mp-icon-img a {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 12px;
   width: 100%;
+  box-sizing: border-box;
   text-align: center;
+  line-height: 0;
 }
 
 :is(body, .wiki-liquid-shell).wiki-site .mp-icon-img img,
 :is(body, .wiki-liquid-shell).wiki-site .mp-icon-img .mp-icon-sprite {
+  display: block;
   width: 60px !important;
   height: 60px !important;
   max-width: unset !important;
+  margin: 0 auto;
   object-fit: contain;
   image-rendering: pixelated;
+  flex: 0 0 auto;
 }
 
 :is(body, .wiki-liquid-shell).wiki-site .mp-icon-sprite {
-  display: inline-block;
   background-size: contain;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
 }
 
