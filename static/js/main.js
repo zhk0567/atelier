@@ -209,7 +209,24 @@
     root.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
   };
 
+  const isNarrowViewport = () => window.matchMedia("(max-width: 720px)").matches;
+
   const prepareThemeLayer = (layer, next) => {
+    layer.setAttribute("data-theme", next);
+    if (html.classList.contains("wallpaper-enabled")) {
+      layer.classList.add("wallpaper-enabled");
+    }
+    if (html.classList.contains("wallpaper-img-failed")) {
+      layer.classList.add("wallpaper-img-failed");
+    }
+
+    // Mobile: skip cloning the whole page (causes black flash + jank).
+    // Liquid fill alone still reads as a ceremonial pour.
+    if (isNarrowViewport()) {
+      layer.classList.add("liquid-reveal--lite");
+      return;
+    }
+
     const shell = document.createElement("div");
     shell.className = `${document.body.className} wiki-liquid-shell`.trim();
     shell.setAttribute("data-theme", next);
@@ -232,13 +249,6 @@
       btn.textContent = next === "dark" ? "☀" : "☽";
     });
 
-    layer.setAttribute("data-theme", next);
-    if (html.classList.contains("wallpaper-enabled")) {
-      layer.classList.add("wallpaper-enabled");
-    }
-    if (html.classList.contains("wallpaper-img-failed")) {
-      layer.classList.add("wallpaper-img-failed");
-    }
     layer.appendChild(shell);
   };
 
@@ -263,10 +273,12 @@
       themeSwitching = true;
       html.classList.add("is-liquidating");
 
+      const narrow = isNarrowViewport();
       window.FortuneLiquid.reveal({
         fromBtn: btn,
         toTheme: next,
-        duration: 3900,
+        // Phone: shorter pour + lite layer (no full DOM clone)
+        duration: narrow ? 2200 : 3900,
         prepareLayer(layer) {
           prepareThemeLayer(layer, next);
         },

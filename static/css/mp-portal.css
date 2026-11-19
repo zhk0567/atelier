@@ -414,7 +414,8 @@
 /* Homepage quick-entry cards: equal-height grid, CTA pinned to bottom */
 :is(body, .wiki-liquid-shell).page-home .mp-home-cards {
   display: grid;
-  grid-template-columns: 1fr;
+  /* Phone: 2×2 so four entries stay compact and even */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
   gap: 10px;
   width: 100%;
@@ -495,9 +496,33 @@
   height: 22px;
 }
 
-@media screen and (min-width: 720px) {
-  :is(body, .wiki-liquid-shell).page-home .mp-home-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media screen and (max-width: 719px) {
+  :is(body, .wiki-liquid-shell).page-home .mp-home-card {
+    padding: 10px 8px 8px;
+  }
+
+  :is(body, .wiki-liquid-shell).page-home .mp-wrapper .mp-home-card > h2.mp-title {
+    font-size: 0.92rem;
+    min-height: calc(1.2em * 2 + 0.25rem);
+    margin-bottom: 0.4rem;
+  }
+
+  :is(body, .wiki-liquid-shell).page-home .mp-home-card__desc {
+    font-size: 0.78em;
+    min-height: calc(1.4em * 2);
+  }
+
+  :is(body, .wiki-liquid-shell).page-home .mp-home-card .mp-button__inner {
+    min-height: 2.15rem;
+    padding: 0.35rem 0.4rem;
+    font-size: 0.86em;
+    gap: 4px;
+  }
+
+  :is(body, .wiki-liquid-shell).page-home .mp-home-card .mp-button.mp-button-has-image .mp-button__inner::before {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -673,13 +698,13 @@
   border-top: 0;
 }
 
-/* Icon grid */
+/* Icon grid — use CSS grid so 4 hubs never wrap as 3+1 */
 :is(body, .wiki-liquid-shell).wiki-site .mp-icon-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 8px;
   margin: 0.5rem auto 0;
+  justify-items: stretch;
   --icon-base-width: 90px;
   --icon-max-width: 160px;
 }
@@ -689,12 +714,18 @@
 }
 
 :is(body, .wiki-liquid-shell).wiki-site .mp-icon {
-  flex: 1 1 var(--icon-base-width);
-  width: var(--icon-base-width);
-  max-width: var(--icon-max-width);
+  width: 100%;
+  max-width: none;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+
+@media screen and (min-width: 720px) {
+  :is(body, .wiki-liquid-shell).wiki-site .mp-icon-wrapper.mp-main-icons {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 :is(body, .wiki-liquid-shell).wiki-site .mp-icon-img {
@@ -845,11 +876,6 @@
 }
 
 @media screen and (max-width: 950px) {
-  :is(body, .wiki-liquid-shell).wiki-site .mp-icon-wrapper.mp-main-icons {
-    --icon-base-width: 72px;
-    --icon-max-width: 100px;
-  }
-
   :is(body, .wiki-liquid-shell).wiki-site .mp-icon-img a {
     padding: 6px;
   }
@@ -873,11 +899,6 @@
 }
 
 @media screen and (max-width: 480px) {
-  :is(body, .wiki-liquid-shell).wiki-site .mp-icon-wrapper.mp-main-icons {
-    --icon-base-width: 72px;
-    --icon-max-width: 88px;
-  }
-
   :is(body, .wiki-liquid-shell).wiki-site .mp-profile-list li {
     flex-direction: column;
     align-items: flex-start;

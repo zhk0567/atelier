@@ -8,10 +8,29 @@
   if (!root || root.dataset.enabled !== "1") return;
 
   var modelUrl = root.dataset.modelUrl;
-  var W = 360;
-  var H = 460;
-  var OFFSET_X = 75;
-  var OFFSET_Y = 100;
+  var stage = { W: 360, H: 460, OFFSET_X: 75, OFFSET_Y: 100 };
+  var W = stage.W;
+  var H = stage.H;
+  var OFFSET_X = stage.OFFSET_X;
+  var OFFSET_Y = stage.OFFSET_Y;
+
+  function readStageSize() {
+    var narrow = window.matchMedia("(max-width: 640px)").matches;
+    if (narrow) {
+      return { W: 168, H: 214, OFFSET_X: 10, OFFSET_Y: 14 };
+    }
+    return { W: 360, H: 460, OFFSET_X: 75, OFFSET_Y: 100 };
+  }
+
+  function applyStageSize() {
+    stage = readStageSize();
+    W = stage.W;
+    H = stage.H;
+    OFFSET_X = stage.OFFSET_X;
+    OFFSET_Y = stage.OFFSET_Y;
+  }
+
+  applyStageSize();
   var BLESSINGS = [
     "愿你今天心情晴朗，万事顺心～",
     "祝你学习进步，答啥都会！",
@@ -80,20 +99,38 @@
     showBlessingDialog();
   }
 
+  function ensureHitTarget() {
+    var hit = root.querySelector(".live2d-mc-vtuber__hit");
+    if (hit) return hit;
+    hit = document.createElement("button");
+    hit.type = "button";
+    hit.className = "live2d-mc-vtuber__hit";
+    hit.setAttribute("aria-label", "与看板娘互动");
+    root.appendChild(hit);
+    return hit;
+  }
+
   function bindModelInteraction(model, canvas, app) {
     root._live2dModel = model;
 
-    model.interactive = true;
-    model.buttonMode = true;
-    model.cursor = "pointer";
-
-    model.on("hit", onCharacterTap);
-    model.on("pointertap", onCharacterTap);
-
+    // Avoid full-canvas hit stealing scroll/clicks; use compact CSS hit button.
+    model.interactive = false;
+    model.buttonMode = false;
     if (app.renderer.plugins.interaction) {
-      app.stage.interactive = true;
-      app.stage.hitArea = new PIXI.Rectangle(0, 0, W, H);
+      app.stage.interactive = false;
+      app.stage.hitArea = null;
     }
+
+    var hit = ensureHitTarget();
+    hit.addEventListener("click", onCharacterTap);
+    hit.addEventListener(
+      "touchend",
+      function (event) {
+        event.preventDefault();
+        onCharacterTap();
+      },
+      { passive: false },
+    );
   }
 
   function isDebugRulers() {
@@ -258,6 +295,7 @@
       Live2DModel.registerTicker(PIXI.Ticker);
     }
 
+    applyStageSize();
     setupDomDebugChrome();
 
     var canvas = document.createElement("canvas");
@@ -280,6 +318,7 @@
     }
 
     root.appendChild(canvas);
+    ensureHitTarget();
 
     if (isDebugRulers()) {
       app.renderer.backgroundColor = 0x101018;
@@ -307,6 +346,21 @@
           if (document.hidden) app.ticker.stop();
           else app.ticker.start();
         });
+
+        var mq = window.matchMedia("(max-width: 640px)");
+        var onStageChange = function () {
+          applyStageSize();
+          try {
+            app.renderer.resize(W, H);
+          } catch (e) {
+            /* ignore */
+          }
+          layoutModel(model);
+          if (redrawDebug) redrawDebug();
+        };
+        if (typeof mq.addEventListener === "function") mq.addEventListener("change", onStageChange);
+        else if (typeof mq.addListener === "function") mq.addListener(onStageChange);
+
         root._live2dApp = app;
       })
       .catch(function (err) {

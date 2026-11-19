@@ -1,21 +1,20 @@
-/* MC_Vtuber — fixed bottom-right */
+/* MC_Vtuber — fixed bottom-right; transparent areas must not steal taps/scroll */
+
 #live2d-mc-vtuber {
   position: fixed;
   right: 0;
   bottom: 0;
   z-index: 250;
-  width: 360px;
-  height: 460px;
-  max-width: 46vw;
-  max-height: 58vh;
+  /* Width-driven box; height follows aspect so max-* never squashes X/Y */
+  width: min(360px, 42vw);
+  height: auto;
+  aspect-ratio: 360 / 460;
+  max-height: min(460px, 55vh);
   padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) 0;
   box-sizing: border-box;
   overflow: visible;
+  pointer-events: none;
   filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.2));
-}
-
-#live2d-mc-vtuber.is-ready {
-  pointer-events: auto;
 }
 
 #live2d-mc-vtuber canvas,
@@ -23,8 +22,29 @@
   display: block;
   width: 100% !important;
   height: 100% !important;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Compact tap target over the character only — rest of page stays scrollable */
+#live2d-mc-vtuber .live2d-mc-vtuber__hit {
+  position: absolute;
+  right: 6%;
+  bottom: 2%;
+  width: 52%;
+  height: 68%;
+  z-index: 6;
   pointer-events: auto;
   cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#live2d-mc-vtuber.is-ready .live2d-mc-vtuber__hit {
+  pointer-events: auto;
 }
 
 /* MC 风格对话框（GUI 灰底 + 黑边浮雕 + 经验条绿条） */
@@ -37,13 +57,13 @@
   --mc-accent: #80ff20;
   --mc-accent-dark: #1e7a12;
   position: absolute;
-  right: 33px;
-  bottom: 200px;
+  right: 18px;
+  bottom: calc(58% + 8px);
   z-index: 5;
-  max-width: min(280px, 72vw);
+  max-width: min(240px, 68vw);
   padding: 10px 12px 10px 16px;
   font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1.45;
   letter-spacing: 0.02em;
@@ -79,7 +99,6 @@
   transform: translateY(0);
 }
 
-/* 方块小尾巴（替代圆角三角） */
 .live2d-mc-vtuber__bubble::after {
   content: "";
   position: absolute;
@@ -104,6 +123,10 @@ html[data-theme="dark"] .live2d-mc-vtuber__bubble {
   --mc-accent: #55ff55;
   --mc-accent-dark: #137342;
   text-shadow: 1px 1px 0 #000000;
+}
+
+html.is-liquidating #live2d-mc-vtuber {
+  visibility: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -252,10 +275,27 @@ html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-labe
   color: #69f0ae;
 }
 
+/* Keep CSS size in sync with JS stage (same aspect) to avoid squeeze */
 @media (max-width: 640px) {
   #live2d-mc-vtuber {
-    width: 260px;
-    height: 340px;
+    width: min(168px, 44vw);
+    height: auto;
+    max-height: 32vh;
+    aspect-ratio: 168 / 214;
+  }
+
+  #live2d-mc-vtuber .live2d-mc-vtuber__hit {
+    right: 4%;
+    bottom: 1%;
+    width: 58%;
+    height: 72%;
+  }
+
+  .live2d-mc-vtuber__bubble {
+    right: 8px;
+    bottom: calc(62% + 4px);
+    max-width: min(200px, 62vw);
+    font-size: 12px;
   }
 }
 
