@@ -5,11 +5,9 @@
   right: 0;
   bottom: 0;
   z-index: 250;
-  /* Width-driven box; height follows aspect so max-* never squashes X/Y */
-  width: min(360px, 42vw);
-  height: auto;
-  aspect-ratio: 360 / 460;
-  max-height: min(460px, 55vh);
+  /* Fallback size; JS writes exact px to match PIXI stage 1:1 */
+  width: 360px;
+  height: 460px;
   padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) 0;
   box-sizing: border-box;
   overflow: visible;
@@ -19,6 +17,9 @@
 
 #live2d-mc-vtuber canvas,
 #live2d-mc-vtuber .live2d-mc-vtuber__canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
   display: block;
   width: 100% !important;
   height: 100% !important;
@@ -26,15 +27,15 @@
   cursor: default;
 }
 
-/* Compact tap target over the character only — rest of page stays scrollable */
+/* Tight tap target — JS syncs left/top/width/height from model bounds */
 #live2d-mc-vtuber .live2d-mc-vtuber__hit {
   position: absolute;
-  right: 6%;
-  bottom: 2%;
-  width: 52%;
-  height: 68%;
+  left: 38%;
+  top: 18%;
+  width: 36%;
+  height: 72%;
   z-index: 6;
-  pointer-events: auto;
+  pointer-events: none;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -57,10 +58,12 @@
   --mc-accent: #80ff20;
   --mc-accent-dark: #1e7a12;
   position: absolute;
-  right: 18px;
-  bottom: calc(58% + 8px);
+  /* JS overrides left/bottom from head bounds; fallback sits above torso */
+  right: auto;
+  left: 0;
+  bottom: 78%;
   z-index: 5;
-  max-width: min(240px, 68vw);
+  max-width: min(220px, 64vw);
   padding: 10px 12px 10px 16px;
   font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
   font-size: 13px;
@@ -102,7 +105,8 @@
 .live2d-mc-vtuber__bubble::after {
   content: "";
   position: absolute;
-  right: 22px;
+  left: var(--bubble-tail-x, 28px);
+  right: auto;
   bottom: -12px;
   width: 10px;
   height: 10px;
@@ -275,26 +279,22 @@ html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-labe
   color: #69f0ae;
 }
 
-/* Keep CSS size in sync with JS stage (same aspect) to avoid squeeze */
 @media (max-width: 640px) {
   #live2d-mc-vtuber {
-    width: min(168px, 44vw);
-    height: auto;
-    max-height: 32vh;
-    aspect-ratio: 168 / 214;
+    /* JS sets exact px; these are only pre-boot fallbacks */
+    width: 140px;
+    height: 178px;
   }
 
   #live2d-mc-vtuber .live2d-mc-vtuber__hit {
-    right: 4%;
-    bottom: 1%;
-    width: 58%;
-    height: 72%;
+    left: 34%;
+    top: 14%;
+    width: 40%;
+    height: 74%;
   }
 
   .live2d-mc-vtuber__bubble {
-    right: 8px;
-    bottom: calc(62% + 4px);
-    max-width: min(200px, 62vw);
+    max-width: min(180px, 58vw);
     font-size: 12px;
   }
 }

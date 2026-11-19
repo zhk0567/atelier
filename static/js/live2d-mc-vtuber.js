@@ -8,26 +8,62 @@
   if (!root || root.dataset.enabled !== "1") return;
 
   var modelUrl = root.dataset.modelUrl;
-  var stage = { W: 360, H: 460, OFFSET_X: 75, OFFSET_Y: 100 };
+  var DESKTOP = { W: 360, H: 460, anchorX: 0.58, footPad: 6, scale: 0.92 };
+  var MOBILE = { W: 140, H: 178, anchorX: 0.56, footPad: 4, scale: 0.9 };
+  var stage = DESKTOP;
   var W = stage.W;
   var H = stage.H;
-  var OFFSET_X = stage.OFFSET_X;
-  var OFFSET_Y = stage.OFFSET_Y;
+
+  function fitStage(baseW, baseH, maxW, maxH) {
+    var aspect = baseW / baseH;
+    var w = Math.min(baseW, maxW);
+    var h = Math.round(w / aspect);
+    if (h > maxH) {
+      h = Math.min(baseH, maxH);
+      w = Math.round(h * aspect);
+    }
+    return { W: Math.max(96, w), H: Math.max(120, h) };
+  }
 
   function readStageSize() {
     var narrow = window.matchMedia("(max-width: 640px)").matches;
     if (narrow) {
-      return { W: 168, H: 214, OFFSET_X: 10, OFFSET_Y: 14 };
+      var fitted = fitStage(
+        MOBILE.W,
+        MOBILE.H,
+        Math.floor(window.innerWidth * 0.38),
+        Math.floor(window.innerHeight * 0.28),
+      );
+      return {
+        W: fitted.W,
+        H: fitted.H,
+        anchorX: MOBILE.anchorX,
+        footPad: MOBILE.footPad,
+        scale: MOBILE.scale,
+      };
     }
-    return { W: 360, H: 460, OFFSET_X: 75, OFFSET_Y: 100 };
+    var desk = fitStage(
+      DESKTOP.W,
+      DESKTOP.H,
+      Math.min(360, Math.floor(window.innerWidth * 0.42)),
+      Math.min(460, Math.floor(window.innerHeight * 0.55)),
+    );
+    return {
+      W: desk.W,
+      H: desk.H,
+      anchorX: DESKTOP.anchorX,
+      footPad: DESKTOP.footPad,
+      scale: DESKTOP.scale,
+    };
   }
 
   function applyStageSize() {
     stage = readStageSize();
     W = stage.W;
     H = stage.H;
-    OFFSET_X = stage.OFFSET_X;
-    OFFSET_Y = stage.OFFSET_Y;
+    // Keep CSS box === PIXI stage so canvas never stretches unevenly.
+    root.style.width = W + "px";
+    root.style.height = H + "px";
   }
 
   applyStageSize();
@@ -74,8 +110,51 @@
     return bubbleEl;
   }
 
+  function syncHitAndBubble(model) {
+    if (!model) return;
+    var hit = ensureHitTarget();
+    var bounds = null;
+    try {
+      bounds = model.getBounds(true);
+    } catch (e) {
+      bounds = null;
+    }
+    if (!bounds || !isFinite(bounds.width) || bounds.width < 8) {
+      return;
+    }
+
+    var padX = Math.max(6, W * 0.03);
+    var padY = Math.max(8, H * 0.02);
+    var left = Math.max(0, bounds.x - padX);
+    var top = Math.max(0, bounds.y - padY);
+    var right = Math.min(W, bounds.x + bounds.width + padX);
+    var bottom = Math.min(H, bounds.y + bounds.height + padY);
+    var width = Math.max(36, right - left);
+    var height = Math.max(48, bottom - top);
+
+    hit.style.left = (left / W) * 100 + "%";
+    hit.style.top = (top / H) * 100 + "%";
+    hit.style.width = (width / W) * 100 + "%";
+    hit.style.height = (height / H) * 100 + "%";
+    hit.style.right = "auto";
+    hit.style.bottom = "auto";
+
+    var bubble = ensureBubble();
+    var headX = bounds.x + bounds.width * 0.5;
+    var headTop = Math.max(0, bounds.y);
+    var bubbleMax = Math.min(220, window.innerWidth * 0.64, W * 1.45);
+    var bubbleLeft = Math.min(Math.max(headX - bubbleMax * 0.35, -W * 0.55), W * 0.08);
+    bubble.style.left = bubbleLeft + "px";
+    bubble.style.right = "auto";
+    bubble.style.bottom = H - headTop + 10 + "px";
+    bubble.style.maxWidth = bubbleMax + "px";
+    var tailX = Math.max(14, Math.min(bubbleMax - 24, headX - bubbleLeft - 5));
+    bubble.style.setProperty("--bubble-tail-x", tailX + "px");
+  }
+
   function showBlessingDialog() {
     var bubble = ensureBubble();
+    if (root._live2dModel) syncHitAndBubble(root._live2dModel);
     bubble.textContent = randomBlessing();
     bubble.hidden = false;
     bubble.classList.add("is-visible");
@@ -270,17 +349,18 @@
     }
   }
 
-  /** 稳定可见：脚底锚点，略偏右下（配布画布人物不在几何中心） */
+  /** 脚底锚点站在画布内；不再额外 OFFSET，避免人物偏出 hit 区 */
   function layoutModel(model) {
     var mw = model.width > 0 ? model.width : 1000;
     var mh = model.height > 0 ? model.height : 1000;
-    var scale = Math.min(W / mw, H / mh) * 0.92;
+    var scale = Math.min(W / mw, H / mh) * (stage.scale || 0.92);
     if (!isFinite(scale) || scale <= 0) {
       scale = 0.12;
     }
     model.scale.set(scale);
     model.anchor.set(0.5, 1);
-    model.position.set(W * 0.58 + OFFSET_X, H - 6 + OFFSET_Y);
+    model.position.set(W * (stage.anchorX || 0.56), H - (stage.footPad || 4));
+    syncHitAndBubble(model);
   }
 
   function boot() {
@@ -340,6 +420,13 @@
 
         bindModelInteraction(model, canvas, app);
         root.classList.add("is-ready");
+        // Bounds settle after first frames of Live2D update
+        window.setTimeout(function () {
+          syncHitAndBubble(model);
+        }, 120);
+        window.setTimeout(function () {
+          syncHitAndBubble(model);
+        }, 600);
 
         document.addEventListener("visibilitychange", function () {
           if (!root._live2dApp) return;
@@ -347,7 +434,7 @@
           else app.ticker.start();
         });
 
-        var mq = window.matchMedia("(max-width: 640px)");
+        var resizeTimer = 0;
         var onStageChange = function () {
           applyStageSize();
           try {
@@ -357,9 +444,16 @@
           }
           layoutModel(model);
           if (redrawDebug) redrawDebug();
+          syncHitAndBubble(model);
         };
+        var onResize = function () {
+          window.clearTimeout(resizeTimer);
+          resizeTimer = window.setTimeout(onStageChange, 120);
+        };
+        var mq = window.matchMedia("(max-width: 640px)");
         if (typeof mq.addEventListener === "function") mq.addEventListener("change", onStageChange);
         else if (typeof mq.addListener === "function") mq.addListener(onStageChange);
+        window.addEventListener("resize", onResize);
 
         root._live2dApp = app;
       })
