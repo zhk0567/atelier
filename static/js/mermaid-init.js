@@ -34,9 +34,18 @@
     schedule();
   }
 
-  document.querySelectorAll(".theme-toggle").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      setTimeout(schedule, 120);
+  if (typeof MutationObserver !== "undefined") {
+    new MutationObserver(function () {
+      schedule();
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
     });
-  });
+  } else {
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setTimeout(schedule, 120);
+      });
+    });
+  }
 })();

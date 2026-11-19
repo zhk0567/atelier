@@ -184,6 +184,8 @@
 
   initGuideTocMobile();
 
+  let themeSwitching = false;
+
   const syncThemeToggleIcon = () => {
     document.querySelectorAll(".theme-toggle").forEach((btn) => {
       btn.textContent = html.getAttribute("data-theme") === "dark" ? "☀" : "☽";
@@ -197,18 +199,85 @@
     syncThemeToggleIcon();
   };
 
+  const stripThemeCloneNoise = (root) => {
+    root
+      .querySelectorAll(
+        "script, link, #live2d-mc-vtuber, #toast, #wiki-lightbox, #wiki-sidebar-backdrop, iframe, video, canvas"
+      )
+      .forEach((el) => el.remove());
+    if (root.id) root.removeAttribute("id");
+    root.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+  };
+
+  const prepareThemeLayer = (layer, next) => {
+    const shell = document.createElement("div");
+    shell.className = `${document.body.className} wiki-liquid-shell`.trim();
+    shell.setAttribute("data-theme", next);
+    shell.setAttribute("aria-hidden", "true");
+
+    const scrollY = window.scrollY || html.scrollTop || 0;
+
+    ["#wiki-wallpaper", ".wiki-header", ".wiki-body"].forEach((sel) => {
+      const el = document.querySelector(sel);
+      if (!el) return;
+      const clone = el.cloneNode(true);
+      stripThemeCloneNoise(clone);
+      if (sel === ".wiki-body" && scrollY > 0) {
+        clone.style.transform = `translateY(-${scrollY}px)`;
+      }
+      shell.appendChild(clone);
+    });
+
+    shell.querySelectorAll(".theme-toggle").forEach((btn) => {
+      btn.textContent = next === "dark" ? "☀" : "☽";
+    });
+
+    layer.setAttribute("data-theme", next);
+    if (html.classList.contains("wallpaper-enabled")) {
+      layer.classList.add("wallpaper-enabled");
+    }
+    if (html.classList.contains("wallpaper-img-failed")) {
+      layer.classList.add("wallpaper-img-failed");
+    }
+    layer.appendChild(shell);
+  };
+
   const stored = localStorage.getItem("theme");
   const initialTheme = stored === "dark" ? "dark" : "light";
   applyTheme(initialTheme);
 
   document.querySelectorAll(".theme-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
+      if (themeSwitching) return;
       const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      if (!prefersReducedMotion()) {
-        html.classList.add("theme-transitioning");
-        window.setTimeout(() => html.classList.remove("theme-transitioning"), 220);
+
+      if (!window.FortuneLiquid || typeof window.FortuneLiquid.reveal !== "function") {
+        if (!prefersReducedMotion()) {
+          html.classList.add("theme-transitioning");
+          window.setTimeout(() => html.classList.remove("theme-transitioning"), 220);
+        }
+        applyTheme(next);
+        return;
       }
-      applyTheme(next);
+
+      themeSwitching = true;
+      html.classList.add("is-liquidating");
+
+      window.FortuneLiquid.reveal({
+        fromBtn: btn,
+        toTheme: next,
+        duration: 3900,
+        prepareLayer(layer) {
+          prepareThemeLayer(layer, next);
+        },
+        onCover() {
+          applyTheme(next);
+        },
+        onDone() {
+          html.classList.remove("is-liquidating");
+          themeSwitching = false;
+        },
+      });
     });
   });
 

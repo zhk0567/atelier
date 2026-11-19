@@ -189,7 +189,7 @@ html.wallpaper-enabled.wallpaper-img-failed[data-theme="dark"] {
   background-attachment: fixed;
 }
 
-body.wiki-site {
+:is(body, .wiki-liquid-shell).wiki-site {
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   line-height: var(--line-height-content);
@@ -198,7 +198,7 @@ body.wiki-site {
   min-height: 100dvh;
   position: relative;
 }
-body.wiki-site.has-wallpaper {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper {
   color: var(--text-on-glass);
 }
 
@@ -237,14 +237,14 @@ body.wiki-site.has-wallpaper {
   background: var(--wallpaper-vignette, none);
 }
 
-body.wiki-site.has-wallpaper .wiki-header {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-header {
   background: var(--scrim-wallpaper);
   -webkit-backdrop-filter: var(--scrim-wallpaper-blur);
   backdrop-filter: var(--scrim-wallpaper-blur);
   border-bottom: 1px solid var(--scrim-wallpaper-border);
   box-shadow: var(--box-shadow-elevated), inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
-body.wiki-site.has-wallpaper .wiki-sidebar {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-sidebar {
   background: var(--scrim-wallpaper);
   -webkit-backdrop-filter: var(--scrim-wallpaper-blur);
   backdrop-filter: var(--scrim-wallpaper-blur);
@@ -255,7 +255,7 @@ body.wiki-site.has-wallpaper .wiki-sidebar {
   top: calc(var(--header-height) + 0.5rem);
   max-height: calc(100dvh - var(--header-height) - 1rem);
 }
-body.wiki-site.has-wallpaper .wiki-main {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main {
   background: var(--scrim-wallpaper);
   -webkit-backdrop-filter: var(--scrim-wallpaper-blur);
   backdrop-filter: var(--scrim-wallpaper-blur);
@@ -265,127 +265,127 @@ body.wiki-site.has-wallpaper .wiki-main {
   margin: 0.5rem 0.5rem 0.5rem 0;
 }
 
-body.wiki-site:not(.has-wallpaper) .wiki-header {
+:is(body, .wiki-liquid-shell).wiki-site:not(.has-wallpaper) .wiki-header {
   background: var(--background-color-base);
 }
-body.wiki-site:not(.has-wallpaper) .wiki-sidebar {
+:is(body, .wiki-liquid-shell).wiki-site:not(.has-wallpaper) .wiki-sidebar {
   background: var(--background-color-neutral-subtle);
 }
-body.wiki-site:not(.has-wallpaper) .wiki-main {
+:is(body, .wiki-liquid-shell).wiki-site:not(.has-wallpaper) .wiki-main {
   background: var(--background-color-base);
 }
 
 @media (max-width: 720px) {
-  body.wiki-site.has-wallpaper .wiki-main,
-  body.wiki-site.has-wallpaper .wiki-header,
-  body.wiki-site.has-wallpaper .wiki-sidebar {
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main,
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-header,
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-sidebar {
     box-shadow: none;
     border-radius: 0;
     border-left: none;
     border-right: none;
   }
-  body.wiki-site.has-wallpaper .wiki-sidebar {
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-sidebar {
     margin: 0;
     top: var(--header-height);
     max-height: calc(100dvh - var(--header-height) - var(--safe-bottom));
   }
-  body.wiki-site.has-wallpaper .wiki-main {
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main {
     border-top: 1px solid var(--scrim-wallpaper-border);
   }
 }
 
 /* ── Wallpaper mode: inner surfaces (forms, cards, code, tables) ─────── */
-body.wiki-site.has-wallpaper .wiki-search__input,
-body.wiki-site.has-wallpaper .wiki-tool-btn,
-body.wiki-site.has-wallpaper .wiki-wallpaper-picker__select,
-body.wiki-site.has-wallpaper .wiki-nav-toggle {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-search__input,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-tool-btn,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-wallpaper-picker__select,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-nav-toggle {
   background: var(--surface-solid);
   border-color: var(--border-color-base);
   color: var(--text-on-glass);
 }
-body.wiki-site.has-wallpaper .wiki-nav a:hover {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-nav a:hover {
   background: var(--surface-solid-muted);
   color: var(--link-on-glass);
 }
-body.wiki-site.has-wallpaper .wiki-nav a.is-current {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-nav a.is-current {
   background: var(--surface-solid);
   border-left-color: var(--color-progressive);
   color: var(--text-on-glass);
   font-weight: 600;
   box-shadow: var(--box-shadow-subtle);
 }
-body.wiki-site.has-wallpaper .wiki-doc-nav,
-body.wiki-site.has-wallpaper .wiki-pager__link,
-body.wiki-site.has-wallpaper .wiki-article-card,
-body.wiki-site.has-wallpaper .browse-toolbar__input,
-body.wiki-site.has-wallpaper .infobox,
-body.wiki-site.has-wallpaper .wikitable,
-body.wiki-site.has-wallpaper .wiki-notice,
-body.wiki-site.has-wallpaper .wiki-ambox,
-body.wiki-site.has-wallpaper .wiki-footer {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-doc-nav,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-pager__link,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-article-card,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .browse-toolbar__input,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .infobox,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wikitable,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-notice,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-ambox,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-footer {
   background: var(--surface-solid);
   border-color: var(--border-color-base);
 }
-body.wiki-site.has-wallpaper .infobox caption,
-body.wiki-site.has-wallpaper .infobox-title,
-body.wiki-site.has-wallpaper .infobox th {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .infobox caption,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .infobox-title,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .infobox th {
   background: var(--surface-solid-muted);
 }
-body.wiki-site.has-wallpaper .infobox td,
-body.wiki-site.has-wallpaper .wikitable td {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .infobox td,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wikitable td {
   background: var(--surface-solid);
 }
-body.wiki-site.has-wallpaper .wikitable th {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wikitable th {
   background: var(--surface-solid-muted);
 }
-body.wiki-site.has-wallpaper .wiki-content .wiki-md pre,
-body.wiki-site.has-wallpaper .wiki-content .blog-md pre:not(.mermaid) {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .wiki-md pre,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .blog-md pre:not(.mermaid) {
   background: var(--surface-solid-muted);
 }
-body.wiki-site.has-wallpaper .wiki-content .wiki-md code {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .wiki-md code {
   background: var(--surface-solid-muted);
   border-color: var(--border-color-base);
 }
-body.wiki-site.has-wallpaper .wiki-content .wiki-md th,
-body.wiki-site.has-wallpaper .wiki-content .blog-md th {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .wiki-md th,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .blog-md th {
   background: var(--surface-solid-muted);
 }
-body.wiki-site.has-wallpaper .wiki-content .wiki-md td,
-body.wiki-site.has-wallpaper .wiki-content .blog-md td {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .wiki-md td,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .blog-md td {
   background: var(--surface-solid);
 }
-body.wiki-site.has-wallpaper .wiki-content .wiki-md blockquote,
-body.wiki-site.has-wallpaper .wiki-content .blog-md blockquote {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .wiki-md blockquote,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .blog-md blockquote {
   background: var(--surface-solid-muted);
 }
-body.wiki-site.has-wallpaper .wiki-breadcrumbs {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-breadcrumbs {
   color: var(--text-muted-on-glass);
   border-bottom: 1px solid var(--inner-border);
   padding-bottom: 0.65rem;
   margin-bottom: 1.1rem;
 }
-body.wiki-site.has-wallpaper .wiki-sidebar__heading,
-body.wiki-site.has-wallpaper .wiki-wallpaper-picker {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-sidebar__heading,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-wallpaper-picker {
   color: var(--text-muted-on-glass);
 }
-body.wiki-site.has-wallpaper .wiki-nav__group-title {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-nav__group-title {
   color: var(--text-on-glass);
 }
-body.wiki-site.has-wallpaper .wiki-content {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content {
   color: var(--text-on-glass);
 }
-body.wiki-site.has-wallpaper .wiki-content > h1:first-child,
-body.wiki-site.has-wallpaper .wiki-content h2,
-body.wiki-site.has-wallpaper .wiki-content h3,
-body.wiki-site.has-wallpaper .wiki-content .wiki-md h1,
-body.wiki-site.has-wallpaper .wiki-content .wiki-md h2,
-body.wiki-site.has-wallpaper .wiki-content .wiki-md h3,
-body.wiki-site.has-wallpaper .wiki-content .blog-md h1,
-body.wiki-site.has-wallpaper .wiki-content .blog-md h2,
-body.wiki-site.has-wallpaper .wiki-content .blog-md h3 {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content > h1:first-child,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content h2,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content h3,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .wiki-md h1,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .wiki-md h2,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .wiki-md h3,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .blog-md h1,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .blog-md h2,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-content .blog-md h3 {
   color: var(--text-on-glass);
 }
-body.wiki-site.has-wallpaper .wiki-footer {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-footer {
   color: var(--text-muted-on-glass);
 }
 
@@ -403,11 +403,11 @@ a:focus-visible {
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
-body.wiki-site.has-wallpaper a:link,
-body.wiki-site.has-wallpaper a:visited {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper a:link,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper a:visited {
   color: var(--link-on-glass);
 }
-body.wiki-site.has-wallpaper a:hover {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper a:hover {
   color: var(--color-progressive-hover);
 }
 
@@ -432,7 +432,7 @@ button, input, select {
   transition: box-shadow var(--duration-normal) var(--ease-out),
     border-color var(--duration-normal) var(--ease-out);
 }
-body.wiki-site.has-wallpaper .wiki-header.is-scrolled {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-header.is-scrolled {
   box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 .wiki-header__start {
@@ -572,11 +572,11 @@ body.wiki-site.has-wallpaper .wiki-header.is-scrolled {
   background: var(--inner-surface, var(--background-color-base));
   box-shadow: var(--shadow-lift, 0 8px 24px rgba(0, 0, 0, 0.12));
 }
-body.wiki-site.has-wallpaper .wiki-search__panel {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-search__panel {
   background: var(--inner-surface);
   border-color: var(--inner-border);
 }
-body.wiki-site.has-wallpaper .wiki-search__option.is-active {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-search__option.is-active {
   background: var(--inner-surface-muted);
 }
 .wiki-search__panel:not([hidden]) {
@@ -880,8 +880,8 @@ body.wiki-site.has-wallpaper .wiki-search__option.is-active {
   color: var(--color-progressive);
   text-decoration: none;
 }
-body.wiki-site.has-wallpaper .wiki-doc-nav__list a.is-current,
-body.wiki-site.has-wallpaper .wiki-doc-nav__list a.is-active {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-doc-nav__list a.is-current,
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-doc-nav__list a.is-active {
   color: var(--link-on-glass);
 }
 .wiki-nav__group--doc .wiki-nav__group-title {
@@ -1618,7 +1618,7 @@ body.wiki-site.has-wallpaper .wiki-doc-nav__list a.is-active {
   line-height: 1.55;
   color: var(--color-subtle);
 }
-body.wiki-site.has-wallpaper .wiki-footer {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-footer {
   border-top-color: var(--inner-border);
   color: var(--text-muted-on-glass);
 }
@@ -1627,7 +1627,7 @@ body.wiki-site.has-wallpaper .wiki-footer {
   font-size: 0.7rem;
   color: var(--color-placeholder);
 }
-body.wiki-site.has-wallpaper .wiki-footer__attr {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-footer__attr {
   color: var(--text-muted-on-glass);
   opacity: 0.85;
 }
@@ -2045,7 +2045,7 @@ body.sidebar-open .wiki-sidebar-backdrop {
     break-inside: avoid;
   }
 }
-body.wiki-site.has-wallpaper .wiki-doc-nav--guide {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-doc-nav--guide {
   background: var(--inner-surface);
   border-color: var(--inner-border);
   box-shadow: var(--inner-shadow);
@@ -2177,7 +2177,7 @@ body.wiki-site.has-wallpaper .wiki-doc-nav--guide {
   border-radius: 0 var(--inner-radius) var(--inner-radius) 0;
   color: inherit;
 }
-body.wiki-site.has-wallpaper .blog-guide-md blockquote {
+:is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .blog-guide-md blockquote {
   background: var(--inner-surface-muted);
   border-left-color: var(--color-progressive);
 }
@@ -2203,7 +2203,7 @@ body.wiki-site.has-wallpaper .blog-guide-md blockquote {
   }
 
   html.theme-transitioning,
-  html.theme-transitioning body.wiki-site {
+  html.theme-transitioning :is(body, .wiki-liquid-shell).wiki-site {
     transition: background-color var(--duration-normal) var(--ease-in-out),
       color var(--duration-normal) var(--ease-in-out);
   }
@@ -2215,16 +2215,16 @@ body.wiki-site.has-wallpaper .blog-guide-md blockquote {
   .wiki-header.is-scrolled {
     box-shadow: var(--box-shadow-elevated);
   }
-  body.wiki-site.has-wallpaper .wiki-header.is-scrolled {
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-header.is-scrolled {
     -webkit-backdrop-filter: blur(14px) saturate(1.22);
     backdrop-filter: blur(14px) saturate(1.22);
   }
 
-  body.wiki-site.has-wallpaper .wiki-main {
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main {
     position: relative;
     isolation: isolate;
   }
-  body.wiki-site.has-wallpaper .wiki-main::before {
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -2233,7 +2233,7 @@ body.wiki-site.has-wallpaper .blog-guide-md blockquote {
     pointer-events: none;
     z-index: 0;
   }
-  body.wiki-site.has-wallpaper .wiki-main > * {
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main > * {
     position: relative;
     z-index: 1;
   }
@@ -2281,23 +2281,23 @@ body.wiki-site.has-wallpaper .blog-guide-md blockquote {
     box-shadow: var(--shadow-lift);
   }
 
-  body.wiki-site:not(.is-ui-ready) .wiki-main {
+  :is(body, .wiki-liquid-shell).wiki-site:not(.is-ui-ready) .wiki-main {
     opacity: 0;
     transform: translateY(8px);
   }
-  body.wiki-site.is-ui-ready .wiki-main {
+  :is(body, .wiki-liquid-shell).wiki-site.is-ui-ready .wiki-main {
     animation: ui-shell-enter var(--duration-slow) var(--ease-out) 60ms forwards;
   }
 
-  body.page-home:not(.is-ui-ready) .mp-wrapper > .mp-banner,
-  body.page-home:not(.is-ui-ready) .mp-wrapper > .mp-inline-sections {
+  :is(body, .wiki-liquid-shell).page-home:not(.is-ui-ready) .mp-wrapper > .mp-banner,
+  :is(body, .wiki-liquid-shell).page-home:not(.is-ui-ready) .mp-wrapper > .mp-inline-sections {
     opacity: 0;
     transform: translateY(8px);
   }
-  body.page-home.is-ui-ready .mp-wrapper > .mp-banner {
+  :is(body, .wiki-liquid-shell).page-home.is-ui-ready .mp-wrapper > .mp-banner {
     animation: ui-shell-enter var(--duration-slow) var(--ease-out) 100ms forwards;
   }
-  body.page-home.is-ui-ready .mp-wrapper > .mp-inline-sections {
+  :is(body, .wiki-liquid-shell).page-home.is-ui-ready .mp-wrapper > .mp-inline-sections {
     animation: ui-shell-enter var(--duration-slow) var(--ease-out) 160ms forwards;
   }
 
@@ -2326,8 +2326,8 @@ body.wiki-site.has-wallpaper .blog-guide-md blockquote {
     --color-subtle: #d8dce2;
     --text-muted-on-glass: #d8dce2;
   }
-  body.wiki-site.has-wallpaper a:link,
-  body.wiki-site.has-wallpaper a:visited,
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper a:link,
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper a:visited,
   a:link,
   a:visited {
     text-decoration: underline;
@@ -2347,35 +2347,112 @@ body.wiki-site.has-wallpaper .blog-guide-md blockquote {
   .wiki-nav-toggle,
   .wiki-search__input,
   .wiki-wallpaper__image,
-  body.wiki-site .mp-section,
-  body.wiki-site .mp-project-card,
-  body.wiki-site.client-js .mp-wrapper .collapsible-content {
+  :is(body, .wiki-liquid-shell).wiki-site .mp-section,
+  :is(body, .wiki-liquid-shell).wiki-site .mp-project-card,
+  :is(body, .wiki-liquid-shell).wiki-site.client-js .mp-wrapper .collapsible-content {
     transition: none;
     animation: none;
   }
-  body.wiki-site:not(.is-ui-ready) .wiki-main,
-  body.page-home:not(.is-ui-ready) .mp-wrapper > .mp-banner,
-  body.page-home:not(.is-ui-ready) .mp-wrapper > .mp-inline-sections {
+  :is(body, .wiki-liquid-shell).wiki-site:not(.is-ui-ready) .wiki-main,
+  :is(body, .wiki-liquid-shell).page-home:not(.is-ui-ready) .mp-wrapper > .mp-banner,
+  :is(body, .wiki-liquid-shell).page-home:not(.is-ui-ready) .mp-wrapper > .mp-inline-sections {
     opacity: 1;
     transform: none;
   }
-  body.wiki-site.has-wallpaper .wiki-header,
-  body.wiki-site.has-wallpaper .wiki-sidebar,
-  body.wiki-site.has-wallpaper .wiki-main,
-  body.wiki-site.has-wallpaper .mp-section {
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-header,
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-sidebar,
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main,
+  :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .mp-section {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
-  [data-theme="light"] body.wiki-site.has-wallpaper .wiki-header,
-  [data-theme="light"] body.wiki-site.has-wallpaper .wiki-sidebar,
-  [data-theme="light"] body.wiki-site.has-wallpaper .wiki-main,
-  [data-theme="light"] body.wiki-site.has-wallpaper .mp-section {
+  [data-theme="light"] :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-header,
+  [data-theme="light"] :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-sidebar,
+  [data-theme="light"] :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main,
+  [data-theme="light"] :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .mp-section {
     background: rgba(255, 255, 255, 0.96);
   }
-  [data-theme="dark"] body.wiki-site.has-wallpaper .wiki-header,
-  [data-theme="dark"] body.wiki-site.has-wallpaper .wiki-sidebar,
-  [data-theme="dark"] body.wiki-site.has-wallpaper .wiki-main,
-  [data-theme="dark"] body.wiki-site.has-wallpaper .mp-section {
+  [data-theme="dark"] :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-header,
+  [data-theme="dark"] :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-sidebar,
+  [data-theme="dark"] :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .wiki-main,
+  [data-theme="dark"] :is(body, .wiki-liquid-shell).wiki-site.has-wallpaper .mp-section {
     background: rgba(22, 24, 26, 0.96);
   }
+}
+
+/* —— liquid theme reveal (shared with fortune-liquid.js) —— */
+.liquid-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 450;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--background-color-neutral-subtle);
+  color: var(--color-base);
+  font-family: var(--font-sans);
+}
+
+.liquid-reveal:not(.wallpaper-enabled)[data-theme="light"] {
+  background-image:
+    linear-gradient(180deg, rgba(120, 185, 255, 0.35) 0%, rgba(120, 185, 255, 0.08) 38%, transparent 48%),
+    url("/static/img/wiki/grass_block.png");
+  background-size: auto, 32px 32px;
+  background-attachment: fixed;
+  image-rendering: pixelated;
+}
+
+.liquid-reveal:not(.wallpaper-enabled)[data-theme="dark"] {
+  background-image: url("/static/img/wiki/stone.png");
+  background-size: 32px 32px;
+  background-attachment: fixed;
+  image-rendering: pixelated;
+}
+
+.liquid-reveal.wallpaper-enabled {
+  background-image: none;
+  background-color: var(--background-color-neutral-subtle);
+}
+
+.liquid-reveal.wallpaper-enabled.wallpaper-img-failed[data-theme="light"] {
+  background-image:
+    linear-gradient(180deg, rgba(120, 185, 255, 0.35) 0%, rgba(120, 185, 255, 0.08) 38%, transparent 48%),
+    url("/static/img/wiki/grass_block.png");
+  background-size: auto, 32px 32px;
+  background-attachment: fixed;
+}
+
+.liquid-reveal.wallpaper-enabled.wallpaper-img-failed[data-theme="dark"] {
+  background-image: url("/static/img/wiki/stone.png");
+  background-size: 32px 32px;
+  background-attachment: fixed;
+}
+
+.liquid-reveal > .wiki-liquid-shell {
+  position: relative;
+  min-height: 100%;
+  height: 100%;
+  color: inherit;
+  background: transparent;
+}
+
+.liquid-rim {
+  position: fixed;
+  inset: 0;
+  z-index: 451;
+  pointer-events: none;
+}
+
+#liquid-clip-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+html.is-liquidating {
+  cursor: progress;
+}
+
+html.is-liquidating .wiki-wallpaper__image {
+  transition: none;
 }
