@@ -1,25 +1,21 @@
-/* MC_Vtuber — fixed bottom-right; transparent areas must not steal taps/scroll */
-
+/* MC_Vtuber — fixed bottom-right; stage stays 360×460 (layout math), scale on phone */
 #live2d-mc-vtuber {
   position: fixed;
   right: 0;
   bottom: 0;
   z-index: 250;
-  /* Fallback size; JS writes exact px to match PIXI stage 1:1 */
   width: 360px;
   height: 460px;
   padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) 0;
   box-sizing: border-box;
   overflow: visible;
   pointer-events: none;
+  transform-origin: bottom right;
   filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.2));
 }
 
 #live2d-mc-vtuber canvas,
 #live2d-mc-vtuber .live2d-mc-vtuber__canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
   display: block;
   width: 100% !important;
   height: 100% !important;
@@ -27,13 +23,13 @@
   cursor: default;
 }
 
-/* Tight tap target — JS syncs left/top/width/height from model bounds */
+/* Tight chip over the character only (empty canvas must not steal taps) */
 #live2d-mc-vtuber .live2d-mc-vtuber__hit {
   position: absolute;
-  left: 38%;
-  top: 18%;
-  width: 36%;
-  height: 72%;
+  right: 5%;
+  bottom: 2%;
+  width: 28%;
+  height: 50%;
   z-index: 6;
   pointer-events: none;
   cursor: pointer;
@@ -58,15 +54,13 @@
   --mc-accent: #80ff20;
   --mc-accent-dark: #1e7a12;
   position: absolute;
-  /* JS overrides left/bottom from head bounds; fallback sits above torso */
-  right: auto;
-  left: 0;
-  bottom: 78%;
+  right: 28px;
+  bottom: 210px;
   z-index: 5;
-  max-width: min(220px, 64vw);
+  max-width: min(240px, 70vw);
   padding: 10px 12px 10px 16px;
   font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.45;
   letter-spacing: 0.02em;
@@ -102,11 +96,11 @@
   transform: translateY(0);
 }
 
+/* 方块小尾巴（替代圆角三角） */
 .live2d-mc-vtuber__bubble::after {
   content: "";
   position: absolute;
-  left: var(--bubble-tail-x, 28px);
-  right: auto;
+  right: 22px;
   bottom: -12px;
   width: 10px;
   height: 10px;
@@ -127,10 +121,6 @@ html[data-theme="dark"] .live2d-mc-vtuber__bubble {
   --mc-accent: #55ff55;
   --mc-accent-dark: #137342;
   text-shadow: 1px 1px 0 #000000;
-}
-
-html.is-liquidating #live2d-mc-vtuber {
-  visibility: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -279,23 +269,28 @@ html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-labe
   color: #69f0ae;
 }
 
+html.is-liquidating #live2d-mc-vtuber {
+  visibility: hidden;
+}
+
+/* Uniform scale — keeps PIXI 360×460 aspect, no horizontal squeeze */
 @media (max-width: 640px) {
   #live2d-mc-vtuber {
-    /* JS sets exact px; these are only pre-boot fallbacks */
-    width: 140px;
-    height: 178px;
+    transform: scale(0.48);
   }
 
   #live2d-mc-vtuber .live2d-mc-vtuber__hit {
-    left: 34%;
-    top: 14%;
-    width: 40%;
-    height: 74%;
+    right: 6%;
+    bottom: 3%;
+    width: 30%;
+    height: 52%;
   }
 
   .live2d-mc-vtuber__bubble {
-    max-width: min(180px, 58vw);
-    font-size: 12px;
+    right: 24px;
+    bottom: 205px;
+    max-width: 220px;
+    font-size: 13px;
   }
 }
 
