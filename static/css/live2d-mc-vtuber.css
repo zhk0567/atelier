@@ -1,4 +1,5 @@
-/* MC_Vtuber — fixed bottom-right; stage stays 360×460 (layout math), scale on phone */
+/* MC_Vtuber — fixed bottom-right; PIXI stage always 360×460; CSS box keeps same aspect */
+
 #live2d-mc-vtuber {
   position: fixed;
   right: 0;
@@ -10,7 +11,6 @@
   box-sizing: border-box;
   overflow: visible;
   pointer-events: none;
-  transform-origin: bottom right;
   filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.2));
 }
 
@@ -23,13 +23,13 @@
   cursor: default;
 }
 
-/* Tight chip over the character only (empty canvas must not steal taps) */
+/* Tight chip over the character only */
 #live2d-mc-vtuber .live2d-mc-vtuber__hit {
   position: absolute;
-  right: 5%;
-  bottom: 2%;
-  width: 28%;
-  height: 50%;
+  right: 8%;
+  bottom: 4%;
+  width: 26%;
+  height: 48%;
   z-index: 6;
   pointer-events: none;
   cursor: pointer;
@@ -55,7 +55,7 @@
   --mc-accent-dark: #1e7a12;
   position: absolute;
   right: 28px;
-  bottom: 210px;
+  bottom: 205px;
   z-index: 5;
   max-width: min(240px, 70vw);
   padding: 10px 12px 10px 16px;
@@ -96,7 +96,6 @@
   transform: translateY(0);
 }
 
-/* 方块小尾巴（替代圆角三角） */
 .live2d-mc-vtuber__bubble::after {
   content: "";
   position: absolute;
@@ -121,6 +120,10 @@ html[data-theme="dark"] .live2d-mc-vtuber__bubble {
   --mc-accent: #55ff55;
   --mc-accent-dark: #137342;
   text-shadow: 1px 1px 0 #000000;
+}
+
+html.is-liquidating #live2d-mc-vtuber {
+  visibility: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -269,14 +272,14 @@ html[data-theme="dark"] #live2d-mc-vtuber.is-debug .live2d-mc-vtuber__model-labe
   color: #69f0ae;
 }
 
-html.is-liquidating #live2d-mc-vtuber {
-  visibility: hidden;
-}
-
-/* Uniform scale — keeps PIXI 360×460 aspect, no horizontal squeeze */
+/*
+  Phone: same aspect as 360×460 (ratio 18:23). Never set max-width AND max-height
+  independently — that was the original horizontal squeeze.
+*/
 @media (max-width: 640px) {
   #live2d-mc-vtuber {
-    transform: scale(0.48);
+    width: 168px;
+    height: 214px;
   }
 
   #live2d-mc-vtuber .live2d-mc-vtuber__hit {
@@ -287,10 +290,15 @@ html.is-liquidating #live2d-mc-vtuber {
   }
 
   .live2d-mc-vtuber__bubble {
-    right: 24px;
-    bottom: 205px;
-    max-width: 220px;
-    font-size: 13px;
+    right: 10px;
+    bottom: 96px;
+    max-width: min(180px, 58vw);
+    font-size: 12px;
+    padding: 8px 10px 8px 14px;
+  }
+
+  .live2d-mc-vtuber__bubble::after {
+    right: 16px;
   }
 }
 
