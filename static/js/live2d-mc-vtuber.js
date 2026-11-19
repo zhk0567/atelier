@@ -123,14 +123,30 @@
       return;
     }
 
-    var padX = Math.max(6, W * 0.03);
-    var padY = Math.max(8, H * 0.02);
-    var left = Math.max(0, bounds.x - padX);
-    var top = Math.max(0, bounds.y - padY);
-    var right = Math.min(W, bounds.x + bounds.width + padX);
-    var bottom = Math.min(H, bounds.y + bounds.height + padY);
-    var width = Math.max(36, right - left);
-    var height = Math.max(48, bottom - top);
+    var padX = Math.max(4, W * 0.02);
+    var padY = Math.max(6, H * 0.015);
+    var left = bounds.x - padX;
+    var top = bounds.y - padY;
+    var width = bounds.width + padX * 2;
+    var height = bounds.height + padY * 2;
+
+    // Live2D bounds can include empty mesh; clamp to a torso-sized chip.
+    var maxW = W * 0.4;
+    var maxH = H * 0.82;
+    if (width > maxW) {
+      var cx = bounds.x + bounds.width * 0.5;
+      left = cx - maxW * 0.5;
+      width = maxW;
+    }
+    if (height > maxH) {
+      var feet = bounds.y + bounds.height;
+      top = feet - maxH;
+      height = maxH;
+    }
+    left = Math.max(0, Math.min(left, W - width));
+    top = Math.max(0, Math.min(top, H - height));
+    width = Math.max(32, Math.min(width, W));
+    height = Math.max(44, Math.min(height, H));
 
     hit.style.left = (left / W) * 100 + "%";
     hit.style.top = (top / H) * 100 + "%";
