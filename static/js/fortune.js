@@ -302,16 +302,34 @@
     localStorage.setItem("theme", next);
   }
 
+  function isNarrowViewport() {
+    return window.matchMedia("(max-width: 720px)").matches;
+  }
+
+  function prefersReduced() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
   function switchTheme() {
     if (switching || busy) return;
-    if (!window.FortuneLiquid || typeof window.FortuneLiquid.reveal !== "function") {
-      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      commitTheme(next);
-      return;
-    }
 
     const prev = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
     const next = prev === "dark" ? "light" : "dark";
+
+    // Mobile / reduced-motion: avoid SVG clip liquid (full-screen black flash).
+    if (
+      isNarrowViewport() ||
+      prefersReduced() ||
+      !window.FortuneLiquid ||
+      typeof window.FortuneLiquid.reveal !== "function"
+    ) {
+      switching = true;
+      commitTheme(next);
+      switching = false;
+      syncDrawButton();
+      return;
+    }
+
     switching = true;
     syncDrawButton();
     document.documentElement.classList.add("is-liquidating");

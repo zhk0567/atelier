@@ -14,7 +14,7 @@
   {% block meta %}{% endblock %}
   <title>{% block title %}{{ site_title }}{% endblock %}</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/static/css/wiki.css?v=53" />
+  <link rel="stylesheet" href="/static/css/wiki.css?v=54" />
   <link rel="stylesheet" href="/static/css/mp-portal.css?v=21" />
   {% if wallpapers %}
   {% set default_wp = wallpapers | selectattr('default') | first | default(wallpapers[0]) %}
@@ -186,7 +186,7 @@
   <script src="/static/js/live2d-mc-vtuber.js?v=27" defer></script>
   {% endif %}
   <script src="/static/js/fortune-liquid.js?v=18" defer></script>
-  <script src="/static/js/main.js?v=48" defer></script>
+  <script src="/static/js/main.js?v=49" defer></script>
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>

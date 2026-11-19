@@ -220,13 +220,6 @@
       layer.classList.add("wallpaper-img-failed");
     }
 
-    // Mobile: skip cloning the whole page (causes black flash + jank).
-    // Liquid fill alone still reads as a ceremonial pour.
-    if (isNarrowViewport()) {
-      layer.classList.add("liquid-reveal--lite");
-      return;
-    }
-
     const shell = document.createElement("div");
     shell.className = `${document.body.className} wiki-liquid-shell`.trim();
     shell.setAttribute("data-theme", next);
@@ -256,29 +249,42 @@
   const initialTheme = stored === "dark" ? "dark" : "light";
   applyTheme(initialTheme);
 
+  const softSwitchTheme = (next) => {
+    themeSwitching = true;
+    if (!prefersReducedMotion()) {
+      html.classList.add("theme-transitioning");
+    }
+    applyTheme(next);
+    window.setTimeout(() => {
+      html.classList.remove("theme-transitioning");
+      themeSwitching = false;
+    }, prefersReducedMotion() ? 0 : 280);
+  };
+
   document.querySelectorAll(".theme-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (themeSwitching) return;
       const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
 
-      if (!window.FortuneLiquid || typeof window.FortuneLiquid.reveal !== "function") {
-        if (!prefersReducedMotion()) {
-          html.classList.add("theme-transitioning");
-          window.setTimeout(() => html.classList.remove("theme-transitioning"), 220);
-        }
-        applyTheme(next);
+      // Phones: SVG clip-path liquid often paints a full-screen black frame.
+      // Use a light CSS color fade instead — desktop keeps the pour.
+      if (
+        isNarrowViewport() ||
+        prefersReducedMotion() ||
+        !window.FortuneLiquid ||
+        typeof window.FortuneLiquid.reveal !== "function"
+      ) {
+        softSwitchTheme(next);
         return;
       }
 
       themeSwitching = true;
       html.classList.add("is-liquidating");
 
-      const narrow = isNarrowViewport();
       window.FortuneLiquid.reveal({
         fromBtn: btn,
         toTheme: next,
-        // Phone: shorter pour + lite layer (no full DOM clone)
-        duration: narrow ? 2200 : 3900,
+        duration: 3900,
         prepareLayer(layer) {
           prepareThemeLayer(layer, next);
         },
